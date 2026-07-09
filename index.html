@@ -285,34 +285,110 @@
     <div class="mhdr"><h3>📋 Términos y Condiciones de Uso</h3><button class="mcls" onclick="cerrarModal()">✕</button></div>
     <div class="mbody">
       <div class="warn">⚠️ CapturaDocs Express es una herramienta <strong>privada e independiente</strong>. No está afiliada, avalada ni relacionada con la Policía Nacional de Colombia ni ninguna entidad del Estado.</div>
-      <h2>1. Naturaleza del software</h2>
-      <p>CapturaDocs Express es una herramienta de apoyo para la generación de documentos de captura en flagrancia. Su uso no reemplaza el criterio profesional del servidor de policía, ni garantiza la aceptación de los documentos por ninguna autoridad.</p>
-      <h2>2. Aceptación</h2>
-      <p>Al usar CapturaDocs Express, el usuario declara haber leído y aceptado estos términos. Si no está de acuerdo, debe abstenerse de usar el software.</p>
-      <h2>3. Licencia de uso</h2>
-      <p>Se otorga una licencia <strong>personal, intransferible y no exclusiva</strong> para usar el software en un (1) dispositivo por el período adquirido.</p>
-      <h3>El usuario NO puede:</h3>
-      <ul><li>Compartir, ceder o transferir su licencia a terceros</li><li>Usar el software en más dispositivos de los autorizados</li><li>Intentar descompilar o realizar ingeniería inversa</li><li>Usar el software para fines comerciales de reventa</li></ul>
-      <h3>Tipos de licencia:</h3>
-      <ul><li><strong>Prueba gratuita:</strong> 5 generaciones sin costo</li><li><strong>Licencia semanal:</strong> uso ilimitado por 7 días en un dispositivo</li><li><strong>Licencia mensual:</strong> uso ilimitado por 30 días en un dispositivo</li><li><strong>Período de gracia:</strong> 3 días adicionales tras el vencimiento</li></ul>
-      <h2>4. Privacidad y datos</h2>
-      <p>Toda la información ingresada se <strong>procesa exclusivamente en tu dispositivo</strong>. Ningún dato es transmitido a servidores externos. El usuario es responsable del cumplimiento de la Ley 1581 de 2012.</p>
-      <h2>5. Limitación de responsabilidad</h2>
-      <p>El desarrollador no garantiza que los documentos generados sean aceptados por entidades judiciales o policiales. El software se provee "tal como está".</p>
-      <h2>6. Propiedad intelectual</h2>
-      <p>El software, diseño y nombre comercial son propiedad del desarrollador. Los formatos FPJ son propiedad de la Policía Nacional de Colombia.</p>
-      <h2>7. Pagos y reembolsos</h2>
-      <ul><li>El pago es <strong>definitivo</strong> una vez activada la licencia</li><li>No se realizan reembolsos por períodos no utilizados</li><li>Cambio de dispositivo requiere nueva licencia</li><li>Precios sujetos a cambios con 15 días de aviso previo</li></ul>
-      <h2>8. Contacto</h2>
-      <p>📧 capturadocsexpress@gmail.com<br>💬 WhatsApp: 350 3593635 · Bogotá, Colombia</p>
-      <hr>
-      <p style="font-size:.78rem;text-align:center;color:#555">CapturaDocs Express · Mayo 2026</p>
+
+      <!-- TABS -->
+      <div style="display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0">
+        <button onclick="showTab('tc')" id="tab-tc" style="padding:8px 16px;background:var(--gold);color:var(--navy);border:none;border-radius:6px 6px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer">Términos de Uso</button>
+        <button onclick="showTab('pp')" id="tab-pp" style="padding:8px 16px;background:var(--navy3);color:var(--muted);border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer">Privacidad</button>
+        <button onclick="showTab('pl')" id="tab-pl" style="padding:8px 16px;background:var(--navy3);color:var(--muted);border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer">Licencias</button>
+      </div>
+
+      <!-- TÉRMINOS Y CONDICIONES -->
+      <div id="content-tc">
+        <h2>1. Naturaleza del software</h2>
+        <p>CapturaDocs Express es una herramienta de apoyo para la generación de documentos de captura en flagrancia. Su uso no reemplaza el criterio profesional del servidor de policía, ni garantiza la aceptación de los documentos generados por ninguna autoridad.</p>
+        <h2>2. Aceptación</h2>
+        <p>Al usar CapturaDocs Express, el usuario declara haber leído y aceptado estos términos en su totalidad. Si no está de acuerdo, debe abstenerse de usar el software.</p>
+        <h2>3. Licencia de uso</h2>
+        <p>Se otorga una licencia <strong>personal, intransferible y no exclusiva</strong> para usar el software en un (1) dispositivo por el período adquirido.</p>
+        <h3>El usuario NO puede:</h3>
+        <ul><li>Compartir, ceder o transferir su licencia a terceros</li><li>Usar el software en más dispositivos de los autorizados</li><li>Intentar descompilar o realizar ingeniería inversa</li><li>Usar el software para fines comerciales de reventa</li><li>Usar el software para generar documentos falsos o con información fraudulenta</li></ul>
+        <h2>4. Privacidad y datos</h2>
+        <p>Toda la información ingresada se <strong>procesa exclusivamente en tu dispositivo</strong>. Ningún dato es transmitido a servidores externos. El usuario es responsable del cumplimiento de la Ley 1581 de 2012.</p>
+        <h2>5. Limitación de responsabilidad</h2>
+        <p>El desarrollador no garantiza que los documentos generados sean aceptados por entidades judiciales o policiales. El software se provee "tal como está". En ningún caso el desarrollador será responsable por consecuencias legales, disciplinarias o administrativas derivadas del uso del software.</p>
+        <h2>6. Propiedad intelectual</h2>
+        <p>El software, diseño y nombre comercial son propiedad del desarrollador. Los formatos FPJ son propiedad de la Policía Nacional de Colombia — CapturaDocs Express únicamente facilita su diligenciamiento.</p>
+        <h2>7. Pagos y reembolsos</h2>
+        <ul><li>El pago es <strong>definitivo</strong> una vez activada la licencia</li><li>No se realizan reembolsos por períodos no utilizados</li><li>Si hay un problema técnico imputable al software, se evaluará el caso y podrá ofrecerse extensión como compensación</li><li>Cambio de dispositivo requiere nueva licencia</li><li>Precios sujetos a cambios con 15 días de aviso previo</li></ul>
+        <h2>8. Contacto</h2>
+        <p>📧 capturadocsexpress@gmail.com · 💬 WhatsApp: 350 3593635 · Bogotá, Colombia</p>
+        <hr><p style="font-size:.78rem;text-align:center;color:#555">CapturaDocs Express · Versión 1.0 · Mayo 2026</p>
+      </div>
+
+      <!-- POLÍTICA DE PRIVACIDAD -->
+      <div id="content-pp" style="display:none">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>CapturaDocs Express, desarrollador independiente con domicilio en Bogotá, D.C., Colombia. Contacto: capturadocsexpress@gmail.com · WhatsApp: 350 3593635.</p>
+        <h2>2. Datos que se recopilan</h2>
+        <p>CapturaDocs Express <strong>no recopila ni transmite datos personales a servidores externos</strong>. Toda la información ingresada (nombres, documentos de identidad, NUNC, datos de capturados) se procesa y almacena únicamente en el dispositivo del usuario.</p>
+        <p>Los únicos datos que permanecen en el dispositivo son:</p>
+        <ul><li>Estado de la licencia (activa/prueba/vencida)</li><li>Identificador del dispositivo (generado localmente, no vinculado a identidad personal)</li><li>Borradores de casos guardados por el propio usuario</li></ul>
+        <h2>3. Finalidad del tratamiento</h2>
+        <p>Los datos ingresados en la aplicación se usan exclusivamente para generar los documentos de captura solicitados por el usuario. No se usan para ningún otro fin.</p>
+        <h2>4. Derechos del usuario (Ley 1581 de 2012)</h2>
+        <p>El usuario tiene derecho a conocer, actualizar, rectificar y suprimir sus datos. Dado que CapturaDocs Express no almacena datos en servidores propios, el usuario ejerce estos derechos directamente desde su dispositivo (borrando el caché o los borradores guardados).</p>
+        <h2>5. Seguridad</h2>
+        <p>Al no transmitir datos a servidores externos, el riesgo de interceptación es mínimo. El usuario es responsable de la seguridad de su propio dispositivo y de los documentos generados.</p>
+        <h2>6. Cookies y almacenamiento local</h2>
+        <p>La aplicación usa <strong>localStorage</strong> y <strong>cookies</strong> del navegador exclusivamente para guardar el estado de la licencia y los borradores de casos. No se usan cookies de seguimiento ni publicidad.</p>
+        <h2>7. Menores de edad</h2>
+        <p>CapturaDocs Express está dirigido exclusivamente a servidores de policía mayores de edad en ejercicio de sus funciones.</p>
+        <h2>8. Cambios a esta política</h2>
+        <p>Cualquier cambio se notificará mediante aviso dentro de la aplicación con al menos 15 días de anticipación.</p>
+        <hr><p style="font-size:.78rem;text-align:center;color:#555">Política de Privacidad · CapturaDocs Express · Mayo 2026</p>
+      </div>
+
+      <!-- POLÍTICA DE LICENCIAS -->
+      <div id="content-pl" style="display:none">
+        <h2>1. Tipos de licencia</h2>
+        <h3>Período de prueba gratuito</h3>
+        <ul><li>5 generaciones de documentos sin costo</li><li>Una prueba por dispositivo</li><li>Extensión mediante código de regalo (+5 generaciones)</li><li>Acceso completo a todas las funciones</li></ul>
+        <h3>Licencia semanal</h3>
+        <ul><li>Duración: 7 días desde la activación</li><li>Generaciones ilimitadas</li><li>Un (1) dispositivo</li><li>Precio: $12.000 COP</li></ul>
+        <h3>Licencia mensual individual</h3>
+        <ul><li>Duración: 30 días desde la activación</li><li>Generaciones ilimitadas</li><li>Un (1) dispositivo</li><li>Precio: $35.000 COP</li></ul>
+        <h2>2. Proceso de activación</h2>
+        <ul><li>El usuario abre la app y visualiza su <strong>ID de dispositivo</strong></li><li>Contacta a CapturaDocs Express por WhatsApp enviando su ID</li><li>Realiza el pago por los medios habilitados</li><li>Recibe la clave de activación personalizada</li><li>Ingresa la clave en la app</li></ul>
+        <p><strong>Tiempo de respuesta:</strong> Lunes a sábado, 8:00 am - 8:00 pm. Fuera de horario, se procesa al siguiente día hábil.</p>
+        <h2>3. Medios de pago</h2>
+        <ul><li><strong>Nequi:</strong> 321 2016275</li><li><strong>Llave (Bancolombia):</strong> 321 2016275</li></ul>
+        <h2>4. Período de gracia y avisos</h2>
+        <ul><li>3 días de gracia tras el vencimiento con funcionalidad completa</li><li>Aviso visual 1 día antes del vencimiento</li></ul>
+        <h2>5. Restricciones</h2>
+        <ul><li>No compartir clave de activación con otros dispositivos</li><li>No intentar generar claves fraudulentas</li><li>No revender ni sublicenciar el software</li><li>No usar para generar documentos falsos</li></ul>
+        <h2>6. Cambio de dispositivo</h2>
+        <p>La licencia no es transferible. Si cambia de dispositivo, deberá adquirir una nueva licencia.</p>
+        <h2>7. Suspensión por el desarrollador</h2>
+        <p>CapturaDocs Express podrá suspender una licencia sin reembolso ante: uso de claves compartidas, generación de documentos fraudulentos, violación de términos o comportamiento abusivo hacia soporte.</p>
+        <h2>8. Soporte técnico</h2>
+        <p>Solo para usuarios con licencia activa. WhatsApp: 350 3593635 · Lunes a sábado 8am-8pm · Respuesta máx. 24 horas hábiles.</p>
+        <h2>9. Actualizaciones</h2>
+        <p>Las actualizaciones están incluidas en la licencia activa sin costo adicional.</p>
+        <hr><p style="font-size:.78rem;text-align:center;color:#555">Política de Licencias · CapturaDocs Express · Mayo 2026</p>
+      </div>
     </div>
     <div class="mftr"><button onclick="cerrarModal()">Entendido ✓</button></div>
   </div>
 </div>
 
 <script>
+  function showTab(tab) {
+    ['tc','pp','pl'].forEach(t => {
+      document.getElementById('content-' + t).style.display = t === tab ? '' : 'none';
+      const btn = document.getElementById('tab-' + t);
+      if (t === tab) {
+        btn.style.background = 'var(--gold)';
+        btn.style.color = 'var(--navy)';
+        btn.style.border = 'none';
+      } else {
+        btn.style.background = 'var(--navy3)';
+        btn.style.color = 'var(--muted)';
+        btn.style.border = '1px solid var(--border)';
+        btn.style.borderBottom = 'none';
+      }
+    });
+  }
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if(e.isIntersecting){
