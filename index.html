@@ -83,17 +83,35 @@
     .db{background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.3);color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;padding:2px 8px;border-radius:4px;white-space:nowrap}
     .dn{flex:1;color:var(--white)}
     .dc{color:#27c93f}
+    .compare{padding:100px 0}
+    .chdr{text-align:center;margin-bottom:56px}
+    .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:900px;margin:0 auto}
+    @media(max-width:768px){.cgrid{grid-template-columns:1fr}}
+    .ccard{border-radius:16px;padding:32px 28px;border:1px solid var(--border)}
+    .ccard.cbad{background:var(--navy2)}
+    .ccard.cgood{background:linear-gradient(160deg,var(--navy3),var(--navy2));border-color:rgba(240,165,0,.35)}
+    .ctag{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:.5px;margin-bottom:20px;display:block}
+    .cbad .ctag{color:#ff6b6b}
+    .cgood .ctag{color:var(--gold)}
+    .clist{list-style:none;display:flex;flex-direction:column;gap:16px}
+    .clist li{font-size:.92rem;line-height:1.65;padding-left:22px;position:relative}
+    .cbad .clist li{color:#9aa3b8}
+    .cbad .clist li::before{content:'✕';position:absolute;left:0;color:#ff6b6b;font-weight:700}
+    .cgood .clist li{color:var(--white)}
+    .cgood .clist li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
     .pricing{padding:100px 0}
     .phdr{text-align:center;margin-bottom:64px}
-    .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:900px;margin:0 auto}
-    .plan{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:36px 32px;position:relative;transition:transform .2s}
+    .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1180px;margin:0 auto}
+    @media(max-width:900px){.pgrid{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.pgrid{grid-template-columns:1fr;max-width:360px}}
+    .plan{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:30px 20px;position:relative;transition:transform .2s}
     .plan:hover{transform:translateY(-4px)}
     .plan.ft{border-color:var(--gold);background:linear-gradient(160deg,var(--navy3),var(--navy2))}
-    .ptag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:1px;padding:3px 14px;border-radius:100px;white-space:nowrap}
-    .pname{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.4rem;margin-bottom:8px}
-    .pprice{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:3rem;color:var(--gold);line-height:1;margin-bottom:4px}
-    .pprice span{font-size:1.1rem;color:var(--muted);font-weight:400}
-    .pper{font-size:.85rem;color:var(--muted);margin-bottom:28px}
+    .ptag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:1px;padding:3px 12px;border-radius:100px;white-space:nowrap}
+    .pname{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.25rem;margin-bottom:8px}
+    .pprice{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.3rem;color:var(--gold);line-height:1;margin-bottom:4px}
+    .pprice span{font-size:1rem;color:var(--muted);font-weight:400}
+    .pper{font-size:.8rem;color:var(--muted);margin-bottom:24px}
     .pfeats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
     .pfeats li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;color:var(--muted)}
     .pfeats li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
@@ -101,9 +119,26 @@
     .pbtn:hover{opacity:.85}
     .pbtn.pp{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
     .pbtn.po{border:1px solid var(--border);color:var(--muted)}
+    .testimonios{padding:100px 0}
+    .thdr{text-align:center;margin-bottom:56px}
+    .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:1100px;margin:0 auto}
+    .tcard{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column;gap:18px}
+    .tquote{font-size:.94rem;line-height:1.7;color:var(--white);flex:1}
+    .tauthor{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;color:var(--gold);letter-spacing:.3px}
     .trust{padding:80px 0;background:var(--navy2)}
     .tinner{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;align-items:center}
     .ti{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--muted)}
+    .faq{padding:100px 0}
+    .fhdr{text-align:center;margin-bottom:56px}
+    .faccord{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+    .fitem{background:var(--navy2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .fitem[open]{border-color:rgba(240,165,0,.35)}
+    .fitem summary{list-style:none;cursor:pointer;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.02rem;color:var(--white)}
+    .fitem summary::-webkit-details-marker{display:none}
+    .fplus{flex-shrink:0;width:26px;height:26px;border-radius:50%;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:transform .25s}
+    .fitem[open] .fplus{transform:rotate(45deg)}
+    .fitem .fa{padding:0 24px 20px;color:var(--muted);font-size:.92rem;line-height:1.7}
+    .fitem .fa strong{color:var(--white)}
     .cta{padding:120px 0;text-align:center;position:relative;overflow:hidden}
     .cta::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(46,127,255,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
     .cta h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,4rem);line-height:1.1;margin-bottom:20px}
@@ -193,25 +228,53 @@
         <div class="flist">
           <div class="fi"><div class="fi-icon">📝</div><div><h4>5 documentos simultáneos</h4><p>FPJ-5, FPJ-6, FPJ-7, FPJ-8 y Acta generados de una sola vez con los mismos datos.</p></div></div>
           <div class="fi"><div class="fi-icon">👥</div><div><h4>Múltiples capturados</h4><p>Soporta varios capturados en el mismo procedimiento con documentación individual.</p></div></div>
-          <div class="fi"><div class="fi-icon">✍️</div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te ayuda a mejorar la claridad y coherencia, sin cambiar los hechos. <strong>Exclusivo de la licencia mensual.</strong></p></div></div>
+          <div class="fi"><div class="fi-icon">✍️</div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te ayuda a mejorar la claridad y coherencia, sin cambiar los hechos. <strong>Exclusivo de las licencias Mensual y Negocio/Estación.</strong></p></div></div>
           <div class="fi"><div class="fi-icon">📱</div><div><h4>App para Android</h4><p>Además del navegador, ya tenemos app instalable para tu celular — mismos casos, mismos documentos, sin depender de internet para diligenciar.</p></div></div>
           <div class="fi"><div class="fi-icon">💾</div><div><h4>Guardar y continuar</h4><p>Guarda el caso en cualquier momento y retómalo después sin perder nada.</p></div></div>
           <div class="fi"><div class="fi-icon">🔒</div><div><h4>100% privado</h4><p>Todo se procesa en tu dispositivo. Ningún dato sale de tu navegador o celular.</p></div></div>
         </div>
       </div>
       <div class="preview">
-        <div class="pbar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span class="ptitle">CapturaDocs Express — HURTO_SANCHEZ</span></div>
+        <div class="pbar"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span class="ptitle">CapturaDocs Express</span></div>
         <div class="plist">
-          <div class="di"><span class="db">FPJ-5</span><span class="dn">informe_HURTO_SANCHEZ.docx</span><span class="dc">✓</span></div>
-          <div class="di"><span class="db">FPJ-6</span><span class="dn">derechos_SANCHEZ_LOPEZ.docx</span><span class="dc">✓</span></div>
-          <div class="di"><span class="db">FPJ-7</span><span class="dn">rotulo_SANCHEZ.docx</span><span class="dc">✓</span></div>
-          <div class="di"><span class="db">FPJ-8</span><span class="dn">cadena_SANCHEZ.docx</span><span class="dc">✓</span></div>
-          <div class="di"><span class="db">ACTA</span><span class="dn">acta_SANCHEZ_LOPEZ.docx</span><span class="dc">✓</span></div>
+          <div class="di"><span class="db">FPJ-5</span><span class="dn">Informe de Captura en Flagrancia.docx</span><span class="dc">✓</span></div>
+          <div class="di"><span class="db">FPJ-6</span><span class="dn">Acta de Derechos del Capturado.docx</span><span class="dc">✓</span></div>
+          <div class="di"><span class="db">FPJ-7</span><span class="dn">Rótulo.docx</span><span class="dc">✓</span></div>
+          <div class="di"><span class="db">FPJ-8</span><span class="dn">Cadena de Custodia.docx</span><span class="dc">✓</span></div>
+          <div class="di"><span class="db">ACTA</span><span class="dn">Acta de Incautación.docx</span><span class="dc">✓</span></div>
         </div>
         <div style="padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
           <span style="font-size:.8rem;color:var(--muted)">⏱ ~30 minutos</span>
           <span style="font-size:.8rem;color:#27c93f;font-family:'Rajdhani',sans-serif;font-weight:700">✓ 5 archivos listos</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <div class="container">
+    <div class="chdr">
+      <div class="stag">El problema real</div>
+      <h2 class="stitle">Un solo error<br>te hace empezar de cero.</h2>
+      <p class="ssub" style="margin:0 auto">Un nombre mal escrito, una cédula que no cuadra entre documentos, un capturado que miente su edad o su identidad para entorpecer el proceso — cualquiera de estos te obliga a rehacer todo a mano.</p>
+    </div>
+    <div class="cgrid">
+      <div class="ccard cbad">
+        <span class="ctag">✕ Antes, a mano en Word</span>
+        <ul class="clist">
+          <li>Escribes el mismo nombre, cédula o apellido hasta 5 veces — un solo error de tipeo y los documentos ya no coinciden entre sí.</li>
+          <li>El capturado da un nombre falso o dice ser menor de edad para entorpecer la captura, y cuando se confirma el dato real hay que <strong style="color:#c9c9d6">rehacer toda la documentación desde cero</strong>.</li>
+          <li>Cada corrección es documento por documento, uno por uno — mucho tiempo perdido en algo que ya habías escrito.</li>
+        </ul>
+      </div>
+      <div class="ccard cgood">
+        <span class="ctag">✓ Con CapturaDocs Express</span>
+        <ul class="clist">
+          <li>Escribes el dato una sola vez y se llena solo en los 5 documentos — sin transcribir, sin inconsistencias entre ellos.</li>
+          <li>Si después se confirma el nombre o la edad real, corriges el dato <strong>una sola vez</strong> y regeneras — no repites el trabajo desde cero.</li>
+          <li>Menos tiempo corrigiendo, más tiempo en lo que realmente importa.</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -247,6 +310,37 @@
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>✨ Mejora de redacción con IA</li><li>App web y Android</li><li>Soporte por WhatsApp</li></ul>
         <a href="https://wa.me/573503593635" target="_blank" class="pbtn pp">Activar por WhatsApp</a>
       </div>
+      <div class="plan">
+        <div class="pname">Negocio/Estación</div>
+        <div class="pprice">$100.000 <span>COP</span></div>
+        <div class="pper">30 días · casos ilimitados</div>
+        <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>✨ Mejora de redacción con IA</li><li>Pensada para negocios y estaciones</li><li>Solo para computador (versión web)</li></ul>
+        <a href="https://wa.me/573503593635" target="_blank" class="pbtn po">Activar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonios">
+  <div class="container">
+    <div class="thdr">
+      <div class="stag">Lo que dicen los policías</div>
+      <h2 class="stitle">Probado antes del lanzamiento.</h2>
+      <p class="ssub" style="margin:0 auto">Agentes que ya lo usaron en su trabajo diario, en sus propias palabras.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tcard">
+        <p class="tquote">"Me gustó porque rindo mucho más y no tengo que estar escribiendo lo mismo varias veces."</p>
+        <div class="tauthor">Patrullero · Estación de Engativá</div>
+      </div>
+      <div class="tcard">
+        <p class="tquote">"Empecé a usarla porque en la Fiscalía me molestaban mucho por mi letra, no la entendían. Hacerlo en computador me parecía difícil, pero con esta app es mucho más sencillo."</p>
+        <div class="tauthor">Subintendente · Estación de Fontibón</div>
+      </div>
+      <div class="tcard">
+        <p class="tquote">"La verdad soy nuevo y hay cosas que no entiendo de los formatos, pero la app los hace más fáciles de llenar — solo pide los datos y ella los diligencia en donde debe ir cada cosa."</p>
+        <div class="tauthor">Patrullero · Estación de Fontibón</div>
+      </div>
     </div>
   </div>
 </section>
@@ -259,6 +353,63 @@
       <div class="ti"><span style="font-size:1.4rem">🏛️</span><span>Formato oficial PONAL</span></div>
       <div class="ti"><span style="font-size:1.4rem">💬</span><span>Soporte directo por WhatsApp</span></div>
       <div class="ti"><span style="font-size:1.4rem">🔄</span><span>Actualizaciones constantes</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="preguntas">
+  <div class="container">
+    <div class="fhdr">
+      <div class="stag">Preguntas frecuentes</div>
+      <h2 class="stitle">Antes de empezar,<br>lo que más preguntan.</h2>
+    </div>
+    <div class="faccord">
+      <details class="fitem" open>
+        <summary>¿Es una app oficial de la Policía Nacional?<span class="fplus">+</span></summary>
+        <div class="fa">No. CapturaDocs Express es una herramienta <strong>privada e independiente</strong>, no afiliada ni avalada por la Policía Nacional de Colombia. Solo facilita el diligenciamiento de los formatos FPJ; el criterio profesional del servidor de policía sigue siendo el que manda.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Los documentos generados son aceptados por la Fiscalía u otras autoridades?<span class="fplus">+</span></summary>
+        <div class="fa">CapturaDocs Express te ayuda a diligenciar los formatos oficiales PONAL de forma correcta y sin inconsistencias entre documentos, pero la aceptación final siempre depende del criterio de la autoridad correspondiente, no de la herramienta.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Qué pasa con los datos de mis capturados?<span class="fplus">+</span></summary>
+        <div class="fa">Se procesan <strong>100% en tu dispositivo</strong>. Nombres, cédulas y demás datos del caso nunca salen de tu navegador o celular hacia ningún servidor — ni siquiera nosotros los vemos.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Cómo empiezo, y cómo pago cuando quiera activar la licencia?<span class="fplus">+</span></summary>
+        <div class="fa">No necesitas contraseña ni tarjeta para probarla: solo un correo, y ya generas tus primeros 5 casos gratis. Cuando quieras activar, escríbenos por WhatsApp con el <strong>ID de tu dispositivo</strong> (la app te lo muestra), paga por Nequi o Llave, y te enviamos la clave el mismo día hábil.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Qué pasa si no renuevo a tiempo?<span class="fplus">+</span></summary>
+        <div class="fa">Al vencer tu licencia tienes <strong>3 días de gracia</strong> con funcionalidad completa para que renueves sin afanes. Pasado ese plazo, la app deja de generar documentos hasta que actives de nuevo.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Necesito internet para usarla, o pierdo mi trabajo si se corta la luz?<span class="fplus">+</span></summary>
+        <div class="fa">Puedes diligenciar el formulario y generar documentos <strong>sin conexión</strong> — solo hace falta internet en algún momento para verificar tu licencia. Además, tu caso se va guardando automáticamente mientras lo diligencias, así que no pierdes nada si se corta la conexión, cierras la app o se apaga el celular.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Funciona en celular o solo en computador?<span class="fplus">+</span></summary>
+        <div class="fa">Las dos. Hay versión web (cualquier navegador) y <strong>app instalable para Android</strong>, con la misma licencia funcionando en ambas — excepto la licencia <strong>Negocio/Estación</strong>, pensada solo para computador.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Puedo cambiar de celular o usar la misma licencia en dos dispositivos?<span class="fplus">+</span></summary>
+        <div class="fa">La licencia queda ligada a un único dispositivo, así que no puede estar activa en dos a la vez. Si cambias de celular o computador, escríbenos por WhatsApp y te ayudamos a reasignarla al nuevo — no necesitas comprar una licencia nueva.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿La mejora de redacción con IA tiene costo aparte?<span class="fplus">+</span></summary>
+        <div class="fa">No es un costo aparte, pero sí es <strong>exclusiva de las licencias Mensual y Negocio/Estación</strong>. La prueba gratuita y la licencia semanal generan los documentos igual, sin esa asistencia.</div>
+      </details>
+      <details class="fitem">
+        <summary>¿Qué es la licencia Negocio/Estación?<span class="fplus">+</span></summary>
+        <div class="fa">Es para negocios, estaciones u otras instituciones que quieran tener CapturaDocs Express disponible en un computador para varios funcionarios — no para el uso individual de un solo policía. Cuesta más que la mensual normal y solo se activa en la <strong>versión web (computador)</strong>, no en la app de Android.</div>
+      </details>
+    </div>
+    <div style="text-align:center;margin-top:36px">
+      <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">¿Tienes otra pregunta que no esté aquí?</p>
+      <a href="https://wa.me/573503593635?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20CapturaDocs%20Express" target="_blank" class="wa" style="padding:12px 28px;font-size:.95rem;box-shadow:0 4px 16px rgba(37,211,102,.2)">
+        💬 Pregúntanos y solucionamos tus dudas
+      </a>
     </div>
   </div>
 </section>
@@ -349,10 +500,12 @@
         <ul><li>Duración: 7 días desde la activación</li><li>Generaciones ilimitadas</li><li>Un (1) dispositivo</li><li>Precio: $12.000 COP</li><li>No incluye asistencia de IA</li></ul>
         <h3>Licencia mensual individual</h3>
         <ul><li>Duración: 30 días desde la activación</li><li>Generaciones ilimitadas</li><li>Un (1) dispositivo</li><li>Precio: $35.000 COP</li><li>Incluye asistencia de mejora de redacción con IA</li></ul>
+        <h3>Licencia Negocio/Estación</h3>
+        <ul><li>Dirigida a negocios, estaciones u otras instituciones — no al servidor de policía individual</li><li>Duración: 30 días desde la activación</li><li>Generaciones ilimitadas</li><li>Un (1) dispositivo, restringido a la versión web (computador); no se activa en la app de Android</li><li>Precio: $100.000 COP</li><li>Incluye asistencia de mejora de redacción con IA</li></ul>
         <h3>Asistencia de IA</h3>
-        <p>La función de mejora de redacción con inteligencia artificial está disponible <strong>únicamente con la licencia mensual</strong>. Los planes de prueba y semanal no incluyen este beneficio.</p>
+        <p>La función de mejora de redacción con inteligencia artificial está disponible <strong>con las licencias mensual y Negocio/Estación</strong>. Los planes de prueba y semanal no incluyen este beneficio.</p>
         <h3>Disponibilidad</h3>
-        <p>CapturaDocs Express está disponible como app web (cualquier navegador) y como app instalable para Android, con la misma licencia funcionando en ambas.</p>
+        <p>CapturaDocs Express está disponible como app web (cualquier navegador) y como app instalable para Android. La licencia semanal y mensual funcionan igual en ambas; la licencia Negocio/Estación solo se activa en la versión web.</p>
         <h2>2. Proceso de activación</h2>
         <ul><li>El usuario abre la app y visualiza su <strong>ID de dispositivo</strong></li><li>Contacta a CapturaDocs Express por WhatsApp enviando su ID</li><li>Realiza el pago por los medios habilitados</li><li>Recibe la clave de activación personalizada</li><li>Ingresa la clave en la app</li></ul>
         <p><strong>Tiempo de respuesta:</strong> Lunes a sábado, 8:00 am - 8:00 pm. Fuera de horario, se procesa al siguiente día hábil.</p>
