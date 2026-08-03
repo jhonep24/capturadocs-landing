@@ -109,3 +109,43 @@ Si cambian los precios o los planes en `.pricing` (`index.html`), hay que
 actualizar también el bloque `offers` del JSON-LD — no se generan solos a
 partir del HTML visible. Ver también la nota correspondiente en
 `CONTEXTO.md`.
+
+---
+
+## 2026-08-03 — Prioridad baja: número de WhatsApp y analítica
+
+### Qué se hizo
+
+- **#19 resuelto distinto a como se propuso originalmente.** La idea
+  inicial (centralizar el número de WhatsApp en una constante de JS que
+  arma los `href` al cargar la página) se descartó tras pensarlo mejor: en
+  una landing cuyo único camino de conversión son esos enlaces, hacerlos
+  depender de que JS cargue y corra sin errores es cambiar un riesgo bajo
+  (typo al editar a mano) por uno peor (CTA muerto si JS falla o el
+  usuario lo bloquea). En su lugar se creó `check_wa_number.py`: un script
+  que escanea `index.html`, extrae todos los números en enlaces `wa.me/` y
+  falla si hay más de uno distinto. Se probó en dos escenarios: número
+  consistente (pasa) y con un número alterado a propósito en una sola
+  ocurrencia (falla y lo señala). Se enganchó como git hook versionado en
+  `.githooks/pre-commit`.
+- **#18 (analítica) se dejó pendiente a propósito.** Requiere una cuenta
+  real (GA4, Plausible, etc.) — no tiene sentido inventar un ID de
+  tracking. Queda para cuando el usuario decida el servicio.
+
+### Por qué
+
+El objetivo real detrás de "centralizar el número" no era el número en sí,
+sino evitar que una edición manual futura deje el sitio con enlaces
+inconsistentes sin que nadie lo note hasta que un usuario reporte el
+problema. Un chequeo que corre antes de comitear resuelve exactamente eso,
+sin tocar en nada el comportamiento del sitio publicado.
+
+### Problemas encontrados y cómo se resolvieron
+
+- **El hook de git no se activa solo al clonar el repo.** `.git/hooks/`
+  no se versiona con git — por eso el hook vive en `.githooks/` (sí
+  versionado) y necesita `git config core.hooksPath .githooks` corrido a
+  mano una vez por clon. Este comando no se ejecutó automáticamente: la
+  sesión que hizo el cambio tiene la regla de no tocar la configuración de
+  git nunca, ni siquiera local — queda como paso manual documentado acá y
+  en `CONTEXTO.md`.

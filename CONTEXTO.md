@@ -87,6 +87,31 @@ en enlaces externos, imagen OG a tamaño correcto, accesibilidad del modal
 de términos y sus pestañas, `theme-color`, `canonical`, `preconnect` a
 Google Fonts, JSON-LD y `robots.txt`/`sitemap.xml`.
 
+- **#18 (analítica)** — sigue pendiente, sin decidir: requiere que el
+  usuario cree la cuenta (GA4/Plausible/etc.) primero.
+- **#19 (número de WhatsApp)** — resuelto de forma distinta a lo previsto:
+  ver `check_wa_number.py` más abajo, en vez de centralizar en JS runtime.
+
+## Verificación del número de WhatsApp (`check_wa_number.py`)
+
+El número `573503593635` está repetido a mano en ~9 enlaces `wa.me/` de
+`index.html` (se descartó centralizarlo vía JS en tiempo de carga porque
+eso vuelve el CTA principal del sitio dependiente de que JS cargue bien —
+demasiado riesgo para el único camino de conversión de la landing).
+
+En su lugar, `check_wa_number.py` (raíz del repo) escanea `index.html` y
+falla si encuentra más de un número distinto en los enlaces `wa.me/`. Está
+enganchado como git hook en `.githooks/pre-commit`, pero **el hook no se
+activa solo** — hay que correr una vez, en cada clon del repo:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Si cambia el número de WhatsApp: reemplázalo en todo `index.html` (buscar
+`573503593635`) y el hook (o `python check_wa_number.py` a mano) avisa si
+quedó alguno desincronizado.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni

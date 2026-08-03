@@ -1,0 +1,4 @@
+#!/bin/sh
+# Bloquea el commit si index.html tiene numeros de WhatsApp inconsistentes.
+# Instalado via: git config core.hooksPath .githooks
+python check_wa_number.py
