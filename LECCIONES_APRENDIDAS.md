@@ -69,9 +69,6 @@ arreglos acotados y verificables antes que un rediseño.
 
 Del backlog original de la revisión, sin aplicar todavía:
 
-- JSON-LD (`schema.org/SoftwareApplication`) para resultados enriquecidos
-  en Google.
-- `robots.txt` / `sitemap.xml`.
 - Analítica (Google Analytics/Plausible) — hoy no hay forma de medir
   cuántas visitas llegan a WhatsApp vs. rebotan.
 - Centralizar el número de WhatsApp (hoy repetido en ~9 lugares) en una
@@ -79,3 +76,36 @@ Del backlog original de la revisión, sin aplicar todavía:
 - Pendientes ya documentados en `CONTEXTO.md`: #14 (CTAs a la app real en
   vez de solo WhatsApp), #15 (reemplazar maqueta de funciones por captura
   real), #17 (mover hosting de GitHub Pages a Vercel/Netlify).
+
+---
+
+## 2026-08-03 — Prioridad media: SEO estructural
+
+### Qué se hizo
+
+- **JSON-LD** (`schema.org/SoftwareApplication`) en el `<head>` con nombre,
+  descripción, URL, imagen y los 4 planes de precio como `offers`.
+- **`robots.txt`** apuntando al sitemap.
+- **`sitemap.xml`** con la única URL del sitio (landing de una sola página).
+
+### Por qué
+
+El JSON-LD le da a Google datos estructurados para mostrar (potencialmente)
+precio y categoría de la app directamente en resultados de búsqueda, sin
+depender de que el crawler infiera esa info del texto visible. `robots.txt`
++ `sitemap.xml` son prácticamente gratis de mantener en un sitio de una
+sola página y evitan que el crawling dependa solo de enlaces externos.
+
+### Problemas encontrados y cómo se resolvieron
+
+- Antes de dar el JSON-LD por bueno, se extrajo el bloque del HTML con un
+  script de Python (`re` + `json.loads`) para confirmar que parseaba como
+  JSON válido — un solo error de coma ahí lo invalida silenciosamente para
+  los crawlers sin que se note visualmente en el navegador.
+
+### Nota sobre mantenimiento
+
+Si cambian los precios o los planes en `.pricing` (`index.html`), hay que
+actualizar también el bloque `offers` del JSON-LD — no se generan solos a
+partir del HTML visible. Ver también la nota correspondiente en
+`CONTEXTO.md`.

@@ -17,6 +17,16 @@ en `informes-ponal`) la URL vigente del Worker de licencias — ver la sección
 ese archivo al editar la landing** a menos que el Worker se haya mudado de
 verdad.
 
+Además: `robots.txt` y `sitemap.xml` (SEO básico), y `logo-og.jpg`
+(1200×630, imagen de vista previa al compartir el link — regenerarla con
+Pillow si cambia el logo o el copy principal, no solo redimensionar la
+vieja). El `<head>` de `index.html` también trae un bloque JSON-LD
+(`schema.org/SoftwareApplication`) con nombre, descripción y los 4 precios
+— actualízalo si cambian los planes o precios en `.pricing`.
+
+Ver [LECCIONES_APRENDIDAS.md](LECCIONES_APRENDIDAS.md) para el porqué de
+las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
+
 ## Sistema de diseño (todo vive en el `<style>` del `<head>`)
 
 - **Paleta** (variables CSS en `:root`): `--navy` (fondo principal, casi
@@ -69,6 +79,13 @@ gratis ahora" podría ir directo a la app).
 - **#14** — Enlazar botones a la app real, no solo a WhatsApp.
 - **#15** — Reemplazar la maqueta falsa de `.preview` (sección Funciones) por una captura o GIF real de la app funcionando.
 - **#17** — Mover el hosting de GitHub Pages a Vercel/Netlify para tener un link sin depender de un usuario de GitHub visible en la URL.
+- **#18** — Analítica (Google Analytics/Plausible) para medir cuántas visitas llegan a WhatsApp vs. rebotan.
+- **#19** — Centralizar el número de WhatsApp (hoy repetido "a mano" en ~9 lugares del HTML) en una constante de JS.
+
+Ya resueltos (ver `LECCIONES_APRENDIDAS.md` para el detalle): `rel=noopener`
+en enlaces externos, imagen OG a tamaño correcto, accesibilidad del modal
+de términos y sus pestañas, `theme-color`, `canonical`, `preconnect` a
+Google Fonts, JSON-LD y `robots.txt`/`sitemap.xml`.
 
 ## Cómo desplegar cambios
 
