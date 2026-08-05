@@ -4,6 +4,15 @@ Este archivo es el punto de partida para modificar o mejorar la landing
 (`index.html`) desde una sesión nueva, sin tener que releer todo el HTML para
 entender el sistema de diseño o las decisiones ya tomadas.
 
+📌 **Los pendientes reales viven en Vikunja, no acá** (regla acordada
+2026-08-05 en la sección `homelab`, coordinadora de todos los proyectos
+— ver `../homelab/CONTEXTO.md`, "Rol de esta sección: coordinación
+multi-proyecto"). Proyecto **"CapturaDocs Landing"** en
+`http://192.168.0.100:3456`. La sección "Pendientes conocidos" más abajo
+quedó congelada como estaba antes de esa fecha — no confiar en ella como
+lista viva. Esta sección SÍ es dueña de sus propias tareas en Vikunja:
+márcalas hechas ahí mismo al resolverlas.
+
 ## Qué es este repo
 
 Landing estática de una sola página (`index.html`, sin build, sin
