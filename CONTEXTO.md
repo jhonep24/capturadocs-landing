@@ -8,8 +8,12 @@ entender el sistema de diseño o las decisiones ya tomadas.
 
 Landing estática de una sola página (`index.html`, sin build, sin
 frameworks) para **CapturaDocs Express**, la app de informes de captura de
-`informes-ponal`. Se publica en GitHub Pages:
-https://jhonep24.github.io/capturadocs-landing/
+`informes-ponal`. Se publica en GitHub Pages, con dominio propio:
+https://capturadocs.com/ (el link de GitHub sigue funcionando como alias:
+https://jhonep24.github.io/capturadocs-landing/). El dominio se compró en
+Cloudflare Registrar y el DNS apunta a las IPs de GitHub Pages — ver
+`CNAME` en la raíz del repo y `git log` del commit que lo configuró
+(2026-08-04) si hace falta tocarlo de nuevo.
 
 También vive aquí `api-config.json`, que le indica a la app (`licencia.js`
 en `informes-ponal`) la URL vigente del Worker de licencias — ver la sección
@@ -68,6 +72,7 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 10. `.cta` — llamado final a WhatsApp
 11. `footer` — contacto + enlace a modal de términos
 12. Modal de términos (`#modal`) — 3 pestañas: Términos de Uso, Privacidad, Licencias (contenido legal completo, sincronizado con lo que ofrece la app real: precios, período de gracia de 3 días, medios de pago Nequi/Llave, etc.)
+13. Widget de chat flotante (`#chatToggle` / `#chatPanel`, agregado 2026-08-04) — botón dorado fijo abajo a la derecha. Abre un panel con 4 acciones: ver precios, cotizar un plan, subir comprobante de pago (con deviceId + foto), y consultar el estado de un pedido por deviceId. Habla directo con el bot de `capturadocs-bot-pagos` vía `https://chat.capturadocs.com/webhook/landing-chat` y `.../landing-status` (mismo túnel Cloudflare que ya exponía el webhook de WhatsApp, con dos rutas nuevas agregadas). No depende de WhatsApp: la aprobación del pago la sigue haciendo el dueño por WhatsApp como siempre, pero el cliente compra y recibe la clave sin salir de la landing. Ver `capturadocs-bot-pagos/CONTEXTO.md` sección 50 para el diseño completo del lado del bot.
 
 Todos los botones de CTA (`btn-p`, `wa`, `pbtn`, `nav-cta`) apuntan a
 `https://wa.me/573503593635` — **pendiente #14**: enlazar a la app real
@@ -76,11 +81,16 @@ gratis ahora" podría ir directo a la app).
 
 ## Pendientes conocidos de la landing (backlog)
 
-- **#14** — Enlazar botones a la app real, no solo a WhatsApp.
+- **#14** — Enlazar botones a la app real, no solo a WhatsApp. (El widget de chat del punto 13 ya cubre la compra directa; los botones de WhatsApp existentes se dejaron intactos como canal alterno, no se tocaron.)
 - **#15** — Reemplazar la maqueta falsa de `.preview` (sección Funciones) por una captura o GIF real de la app funcionando.
-- **#17** — Mover el hosting de GitHub Pages a Vercel/Netlify para tener un link sin depender de un usuario de GitHub visible en la URL.
 - **#18** — Analítica (Google Analytics/Plausible) para medir cuántas visitas llegan a WhatsApp vs. rebotan.
 - **#19** — Centralizar el número de WhatsApp (hoy repetido "a mano" en ~9 lugares del HTML) en una constante de JS.
+- **#20** (2026-08-04) — El endpoint `landing-status` devuelve la clave de licencia solo con el `deviceId` (formato `XXXX-XXXX`, ~32 bits de entropía) sin ningún otro secreto. Se recomendó activar un rate limit en Cloudflare (WAF → Rate limiting rules) sobre esa ruta — confirmar si ya se activó.
+
+Resuelto: **#17** — no se migró el hosting a Vercel/Netlify, pero se
+compró dominio propio (`capturadocs.com`) y se configuró como custom
+domain de GitHub Pages, que resuelve el mismo problema (link sin usuario
+de GitHub visible) sin cambiar de proveedor.
 
 Ya resueltos (ver `LECCIONES_APRENDIDAS.md` para el detalle): `rel=noopener`
 en enlaces externos, imagen OG a tamaño correcto, accesibilidad del modal

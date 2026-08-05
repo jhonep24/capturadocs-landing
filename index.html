@@ -200,6 +200,34 @@
     .mftr button{width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;cursor:pointer}
     @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
     @media(max-width:600px){nav{padding:14px 20px}.stats{gap:24px}footer{flex-direction:column;text-align:center}}
+
+    .chat-toggle{position:fixed;bottom:24px;right:24px;z-index:998;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;color:var(--navy);font-size:1.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(240,165,0,.35);transition:transform .2s}
+    .chat-toggle:hover{transform:scale(1.06)}
+    .chat-panel{position:fixed;bottom:96px;right:24px;z-index:998;width:360px;max-width:calc(100vw - 32px);max-height:min(560px,calc(100vh - 140px));background:var(--navy2);border:1px solid var(--border);border-radius:16px;display:flex;flex-direction:column;opacity:0;transform:translateY(16px) scale(.98);pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 12px 48px rgba(0,0,0,.4)}
+    .chat-panel.open{opacity:1;transform:none;pointer-events:all}
+    .chat-hdr{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--gold);flex-shrink:0}
+    .chat-close{background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;transition:color .2s}
+    .chat-close:hover{color:var(--white)}
+    .chat-body{padding:18px;overflow-y:auto;flex:1}
+    .chat-intro{color:var(--muted);font-size:.88rem;margin-bottom:14px}
+    .chat-menu-btn{display:block;width:100%;text-align:left;background:var(--navy3);border:1px solid var(--border);color:var(--white);padding:12px 14px;border-radius:10px;margin-bottom:10px;font-size:.9rem;cursor:pointer;text-decoration:none;transition:border-color .2s;font-family:inherit}
+    .chat-menu-btn:hover{border-color:rgba(240,165,0,.4)}
+    .chat-wa{color:var(--green);border-color:rgba(37,211,102,.25)}
+    .chat-back{background:none;border:none;color:var(--muted);font-size:.82rem;cursor:pointer;margin-bottom:14px;padding:0;font-family:inherit}
+    .chat-back:hover{color:var(--white)}
+    .chat-label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:6px;margin-top:12px;text-transform:uppercase;letter-spacing:.5px;font-family:'Rajdhani',sans-serif;font-weight:600}
+    .chat-input{width:100%;background:var(--navy);border:1px solid var(--border);border-radius:8px;padding:10px 12px;color:var(--white);font-size:.9rem;font-family:inherit}
+    .chat-input:focus{outline:none;border-color:var(--gold)}
+    .chat-btn{width:100%;margin-top:14px;padding:11px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s}
+    .chat-btn:hover{opacity:.85}
+    .chat-btn:disabled{opacity:.5;cursor:default}
+    .chat-result{margin-top:14px;font-size:.88rem;color:var(--muted);line-height:1.6}
+    .chat-result.err{color:#ff6b6b}
+    .chat-result.ok{color:var(--white)}
+    .chat-plan-row{display:flex;justify-content:space-between;padding:10px 12px;background:var(--navy3);border-radius:8px;margin-bottom:8px;font-size:.88rem}
+    .chat-plan-row b{color:var(--gold);font-family:'Rajdhani',sans-serif}
+    .chat-clave{background:var(--navy);border:1px dashed var(--gold);border-radius:8px;padding:12px;margin-top:10px;font-family:monospace;font-size:1rem;color:var(--gold);text-align:center;letter-spacing:1px;word-break:break-all}
+    @media(max-width:480px){.chat-panel{right:12px;left:12px;width:auto;bottom:88px}.chat-toggle{right:16px;bottom:16px}}
   </style>
 </head>
 <body>
@@ -560,6 +588,63 @@
   </div>
 </div>
 
+<button id="chatToggle" class="chat-toggle" aria-label="Abrir chat de CapturaDocs" aria-expanded="false" aria-controls="chatPanel">💬</button>
+
+<div id="chatPanel" class="chat-panel" role="dialog" aria-label="Chat de CapturaDocs Express" aria-hidden="true">
+  <div class="chat-hdr">
+    <span>🛡️ CapturaDocs Express</span>
+    <button class="chat-close" onclick="cerrarChat()" aria-label="Cerrar chat">✕</button>
+  </div>
+  <div class="chat-body">
+    <div id="chat-view-menu" class="chat-view">
+      <p class="chat-intro">¿En qué te ayudamos?</p>
+      <button class="chat-menu-btn" onclick="chatShowView('precios')">💰 Ver precios</button>
+      <button class="chat-menu-btn" onclick="chatShowView('cotizar')">🧮 Cotizar un plan</button>
+      <button class="chat-menu-btn" onclick="chatShowView('comprobante')">📤 Ya pagué, subir comprobante</button>
+      <button class="chat-menu-btn" onclick="chatShowView('estado')">🔍 Consultar mi pedido</button>
+      <a class="chat-menu-btn chat-wa" href="https://wa.me/573503593635" target="_blank" rel="noopener">💬 Prefiero WhatsApp</a>
+    </div>
+
+    <div id="chat-view-precios" class="chat-view" style="display:none">
+      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div id="chat-precios-body" class="chat-result">Cargando…</div>
+    </div>
+
+    <div id="chat-view-cotizar" class="chat-view" style="display:none">
+      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <label class="chat-label" for="chat-plan-select">Plan</label>
+      <select id="chat-plan-select" class="chat-input">
+        <option value="S">Semanal (7 días) — $12.000</option>
+        <option value="M">Mensual (30 días) — $35.000</option>
+        <option value="N">Negocio/Estación (30 días) — $100.000</option>
+      </select>
+      <button class="chat-btn" onclick="chatCotizar(this)">Cotizar</button>
+      <div id="chat-cotizar-result" class="chat-result"></div>
+    </div>
+
+    <div id="chat-view-comprobante" class="chat-view" style="display:none">
+      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono 🎁 → arriba.</p>
+      <label class="chat-label" for="chat-comp-deviceid">ID de dispositivo</label>
+      <input id="chat-comp-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
+      <label class="chat-label" for="chat-comp-nombre">Nombre (opcional)</label>
+      <input id="chat-comp-nombre" class="chat-input" type="text" placeholder="Tu nombre" autocomplete="off"/>
+      <label class="chat-label" for="chat-comp-file">Foto del comprobante</label>
+      <input id="chat-comp-file" class="chat-input" type="file" accept="image/*"/>
+      <button class="chat-btn" onclick="chatEnviarComprobante(this)">Enviar comprobante</button>
+      <div id="chat-comp-result" class="chat-result"></div>
+    </div>
+
+    <div id="chat-view-estado" class="chat-view" style="display:none">
+      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <label class="chat-label" for="chat-estado-deviceid">ID de dispositivo</label>
+      <input id="chat-estado-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
+      <button class="chat-btn" onclick="chatConsultarEstado(this)">Consultar</button>
+      <div id="chat-estado-result" class="chat-result"></div>
+    </div>
+  </div>
+</div>
+
 <script>
   function showTab(tab) {
     ['tc','pp','pl'].forEach(t => {
@@ -610,6 +695,157 @@
       else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
     }
   });
+
+  // --- Chat / compra directa desde la landing ---
+  const CHAT_API = 'https://chat.capturadocs.com/webhook';
+  const chatToggleBtn = document.getElementById('chatToggle');
+  const chatPanelEl = document.getElementById('chatPanel');
+
+  function abrirChat(){
+    chatPanelEl.classList.add('open');
+    chatPanelEl.setAttribute('aria-hidden','false');
+    chatToggleBtn.setAttribute('aria-expanded','true');
+    const firstBtn = chatPanelEl.querySelector('.chat-menu-btn');
+    if (firstBtn) firstBtn.focus();
+  }
+  function cerrarChat(){
+    chatPanelEl.classList.remove('open');
+    chatPanelEl.setAttribute('aria-hidden','true');
+    chatToggleBtn.setAttribute('aria-expanded','false');
+    chatToggleBtn.focus();
+  }
+  chatToggleBtn.addEventListener('click', () => {
+    chatPanelEl.classList.contains('open') ? cerrarChat() : abrirChat();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && chatPanelEl.classList.contains('open')) cerrarChat();
+  });
+
+  function chatShowView(view){
+    ['menu','precios','cotizar','comprobante','estado'].forEach(v => {
+      document.getElementById('chat-view-' + v).style.display = v === view ? '' : 'none';
+    });
+    if (view === 'precios') chatCargarPrecios();
+  }
+
+  async function chatPost(path, body){
+    const r = await fetch(CHAT_API + '/' + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body || {}),
+    });
+    return r.json();
+  }
+
+  const CHAT_PLAN_NOMBRES = { S: 'Semanal (7 días)', M: 'Mensual (30 días)', N: 'Negocio/Estación (30 días)' };
+
+  async function chatCargarPrecios(){
+    const el = document.getElementById('chat-precios-body');
+    el.textContent = 'Cargando…';
+    try {
+      const data = await chatPost('landing-chat', { accion: 'precios' });
+      if (!data.ok) { el.textContent = 'No pudimos cargar los precios, intenta de nuevo.'; return; }
+      el.innerHTML = Object.entries(data.precios).map(([plan, precio]) =>
+        `<div class="chat-plan-row"><span>${CHAT_PLAN_NOMBRES[plan] || plan}</span><b>$${Number(precio).toLocaleString('es-CO')}</b></div>`
+      ).join('');
+    } catch (e) {
+      el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
+    }
+  }
+
+  async function chatCotizar(btn){
+    const plan = document.getElementById('chat-plan-select').value;
+    const el = document.getElementById('chat-cotizar-result');
+    el.className = 'chat-result';
+    el.textContent = 'Cotizando…';
+    btn.disabled = true;
+    try {
+      const data = await chatPost('landing-chat', { accion: 'cotizar', plan });
+      if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'Plan inválido.'; return; }
+      el.className = 'chat-result ok';
+      el.innerHTML = `Tu plan <b>${CHAT_PLAN_NOMBRES[data.plan] || data.plan}</b> cuesta <b>$${Number(data.precio).toLocaleString('es-CO')} COP</b>. Cuando pagues, usa "Ya pagué, subir comprobante" en el menú.`;
+    } catch (e) {
+      el.className = 'chat-result err';
+      el.textContent = 'No pudimos conectar. Intenta de nuevo.';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function chatLeerArchivoBase64(file){
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve((reader.result || '').toString().split(',')[1] || '');
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function chatEnviarComprobante(btn){
+    const deviceId = document.getElementById('chat-comp-deviceid').value.trim();
+    const nombre = document.getElementById('chat-comp-nombre').value.trim();
+    const fileInput = document.getElementById('chat-comp-file');
+    const file = fileInput.files[0];
+    const el = document.getElementById('chat-comp-result');
+    el.className = 'chat-result';
+    if (!deviceId) { el.className = 'chat-result err'; el.textContent = 'Ingresa tu ID de dispositivo.'; return; }
+    if (!file) { el.className = 'chat-result err'; el.textContent = 'Adjunta la foto del comprobante.'; return; }
+    if (file.size > 8 * 1024 * 1024) { el.className = 'chat-result err'; el.textContent = 'La imagen es muy pesada (máx. 8MB).'; return; }
+    el.textContent = 'Enviando…';
+    btn.disabled = true;
+    try {
+      const imagenBase64 = await chatLeerArchivoBase64(file);
+      const data = await chatPost('landing-chat', { accion: 'comprobante', deviceId, nombre, imagenBase64, mimetype: file.type || 'image/jpeg' });
+      if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos procesar el comprobante.'; return; }
+      el.className = 'chat-result ok';
+      el.innerHTML = `✓ ${data.mensaje}<br><span style="color:var(--muted)">Pedido #${data.pedidoId}. Puedes consultar el estado cuando quieras con "Consultar mi pedido".</span>`;
+      fileInput.value = '';
+    } catch (e) {
+      el.className = 'chat-result err';
+      el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  const CHAT_ESTADO_TEXTOS = {
+    cotizado: 'Cotizado, esperando tu comprobante.',
+    esperando_aprobacion: 'Comprobante recibido, en revisión.',
+    por_confirmar: 'Aprobado, confirmando entrega.',
+    entregado: 'Entregado — revisa tu clave abajo.',
+    rechazado: 'Rechazado. Escríbenos por WhatsApp si crees que es un error.',
+    confirmado: 'Confirmado.',
+    anulado: 'Anulado.',
+  };
+
+  async function chatConsultarEstado(btn){
+    const deviceId = document.getElementById('chat-estado-deviceid').value.trim();
+    const el = document.getElementById('chat-estado-result');
+    el.className = 'chat-result';
+    if (!deviceId) { el.className = 'chat-result err'; el.textContent = 'Ingresa tu ID de dispositivo.'; return; }
+    el.textContent = 'Consultando…';
+    btn.disabled = true;
+    try {
+      const data = await chatPost('landing-status', { deviceId });
+      if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos consultar el estado.'; return; }
+      if (!data.pedido) {
+        el.className = 'chat-result';
+        el.textContent = 'No encontramos pedidos para este ID de dispositivo.';
+        return;
+      }
+      el.className = 'chat-result ok';
+      let html = `Estado: <b>${CHAT_ESTADO_TEXTOS[data.pedido.estado] || data.pedido.estado}</b>`;
+      if (data.licencia.clave) {
+        html += `<div class="chat-clave">${data.licencia.clave}</div><p style="margin-top:8px;color:var(--muted)">Actívala en la app: ícono 🎁 → pegar la clave → Activar.</p>`;
+      }
+      el.innerHTML = html;
+    } catch (e) {
+      el.className = 'chat-result err';
+      el.textContent = 'No pudimos conectar. Intenta de nuevo.';
+    } finally {
+      btn.disabled = false;
+    }
+  }
 </script>
 </body>
 </html>

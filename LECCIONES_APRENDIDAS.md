@@ -149,3 +149,66 @@ sin tocar en nada el comportamiento del sitio publicado.
   sesión que hizo el cambio tiene la regla de no tocar la configuración de
   git nunca, ni siquiera local — queda como paso manual documentado acá y
   en `CONTEXTO.md`.
+
+---
+
+## 2026-08-04 — Dominio propio + widget de chat con compra directa
+
+### Qué se hizo
+
+- Se compró `capturadocs.com` en Cloudflare Registrar y se configuró como
+  custom domain de GitHub Pages: archivo `CNAME` en el repo + 4 registros
+  DNS tipo A (apex) apuntando a las IPs de GitHub Pages + 1 CNAME para
+  `www`, todos con proxy de Cloudflare apagado (DNS only) para que GitHub
+  pudiera emitir el certificado HTTPS. `https_enforced` se activó después
+  vía la API de GitHub (`PUT /repos/.../pages`).
+- Se agregó un widget de chat flotante (`#chatToggle`/`#chatPanel` en
+  `index.html`) con 4 acciones: ver precios, cotizar un plan, subir
+  comprobante de pago (deviceId + foto), y consultar el estado de un
+  pedido por deviceId. No es un chat de texto libre — es un menú
+  estructurado con botones y formularios, deliberadamente más simple que
+  el bot de WhatsApp (ver el porqué abajo).
+- El widget habla directo con dos webhooks nuevos del bot de
+  `capturadocs-bot-pagos` (`/webhook/landing-chat` y
+  `/webhook/landing-status`), expuestos en el mismo túnel de Cloudflare
+  que ya exponía el webhook de WhatsApp, bajo el hostname
+  `chat.capturadocs.com`. El diseño completo del lado del bot (motor
+  compartido, columna `canal`, dónde se guarda la clave) está en
+  `capturadocs-bot-pagos/CONTEXTO.md` sección 50 y
+  `LECCIONES_APRENDIDAS.md` de ese repo.
+
+### Por qué
+
+El usuario pidió que la compra (incluyendo subir el comprobante) se
+pudiera hacer directo desde la landing, sin depender de que WhatsApp esté
+disponible — la aprobación del pago la sigue haciendo el dueño por
+WhatsApp como siempre, pero el cliente ya no tiene que salir de la landing
+para nada del proceso de compra.
+
+Se decidió construir el widget como un **menú de acciones estructurado**
+(botones + formularios) en vez de un chat de texto libre con NLU, porque
+replicar el reconocimiento de intención del bot de WhatsApp (que tiene
+~200 nodos de n8n dedicados a eso) hubiera sido reinventar esa lógica dos
+veces, con doble superficie de bugs. Un menú de acciones fijas cubre
+exactamente los casos que se pidieron (precio, cotizar, comprobante,
+estado) con una fracción del esfuerzo y sin duplicar el motor existente.
+
+### Problemas encontrados y cómo se resolvieron
+
+- **`landing-status` iba a devolver la clave siempre en `null`.** El plan
+  original era leer la clave desde `/admin/consultar` del Worker de
+  licencias, pero ese endpoint solo refleja `dispositivo.clave` **después**
+  de que el cliente activa la clave en la app — nunca justo después de
+  generarla, que es exactamente cuando el cliente web más la necesita. Se
+  detectó probando el flujo completo en vivo (comprobante de prueba →
+  aprobación → consulta de estado) antes de darlo por terminado. Se
+  corrigió guardando la clave directamente en la fila del pedido en el
+  momento en que se genera (columna `clave` nueva en la Data Table), y
+  `landing-status` prefiere ese valor sobre el del Worker.
+- **Seguridad de `landing-status` sin segundo factor.** El endpoint
+  público solo pide el `deviceId` (formato `XXXX-XXXX`, ~32 bits) para
+  devolver el estado del pedido y la clave de licencia — no hay ninguna
+  otra verificación. Es una decisión consciente (coherente con la UX ya
+  elegida por el usuario: "volver y verificar con el deviceId"), mitigada
+  con la recomendación de activar un rate limit en Cloudflare sobre esa
+  ruta — ver pendiente #20 en `CONTEXTO.md`.
