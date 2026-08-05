@@ -84,16 +84,28 @@ gratis ahora" podría ir directo a la app).
 
 - **#14** — Enlazar botones a la app real, no solo a WhatsApp. (El widget de chat del punto 13 ya cubre la compra directa; los botones de WhatsApp existentes se dejaron intactos como canal alterno, no se tocaron.)
 - **#15** — Reemplazar la maqueta falsa de `.preview` (sección Funciones) por una captura o GIF real de la app funcionando.
-- **#18** — Analítica (Google Analytics/Plausible) para medir cuántas visitas llegan a WhatsApp vs. rebotan.
 - **#19** — Centralizar el número de WhatsApp (hoy repetido "a mano" en ~9 lugares del HTML) en una constante de JS.
-- **#20** (2026-08-04, actualizado 2026-08-04) — El endpoint `landing-status` devolvía la clave de licencia solo con el `deviceId` (formato `XXXX-XXXX`, ~32 bits de entropía) sin ningún otro secreto. Dos mitigaciones:
-  1. **Rate limit en Cloudflare** (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard.
-  2. **Exigir también el correo registrado** — el widget de esta landing (`index.html`, vista `chat-view-estado`) ya se actualizó para pedir el correo además del `deviceId` y mandarlo en el `POST /webhook/landing-status {deviceId, email}`. **Falta el lado del workflow de n8n** (`capturadocs-bot-pagos`): el nodo de `landing-status` debe comparar el `email` recibido contra `dispositivo.correo` (ya viene en la respuesta de `/admin/consultar` del Worker, que el workflow ya llama) y solo devolver `licencia.clave` si coinciden — si no, responder como si no hubiera pedido, igual que un `deviceId` inexistente. Ver instrucción completa para la sesión del homelab en `capturadocs-bot-pagos/CONTEXTO.md` (por agregar).
+- **#20.1** — Rate limit en Cloudflare (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard. (El punto 2 de este pendiente, exigir correo, ya quedó resuelto — ver abajo.)
 
 Resuelto: **#17** — no se migró el hosting a Vercel/Netlify, pero se
 compró dominio propio (`capturadocs.com`) y se configuró como custom
 domain de GitHub Pages, que resuelve el mismo problema (link sin usuario
 de GitHub visible) sin cambiar de proveedor.
+
+Resuelto: **#18 (analítica)** — se activó Cloudflare Web Analytics
+(cuenta ya existente, sin crear nada nuevo) para `capturadocs.com`. El
+dominio usa DNS-only (sin proxy naranja, necesario para el certificado
+de GitHub Pages), así que el modo "automático" de Cloudflare no sirve —
+se usó el modo manual ("Enable with JS Snippet installation"), que
+inyecta un `<script type="module">` con un `data-cf-beacon` propio del
+sitio. El snippet vive en el `<head>` de `index.html`, justo antes de
+`</head>`.
+
+Resuelto: **#20.2 (exigir correo, no solo deviceId, en landing-status)**
+— el widget ya mandaba `email` desde que se agregó (ver abajo); el lado
+de n8n (`capturadocs-bot-pagos`) se completó en la sesión del homelab,
+sección 51 de su `CONTEXTO.md` — confirmado en vivo por las dos
+sesiones en paralelo, sin conflicto.
 
 Ya resueltos (ver `LECCIONES_APRENDIDAS.md` para el detalle): `rel=noopener`
 en enlaces externos, imagen OG a tamaño correcto, accesibilidad del modal

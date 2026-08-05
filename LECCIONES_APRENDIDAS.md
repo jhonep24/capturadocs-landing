@@ -211,4 +211,65 @@ estado) con una fracción del esfuerzo y sin duplicar el motor existente.
   otra verificación. Es una decisión consciente (coherente con la UX ya
   elegida por el usuario: "volver y verificar con el deviceId"), mitigada
   con la recomendación de activar un rate limit en Cloudflare sobre esa
-  ruta — ver pendiente #20 en `CONTEXTO.md`.
+  ruta — ver pendiente #20 en `CONTEXTO.md`. **Actualización (2026-08-04,
+  más tarde)**: se agregó un segundo factor real (correo) en vez de solo
+  el rate limit — ver la entrada de abajo.
+
+---
+
+## 2026-08-04 (más tarde) — Formulario de contacto, estadísticas de visitas, y correo obligatorio en el widget
+
+### Qué se hizo
+
+- **Vista "Sugerencias o contacto"** en el widget (`chatEnviarContacto`,
+  acción `contacto`): tipo (sugerencia/problema/otro), nombre y
+  contacto opcionales, mensaje obligatorio. Llega a una Data Table
+  nueva del bot (`mensajes_contacto`) y avisa al dueño por WhatsApp —
+  detalle completo en `capturadocs-bot-pagos/CONTEXTO.md` sección 52.
+- **Cloudflare Web Analytics**: snippet manual en el `<head>`, ver
+  pendiente #18 resuelto en `CONTEXTO.md` para el porqué del modo
+  manual (no automático).
+- **Correo obligatorio en "Consultar mi pedido"**: esto lo hizo una
+  sesión distinta trabajando en paralelo sobre el mismo repo (avisada
+  por mensaje directo entre sesiones) — agregó el campo `chat-estado-email`
+  y actualizó `chatConsultarEstado` para mandar `{deviceId, email}` en
+  vez de solo `{deviceId}`. Documentado acá porque cambia el contrato
+  del widget con el backend, no porque lo haya construido esta sesión.
+
+### Por qué
+
+El dueño pidió "sugerencias/contacto" y "estadísticas de visitas" en la
+misma tanda de mejoras — ambas de bajo esfuerzo y sin decisiones
+pendientes, a diferencia de la sección de descargas (bloqueada en si
+vale la pena generar/firmar un APK) y de promocionar Telegram (bloqueado
+en que el bot de Telegram está apagado en producción). El correo
+obligatorio en `landing-status` fue una corrección de seguridad
+encontrada por otra sesión, no parte de esta tanda de mejoras, pero se
+integró sin fricción porque tocaba una parte del widget que esta sesión
+no estaba editando al mismo tiempo.
+
+### Problemas encontrados y cómo se resolvieron
+
+- **Dos sesiones de Claude Code editando el mismo repo (y el mismo
+  workflow de n8n) al mismo tiempo, sin coordinación previa.** No hubo
+  pérdida de trabajo porque las dos sesiones tocaron partes distintas
+  del archivo en cada edición puntual (Data Table nueva vs. campo de
+  correo en una vista existente; nodos nuevos vs. nodos existentes) —
+  pero fue por suerte de scope, no por ningún mecanismo de bloqueo. Se
+  verificó explícitamente después (conteo de nodos, pruebas en vivo de
+  ambos lados, lectura del archivo real) en vez de asumir que todo
+  seguía intacto solo porque el `git commit` no dio error. Lección
+  general: cuando se sepa que hay más de una sesión activa sobre el
+  mismo repo/workflow, verificar con evidencia (no con el historial de
+  git ni con la documentación de la otra sesión) antes de dar algo por
+  bueno.
+- **Clics simulados por coordenadas no se registraban en el panel del
+  chat** al probar en el navegador de la herramienta (tanto en local
+  como contra `capturadocs.com` en vivo) — el error decía "the Browser
+  pane is not displayed, so the page is not compositing frames". No es
+  un bug del widget: se confirmó invocando directamente la misma
+  función que dispara el botón (`chatEnviarContacto(boton)`), que sí
+  ejecuta el mismo código y la misma llamada de red que un clic real.
+  Cuando el clic por coordenadas no registre en este entorno de
+  pruebas, no asumir que el código está roto — verificar llamando la
+  función directamente antes de reportar un problema.
