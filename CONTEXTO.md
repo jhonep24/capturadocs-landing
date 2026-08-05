@@ -11,7 +11,11 @@ multi-proyecto"). Proyecto **"CapturaDocs Landing"** en
 `http://192.168.0.100:3456`. La sección "Pendientes conocidos" más abajo
 quedó congelada como estaba antes de esa fecha — no confiar en ella como
 lista viva. Esta sección SÍ es dueña de sus propias tareas en Vikunja:
-márcalas hechas ahí mismo al resolverlas.
+márcalas hechas ahí mismo al resolverlas. Para avisar algo a otra
+sección (o dejar constancia persistente de un cambio compartido), hay
+dos canales: `mcp__ccd_session_mgmt__send_message` (tiempo real) y la
+bitácora de Vikunja (proyecto "Coordinación" id 9, tarea 63, comentarios
+prefijados `[capturadocs-landing]`) — detalle en `../homelab/CONTEXTO.md`.
 
 ## Qué es este repo
 
