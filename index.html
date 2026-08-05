@@ -602,6 +602,7 @@
       <button class="chat-menu-btn" onclick="chatShowView('cotizar')">🧮 Cotizar un plan</button>
       <button class="chat-menu-btn" onclick="chatShowView('comprobante')">📤 Ya pagué, subir comprobante</button>
       <button class="chat-menu-btn" onclick="chatShowView('estado')">🔍 Consultar mi pedido</button>
+      <button class="chat-menu-btn" onclick="chatShowView('contacto')">📮 Sugerencias o contacto</button>
       <a class="chat-menu-btn chat-wa" href="https://wa.me/573503593635" target="_blank" rel="noopener">💬 Prefiero WhatsApp</a>
     </div>
 
@@ -639,8 +640,28 @@
       <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
       <label class="chat-label" for="chat-estado-deviceid">ID de dispositivo</label>
       <input id="chat-estado-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
+      <label class="chat-label" for="chat-estado-email">Correo con el que registraste la app</label>
+      <input id="chat-estado-email" class="chat-input" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="email"/>
       <button class="chat-btn" onclick="chatConsultarEstado(this)">Consultar</button>
       <div id="chat-estado-result" class="chat-result"></div>
+    </div>
+
+    <div id="chat-view-contacto" class="chat-view" style="display:none">
+      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <label class="chat-label" for="chat-contacto-tipo">Tipo</label>
+      <select id="chat-contacto-tipo" class="chat-input">
+        <option value="sugerencia">Sugerencia</option>
+        <option value="problema">Reportar un problema</option>
+        <option value="otro">Otra consulta</option>
+      </select>
+      <label class="chat-label" for="chat-contacto-nombre">Nombre (opcional)</label>
+      <input id="chat-contacto-nombre" class="chat-input" type="text" placeholder="Tu nombre" autocomplete="off"/>
+      <label class="chat-label" for="chat-contacto-medio">WhatsApp o correo (opcional)</label>
+      <input id="chat-contacto-medio" class="chat-input" type="text" placeholder="Para responderte, si hace falta" autocomplete="off"/>
+      <label class="chat-label" for="chat-contacto-mensaje">Mensaje</label>
+      <textarea id="chat-contacto-mensaje" class="chat-input" rows="4" placeholder="Cuéntanos qué pasó o qué te gustaría ver"></textarea>
+      <button class="chat-btn" onclick="chatEnviarContacto(this)">Enviar mensaje</button>
+      <div id="chat-contacto-result" class="chat-result"></div>
     </div>
   </div>
 </div>
@@ -722,7 +743,7 @@
   });
 
   function chatShowView(view){
-    ['menu','precios','cotizar','comprobante','estado'].forEach(v => {
+    ['menu','precios','cotizar','comprobante','estado','contacto'].forEach(v => {
       document.getElementById('chat-view-' + v).style.display = v === view ? '' : 'none';
     });
     if (view === 'precios') chatCargarPrecios();
@@ -820,13 +841,15 @@
 
   async function chatConsultarEstado(btn){
     const deviceId = document.getElementById('chat-estado-deviceid').value.trim();
+    const email = document.getElementById('chat-estado-email').value.trim();
     const el = document.getElementById('chat-estado-result');
     el.className = 'chat-result';
     if (!deviceId) { el.className = 'chat-result err'; el.textContent = 'Ingresa tu ID de dispositivo.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { el.className = 'chat-result err'; el.textContent = 'Ingresa el correo con el que registraste la app.'; return; }
     el.textContent = 'Consultando…';
     btn.disabled = true;
     try {
-      const data = await chatPost('landing-status', { deviceId });
+      const data = await chatPost('landing-status', { deviceId, email });
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos consultar el estado.'; return; }
       if (!data.pedido) {
         el.className = 'chat-result';
@@ -842,6 +865,31 @@
     } catch (e) {
       el.className = 'chat-result err';
       el.textContent = 'No pudimos conectar. Intenta de nuevo.';
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  async function chatEnviarContacto(btn){
+    const tipo = document.getElementById('chat-contacto-tipo').value;
+    const nombre = document.getElementById('chat-contacto-nombre').value.trim();
+    const contacto = document.getElementById('chat-contacto-medio').value.trim();
+    const mensajeEl = document.getElementById('chat-contacto-mensaje');
+    const mensaje = mensajeEl.value.trim();
+    const el = document.getElementById('chat-contacto-result');
+    el.className = 'chat-result';
+    if (!mensaje) { el.className = 'chat-result err'; el.textContent = 'Escribe tu mensaje antes de enviar.'; return; }
+    el.textContent = 'Enviando…';
+    btn.disabled = true;
+    try {
+      const data = await chatPost('landing-chat', { accion: 'contacto', tipo, nombre, contacto, mensaje });
+      if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos enviar tu mensaje.'; return; }
+      el.className = 'chat-result ok';
+      el.textContent = '✓ ' + data.mensaje;
+      mensajeEl.value = '';
+    } catch (e) {
+      el.className = 'chat-result err';
+      el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
     } finally {
       btn.disabled = false;
     }
