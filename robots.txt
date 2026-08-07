@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jhonep24.github.io/capturadocs-landing/sitemap.xml
+Sitemap: https://capturadocs.com/sitemap.xml
