@@ -898,6 +898,42 @@
       btn.disabled = false;
     }
   }
+
+  // --- Deep-link desde la app (informes-ponal): compra, renovación, soporte
+  // e instalador redirigen acá con ?view=&deviceId=&plan=&mensaje=&tipo= en
+  // vez de ir directo a WhatsApp — ver licencia.js:getLandingLink() y
+  // ActualizacionRequerida.jsx en ese repo.
+  (function chatDeepLink(){
+    const qp = new URLSearchParams(location.search);
+    const view = qp.get('view');
+    const deviceId = qp.get('deviceId');
+    const plan = qp.get('plan');
+    const mensaje = qp.get('mensaje');
+    const tipo = qp.get('tipo');
+    if (!view) return;
+    const vistasValidas = ['precios','cotizar','comprobante','estado','contacto'];
+    if (!vistasValidas.includes(view)) return;
+    if (deviceId) {
+      const compDeviceId = document.getElementById('chat-comp-deviceid');
+      const estadoDeviceId = document.getElementById('chat-estado-deviceid');
+      if (compDeviceId) compDeviceId.value = deviceId;
+      if (estadoDeviceId) estadoDeviceId.value = deviceId;
+    }
+    if (plan) {
+      const planSelect = document.getElementById('chat-plan-select');
+      if (planSelect) planSelect.value = plan;
+    }
+    if (tipo) {
+      const tipoSelect = document.getElementById('chat-contacto-tipo');
+      if (tipoSelect) tipoSelect.value = tipo;
+    }
+    if (mensaje) {
+      const mensajeEl = document.getElementById('chat-contacto-mensaje');
+      if (mensajeEl) mensajeEl.value = mensaje;
+    }
+    abrirChat();
+    chatShowView(view);
+  })();
 </script>
 </body>
 </html>
