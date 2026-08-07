@@ -247,7 +247,7 @@
     <img class="nav-icon" src="logo.png" alt="CapturaDocs Express" width="36" height="36"/>
     <div class="nav-text">Captura<span>Docs</span> Express</div>
   </a>
-  <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="nav-cta">💬 Obtener acceso</a>
+  <a href="https://capturadocs-app.capturadocs.workers.dev/" target="_blank" rel="noopener" class="nav-cta">Obtener acceso</a>
 </nav>
 
 <section class="hero">
@@ -258,7 +258,7 @@
     <h1>Software para informes<em>de captura en flagrancia.</em></h1>
     <p class="hero-sub"><strong>Diligencias una sola vez</strong> y el sistema genera automáticamente el Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación — sin transcribir datos, sin inconsistencias entre documentos.</p>
     <div class="hero-actions">
-      <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="btn-p">Probar gratis ahora</a>
+      <a href="https://capturadocs-app.capturadocs.workers.dev/" target="_blank" rel="noopener" class="btn-p">Probar gratis ahora</a>
       <a href="#como-funciona" class="btn-s">Ver cómo funciona →</a>
     </div>
     <div class="stats">
@@ -361,14 +361,14 @@
         <div class="pprice">$0</div>
         <div class="pper">Sin tarjeta requerida</div>
         <ul class="pfeats"><li>5 casos completos gratis</li><li>Todos los documentos incluidos</li><li>Web, Android y Windows</li><li>Sin registro obligatorio</li></ul>
-        <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="pbtn po">Empezar gratis →</a>
+        <a href="https://capturadocs-app.capturadocs.workers.dev/" target="_blank" rel="noopener" class="pbtn po">Empezar gratis →</a>
       </div>
       <div class="plan">
         <div class="pname">Licencia semanal</div>
         <div class="pprice">$12.000 <span>COP</span></div>
         <div class="pper">7 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 7 días</li><li>Todos los documentos</li><li>Web, Android y Windows</li><li>Ideal para uso esporádico</li></ul>
-        <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="pbtn po">Activar por WhatsApp</a>
+        <a href="#" onclick="abrirChatEnVista('cotizar','S');return false" class="pbtn po">Cotizar y activar</a>
       </div>
       <div class="plan ft">
         <div class="ptag">⭐ MÁS POPULAR</div>
@@ -376,14 +376,14 @@
         <div class="pprice">$35.000 <span>COP</span></div>
         <div class="pper">30 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>Mejora de redacción con IA</li><li>Web, Android y Windows</li><li>Soporte por WhatsApp</li></ul>
-        <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="pbtn pp">Activar por WhatsApp</a>
+        <a href="#" onclick="abrirChatEnVista('cotizar','M');return false" class="pbtn pp">Cotizar y activar</a>
       </div>
       <div class="plan">
         <div class="pname">Negocio/Estación</div>
         <div class="pprice">$100.000 <span>COP</span></div>
         <div class="pper">30 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>Mejora de redacción con IA</li><li>Pensada para negocios y estaciones</li><li>Solo para computador (versión web)</li></ul>
-        <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="pbtn po">Activar por WhatsApp</a>
+        <a href="#" onclick="abrirChatEnVista('cotizar','N');return false" class="pbtn po">Cotizar y activar</a>
       </div>
     </div>
   </div>
@@ -502,8 +502,8 @@
     </div>
     <div style="text-align:center;margin-top:36px">
       <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">¿Tienes otra pregunta que no esté aquí?</p>
-      <a href="https://wa.me/573503593635?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20CapturaDocs%20Express" target="_blank" rel="noopener" class="wa" style="padding:12px 28px;font-size:.95rem;box-shadow:0 4px 16px rgba(37,211,102,.2)">
-        💬 Pregúntanos y solucionamos tus dudas
+      <a href="#" onclick="abrirChatEnVista('contacto');return false" class="btn-s" style="padding:12px 28px;font-size:.95rem">
+        Pregúntanos y solucionamos tus dudas
       </a>
     </div>
   </div>
@@ -513,7 +513,7 @@
   <div class="container">
     <h2>¿Listo para eliminar<em>errores en tus informes?</em></h2>
     <p>Empieza con 5 casos gratis. Sin registro, sin tarjeta. Solo entra y genera.</p>
-    <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="wa">💬 Obtener acceso por WhatsApp</a>
+    <a href="https://capturadocs-app.capturadocs.workers.dev/" target="_blank" rel="noopener" class="btn-p">Probar gratis ahora</a>
   </div>
 </section>
 
@@ -784,6 +784,15 @@
       document.getElementById('chat-view-' + v).style.display = v === view ? '' : 'none';
     });
     if (view === 'precios') chatCargarPrecios();
+  }
+
+  function abrirChatEnVista(view, plan){
+    abrirChat();
+    chatShowView(view);
+    if (plan) {
+      const sel = document.getElementById('chat-plan-select');
+      if (sel) sel.value = plan;
+    }
   }
 
   async function chatPost(path, body){
