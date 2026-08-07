@@ -365,7 +365,7 @@
       </div>
       <div class="plan">
         <div class="pname">Licencia semanal</div>
-        <div class="pprice">$12.000 <span>COP</span></div>
+        <div class="pprice" id="price-S">$12.000 <span>COP</span></div>
         <div class="pper">7 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 7 días</li><li>Todos los documentos</li><li>Web, Android y Windows</li><li>Ideal para uso esporádico</li></ul>
         <a href="#" onclick="abrirChatEnVista('cotizar','S');return false" class="pbtn po">Cotizar y activar</a>
@@ -373,14 +373,14 @@
       <div class="plan ft">
         <div class="ptag">⭐ MÁS POPULAR</div>
         <div class="pname">Licencia mensual</div>
-        <div class="pprice">$35.000 <span>COP</span></div>
+        <div class="pprice" id="price-M">$35.000 <span>COP</span></div>
         <div class="pper">30 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>Mejora de redacción con IA</li><li>Web, Android y Windows</li><li>Soporte por WhatsApp</li></ul>
         <a href="#" onclick="abrirChatEnVista('cotizar','M');return false" class="pbtn pp">Cotizar y activar</a>
       </div>
       <div class="plan">
         <div class="pname">Negocio/Estación</div>
-        <div class="pprice">$100.000 <span>COP</span></div>
+        <div class="pprice" id="price-N">$100.000 <span>COP</span></div>
         <div class="pper">30 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>Mejora de redacción con IA</li><li>Pensada para negocios y estaciones</li><li>Solo para computador (versión web)</li></ul>
         <a href="#" onclick="abrirChatEnVista('cotizar','N');return false" class="pbtn po">Cotizar y activar</a>
@@ -736,12 +736,11 @@
   let lastFocused = null;
   let cfgSincronizada = false;
   function sincronizarConfigPublica(){
-    // Nequi/WhatsApp mostrados en el modal legal vienen del mismo KV que
-    // usa el panel de administración de la app (ver README_TECNICO.md,
-    // "Configuración pública en caliente") — así no quedan desactualizados
-    // en el HTML si cambian allá. Si falla (sin internet, CORS, etc.) se
-    // deja el valor ya escrito en el HTML, que sigue siendo válido como
-    // último respaldo.
+    // Nequi/WhatsApp/precios mostrados vienen del mismo KV que usa el panel
+    // de administración de la app (ver README_TECNICO.md, "Configuración
+    // pública en caliente") — así no quedan desactualizados en el HTML si
+    // cambian allá. Si falla (sin internet, CORS, etc.) se deja el valor ya
+    // escrito en el HTML, que sigue siendo válido como último respaldo.
     if (cfgSincronizada) return;
     cfgSincronizada = true;
     fetch('https://capturadocs-licencias.capturadocs.workers.dev/config-publica', { method: 'POST' })
@@ -751,15 +750,23 @@
         const fmt = n => n.replace(/^(\d{3})(\d{7})$/, '$1 $2');
         document.querySelectorAll('.cfg-whatsapp').forEach(el => el.textContent = fmt(cfg.whatsapp));
         document.querySelectorAll('.cfg-nequi').forEach(el => el.textContent = fmt(cfg.nequi));
+        const fmtPrecio = n => '$' + Number(n).toLocaleString('es-CO');
+        if (cfg.precios) {
+          ['S','M','N'].forEach(plan => {
+            const el = document.getElementById('price-' + plan);
+            if (el && precioValido(cfg.precios[plan])) el.firstChild.textContent = fmtPrecio(cfg.precios[plan]) + ' ';
+          });
+        }
       })
-      .catch(() => { cfgSincronizada = false; }); // permite reintentar la próxima vez que se abra el modal
+      .catch(() => { cfgSincronizada = false; }); // permite reintentar en el próximo intento
   }
+  function precioValido(n){ return Number.isInteger(n) && n >= 1000 && n <= 5000000; }
+  sincronizarConfigPublica();
   function abrirTerminos(){
     lastFocused = document.activeElement;
     modalEl.classList.add('open');
     document.body.style.overflow='hidden';
     modalEl.querySelector('.mcls').focus();
-    sincronizarConfigPublica();
   }
   function cerrarModal(){
     modalEl.classList.remove('open');
