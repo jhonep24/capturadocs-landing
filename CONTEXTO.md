@@ -79,6 +79,7 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 4. `.features#funciones` — lista de funcionalidades + maqueta visual de "5 archivos generados" (**pendiente #15: reemplazar por captura/GIF real**)
 5. `.compare` — antes (a mano) vs. después (con la app)
 6. `.pricing#precios` — 4 planes: prueba gratis, semanal $12.000, mensual $35.000 (destacado), Negocio/Estación $100.000
+6.5. `.downloads#descargas` (agregada 2026-08-07) — 3 tarjetas: Android (.apk firmado), Windows (.msix), iPhone (enlace a la PWA por Safari). Los binarios de Android/Windows viven como assets de un GitHub Release (`v1.6-descargas`) en **este repo** (`capturadocs-landing`, público — no en `informes-ponal`, que es privado y da 404 en descarga pública), enlazados vía `releases/latest/download/...`. Ver "Cómo regenerar los instaladores" más abajo para el proceso completo.
 7. `.testimonios` — 3 citas reales de policías que probaron la app
 8. `.trust` — franja de 5 iconos de confianza
 9. `.faq#preguntas` — acordeón `<details>` con 9 preguntas
@@ -129,6 +130,50 @@ Google Fonts, JSON-LD y `robots.txt`/`sitemap.xml`.
   usuario cree la cuenta (GA4/Plausible/etc.) primero.
 - **#19 (número de WhatsApp)** — resuelto de forma distinta a lo previsto:
   ver `check_wa_number.py` más abajo, en vez de centralizar en JS runtime.
+
+## Cómo regenerar los instaladores (Android/Windows)
+
+Cuando cambie la app (`informes-ponal`) y haya que republicar los binarios de
+la sección Descargas:
+
+**Android** (`informes-ponal/android`):
+1. `npm run build && npx cap sync android` en `informes-ponal`.
+2. El keystore de firma vive en `informes-ponal/android/keystore/` —
+   **gitignored, no está en el repo**. Si no existe en la máquina, hay que
+   generarlo de nuevo con `keytool -genkeypair` (esto invalida las
+   actualizaciones para quien ya instaló el APK anterior, porque Android exige
+   la misma firma para reinstalar/actualizar — evitar si es posible, hacer
+   backup del `.keystore` en vez de regenerarlo).
+3. Requiere **JDK 21** (no 17/20) — `capacitor.build.gradle` lo exige. Si no
+   está instalado, usar la versión `.zip` portátil de Temurin en vez del
+   instalador `.msi` (el `.msi` requiere admin, que esta sesión no tenía).
+4. `JAVA_HOME=<ruta-jdk21> ./gradlew.bat assembleRelease` dentro de
+   `informes-ponal/android` → genera `app/build/outputs/apk/release/app-release.apk`.
+
+**Windows** (`.msix`): no usar la interfaz web de pwabuilder.com — sus
+componentes son Lit/shadow-DOM y el click automatizado no siempre dispara el
+handler real (visto en esta sesión). Es más confiable llamar directo a su API
+pública:
+```
+POST https://pwabuilder-windows-docker.azurewebsites.net/msix/generatezip
+Content-Type: application/json
+
+{"url":"https://capturadocs-app.capturadocs.workers.dev/","packageId":"CapturaDocs.CapturaDocsExpress","name":"CapturaDocs Express","version":"1.6.0.0","allowSigning":false,"generateModernPackage":true,"publisher":{"displayName":"CapturaDocs","commonName":"CN=3a54a224-05dd-42aa-85bd-3f3c1478fdca"}}
+```
+Devuelve un `.zip` con `*.sideload.msix` + `install.ps1` + `utils/pwainstaller.exe`
+— ese `.zip` completo es el que se sube al release, no solo el `.msix` suelto
+(el usuario final necesita `install.ps1` para que el certificado de prueba se
+instale junto con el paquete).
+
+**Publicar**: subir los dos archivos (`CapturaDocs-Express-Android.apk`,
+`CapturaDocs-Express-Windows.zip`) como assets de un nuevo GitHub Release en
+**`capturadocs-landing`** (repo público) — nunca en `informes-ponal` (privado,
+los links públicos dan 404 aunque el asset se suba bien, ver Falla más abajo).
+`gh release create <tag> archivo1 archivo2 --repo jhonep24/capturadocs-landing`.
+Los links de la landing usan `releases/latest/download/<nombre-exacto>`, así
+que basta con que el nuevo release quede marcado "Latest" (por defecto, el más
+reciente) — no hace falta tocar `index.html` de nuevo si los nombres de
+archivo no cambian.
 
 ## Verificación del número de WhatsApp (`check_wa_number.py`)
 

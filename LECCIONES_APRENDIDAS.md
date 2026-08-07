@@ -10,7 +10,63 @@ estructura de secciones de la landing.
 
 ---
 
-## 2026-08-03 — Revisión general y mejoras de alta prioridad
+## 2026-08-07 — Sección de descargas (Android APK, Windows .msix, iPhone PWA)
+
+### Qué se hizo
+
+Sección nueva `.downloads#descargas` con instalador real para Android y
+Windows, y enlace a la PWA para iPhone (decisión ya tomada: iOS no tendría
+instalador nativo).
+
+- **Android**: se generó un keystore de firma propio (no debug) en
+  `informes-ponal/android/keystore/` (gitignored) y se agregó
+  `signingConfigs.release` a `android/app/build.gradle`, leyendo el keystore
+  desde un `.properties` también gitignored. Se compiló con `gradlew
+  assembleRelease`, verificado con `apksigner verify` (firma V2 válida).
+- **Windows**: se generó el paquete con la **API pública de PWABuilder
+  directamente** (`POST .../msix/generatezip`), no con su interfaz web.
+- **iPhone**: solo un link a la PWA con instrucción de "Agregar a inicio"
+  desde Safari, sin build nuevo.
+
+### Por qué
+
+El usuario pidió explícitamente "instalador para PC", no solo la PWA (que ya
+existía). Se evaluaron Electron/Tauri (meses de trabajo, proyecto aparte) vs.
+PWABuilder (empaqueta la PWA existente en un `.msix` real, cero rediseño) —
+se eligió PWABuilder por ser el punto intermedio real.
+
+### Problemas encontrados
+
+- **Faltaba JDK 21**: el proyecto Capacitor exige `JavaVersion.VERSION_21`
+  (`capacitor.build.gradle`, autogenerado por `cap sync`) y solo había 17/20
+  instalados. El instalador `.msi` oficial de Temurin 21 falló con error 1603
+  (requiere permisos de administrador que esta sesión no tenía). Se resolvió
+  usando el `.zip` portátil de Temurin (sin instalación, solo `JAVA_HOME`
+  apuntando ahí) — **lección: para JDKs en máquinas sin admin, usar zip, no
+  MSI**. Checksum verificado contra el oficial de adoptium.net antes de usar.
+- **El sitio de pwabuilder.com no respondía a clicks automatizados**: sus
+  componentes son Lit con shadow DOM; `.click()` y hasta
+  `dispatchEvent(MouseEvent)` sobre el botón real no disparaban ninguna
+  petición de red (mismo síntoma ya documentado antes: el Browser pane de
+  esta sesión no compone frames de verdad, así que algunas interacciones no
+  registran). Se resolvió leyendo el bundle JS del sitio
+  (`grep -oE 'https?://[^"]*windows[^"]*' index-*.js`) para encontrar el
+  endpoint real (`pwabuilder-windows-docker.azurewebsites.net/msix/generatezip`),
+  y el shape del payload en el repo open-source de PWABuilder en GitHub
+  (`WindowsAppPackageOptions.cs`) — **lección: cuando una herramienta web es
+  un SPA pesado y el click automatizado no dispara nada, buscar si expone una
+  API pública y llamarla directo es más confiable que seguir intentando con
+  el navegador**.
+- **GitHub Release 404 para el público**: el primer release con los binarios
+  se creó en `informes-ponal`, que es un repo **privado** — los links
+  `releases/latest/download/...` devuelven 404 para cualquiera sin acceso al
+  repo, aunque el asset esté subido correctamente (`state: uploaded` en la
+  API). Se movió el release a `capturadocs-landing` (público, ya lo es porque
+  sirve GitHub Pages) — **lección: los assets de descarga pública deben vivir
+  en un repo público, nunca asumir que "está en GitHub" es suficiente para
+  que un visitante externo lo descargue**.
+
+
 
 ### Qué se hizo
 
