@@ -149,6 +149,13 @@
     .pbtn:hover{opacity:.85}
     .pbtn.pp{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
     .pbtn.po{border:1px solid var(--border);color:var(--muted)}
+    .dlgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:0 auto}
+    @media(max-width:800px){.dlgrid{grid-template-columns:1fr;max-width:400px}}
+    .dlcard{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:30px 24px;text-align:center;transition:transform .2s}
+    .dlcard:hover{transform:translateY(-4px)}
+    .dlicon{font-size:2.4rem;margin-bottom:10px}
+    .dlname{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:10px}
+    .dldesc{color:var(--muted);font-size:.92rem;line-height:1.5;margin-bottom:20px;min-height:80px}
     .testimonios{padding:100px 0}
     .thdr{text-align:center;margin-bottom:56px}
     .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:1100px;margin:0 auto}
@@ -378,6 +385,36 @@
         <div class="pper">30 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>✨ Mejora de redacción con IA</li><li>Pensada para negocios y estaciones</li><li>Solo para computador (versión web)</li></ul>
         <a href="https://wa.me/573503593635" target="_blank" rel="noopener" class="pbtn po">Activar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="downloads" id="descargas">
+  <div class="container">
+    <div class="phdr">
+      <div class="stag">Descargas</div>
+      <h2 class="stitle">Instala la app en tu equipo.</h2>
+      <p class="ssub" style="margin:0 auto">Android y Windows tienen instalador propio. En iPhone se instala como app web (funciona igual, sin App Store).</p>
+    </div>
+    <div class="dlgrid">
+      <div class="dlcard">
+        <div class="dlicon">🤖</div>
+        <div class="dlname">Android</div>
+        <div class="dldesc">Archivo .apk firmado. Al instalar, Android puede advertir "fuente desconocida" — es normal en apps fuera de Play Store, solo confirma la instalación.</div>
+        <a href="https://github.com/jhonep24/capturadocs/releases/latest/download/CapturaDocs-Express-Android.apk" class="pbtn pp">Descargar .apk</a>
+      </div>
+      <div class="dlcard">
+        <div class="dlicon">🖥️</div>
+        <div class="dlname">Windows</div>
+        <div class="dldesc">Paquete .msix para PC. Descomprime el .zip y ejecuta install.ps1 (clic derecho → Ejecutar con PowerShell) para instalar con icono propio en el menú inicio.</div>
+        <a href="https://github.com/jhonep24/capturadocs/releases/latest/download/CapturaDocs-Express-Windows.zip" class="pbtn pp">Descargar para Windows</a>
+      </div>
+      <div class="dlcard">
+        <div class="dlicon">📱</div>
+        <div class="dlname">iPhone</div>
+        <div class="dldesc">Abre la app en Safari, toca Compartir → "Agregar a pantalla de inicio". Queda instalada con icono propio, sin pasar por la App Store.</div>
+        <a href="https://capturadocs-app.capturadocs.workers.dev/" target="_blank" rel="noopener" class="pbtn po">Abrir en Safari →</a>
       </div>
     </div>
   </div>
