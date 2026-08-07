@@ -734,11 +734,32 @@
   document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
   const modalEl = document.getElementById('modal');
   let lastFocused = null;
+  let cfgSincronizada = false;
+  function sincronizarConfigPublica(){
+    // Nequi/WhatsApp mostrados en el modal legal vienen del mismo KV que
+    // usa el panel de administración de la app (ver README_TECNICO.md,
+    // "Configuración pública en caliente") — así no quedan desactualizados
+    // en el HTML si cambian allá. Si falla (sin internet, CORS, etc.) se
+    // deja el valor ya escrito en el HTML, que sigue siendo válido como
+    // último respaldo.
+    if (cfgSincronizada) return;
+    cfgSincronizada = true;
+    fetch('https://capturadocs-licencias.capturadocs.workers.dev/config-publica', { method: 'POST' })
+      .then(r => r.json())
+      .then(cfg => {
+        if (!cfg || !cfg.whatsapp || !cfg.nequi) return;
+        const fmt = n => n.replace(/^(\d{3})(\d{7})$/, '$1 $2');
+        document.querySelectorAll('.cfg-whatsapp').forEach(el => el.textContent = fmt(cfg.whatsapp));
+        document.querySelectorAll('.cfg-nequi').forEach(el => el.textContent = fmt(cfg.nequi));
+      })
+      .catch(() => { cfgSincronizada = false; }); // permite reintentar la próxima vez que se abra el modal
+  }
   function abrirTerminos(){
     lastFocused = document.activeElement;
     modalEl.classList.add('open');
     document.body.style.overflow='hidden';
     modalEl.querySelector('.mcls').focus();
+    sincronizarConfigPublica();
   }
   function cerrarModal(){
     modalEl.classList.remove('open');
