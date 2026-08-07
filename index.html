@@ -826,6 +826,14 @@
     }
   }
 
+  // Escapa texto que viene de una respuesta del backend (n8n) antes de
+  // insertarlo con innerHTML — ese texto puede terminar incluyendo datos
+  // que el propio usuario escribió en un campo libre (ej. "nombre" del
+  // comprobante), así que no se puede tratar como HTML de confianza.
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  }
+
   async function chatPost(path, body){
     const r = await fetch(CHAT_API + '/' + path, {
       method: 'POST',
@@ -844,7 +852,7 @@
       const data = await chatPost('landing-chat', { accion: 'precios' });
       if (!data.ok) { el.textContent = 'No pudimos cargar los precios, intenta de nuevo.'; return; }
       el.innerHTML = Object.entries(data.precios).map(([plan, precio]) =>
-        `<div class="chat-plan-row"><span>${CHAT_PLAN_NOMBRES[plan] || plan}</span><b>$${Number(precio).toLocaleString('es-CO')}</b></div>`
+        `<div class="chat-plan-row"><span>${escapeHtml(CHAT_PLAN_NOMBRES[plan] || plan)}</span><b>$${Number(precio).toLocaleString('es-CO')}</b></div>`
       ).join('');
     } catch (e) {
       el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
@@ -861,7 +869,7 @@
       const data = await chatPost('landing-chat', { accion: 'cotizar', plan });
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'Plan inválido.'; return; }
       el.className = 'chat-result ok';
-      el.innerHTML = `Tu plan <b>${CHAT_PLAN_NOMBRES[data.plan] || data.plan}</b> cuesta <b>$${Number(data.precio).toLocaleString('es-CO')} COP</b>. Cuando pagues, usa "Ya pagué, subir comprobante" en el menú.`;
+      el.innerHTML = `Tu plan <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.plan] || data.plan)}</b> cuesta <b>$${Number(data.precio).toLocaleString('es-CO')} COP</b>. Cuando pagues, usa "Ya pagué, subir comprobante" en el menú.`;
     } catch (e) {
       el.className = 'chat-result err';
       el.textContent = 'No pudimos conectar. Intenta de nuevo.';
@@ -896,7 +904,7 @@
       const data = await chatPost('landing-chat', { accion: 'comprobante', deviceId, nombre, imagenBase64, mimetype: file.type || 'image/jpeg' });
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos procesar el comprobante.'; return; }
       el.className = 'chat-result ok';
-      el.innerHTML = `✓ ${data.mensaje}<br><span style="color:var(--muted)">Pedido #${data.pedidoId}. Puedes consultar el estado cuando quieras con "Consultar mi pedido".</span>`;
+      el.innerHTML = `✓ ${escapeHtml(data.mensaje)}<br><span style="color:var(--muted)">Pedido #${escapeHtml(data.pedidoId)}. Puedes consultar el estado cuando quieras con "Consultar mi pedido".</span>`;
       fileInput.value = '';
     } catch (e) {
       el.className = 'chat-result err';
@@ -934,9 +942,9 @@
         return;
       }
       el.className = 'chat-result ok';
-      let html = `Estado: <b>${CHAT_ESTADO_TEXTOS[data.pedido.estado] || data.pedido.estado}</b>`;
+      let html = `Estado: <b>${escapeHtml(CHAT_ESTADO_TEXTOS[data.pedido.estado] || data.pedido.estado)}</b>`;
       if (data.licencia.clave) {
-        html += `<div class="chat-clave">${data.licencia.clave}</div><p style="margin-top:8px;color:var(--muted)">Actívala en la app: ícono 🎁 → pegar la clave → Activar.</p>`;
+        html += `<div class="chat-clave">${escapeHtml(data.licencia.clave)}</div><p style="margin-top:8px;color:var(--muted)">Actívala en la app: ícono 🎁 → pegar la clave → Activar.</p>`;
       }
       el.innerHTML = html;
     } catch (e) {
