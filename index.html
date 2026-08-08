@@ -181,6 +181,11 @@
     .cta h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,4rem);line-height:1.1;margin-bottom:20px}
     .cta h2 em{font-style:normal;color:var(--gold)}
     .cta p{color:var(--muted);font-size:1.05rem;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+    .ads-promo{padding:20px 0 60px}
+    .ads-promo-box{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+    .ads-promo-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.4rem;margin:6px 0 8px}
+    .ads-promo-text{color:var(--muted);font-size:.9rem;line-height:1.6;max-width:520px;margin:0}
+    .ads-promo-box .btn-s{flex-shrink:0;white-space:nowrap}
     .wa{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:#fff;padding:16px 36px;border-radius:12px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;box-shadow:0 4px 24px rgba(37,211,102,.25);transition:transform .2s,box-shadow .2s}
     .wa:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,211,102,.35)}
     footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.82rem}
@@ -525,6 +530,19 @@
   </div>
 </section>
 
+<section class="ads-promo">
+  <div class="container">
+    <div class="ads-promo-box">
+      <div>
+        <div class="stag">Anúnciate con nosotros</div>
+        <h3 class="ads-promo-title">Tu marca frente a policías de toda Colombia.</h3>
+        <p class="ads-promo-text">Reserva un espacio publicitario dentro de la app — lo ven los usuarios mientras generan sus informes. Ideal para negocios y servicios relacionados con la labor policial.</p>
+      </div>
+      <a href="#" onclick="abrirChatEnVista('contacto', null, 'publicidad');return false" class="btn-s">Quiero anunciarme →</a>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div style="display:flex;flex-direction:column;gap:4px">
     <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;color:var(--white)">🛡️ CapturaDocs<span style="color:var(--gold)"> Express</span></div>
@@ -707,6 +725,7 @@
       <select id="chat-contacto-tipo" class="chat-input">
         <option value="sugerencia">Sugerencia</option>
         <option value="problema">Reportar un problema</option>
+        <option value="publicidad">Quiero anunciarme en la app</option>
         <option value="otro">Otra consulta</option>
       </select>
       <label class="chat-label" for="chat-contacto-nombre">Nombre (opcional)</label>
@@ -856,12 +875,16 @@
     if (view === 'libre') chatLibreAbrir(); else chatLibreDetenerPolling();
   }
 
-  function abrirChatEnVista(view, plan){
+  function abrirChatEnVista(view, plan, tipo){
     abrirChat();
     chatShowView(view);
     if (plan) {
       const sel = document.getElementById('chat-plan-select');
       if (sel) sel.value = plan;
+    }
+    if (tipo) {
+      const tipoSel = document.getElementById('chat-contacto-tipo');
+      if (tipoSel) tipoSel.value = tipo;
     }
   }
 
