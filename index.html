@@ -233,6 +233,13 @@
     .chat-plan-row{display:flex;justify-content:space-between;padding:10px 12px;background:var(--navy3);border-radius:8px;margin-bottom:8px;font-size:.88rem}
     .chat-plan-row b{color:var(--gold);font-family:'Rajdhani',sans-serif}
     .chat-clave{background:var(--navy);border:1px dashed var(--gold);border-radius:8px;padding:12px;margin-top:10px;font-family:monospace;font-size:1rem;color:var(--gold);text-align:center;letter-spacing:1px;word-break:break-all}
+    .chat-libre-mensajes{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;margin-bottom:10px;padding-right:2px}
+    .chat-libre-msg{max-width:85%;padding:8px 12px;border-radius:10px;font-size:.88rem;line-height:1.5;word-break:break-word}
+    .chat-libre-msg.yo{align-self:flex-end;background:var(--gold);color:var(--navy);border-bottom-right-radius:2px}
+    .chat-libre-msg.bot{align-self:flex-start;background:var(--navy3);color:var(--white);border-bottom-left-radius:2px}
+    .chat-libre-msg.esperando{align-self:flex-start;background:var(--navy3);color:var(--muted);font-style:italic}
+    .chat-libre-input-row{display:flex;gap:8px}
+    .chat-libre-input-row .chat-input{margin-bottom:0}
     @media(max-width:480px){.chat-panel{right:12px;left:12px;width:auto;bottom:88px}.chat-toggle{right:16px;bottom:16px}}
   </style>
 
@@ -638,6 +645,7 @@
   <div class="chat-body">
     <div id="chat-view-menu" class="chat-view">
       <p class="chat-intro">¿En qué podemos ayudarte?</p>
+      <button class="chat-menu-btn" onclick="chatShowView('libre')">✍️ Escríbenos (ayuda, renovar, estado, referidos)</button>
       <button class="chat-menu-btn" onclick="chatShowView('precios')">💰 Ver precios</button>
       <button class="chat-menu-btn" onclick="chatShowView('cotizar')">🧮 Cotizar un plan</button>
       <button class="chat-menu-btn" onclick="chatShowView('comprobante')">📤 Ya pagué, subir comprobante</button>
@@ -708,6 +716,16 @@
       <textarea id="chat-contacto-mensaje" class="chat-input" rows="4" placeholder="Cuéntanos qué pasó o qué te gustaría ver"></textarea>
       <button class="chat-btn" onclick="chatEnviarContacto(this)">Enviar mensaje</button>
       <div id="chat-contacto-result" class="chat-result"></div>
+    </div>
+
+    <div id="chat-view-libre" class="chat-view" style="display:none">
+      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <p class="chat-intro">Escríbenos: ayuda con la app, renovar tu licencia, el estado de tu pedido, tu código de referidos, o lo que necesites.</p>
+      <div id="chat-libre-mensajes" class="chat-libre-mensajes"></div>
+      <div class="chat-libre-input-row">
+        <input id="chat-libre-texto" class="chat-input" type="text" placeholder="Escribe tu mensaje…" autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();chatLibreEnviar();}"/>
+        <button class="chat-btn" id="chat-libre-btn" onclick="chatLibreEnviar()" style="width:auto;margin-top:0">Enviar</button>
+      </div>
     </div>
   </div>
 </div>
@@ -820,6 +838,7 @@
     chatPanelEl.setAttribute('aria-hidden','true');
     chatToggleBtn.setAttribute('aria-expanded','false');
     chatToggleBtn.focus();
+    chatLibreDetenerPolling();
   }
   chatToggleBtn.addEventListener('click', () => {
     chatPanelEl.classList.contains('open') ? cerrarChat() : abrirChat();
@@ -829,10 +848,11 @@
   });
 
   function chatShowView(view){
-    ['menu','precios','cotizar','comprobante','estado','contacto'].forEach(v => {
+    ['menu','libre','precios','cotizar','comprobante','estado','contacto'].forEach(v => {
       document.getElementById('chat-view-' + v).style.display = v === view ? '' : 'none';
     });
     if (view === 'precios') chatCargarPrecios();
+    if (view === 'libre') chatLibreAbrir(); else chatLibreDetenerPolling();
   }
 
   function abrirChatEnVista(view, plan){
@@ -973,6 +993,71 @@
       el.textContent = 'No pudimos conectar. Intenta de nuevo.';
     } finally {
       btn.disabled = false;
+    }
+  }
+
+  // --- Chat libre (ayuda/estado/renovar/referidos) — mismo "core"
+  // conversacional que usan WhatsApp/Telegram, entregado por polling.
+  let chatLibreUltimoId = 0;
+  let chatLibrePollTimer = null;
+  let chatLibreEsperandoEl = null;
+
+  function chatLibreAgregarBurbuja(texto, clase){
+    const cont = document.getElementById('chat-libre-mensajes');
+    const div = document.createElement('div');
+    div.className = 'chat-libre-msg ' + clase;
+    div.textContent = texto;
+    cont.appendChild(div);
+    cont.scrollTop = cont.scrollHeight;
+    return div;
+  }
+
+  async function chatLibrePoll(){
+    try {
+      const data = await chatPost('landing-mensajes', { sessionId: getSessionId(), desde: chatLibreUltimoId });
+      const mensajes = (data && data.mensajes) || [];
+      if (mensajes.length && chatLibreEsperandoEl) {
+        chatLibreEsperandoEl.remove();
+        chatLibreEsperandoEl = null;
+      }
+      mensajes.forEach(m => {
+        chatLibreAgregarBurbuja(m.texto, 'bot');
+        if (m.id > chatLibreUltimoId) chatLibreUltimoId = m.id;
+      });
+    } catch (e) { /* silencioso: se reintenta en el próximo tick */ }
+  }
+
+  function chatLibreAbrir(){
+    if (chatLibrePollTimer) return; // ya está abierto/con polling activo
+    chatLibreUltimoId = 0;
+    document.getElementById('chat-libre-mensajes').innerHTML = '';
+    chatLibrePoll(); // trae el historial completo (desde=0) al abrir
+    chatLibrePollTimer = setInterval(chatLibrePoll, 3000);
+  }
+
+  function chatLibreDetenerPolling(){
+    if (chatLibrePollTimer) { clearInterval(chatLibrePollTimer); chatLibrePollTimer = null; }
+  }
+
+  async function chatLibreEnviar(){
+    const input = document.getElementById('chat-libre-texto');
+    const texto = input.value.trim();
+    if (!texto) return;
+    const btn = document.getElementById('chat-libre-btn');
+    chatLibreAgregarBurbuja(texto, 'yo');
+    input.value = '';
+    btn.disabled = true;
+    if (chatLibreEsperandoEl) chatLibreEsperandoEl.remove();
+    chatLibreEsperandoEl = chatLibreAgregarBurbuja('Escribiendo…', 'esperando');
+    try {
+      await chatPost('landing-chat', { accion: 'mensaje', sessionId: getSessionId(), texto });
+      await chatLibrePoll(); // primer intento inmediato; el intervalo sigue cubriendo el resto
+    } catch (e) {
+      if (chatLibreEsperandoEl) { chatLibreEsperandoEl.remove(); chatLibreEsperandoEl = null; }
+      chatLibreAgregarBurbuja('No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.', 'bot');
+    } finally {
+      btn.disabled = false;
+      input.focus();
     }
   }
 
