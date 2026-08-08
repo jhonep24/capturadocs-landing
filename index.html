@@ -668,6 +668,12 @@
       <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono 🎁 → arriba.</p>
       <label class="chat-label" for="chat-comp-deviceid">ID de dispositivo</label>
       <input id="chat-comp-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
+      <label class="chat-label" for="chat-comp-plan">Plan que estás pagando</label>
+      <select id="chat-comp-plan" class="chat-input">
+        <option value="S">Semanal (7 días) — $12.000</option>
+        <option value="M">Mensual (30 días) — $35.000</option>
+        <option value="N">Negocio/Estación (30 días) — $100.000</option>
+      </select>
       <label class="chat-label" for="chat-comp-nombre">Nombre (opcional)</label>
       <input id="chat-comp-nombre" class="chat-input" type="text" placeholder="Tu nombre" autocomplete="off"/>
       <label class="chat-label" for="chat-comp-file">Foto del comprobante</label>
@@ -790,6 +796,18 @@
   const chatToggleBtn = document.getElementById('chatToggle');
   const chatPanelEl = document.getElementById('chatPanel');
 
+  // sessionId: única "autenticación" del hilo de conversación con el core
+  // (comprobante, mensajes libres) — se genera una vez por navegador y se
+  // reutiliza, no identifica a la persona más allá de ese hilo.
+  function getSessionId(){
+    let id = localStorage.getItem('cd_session_id');
+    if (!id || !/^[a-zA-Z0-9-]{8,64}$/.test(id)) {
+      id = (crypto.randomUUID ? crypto.randomUUID() : 'sid-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+      localStorage.setItem('cd_session_id', id);
+    }
+    return id;
+  }
+
   function abrirChat(){
     chatPanelEl.classList.add('open');
     chatPanelEl.setAttribute('aria-hidden','false');
@@ -889,6 +907,7 @@
 
   async function chatEnviarComprobante(btn){
     const deviceId = document.getElementById('chat-comp-deviceid').value.trim();
+    const plan = document.getElementById('chat-comp-plan').value;
     const nombre = document.getElementById('chat-comp-nombre').value.trim();
     const fileInput = document.getElementById('chat-comp-file');
     const file = fileInput.files[0];
@@ -901,10 +920,12 @@
     btn.disabled = true;
     try {
       const imagenBase64 = await chatLeerArchivoBase64(file);
-      const data = await chatPost('landing-chat', { accion: 'comprobante', deviceId, nombre, imagenBase64, mimetype: file.type || 'image/jpeg' });
+      const data = await chatPost('landing-chat', { accion: 'comprobante', sessionId: getSessionId(), deviceId, plan, nombre, imagenBase64, mimetype: file.type || 'image/jpeg' });
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos procesar el comprobante.'; return; }
       el.className = 'chat-result ok';
-      el.innerHTML = `✓ ${escapeHtml(data.mensaje)}<br><span style="color:var(--muted)">Pedido #${escapeHtml(data.pedidoId)}. Puedes consultar el estado cuando quieras con "Consultar mi pedido".</span>`;
+      const mensaje = data.mensaje ? escapeHtml(data.mensaje) : 'Comprobante recibido, en revisión.';
+      const piePedido = data.pedidoId ? `Pedido #${escapeHtml(data.pedidoId)}. ` : '';
+      el.innerHTML = `✓ ${mensaje}<br><span style="color:var(--muted)">${piePedido}Puedes consultar el estado cuando quieras con "Consultar mi pedido".</span>`;
       fileInput.value = '';
     } catch (e) {
       el.className = 'chat-result err';
