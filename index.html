@@ -155,6 +155,7 @@
     .dlcard:hover{transform:translateY(-4px)}
     .dlicon{color:var(--gold);margin-bottom:14px;display:flex;justify-content:center}
     .dlname{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.2rem;margin-bottom:20px}
+    .dlbtn-disabled{display:block;opacity:.45;cursor:not-allowed;user-select:none}
     .testimonios{padding:100px 0}
     .thdr{text-align:center;margin-bottom:56px}
     .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;max-width:1100px;margin:0 auto}
@@ -401,13 +402,13 @@
     <div class="phdr">
       <div class="stag">Descargas</div>
       <h2 class="stitle">Instala la app en tu equipo.</h2>
-      <p class="ssub" style="margin:0 auto">Android y Windows tienen instalador propio. En iPhone se instala como app web (funciona igual, sin App Store).</p>
+      <p class="ssub" style="margin:0 auto">Instalador disponible para Windows. Android e iPhone, muy pronto.</p>
     </div>
     <div class="dlgrid">
       <div class="dlcard">
         <div class="dlicon" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M17.523 15.34c-.532 0-.96-.43-.96-.96 0-.532.428-.96.96-.96.531 0 .96.428.96.96 0 .53-.429.96-.96.96m-11.046 0c-.531 0-.96-.43-.96-.96 0-.532.429-.96.96-.96.532 0 .96.428.96.96 0 .53-.428.96-.96.96m11.405-6.02.96-1.663a.395.395 0 0 0-.145-.542.4.4 0 0 0-.545.146l-.972 1.68A11.463 11.463 0 0 0 12 7.88c-1.85 0-3.6.373-5.18 1.06L5.85 7.26a.4.4 0 0 0-.545-.146.395.395 0 0 0-.145.542l.96 1.663C2.9 10.9 1.02 13.68.8 16.94h22.4c-.22-3.26-2.1-6.04-5.318-7.62"/></svg></div>
         <div class="dlname">Android</div>
-        <a href="https://github.com/jhonep24/capturadocs-landing/releases/latest/download/CapturaDocs-Express-Android.apk" class="pbtn pp">Descargar para Android</a>
+        <span class="pbtn po dlbtn-disabled" aria-disabled="true">Próximamente</span>
       </div>
       <div class="dlcard">
         <div class="dlicon" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M0 3.545 9.818 2.2v9.454H0V3.545ZM10.91 2.05 24 0v11.454H10.91V2.05ZM0 12.545h9.818V22L0 20.664v-8.119Zm10.91 0H24V24l-13-1.789v-9.666Z"/></svg></div>
@@ -417,7 +418,7 @@
       <div class="dlcard">
         <div class="dlicon" aria-hidden="true"><svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01ZM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25Z"/></svg></div>
         <div class="dlname">iPhone</div>
-        <a href="https://capturadocs-app.capturadocs.workers.dev/" target="_blank" rel="noopener" class="pbtn po">Abrir para iPhone</a>
+        <span class="pbtn po dlbtn-disabled" aria-disabled="true">Próximamente</span>
       </div>
     </div>
   </div>
