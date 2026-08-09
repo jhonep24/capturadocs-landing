@@ -1035,11 +1035,14 @@
     }
   }
 
-  // --- Chat libre (ayuda/estado/renovar/referidos) — mismo "core"
-  // conversacional que usan WhatsApp/Telegram, entregado por polling.
-  let chatLibreUltimoId = 0;
-  let chatLibrePollTimer = null;
+  // --- Chat libre (ayuda/estado/renovar/referidos) — asistente de FAQ con
+  // respaldo de IA. Síncrono: la respuesta llega en la misma llamada a
+  // landing-chat (accion:"mensaje"), normalmente en 2-3s. En el caso raro
+  // de una pregunta sin match directo puede tardar hasta ~70s (fallback a
+  // un modelo que a veces tiene que "despertar") — por eso el aviso extra
+  // si se demora, y sin timeout corto en el fetch.
   let chatLibreEsperandoEl = null;
+  let chatLibreEsperaLargaTimer = null;
 
   function chatLibreAgregarBurbuja(texto, clase){
     const cont = document.getElementById('chat-libre-mensajes');
@@ -1051,31 +1054,13 @@
     return div;
   }
 
-  async function chatLibrePoll(){
-    try {
-      const data = await chatPost('landing-mensajes', { sessionId: getSessionId(), desde: chatLibreUltimoId });
-      const mensajes = (data && data.mensajes) || [];
-      if (mensajes.length && chatLibreEsperandoEl) {
-        chatLibreEsperandoEl.remove();
-        chatLibreEsperandoEl = null;
-      }
-      mensajes.forEach(m => {
-        chatLibreAgregarBurbuja(m.texto, 'bot');
-        if (m.id > chatLibreUltimoId) chatLibreUltimoId = m.id;
-      });
-    } catch (e) { /* silencioso: se reintenta en el próximo tick */ }
-  }
-
   function chatLibreAbrir(){
-    if (chatLibrePollTimer) return; // ya está abierto/con polling activo
-    chatLibreUltimoId = 0;
-    document.getElementById('chat-libre-mensajes').innerHTML = '';
-    chatLibrePoll(); // trae el historial completo (desde=0) al abrir
-    chatLibrePollTimer = setInterval(chatLibrePoll, 3000);
+    // Nada que precargar: es un asistente de FAQ sin memoria de sesiones
+    // anteriores, no hace falta traer historial al abrir.
   }
 
   function chatLibreDetenerPolling(){
-    if (chatLibrePollTimer) { clearInterval(chatLibrePollTimer); chatLibrePollTimer = null; }
+    if (chatLibreEsperaLargaTimer) { clearTimeout(chatLibreEsperaLargaTimer); chatLibreEsperaLargaTimer = null; }
   }
 
   async function chatLibreEnviar(){
@@ -1086,15 +1071,19 @@
     chatLibreAgregarBurbuja(texto, 'yo');
     input.value = '';
     btn.disabled = true;
-    if (chatLibreEsperandoEl) chatLibreEsperandoEl.remove();
     chatLibreEsperandoEl = chatLibreAgregarBurbuja('Escribiendo…', 'esperando');
+    chatLibreEsperaLargaTimer = setTimeout(() => {
+      if (chatLibreEsperandoEl) chatLibreEsperandoEl.textContent = 'Esto puede tardar un poco más de lo normal…';
+    }, 6000);
     try {
-      await chatPost('landing-chat', { accion: 'mensaje', sessionId: getSessionId(), texto });
-      await chatLibrePoll(); // primer intento inmediato; el intervalo sigue cubriendo el resto
+      const data = await chatPost('landing-chat', { accion: 'mensaje', sessionId: getSessionId(), texto });
+      if (chatLibreEsperandoEl) { chatLibreEsperandoEl.remove(); chatLibreEsperandoEl = null; }
+      chatLibreAgregarBurbuja((data && data.respuesta) || 'No pudimos generar una respuesta. Intenta de nuevo o escríbenos por WhatsApp.', 'bot');
     } catch (e) {
       if (chatLibreEsperandoEl) { chatLibreEsperandoEl.remove(); chatLibreEsperandoEl = null; }
       chatLibreAgregarBurbuja('No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.', 'bot');
     } finally {
+      chatLibreDetenerPolling();
       btn.disabled = false;
       input.focus();
     }
