@@ -1076,7 +1076,7 @@
       if (chatLibreEsperandoEl) chatLibreEsperandoEl.textContent = 'Esto puede tardar un poco más de lo normal…';
     }, 6000);
     try {
-      const data = await chatPost('landing-chat', { accion: 'mensaje', sessionId: getSessionId(), texto });
+      const data = await chatPost('landing-faq', { sessionId: getSessionId(), texto });
       if (chatLibreEsperandoEl) { chatLibreEsperandoEl.remove(); chatLibreEsperandoEl = null; }
       chatLibreAgregarBurbuja((data && data.respuesta) || 'No pudimos generar una respuesta. Intenta de nuevo o escríbenos por WhatsApp.', 'bot');
     } catch (e) {
