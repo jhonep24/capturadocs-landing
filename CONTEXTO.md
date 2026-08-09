@@ -137,11 +137,6 @@ en enlaces externos, imagen OG a tamaño correcto, accesibilidad del modal
 de términos y sus pestañas, `theme-color`, `canonical`, `preconnect` a
 Google Fonts, JSON-LD y `robots.txt`/`sitemap.xml`.
 
-- **#18 (analítica)** — sigue pendiente, sin decidir: requiere que el
-  usuario cree la cuenta (GA4/Plausible/etc.) primero.
-- **#19 (número de WhatsApp)** — resuelto de forma distinta a lo previsto:
-  ver `check_wa_number.py` más abajo, en vez de centralizar en JS runtime.
-
 ## Cómo regenerar los instaladores (Android/Windows)
 
 Cuando cambie la app (`informes-ponal`) y haya que republicar los binarios de
