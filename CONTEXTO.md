@@ -73,34 +73,43 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 
 ## Estructura actual de secciones (en orden)
 
-1. `nav` — logo + botón "Obtener acceso" (WhatsApp)
-2. `.hero` — titular, subtítulo, 2 CTAs, franja de stats (5 casos gratis, ~30min, 5 documentos, app Android)
+1. `nav` — logo + botón "Obtener acceso" → `#descargas` (ya NO abre WhatsApp directo, ver nota de CTAs más abajo)
+2. `.hero` — titular, subtítulo, 2 CTAs (Probar gratis → `#descargas`; Ver cómo funciona → `#como-funciona`), franja de stats (5 casos gratis, ~30min, 5 documentos, app instalable)
 3. `.how#como-funciona` — 4 pasos numerados
 4. `.features#funciones` — lista de funcionalidades + maqueta visual de "5 archivos generados" (**pendiente #15: reemplazar por captura/GIF real**)
 5. `.compare` — antes (a mano) vs. después (con la app)
-6. `.pricing#precios` — 4 planes: prueba gratis, semanal $12.000, mensual $35.000 (destacado), Negocio/Estación $100.000
-6.5. `.downloads#descargas` (agregada 2026-08-07) — 3 tarjetas: Android (.apk firmado), Windows (.msix), iPhone (enlace a la PWA por Safari). Los binarios de Android/Windows viven como assets de un GitHub Release (`v1.6-descargas`) en **este repo** (`capturadocs-landing`, público — no en `informes-ponal`, que es privado y da 404 en descarga pública), enlazados vía `releases/latest/download/...`. Ver "Cómo regenerar los instaladores" más abajo para el proceso completo.
+6. `.pricing#precios` — 4 planes: prueba gratis (→ app), semanal/mensual/Negocio (→ chat en "Cotizar" con el plan preseleccionado, `abrirChatEnVista('cotizar', plan)`). Los 3 precios pagos (`#price-S`/`#price-M`/`#price-N`) se sincronizan solos, ver punto 12.
+6.5. `.downloads#descargas` (agregada 2026-08-07) — 3 tarjetas con íconos SVG (no emoji) de Android/Windows/Apple. **Android e iPhone deshabilitados temporalmente** (2026-08-08, pedido del usuario, motivo no técnico) — quedan visibles con `<span class="pbtn po dlbtn-disabled">Próximamente</span>` en vez del link real; **solo Windows sigue activo**. El binario de Windows vive como asset de un GitHub Release (`v1.6-descargas`) en **este repo** (`capturadocs-landing`, público — no en `informes-ponal`, que es privado y da 404 en descarga pública), enlazado vía `releases/latest/download/...`. Ver "Cómo regenerar los instaladores" más abajo para el proceso completo (sigue vigente para cuando se reactiven Android/iPhone).
 7. `.testimonios` — 3 citas reales de policías que probaron la app
 8. `.trust` — franja de 5 iconos de confianza
-9. `.faq#preguntas` — acordeón `<details>` con 9 preguntas
-10. `.cta` — llamado final a WhatsApp
-11. `footer` — contacto + enlace a modal de términos
-12. Modal de términos (`#modal`) — 3 pestañas: Términos de Uso, Privacidad, Licencias (contenido legal completo, sincronizado con lo que ofrece la app real: precios, período de gracia de 3 días, medios de pago Nequi/Llave, etc.). Los números de WhatsApp/Nequi (`.cfg-whatsapp`/`.cfg-nequi`) y los 3 precios pagos de `.pricing` (`#price-S`/`#price-M`/`#price-N`) se refrescan solos al cargar la página, consultando `POST https://capturadocs-licencias.capturadocs.workers.dev/config-publica` (agregado 2026-08-07) — mismo dato que edita el panel admin de `informes-ponal`, así no quedan desactualizados como pasó antes (Nequi viejo `321 2016275` vs. el real `350 3593635`). Si el fetch falla, se queda con el valor ya escrito en el HTML. Ver `informes-ponal/README_TECNICO.md` sección "Configuración pública en caliente" para el lado del Worker.
-13. Widget de chat flotante (`#chatToggle` / `#chatPanel`, agregado 2026-08-04) — botón dorado fijo abajo a la derecha. Abre un panel con 5 acciones: ver precios, cotizar un plan, subir comprobante de pago (con deviceId + foto), consultar el estado de un pedido por deviceId + correo, y sugerencias/contacto. Habla directo con el bot de `capturadocs-bot-pagos` vía `https://chat.capturadocs.com/webhook/landing-chat` y `.../landing-status` (mismo túnel Cloudflare que ya exponía el webhook de WhatsApp). No depende de WhatsApp: la aprobación del pago la sigue haciendo el dueño por WhatsApp como siempre, pero el cliente compra y recibe la clave sin salir de la landing. Ver `capturadocs-bot-pagos/CONTEXTO.md` sección 50 para el diseño completo del lado del bot.
-    La vista "Sugerencias o contacto" (`chatEnviarContacto`, acción `contacto`) ya tiene su rama en n8n (`mensajes_contacto`, avisa al dueño por WhatsApp) — resuelto 2026-08-04 por la sesión del homelab, confirmado en vivo con un `POST` de prueba.
-    **Deep-link desde la app (`informes-ponal`, agregado 2026-08-07)**: al cargar, `chatDeepLink()` lee `?view=&deviceId=&plan=&mensaje=&tipo=` de la URL — si `view` es una de las 5 vistas válidas, abre el chat directo ahí con `deviceId`/`plan`/`tipo`/`mensaje` ya prellenados. Así los botones de compra, renovación, soporte y "pedir instalador" de la app llevan directo al self-service en vez de abrir WhatsApp. Ver `licencia.js:getLandingLink()` y `ActualizacionRequerida.jsx` en `informes-ponal`, y `README_TECNICO.md` sección 11 de ese repo (v1.6.5).
+9. `.faq#preguntas` — acordeón `<details>` con 9 preguntas. El botón "¿Tienes otra pregunta?" abre el chat en "Contacto" (`abrirChatEnVista('contacto')`), ya no WhatsApp directo.
+10. `.cta` — llamado final → `#descargas` (antes abría WhatsApp)
+10.5. `.ads-promo` (agregada 2026-08-08) — sección "Anúnciate con nosotros", entre el CTA principal y el footer. Promociona el espacio publicitario que ya existe dentro de `informes-ponal` (`BannerPublicidad.jsx`, banners imagen+link gestionados a mano desde el panel admin, visibles solo a usuarios sin licencia paga — motor ya existía, faltaba cómo conseguir anunciantes). Sin precio fijo todavía (a definir); el CTA "Quiero anunciarme →" abre el chat en "Contacto" con el tipo `publicidad` preseleccionado (nueva opción en el `<select id="chat-contacto-tipo">`, junto a sugerencia/problema/otro). Diseño con ícono en badge dorado + gradiente + chips de beneficios, para no verse "simple" al lado del resto de la página.
+11. `footer` — logo/tagline/copyright agrupados en una columna (agosto 2026, antes eran 4 elementos sueltos en `space-between` que se veían desordenados) + columna de links de contacto (correo, WhatsApp — este sí sigue siendo un link directo a WhatsApp, es información de contacto, no un CTA de conversión) + enlace a modal de términos.
+12. Modal de términos (`#modal`) — 3 pestañas: Términos de Uso, Privacidad, Licencias. Los números de WhatsApp/Nequi (`.cfg-whatsapp`/`.cfg-nequi`) y los 3 precios pagos de `.pricing` se refrescan solos al cargar la página, consultando `POST https://capturadocs-licencias.capturadocs.workers.dev/config-publica` (agregado 2026-08-07) — mismo dato que edita el panel admin de `informes-ponal`, así no quedan desactualizados como pasó antes (Nequi viejo `321 2016275` vs. el real `350 3593635`). Si el fetch falla, se queda con el valor ya escrito en el HTML. Ver `informes-ponal/README_TECNICO.md` sección "Configuración pública en caliente" para el lado del Worker.
+13. Widget de chat flotante (`#chatToggle` / `#chatPanel`, agregado 2026-08-04, ampliado varias veces) — botón dorado fijo abajo a la derecha. Menú con **6 acciones**: ver precios, cotizar un plan, subir comprobante de pago, consultar el estado de un pedido, **escríbenos (chat libre, agregada 2026-08-08)**, y sugerencias/contacto (con la nueva opción "Quiero anunciarme en la app"). "Contáctanos por WhatsApp" (renombrado desde "Prefiero WhatsApp") queda como último ítem, último recurso — no incentivado. Habla directo con `capturadocs-bot-pagos` vía `https://chat.capturadocs.com/webhook/landing-chat`, `.../landing-status` y `.../landing-mensajes`.
+    - **Comprobante de pago**: exige `sessionId` (UUID generado por `getSessionId()`, persistido en `localStorage` como `cd_session_id`) y `plan` (S/M/N, selector agregado 2026-08-08) además de `deviceId`+`imagenBase64` — cambio de contrato del backend que rompió este flujo en producción brevemente el 2026-08-08, ver `LECCIONES_APRENDIDAS.md`.
+    - **Chat libre** (`chat-view-libre`, `chatLibreEnviar()`): asistente de FAQ con respaldo de IA, mismo backend que WhatsApp/Telegram. `POST landing-chat {accion:"mensaje", sessionId, texto}` responde **síncrono** con `{ok:true, respuesta:"..."}` en la misma llamada (normalmente 2-3s; hasta ~40-70s en el caso raro de fallback — hay un aviso a los 6s de espera). Ya NO usa polling contra `landing-mensajes` (se probó así primero, se migró a síncrono el mismo día).
+    - La vista "Sugerencias o contacto" (`chatEnviarContacto`, acción `contacto`) llega a una Data Table en el bot (`mensajes_contacto`) y avisa al dueño por WhatsApp — ver `capturadocs-bot-pagos/CONTEXTO.md` sección 52.
+    - **Deep-link desde la app** (`informes-ponal`, agregado 2026-08-07): al cargar, `chatDeepLink()` lee `?view=&deviceId=&plan=&mensaje=&tipo=` de la URL y abre el chat directo ahí. Ver `licencia.js:getLandingLink()` en `informes-ponal`.
+    - **Seguridad**: toda respuesta del backend que se inserta en el DOM pasa por `escapeHtml()` antes de ir a `innerHTML` (agregado 2026-08-08 tras una revisión de seguridad — antes 4 puntos insertaban `data.mensaje`/`data.pedido.estado`/`data.pedidoId`/`data.plan` sin escapar).
 
-Todos los botones de CTA (`btn-p`, `wa`, `pbtn`, `nav-cta`) siguen apuntando a
-`https://wa.me/573503593635` — **pendiente #14**: enlazar a la app real
-(`informes-ponal`) en vez de solo WhatsApp, donde tenga sentido (ej. "Probar
-gratis ahora" podría ir directo a la app). El deep-link de arriba resuelve el
-sentido inverso (app → landing); #14 sigue siendo landing → app.
+**CTAs ya NO apuntan a WhatsApp por defecto** (cambiado 2026-08-08, pedido
+explícito: *"wsp va a ser el último lugar... no quiero incentivar el uso de
+wsp"*). Nav/hero/CTA final → `#descargas`; planes pagos → chat en "Cotizar";
+FAQ → chat en "Contacto". El único `wa.me` con esa etiqueta que sobrevive es
+el ítem del propio menú del chat ("Contáctanos por WhatsApp", último ítem) y
+el link de contacto del footer (información, no CTA). El pendiente histórico
+**#14 (enlazar botones a la app real, no solo WhatsApp) quedó resuelto** con
+esto — se deja la entrada en el backlog de abajo tachada por trazabilidad.
 
 ## Pendientes conocidos de la landing (backlog)
 
-- **#14** — Enlazar botones a la app real, no solo a WhatsApp. (El widget de chat del punto 13 ya cubre la compra directa; los botones de WhatsApp existentes se dejaron intactos como canal alterno, no se tocaron.)
+- ~~**#14** — Enlazar botones a la app real, no solo a WhatsApp.~~ **Resuelto 2026-08-08** — ver nota de CTAs arriba.
 - **#15** — Reemplazar la maqueta falsa de `.preview` (sección Funciones) por una captura o GIF real de la app funcionando.
-- **#19** — Centralizar el número de WhatsApp (hoy repetido "a mano" en ~9 lugares del HTML) en una constante de JS.
+- **#19** — Centralizar el número de WhatsApp (hoy repetido "a mano" en ~9 lugares del HTML) en una constante de JS. Parcialmente mitigado: el texto mostrado en el modal legal ya se sincroniza solo (punto 12), pero los `href="wa.me/..."` siguen hardcodeados.
+- **Reactivar descargas de Android e iPhone** cuando corresponda (hoy deshabilitadas a propósito, ver punto 6.5) — el código/binarios siguen listos, solo hay que quitar el estado `dlbtn-disabled`.
+- **Definir precio y sección de referidos**: el programa de referidos (`REF-XXXXXXXX`, bono de días) existe en `informes-ponal` pero aún no está bien definido del lado de producto — falta esa sección en la landing hasta que se termine de definir. Igual con el precio del espacio publicitario (punto 10.5): la sección ya está, pero cotiza por chat en vez de mostrar un precio fijo.
 - **#20.1** — Rate limit en Cloudflare (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard. (El punto 2 de este pendiente, exigir correo, ya quedó resuelto — ver abajo.)
 
 Resuelto: **#17** — no se migró el hosting a Vercel/Netlify, pero se

@@ -10,6 +10,120 @@ estructura de secciones de la landing.
 
 ---
 
+## 2026-08-08 — Tono profesional, CTAs al contenido real, revisión de seguridad, comprobante urgente, chat libre y sección de anunciantes
+
+### Qué se hizo (en orden)
+
+1. **Pase de tono/claridad**: el usuario pidió que la landing se sintiera
+   más profesional. Se reescribió el hero (antes asumía que el visitante
+   ya sabía qué es un "FPJ-5" — ahora dice explícitamente "software para
+   informes de captura en flagrancia" y usa nombres completos de los
+   documentos, no códigos), se quitaron emojis decorativos sin significado
+   (🚀, ✨, 📋 sueltos) manteniendo los que funcionan como iconografía real
+   (pasos, funcionalidades), y se reemplazaron los íconos de plataforma de
+   la sección Descargas (emoji 🤖/🖥️/📱) por SVG monocromo estilo
+   Android/Windows/Apple.
+2. **Todos los CTAs dejaron de apuntar a WhatsApp por defecto** — WhatsApp
+   pasó a ser el último recurso, no el primero (pedido explícito del
+   usuario: *"no quiero incentivar el uso de wsp"*). Nav/hero/CTA final →
+   `#descargas` (luego se probó llevar directo a la PWA, pero el usuario
+   pidió que primero pasara por Descargas). Planes pagos → abren el chat
+   en "Cotizar" con el plan preseleccionado (`abrirChatEnVista('cotizar',
+   plan)`). FAQ "Pregúntanos" → abre el chat en "Contacto". El único
+   `wa.me` que sobrevive con esa etiqueta es el del propio menú del chat,
+   renombrado de "Prefiero WhatsApp" a "Contáctanos por WhatsApp" para no
+   sonar a opción recomendada.
+3. **Revisión de seguridad** (a pedido del usuario, `/security-review` no
+   sirvió porque no había diff — todo ya estaba en `main` — se hizo manual
+   sobre el estado completo del archivo): se encontró que 4 puntos del
+   widget insertaban campos de la respuesta del backend (`data.mensaje`,
+   `data.pedido.estado`, `data.pedidoId`, `data.plan`) directo en
+   `innerHTML` sin escapar — si el backend (n8n) alguna vez reflejara texto
+   libre del usuario (ej. el campo "nombre" del comprobante) dentro de esos
+   campos, se ejecutaría como HTML/JS en el navegador de la víctima. Se
+   agregó `escapeHtml()` y se aplicó en los 4 puntos. Verificado con un
+   payload de prueba (`<img src=x onerror=...>`) que efectivamente dejó de
+   ejecutarse tras el fix.
+4. **Arreglo urgente en producción**: la otra sesión (`capturadocs-bot-pagos`)
+   avisó por mensaje directo que había cambiado el contrato de
+   `accion:"comprobante"` en `landing-chat` para exigir también `sessionId`
+   y `plan`, no solo `deviceId`+`imagenBase64`. Se verificó con un `curl`
+   real contra producción **antes de hacer nada** — confirmado: cualquier
+   cliente que intentara subir un comprobante de pago en ese momento
+   recibía `400`. Se agregó un selector de plan a la vista de comprobante y
+   `getSessionId()` (UUID en `localStorage`, única "autenticación" del
+   hilo). Publicado de inmediato por ser un bloqueo real de ventas, sin
+   esperar a construir el resto de mejoras pendientes.
+5. **Vista de chat libre** ("Escríbenos: ayuda, renovar, estado,
+   referidos"): construida contra el diseño que documentó la otra sesión
+   (core conversacional compartido con WhatsApp/Telegram, `accion:"mensaje"`
+   + polling en `landing-mensajes`). Al probarla en vivo, `landing-mensajes`
+   daba 404 público — la ruta existía en n8n pero nunca se agregó al túnel
+   de Cloudflare (mismo gotcha de siempre). Se publicó igual, sin el
+   endpoint de recepción funcionando, porque el usuario autorizó
+   explícitamente publicarla ya que **todavía no hay clientes reales**
+   usando la landing — el costo de que alguien mande un mensaje y no vea
+   respuesta era aceptable mientras se resolvía del lado de n8n. Resuelto
+   por la otra sesión horas después (migraron el túnel de
+   `chat.capturadocs.com` a uno gestionado por config/CLI); confirmado de
+   punta a punta con `curl` y en la interfaz real antes de darlo por
+   bueno.
+6. **`accion:"mensaje"` cambió de asíncrono a síncrono** (la otra sesión
+   rediseñó el chat: dejó de ser un menú tipo WhatsApp "responde 1/2/3" y
+   pasó a ser un asistente de FAQ con respaldo de IA). Se verificó con
+   `curl` antes de tocar código: ahora `{ok:true, respuesta:"..."}` llega
+   en la misma llamada, normalmente en 2-3s. Se simplificó
+   `chatLibreEnviar()` para usar `data.respuesta` directo — se eliminó el
+   `setInterval` de polling que ya no hacía falta. Se agregó un aviso
+   ("Esto puede tardar un poco más de lo normal…") a los 6s, porque el
+   caso raro de fallback a un modelo local puede tardar ~40-70s
+   (confirmado con `curl`, 40s reales en una prueba).
+7. **Sección "Anúnciate con nosotros"**: `informes-ponal` ya tenía un
+   motor de banners publicitarios (`BannerPublicidad.jsx`, imagen+link,
+   solo visible a usuarios sin licencia paga) pero ningún lugar público
+   para conseguir anunciantes. Se agregó una sección discreta entre el CTA
+   principal y el footer (para no competir con la conversión de policías,
+   que es la audiencia real del resto de la página) con un CTA que abre el
+   chat en "Contacto" con el tipo "Quiero anunciarme en la app"
+   preseleccionado — sin precio fijo todavía, a pedido del usuario
+   ("cotizar" en vez de mostrar precio). Primera versión quedó "muy
+   simple" según el usuario; se rediseñó con ícono en badge dorado, fondo
+   con gradiente/resplandor y chips de beneficios, para que se sintiera al
+   nivel del resto de la página.
+8. **Descargas de Android e iPhone deshabilitadas temporalmente** (pedido
+   explícito, motivo no técnico): los botones quedan visibles pero
+   inactivos ("Próximamente", `aria-disabled`), no se ocultaron — solo
+   Windows sigue activo.
+
+### Por qué
+
+Todo esto salió de una sola pregunta abierta ("¿alguna mejora que me
+recomiendes?") que fue derivando: tono → seguridad → un hallazgo de
+seguridad reveló que el contrato del backend había cambiado y rompió
+producción → arreglarlo llevó a construir la función que la otra sesión
+ya tenía lista del lado de n8n → eso llevó a coordinar en vivo con esa
+sesión dos veces (túnel roto, luego contrato síncrono) → la conversación
+derivó en monetización (publicidad) como siguiente paso natural.
+
+### Problemas encontrados y cómo se resolvieron
+
+- **No asumir que un aviso de otra sesión ya funciona, aunque diga
+  "probado en vivo de punta a punta"**: dos veces en este mismo día se
+  verificó con `curl`/pruebas reales antes de dar algo por bueno, y una de
+  esas veces (el túnel de `landing-mensajes`) el aviso resultó ser
+  prematuro — el endpoint daba 404 real. La otra vez (contrato síncrono)
+  sí era exacto. No hay forma de saber cuál es cuál sin probar.
+- **Este entorno de pruebas (Browser pane) no aguanta bien esperas largas**:
+  al intentar reproducir el caso lento (~40-70s) de `accion:"mensaje"`
+  dentro del navegador de prueba de esta sesión, la herramienta se
+  recargaba/perdía el estado de JS después de ~30s de espera — un
+  `curl` directo (sin ese límite) sí completó la misma petición en 40s
+  con la respuesta correcta. Lección: cuando una prueba en este entorno
+  falla justo en el límite de tiempo de la herramienta, no asumir que el
+  código está roto — repetir con `curl` antes de reportarlo como bug.
+
+---
+
 ## 2026-08-07 — Sección de descargas (Android APK, Windows .msix, iPhone PWA)
 
 ### Qué se hizo
