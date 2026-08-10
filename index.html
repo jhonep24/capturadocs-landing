@@ -739,12 +739,17 @@
 
     <div id="chat-view-cotizar" class="chat-view" style="display:none">
       <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono 🎁 → arriba.</p>
+      <label class="chat-label" for="chat-cotizar-deviceid">ID de dispositivo</label>
+      <input id="chat-cotizar-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
       <label class="chat-label" for="chat-plan-select">Plan</label>
       <select id="chat-plan-select" class="chat-input">
         <option value="S">Semanal (7 días) — $12.000</option>
         <option value="M">Mensual (30 días) — $35.000</option>
         <option value="N">Negocio/Estación (30 días) — $100.000</option>
       </select>
+      <label class="chat-label" for="chat-cotizar-referido">Código de referido (opcional)</label>
+      <input id="chat-cotizar-referido" class="chat-input" type="text" placeholder="REF-XXXXXXXX o el código de tu amigo" autocomplete="off"/>
       <button class="chat-btn" onclick="chatCotizar(this)">Cotizar</button>
       <div id="chat-cotizar-result" class="chat-result"></div>
     </div>
@@ -981,16 +986,38 @@
   }
 
   async function chatCotizar(btn){
+    const deviceId = document.getElementById('chat-cotizar-deviceid').value.trim();
     const plan = document.getElementById('chat-plan-select').value;
+    const codigoReferido = document.getElementById('chat-cotizar-referido').value.trim();
     const el = document.getElementById('chat-cotizar-result');
     el.className = 'chat-result';
+    if (!deviceId) { el.className = 'chat-result err'; el.textContent = 'Ingresa tu ID de dispositivo.'; return; }
     el.textContent = 'Cotizando…';
     btn.disabled = true;
     try {
-      const data = await chatPost('landing-chat', { accion: 'cotizar', plan });
+      const data = await chatPost('landing-chat', { accion: 'cotizar', plan, deviceId, codigoReferido });
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'Plan inválido.'; return; }
       el.className = 'chat-result ok';
-      el.innerHTML = `Tu plan <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.plan] || data.plan)}</b> cuesta <b>$${Number(data.precio).toLocaleString('es-CO')} COP</b>. Cuando pagues, usa "Ya pagué, subir comprobante" en el menú.`;
+      let html = '';
+      if (data.diasActivos > 0) html += `Ya tienes <b>${data.diasActivos} días</b> activos en tu licencia actual.<br>`;
+      html += `El plan <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.plan] || data.plan)}</b> agrega <b>${data.diasPlan} días</b>.<br>`;
+      if (data.bonoReferido > 0) {
+        html += `Tu código de referido suma <b>${data.bonoReferido} días</b> extra 🎁 (se acreditan al confirmarse el pago).<br>`;
+      } else if (data.referidoError) {
+        html += `<span style="color:#b33">Código de referido: ${escapeHtml(data.referidoError)}</span><br>`;
+      }
+      html += `Con esto tu licencia quedaría activa <b>${data.diasTotal} días</b> en total, por <b>$${Number(data.precio).toLocaleString('es-CO')} COP</b>.`;
+      el.innerHTML = html;
+      const pagarBtn = document.createElement('button');
+      pagarBtn.className = 'chat-btn';
+      pagarBtn.textContent = '✅ Ya pagué, subir comprobante';
+      pagarBtn.onclick = () => {
+        chatShowView('comprobante');
+        document.getElementById('chat-comp-deviceid').value = deviceId;
+        document.getElementById('chat-comp-plan').value = plan;
+      };
+      el.appendChild(document.createElement('br'));
+      el.appendChild(pagarBtn);
     } catch (e) {
       el.className = 'chat-result err';
       el.textContent = 'No pudimos conectar. Intenta de nuevo.';

@@ -202,6 +202,24 @@ Si cambia el número de WhatsApp: reemplázalo en todo `index.html` (buscar
 `573503593635`) y el hook (o `python check_wa_number.py` a mano) avisa si
 quedó alguno desincronizado.
 
+## Chat de la landing — cotizador (2026-08-10)
+
+La vista `chat-view-cotizar` del panel de chat (`chatToggle` /
+`chatPanel`) ahora pide **ID de dispositivo** (obligatorio) y
+**código de referido** (opcional) además del plan. `chatCotizar()`
+llama a `POST {CHAT_API}/landing-chat` con `{accion:'cotizar', plan,
+deviceId, codigoReferido}` — el backend (workflow `Bot de pagos` en
+`capturadocs-bot-pagos`, acción `cotizar`) responde `diasActivos`
+(licencia actual, si tiene), `diasPlan`, `bonoReferido` (7 si el
+código es válido) y `diasTotal`, más `referidoError` si el código no
+se pudo aplicar. El resultado se muestra como texto y agrega un
+botón "✅ Ya pagué, subir comprobante" que salta a `chat-view-
+comprobante` con `chat-comp-deviceid`/`chat-comp-plan` ya rellenos
+con lo que el visitante acaba de cotizar — no hace falta que vuelva a
+escribir el ID. Lógica de negocio (cálculo de días, validación del
+código contra el Worker) vive del lado de n8n, no en el HTML — ver
+`capturadocs-bot-pagos/CONTEXTO.md` (sección "Cotizador de la landing").
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
