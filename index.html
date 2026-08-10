@@ -162,6 +162,15 @@
     .tcard{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:28px 26px;display:flex;flex-direction:column;gap:18px}
     .tquote{font-size:.94rem;line-height:1.7;color:var(--white);flex:1}
     .tauthor{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;color:var(--gold);letter-spacing:.3px}
+    .refgrid{display:flex;align-items:stretch;justify-content:center;gap:14px;max-width:1100px;margin:0 auto;flex-wrap:wrap}
+    .refcard{flex:1;min-width:220px;background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:30px 24px;text-align:center;position:relative}
+    .refcard-reward{border-color:rgba(240,165,0,.4);background:linear-gradient(155deg,var(--navy3),var(--navy2));box-shadow:0 8px 30px rgba(240,165,0,.08)}
+    .refnum{position:absolute;top:14px;left:16px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;color:var(--muted);border:1px solid var(--border);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center}
+    .refico{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 16px;box-shadow:0 4px 20px rgba(240,165,0,.25)}
+    .reftitle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.2rem;margin:0 0 8px}
+    .reftext{color:var(--muted);font-size:.88rem;line-height:1.6;margin:0}
+    .refarrow{display:flex;align-items:center;color:var(--gold);font-size:1.3rem;opacity:.6}
+    @media(max-width:780px){.refarrow{display:none}}
     .trust{padding:80px 0;background:var(--navy2)}
     .tinner{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;align-items:center}
     .ti{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--muted)}
@@ -475,21 +484,32 @@
   <div class="container">
     <div class="phdr">
       <div class="stag">Programa de referidos</div>
-      <h2 class="stitle">Comparte tu código, ganen los dos.</h2>
-      <p class="ssub" style="margin:0 auto">Todo el que usa CapturaDocs Express tiene su propio código de referido — lo ves dentro de la app (ícono 🎁 → Activar licencia).</p>
+      <h2 class="stitle">Tú recomiendas, los dos ganan.</h2>
+      <p class="ssub" style="margin:0 auto">Cada usuario tiene su propio código de referido, visible dentro de la app (ícono 🎁 → Activar licencia). Compártelo con un compañero y ambos reciben días extra de licencia — sin costo, sin trámites.</p>
     </div>
-    <div class="tgrid">
-      <div class="tcard">
-        <p class="tquote">🎁 Comparte tu código con un compañero antes de que se registre o compre su licencia.</p>
+    <div class="refgrid">
+      <div class="refcard">
+        <div class="refnum">1</div>
+        <div class="refico" aria-hidden="true">🎁</div>
+        <h3 class="reftitle">Comparte tu código</h3>
+        <p class="reftext">Envíaselo a un compañero antes de que active su licencia por primera vez.</p>
       </div>
-      <div class="tcard">
-        <p class="tquote">✅ Cuando lo usa y hace su primera compra, gana 7 días extra de regalo en su plan.</p>
+      <div class="refarrow" aria-hidden="true">→</div>
+      <div class="refcard">
+        <div class="refnum">2</div>
+        <div class="refico" aria-hidden="true">✅</div>
+        <h3 class="reftitle">Él activa con tu código</h3>
+        <p class="reftext">En su primera compra, recibe <strong>7 días extra</strong> de regalo en el plan que eligió.</p>
       </div>
-      <div class="tcard">
-        <p class="tquote">💰 Tú también ganas 7 días extra en tu propia licencia, sin hacer nada más.</p>
+      <div class="refarrow" aria-hidden="true">→</div>
+      <div class="refcard refcard-reward">
+        <div class="refnum">3</div>
+        <div class="refico" aria-hidden="true">💰</div>
+        <h3 class="reftitle">Tú recibes tu recompensa</h3>
+        <p class="reftext">Se suman automáticamente <strong>7 días extra</strong> a tu propia licencia. Sin límite de referidos.</p>
       </div>
     </div>
-    <div style="text-align:center;margin-top:28px">
+    <div style="text-align:center;margin-top:32px">
       <a href="#" onclick="abrirChatEnVista('libre');return false" class="pbtn pp" style="display:inline-block;padding:12px 28px">💬 Preguntar cómo funciona</a>
     </div>
   </div>
