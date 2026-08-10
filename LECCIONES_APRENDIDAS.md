@@ -10,6 +10,47 @@ estructura de secciones de la landing.
 
 ---
 
+## 2026-08-10 — Rediseño de la sección de referidos
+
+### Qué se hizo
+
+El usuario pidió que la sección `#referidos` se viera más profesional y no
+le gustó el eslogan "Comparte tu código, ganen los dos" (sonaba informal/
+gamificado). Se rediseñó:
+
+- **Texto**: eslogan nuevo "Tú recomiendas, los dos ganan." (elegido entre
+  varias opciones ofrecidas con `AskUserQuestion`). Las 3 tarjetas genéricas
+  (`.tcard`) se reemplazaron por 3 pasos numerados con flechas conectoras
+  (`.refgrid`/`.refcard`/`.refarrow`), la última tarjeta destacada en dorado
+  (`.refcard-reward`) por ser la recompensa para quien refiere.
+- **CSS nuevo**: agregado junto a los estilos de `.tgrid`/`.tcard`
+  existentes (no se reutilizaron, la estructura es distinta — numeración +
+  flechas). Las flechas se ocultan en móvil (`@media(max-width:780px)`) para
+  no romper el layout cuando las tarjetas se apilan.
+- La mecánica del programa (código `REF-XXXXXXXX`, +7 días para cada lado)
+  **no cambió** — esto fue solo texto/diseño de la landing, ver
+  `CONTEXTO.md` punto 8.5.
+
+### Por qué
+
+Pedido explícito del usuario en dos pasos: primero "mejora esos textos",
+luego al ver el resultado no le gustó el eslogan inicial que yo propuse
+("...y los dos salen ganando") y pidió una opción más corta tipo "tu
+recomiendas los dos ganan" — se usó `AskUserQuestion` para no adivinar y
+confirmar la versión exacta antes de publicar.
+
+### Verificación antes de publicar
+
+Se abrió la landing en el Browser pane (`preview_start` con el archivo
+local), se hizo scroll a `#referidos` y se tomó screenshot en dos anchos
+(mobile ~577px y desktop 1280px) para confirmar que las 3 tarjetas se ven
+bien en fila en desktop y apiladas sin flechas sueltas en mobile. Después
+de publicar, se re-verificó el texto exacto en `capturadocs.com` en vivo
+(no solo el commit) antes de darlo por hecho, como es la costumbre en este
+repo.
+
+---
+
 ## 2026-08-08 — Tono profesional, CTAs al contenido real, revisión de seguridad, comprobante urgente, chat libre y sección de anunciantes
 
 ### Qué se hizo (en orden)
