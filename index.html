@@ -1218,7 +1218,9 @@
     }
     if (plan) {
       const planSelect = document.getElementById('chat-plan-select');
+      const planSelectComp = document.getElementById('chat-comp-plan');
       if (planSelect) planSelect.value = plan;
+      if (planSelectComp) planSelectComp.value = plan;
     }
     if (tipo) {
       const tipoSelect = document.getElementById('chat-contacto-tipo');
