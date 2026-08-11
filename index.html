@@ -670,11 +670,15 @@
         <p>El usuario tiene derecho a conocer, actualizar, rectificar y suprimir sus datos. Dado que CapturaDocs Express no almacena datos en servidores propios, el usuario ejerce estos derechos directamente desde su dispositivo (borrando el caché o los borradores guardados).</p>
         <h2>5. Seguridad</h2>
         <p>Al no transmitir datos a servidores externos, el riesgo de interceptación es mínimo. El usuario es responsable de la seguridad de su propio dispositivo y de los documentos generados.</p>
-        <h2>6. Cookies y almacenamiento local</h2>
+        <h2>6. Conexiones que realiza el software</h2>
+        <p>CapturaDocs Express solo se conecta a <strong>un único servidor propio</strong> (<code>capturadocs-licencias.capturadocs.workers.dev</code>, en Cloudflare Workers) — reforzado en el código, no solo declarado aquí. Se usa para verificar la licencia, registrar activaciones/canjes de códigos y consultar si hay una versión nueva disponible. Ninguna otra conexión recibe datos desde el software, ni siquiera al usar la mejora de redacción con IA: en ese caso nuestro propio servidor reenvía el texto ya anonimizado al proveedor de IA — el navegador o la app nunca lo contactan directamente.</p>
+        <h2>7. Procedimiento de actualización</h2>
+        <p>Cada verificación de licencia informa si tu versión quedó desactualizada. La app lo avisa dentro de la interfaz, con un enlace directo a la versión nueva en esta página. <strong>No hay actualización automática ni silenciosa</strong> — tú decides cuándo instalarla.</p>
+        <h2>8. Cookies y almacenamiento local</h2>
         <p>La aplicación usa <strong>localStorage</strong> y <strong>cookies</strong> del navegador exclusivamente para guardar el estado de la licencia y los borradores de casos. No se usan cookies de seguimiento ni publicidad.</p>
-        <h2>7. Menores de edad</h2>
+        <h2>9. Menores de edad</h2>
         <p>CapturaDocs Express está dirigido exclusivamente a servidores de policía mayores de edad en ejercicio de sus funciones.</p>
-        <h2>8. Cambios a esta política</h2>
+        <h2>10. Cambios a esta política</h2>
         <p>Cualquier cambio se notificará mediante aviso dentro de la aplicación con al menos 15 días de anticipación.</p>
         <hr><p style="font-size:.78rem;text-align:center;color:#555">Política de Privacidad · CapturaDocs Express · Última actualización: agosto de 2026</p>
       </div>
