@@ -99,6 +99,7 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
     - **Seguridad**: toda respuesta del backend que se inserta en el DOM pasa por `escapeHtml()` antes de ir a `innerHTML` (agregado 2026-08-08 tras una revisión de seguridad — antes 4 puntos insertaban `data.mensaje`/`data.pedido.estado`/`data.pedidoId`/`data.plan` sin escapar).
 14. `seguridad.html` (página nueva, 2026-08-11) — "Arquitectura de privacidad": reemplaza la promesa genérica "100% privado" por un diagrama HTML/CSS de dos columnas (`.dcol.local` / `.dcol.remote`, sin librerías externas) que muestra qué se queda 100% en el dispositivo (datos del procedimiento, generación de documentos, borradores) vs. qué sí llega a la infraestructura propia y por qué (ID de dispositivo + licencia, pedidos/comprobantes/contacto, texto anonimizado para la IA). 3 tarjetas de preguntas puntuales debajo (qué hace la IA, qué usa el sistema de licencias, quién más ve los datos de pedido). No tiene su propio `<script>` de negocio — copia solo el CSS necesario del sistema de diseño (no todo el `<style>` de `index.html`) más el snippet de `WA_NUMBER` para el link de WhatsApp del footer. Enlazada desde: nav de `index.html` no (para no saturarlo), sí desde la respuesta de la FAQ "¿Qué pasa con los datos de mis capturados?" y desde el footer ("Cómo protegemos tus datos"). El botón "Leer la Política de Privacidad →" de `seguridad.html` apunta a `index.html#privacidad`, que dispara un pequeño bloque de JS en `index.html` (justo después del listener de teclado del modal) que abre el modal directo en la pestaña Privacidad si `location.hash === '#privacidad'` — así el texto legal completo sigue viviendo en un solo lugar (el modal), sin duplicarlo en la página nueva. Agregada a `sitemap.xml`.
     - **Cuidado si se edita el diagrama**: debe reflejar EXACTAMENTE la distinción de "Categorías de datos" del punto 12 (2a datos del procedimiento vs. 2b datos de gestión de pedidos/contacto) — si se retoca uno, retocar el otro, para no volver a tener dos fuentes de verdad desalineadas (fue justo el problema que motivó el refuerzo de la política, ver "Transparencia legal" más abajo).
+    - **Sección `.hashbox`** (agregada 2026-08-11), debajo de las 3 tarjetas de preguntas: aquí vive el hash SHA-256 del instalador de Windows (`#hash-win`), movido desde `#descargas` — ver nota del punto anterior de "Transparencia legal" sobre por qué se movió aquí en vez de quitarlo del todo.
 
 **CTAs ya NO apuntan a WhatsApp por defecto** (cambiado 2026-08-08, pedido
 explícito: *"wsp va a ser el último lugar... no quiero incentivar el uso de
@@ -237,9 +238,13 @@ A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó
   (v1.6.10) en la pestaña Términos.
 - **Hash SHA-256 del instalador de Windows**, calculado descargando el `.zip` real del
   último release. Se publicó junto al botón de descarga en `#descargas` el 2026-08-10,
-  pero el usuario pidió quitarlo de ahí (2026-08-11, "no es necesario" verlo en la
-  página principal) — queda solo documentado aquí. Hay que recalcularlo a mano cada
-  vez que se publique un instalador nuevo (no hay automatización todavía):
+  el usuario pidió quitarlo de ahí (2026-08-11, "no es necesario" verlo en la página
+  principal), y **finalmente quedó en `seguridad.html`** (mismo día, ver `.hashbox` —
+  sección "Verificación de integridad del instalador (Windows)"), no al lado del botón
+  de descarga pero sí visible públicamente, con instrucciones de cómo calcularlo
+  (`certutil -hashfile ... SHA256`). Hay que recalcularlo a mano cada vez que se
+  publique un instalador nuevo (no hay automatización todavía) y actualizarlo en los
+  dos lugares que lo citan: aquí y `#hash-win` en `seguridad.html`:
   - v1.6.10: `6df2d48bf78e5c8b6b7db48672d40b3c18a7d4c9b4a394e755789f58d3914f98`
 - **Frase de privacidad reescrita** ("los datos de los procedimientos nunca salen del
   dispositivo...") en la FAQ, con la salvedad correcta de que la mejora de redacción con
@@ -327,6 +332,32 @@ de la cadena.
 `dispositivo del usuario (anonimiza) → nuestro Worker (solo reenvía) →
 proveedor de IA (solo ve texto anonimizado)`. Ningún punto de esa cadena
 excepto el primero ve el dato real.
+
+## Corrección: contradicción legal sobre cambio de dispositivo (2026-08-11)
+
+El usuario pidió una auditoría de consistencia entre `capturadocs-landing` e
+`informes-ponal` (app), específicamente en Términos/Privacidad/Licencias.
+Se encontró una **contradicción legal real, no de tono**: el modal de esta
+landing (pestaña Términos §7 y pestaña Licencias §6) decía que cambiar de
+dispositivo **exige comprar una licencia nueva**, mientras que la propia
+FAQ pública de esta misma landing (línea "¿Puedo cambiar de celular...?")
+y los documentos oficiales de la app (`terminos_condiciones.md` §7,
+`politica_licencias.md` §10) decían lo contrario: **reasignación gratis
+por WhatsApp, sin licencia nueva**. El modal de la landing era el que
+estaba desactualizado/equivocado — se corrigió para que coincida con la
+FAQ y con la app (ver también LECCIONES_APRENDIDAS.md).
+
+De paso se verificó contra el código del Worker (`TRIAL_GIFT = 5` en
+`informes-ponal/worker/index.js`) que el código de regalo da **+5**
+generaciones — la landing ya lo decía bien (pestaña Licencias §1), pero
+`informes-ponal/src/politica_licencias.md` §3.1 decía "hasta 10" —
+corregido ahí también.
+
+**Si se vuelve a tocar el tema de cambio de dispositivo o generaciones de
+regalo**: la fuente de verdad es siempre el código (`worker/index.js` para
+las constantes numéricas, `handleReasignar`/similar para el flujo de
+reasignación), no lo que ya esté escrito en ningún documento — verificar
+ahí antes de copiar texto de un documento a otro.
 
 ## Cómo desplegar cambios
 
