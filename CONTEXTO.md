@@ -296,6 +296,38 @@ El mismo bloque de cambios se replicó en los documentos legales de la app
 `informes-ponal/README_TECNICO.md` sección 11 (#12). De paso se corrigió ahí un Nequi
 desactualizado que había quedado en `politica_licencias.md`.
 
+## Corrección: dónde se anonimiza el texto para la IA (2026-08-11)
+
+El usuario detectó una contradicción real (no de tono) en el refuerzo de
+privacidad recién hecho: varios textos decían que **"nuestro propio
+servidor anonimiza"** el texto de la narración antes de mandarlo al
+proveedor de IA — eso sugiere que el servidor llega a ver el dato real
+antes de borrarlo, lo cual es falso.
+
+**Cómo es en realidad, verificado leyendo el código (no de memoria):**
+`informes-ponal/src/anonimizar.js` (función `anonimizar()`, llamada desde
+`src/ia.js:promptMejorarNarracion()`) corre **en el frontend — en el
+navegador o la app, o sea en el dispositivo del usuario** — reemplaza
+nombres/cédulas/NUNC por marcadores (`[CAPTURADO_1]`, etc.) **antes** de
+que el prompt salga del dispositivo. El Worker (`handleIA` en
+`informes-ponal/worker/index.js`) solo reenvía ese prompt ya anonimizado a
+Groq — nunca ve el dato real tampoco. La política de privacidad de la app
+(`informes-ponal/src/politica_privacidad.md`) ya lo decía bien ("texto ya
+anonimizado **localmente**"); el error estaba solo en los 4 lugares de
+`capturadocs-landing` que se habían escrito la ronda anterior.
+
+**Se corrigió** en `index.html` (política de privacidad puntos 5/7/8 y la
+FAQ de "datos de mis capturados") y en `seguridad.html` (diagrama y
+tarjeta "¿Qué hace la IA exactamente?") para decir explícitamente que la
+anonimización ocurre **en el dispositivo del usuario**, y que ni nuestro
+servidor ni el proveedor de IA llegan a ver el dato real en ningún punto
+de la cadena.
+
+**Si se vuelve a tocar este tema**: la cadena correcta es
+`dispositivo del usuario (anonimiza) → nuestro Worker (solo reenvía) →
+proveedor de IA (solo ve texto anonimizado)`. Ningún punto de esa cadena
+excepto el primero ve el dato real.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
