@@ -19,9 +19,12 @@ prefijados `[capturadocs-landing]`) — detalle en `../homelab/CONTEXTO.md`.
 
 ## Qué es este repo
 
-Landing estática de una sola página (`index.html`, sin build, sin
-frameworks) para **CapturaDocs Express**, la app de informes de captura de
-`informes-ponal`. Se publica en GitHub Pages, con dominio propio:
+Landing estática (sin build, sin frameworks) para **CapturaDocs Express**,
+la app de informes de captura de `informes-ponal`. Dos páginas HTML:
+`index.html` (la landing principal, con toda la lógica de precios/chat/
+config-publica) y `seguridad.html` (agregada 2026-08-11, ver punto 14 más
+abajo — página estática simple, sin JS propio salvo el link de WhatsApp).
+Se publica en GitHub Pages, con dominio propio:
 https://capturadocs.com/ (el link de GitHub sigue funcionando como alias:
 https://jhonep24.github.io/capturadocs-landing/). El dominio se compró en
 Cloudflare Registrar y el DNS apunta a las IPs de GitHub Pages — ver
@@ -94,6 +97,8 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
     - La vista "Sugerencias o contacto" (`chatEnviarContacto`, acción `contacto`) llega a una Data Table en el bot (`mensajes_contacto`) y avisa al dueño por WhatsApp — ver `capturadocs-bot-pagos/CONTEXTO.md` sección 52.
     - **Deep-link desde la app** (`informes-ponal`, agregado 2026-08-07): al cargar, `chatDeepLink()` lee `?view=&deviceId=&plan=&mensaje=&tipo=` de la URL y abre el chat directo ahí. Ver `licencia.js:getLandingLink()` en `informes-ponal`.
     - **Seguridad**: toda respuesta del backend que se inserta en el DOM pasa por `escapeHtml()` antes de ir a `innerHTML` (agregado 2026-08-08 tras una revisión de seguridad — antes 4 puntos insertaban `data.mensaje`/`data.pedido.estado`/`data.pedidoId`/`data.plan` sin escapar).
+14. `seguridad.html` (página nueva, 2026-08-11) — "Arquitectura de privacidad": reemplaza la promesa genérica "100% privado" por un diagrama HTML/CSS de dos columnas (`.dcol.local` / `.dcol.remote`, sin librerías externas) que muestra qué se queda 100% en el dispositivo (datos del procedimiento, generación de documentos, borradores) vs. qué sí llega a la infraestructura propia y por qué (ID de dispositivo + licencia, pedidos/comprobantes/contacto, texto anonimizado para la IA). 3 tarjetas de preguntas puntuales debajo (qué hace la IA, qué usa el sistema de licencias, quién más ve los datos de pedido). No tiene su propio `<script>` de negocio — copia solo el CSS necesario del sistema de diseño (no todo el `<style>` de `index.html`) más el snippet de `WA_NUMBER` para el link de WhatsApp del footer. Enlazada desde: nav de `index.html` no (para no saturarlo), sí desde la respuesta de la FAQ "¿Qué pasa con los datos de mis capturados?" y desde el footer ("Cómo protegemos tus datos"). El botón "Leer la Política de Privacidad →" de `seguridad.html` apunta a `index.html#privacidad`, que dispara un pequeño bloque de JS en `index.html` (justo después del listener de teclado del modal) que abre el modal directo en la pestaña Privacidad si `location.hash === '#privacidad'` — así el texto legal completo sigue viviendo en un solo lugar (el modal), sin duplicarlo en la página nueva. Agregada a `sitemap.xml`.
+    - **Cuidado si se edita el diagrama**: debe reflejar EXACTAMENTE la distinción de "Categorías de datos" del punto 12 (2a datos del procedimiento vs. 2b datos de gestión de pedidos/contacto) — si se retoca uno, retocar el otro, para no volver a tener dos fuentes de verdad desalineadas (fue justo el problema que motivó el refuerzo de la política, ver "Transparencia legal" más abajo).
 
 **CTAs ya NO apuntan a WhatsApp por defecto** (cambiado 2026-08-08, pedido
 explícito: *"wsp va a ser el último lugar... no quiero incentivar el uso de
@@ -113,7 +118,7 @@ esto — se deja la entrada en el backlog de abajo tachada por trazabilidad.
 - **Definir precio del espacio publicitario** (punto 10.5): la sección ya está, pero cotiza por chat en vez de mostrar un precio fijo. (La sección de referidos, punto 8.5, ya no está pendiente — se rediseñó el 2026-08-10; la mecánica del programa en sí, `REF-XXXXXXXX`/+7 días, vive en `informes-ponal` sin cambios de este lado.)
 - **#20.1** — Rate limit en Cloudflare (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard. (El punto 2 de este pendiente, exigir correo, ya quedó resuelto — ver abajo.)
 - ~~**#21** — Cambiar "🔒 100% privado".~~ **Resuelto 2026-08-11** — el usuario prefirió mantener el "100%" pero acotado a un hecho verificable: "100% seguros los datos de tu procedimiento" / "Se procesan en tu dispositivo. Ningún dato del caso sale de tu navegador o celular." (sección Funciones). No se tocó la franja de confianza ("Datos 100% en tu dispositivo") ni la FAQ porque ya usaban una frase igual de acotada, no la absoluta que preocupaba a la auditoría.
-- **#22** — Página `/seguridad` con diagrama de arquitectura de privacidad (qué sale del dispositivo, qué no, qué hace la IA) — sugerida por la misma auditoría, es la pieza más grande de las 3, no se abordó todavía.
+- ~~**#22** — Página `/seguridad` con diagrama de arquitectura de privacidad.~~ **Resuelto 2026-08-11** — ver punto 14 de la estructura de secciones más arriba.
 
 Resuelto: **#17** — no se migró el hosting a Vercel/Netlify, pero se
 compró dominio propio (`capturadocs.com`) y se configuró como custom

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Arquitectura de privacidad — CapturaDocs Express</title>
+  <meta name="description" content="Cómo protege CapturaDocs Express los datos de tus procedimientos: qué se procesa 100% en tu dispositivo, qué se envía a nuestra infraestructura y por qué, y qué hace exactamente la mejora de redacción con IA."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link rel="apple-touch-icon" href="logo.png"/>
+  <link rel="canonical" href="https://capturadocs.com/seguridad.html"/>
+  <meta name="theme-color" content="#070f1f"/>
+  <meta name="robots" content="index,follow"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Arquitectura de privacidad — CapturaDocs Express"/>
+  <meta property="og:description" content="Qué datos se quedan en tu dispositivo, qué sale hacia nuestra infraestructura y por qué — explicado con un diagrama, no solo con una promesa de texto."/>
+  <meta property="og:url" content="https://capturadocs.com/seguridad.html"/>
+  <meta property="og:image" content="https://capturadocs.com/logo-og.jpg"/>
+  <meta property="og:locale" content="es_CO"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Barlow+Condensed:wght@700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{--navy:#070f1f;--navy2:#0d1a2e;--navy3:#162035;--gold:#f0a500;--gold2:#cc8800;--accent:#2e7fff;--green:#25d366;--white:#f0f4ff;--muted:#7a8aaa;--border:#1e3050}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--navy);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(7,15,31,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-icon{width:36px;height:36px;border-radius:8px;display:block}
+    .nav-text{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.15rem;color:var(--white);letter-spacing:1px}
+    .nav-text span{color:var(--gold)}
+    .nav-cta{background:var(--green);color:#fff;padding:9px 22px;border-radius:8px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;transition:opacity .2s}
+    .nav-cta:hover{opacity:.85}
+    .nav-links{display:flex;align-items:center;gap:24px}
+    .nav-link{color:var(--muted);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;transition:color .2s}
+    .nav-link:hover{color:var(--white)}
+    section{position:relative;z-index:1}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px}
+    .stag{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+    .stitle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin-bottom:16px}
+    .ssub{color:var(--muted);font-size:1.05rem;max-width:640px;line-height:1.6}
+    .phdr{text-align:center;margin-bottom:56px}
+    .sec-hero{padding:150px 0 70px;text-align:center}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);border-radius:100px;padding:6px 16px;font-size:.78rem;color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+    .btn-p{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:14px 32px;border-radius:10px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;box-shadow:0 4px 24px rgba(240,165,0,.3);transition:transform .2s,box-shadow .2s;display:inline-block}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(240,165,0,.4)}
+    .btn-s{background:rgba(46,127,255,.1);border:1px solid rgba(46,127,255,.3);color:var(--accent);padding:14px 32px;border-radius:10px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;transition:background .2s;display:inline-block}
+    .btn-s:hover{background:rgba(46,127,255,.18)}
+
+    /* Diagrama */
+    .diagram{padding:20px 0 90px}
+    .dwrap{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+    @media(max-width:860px){.dwrap{grid-template-columns:1fr}}
+    .dcol{border-radius:18px;padding:26px 24px;border:1px solid var(--border);background:var(--navy2)}
+    .dcol.local{border-color:rgba(37,211,102,.35);background:linear-gradient(160deg,var(--navy3),var(--navy2))}
+    .dcol.remote{border-color:rgba(46,127,255,.3)}
+    .dcol-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+    .dcol-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+    .local .dcol-icon{background:rgba(37,211,102,.15);border:1px solid rgba(37,211,102,.3)}
+    .remote .dcol-icon{background:rgba(46,127,255,.15);border:1px solid rgba(46,127,255,.3)}
+    .dcol-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem}
+    .local .dcol-title{color:var(--green)}
+    .remote .dcol-title{color:var(--accent)}
+    .dcol-sub{color:var(--muted);font-size:.82rem;margin-top:2px}
+    .dbox{background:var(--navy);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px;font-size:.88rem}
+    .dbox:last-child{margin-bottom:0}
+    .dbox b{display:block;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--white);margin-bottom:3px;font-size:.92rem}
+    .dbox span{color:var(--muted);line-height:1.55}
+    .dflow{display:flex;flex-direction:column;align-items:center;gap:6px;margin:28px 0;color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:.8rem;letter-spacing:.5px;text-transform:uppercase}
+    .dflow .barrier{font-size:1.6rem;color:#ff6b6b;line-height:1}
+    .dflow .arrow{font-size:1.3rem;color:var(--border)}
+    .dnote{max-width:1100px;margin:0 auto 40px;background:rgba(240,165,0,.06);border:1px solid rgba(240,165,0,.2);border-radius:12px;padding:18px 22px;font-size:.9rem;color:var(--muted);line-height:1.65}
+    .dnote strong{color:var(--white)}
+
+    .qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:60px auto 0}
+    @media(max-width:860px){.qa-grid{grid-template-columns:1fr}}
+    .qa-card{background:var(--navy2);border:1px solid var(--border);border-radius:16px;padding:26px 24px}
+    .qa-card h3{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.02rem;margin-bottom:10px;color:var(--gold)}
+    .qa-card p{color:var(--muted);font-size:.88rem;line-height:1.65}
+    .qa-card p+p{margin-top:8px}
+    .qa-card strong{color:var(--white)}
+
+    .cta{padding:100px 0 120px;text-align:center}
+    .cta h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.1;margin-bottom:18px}
+    .cta h2 em{font-style:normal;color:var(--gold)}
+    .cta p{color:var(--muted);font-size:1rem;margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+    .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+    footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.82rem}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--white)}
+    @media(max-width:600px){nav{padding:14px 20px}footer{flex-direction:column;text-align:center}.nav-links{gap:14px}}
+  </style>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b1c89c7467ba41fbb947cce3577347db"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img class="nav-icon" src="logo.png" alt="CapturaDocs Express" width="36" height="36"/>
+    <div class="nav-text">Captura<span>Docs</span> Express</div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">← Volver al inicio</a>
+    <a href="index.html#descargas" class="nav-cta">Obtener acceso</a>
+  </div>
+</nav>
+
+<section class="sec-hero">
+  <div class="container">
+    <div class="badge">🔒 Arquitectura de privacidad</div>
+    <h1 class="stitle" style="max-width:820px;margin:0 auto 16px">No te pedimos que nos creas que es privado. Te mostramos exactamente por qué.</h1>
+    <p class="ssub" style="margin:0 auto">Esta página reemplaza la promesa genérica de "100% privado" por el detalle técnico real: qué se queda en tu dispositivo, qué sale hacia nuestra infraestructura y por qué, y qué hace exactamente la mejora de redacción con IA.</p>
+  </div>
+</section>
+
+<section class="diagram">
+  <div class="container">
+    <div class="dwrap">
+      <div class="dcol local">
+        <div class="dcol-hdr">
+          <div class="dcol-icon">📱</div>
+          <div>
+            <div class="dcol-title">En tu dispositivo</div>
+            <div class="dcol-sub">Nunca sale de aquí</div>
+          </div>
+        </div>
+        <div class="dbox"><b>Datos del procedimiento</b><span>Nombres, cédulas, NUNC, datos del capturado, de los elementos incautados y de los hechos.</span></div>
+        <div class="dbox"><b>Generación de documentos</b><span>El Informe de Captura, Acta de Derechos, Rótulo, Cadena de Custodia y Acta de Incautación se arman localmente.</span></div>
+        <div class="dbox"><b>Borradores guardados</b><span>localStorage del navegador — para no perder tu avance si se corta la conexión o cierras la app.</span></div>
+      </div>
+      <div class="dcol remote">
+        <div class="dcol-hdr">
+          <div class="dcol-icon">☁️</div>
+          <div>
+            <div class="dcol-title">Nuestra infraestructura</div>
+            <div class="dcol-sub">Solo si usas estas funciones, por separado</div>
+          </div>
+        </div>
+        <div class="dbox"><b>ID de dispositivo + licencia</b><span>Se envía a nuestro servidor de licencias (Cloudflare Workers) solo para activar/verificar tu licencia. No identifica tu cédula ni tu identidad.</span></div>
+        <div class="dbox"><b>Pedidos, comprobantes y contacto</b><span>Si cotizas, subes un comprobante o escribes por el chat: nombre, correo/WhatsApp, imagen del comprobante y tus mensajes llegan a nuestro backend de pedidos (Cloudflare Tunnel) — nunca a un tercero ajeno.</span></div>
+        <div class="dbox"><b>Mejora de redacción con IA</b><span>Solo el texto de la narración, y solo <strong>después</strong> de que nuestro propio servidor lo anonimiza. El proveedor de IA nunca recibe nombres, cédulas ni NUNC reales, y tu dispositivo nunca lo contacta directamente.</span></div>
+      </div>
+    </div>
+
+    <div class="dflow">
+      <span class="arrow">↑ ↑ ↑</span>
+      <span class="barrier">✕ ✕ ✕</span>
+      <span>Barrera: el contenido del procedimiento no cruza esta línea</span>
+    </div>
+
+    <div class="dnote">
+      <strong>En resumen:</strong> hay una diferencia entre "el caso que estás diligenciando" (columna izquierda, 100% local, nosotros ni lo vemos) y "los datos que tú decides enviarnos para pagar, activar tu licencia o pedir ayuda" (columna derecha, sí llegan a nuestra infraestructura, y solo se usan para eso). Ver el detalle legal completo en la <a href="index.html#privacidad" style="color:var(--gold)">Política de Privacidad</a>.
+    </div>
+
+    <div class="qa-grid">
+      <div class="qa-card">
+        <h3>¿Qué hace la IA exactamente?</h3>
+        <p>Solo mejora la <strong>redacción</strong> del texto de los hechos que tú ya escribiste — no inventa contenido nuevo del caso.</p>
+        <p>El texto se anonimiza <strong>en nuestro servidor</strong> antes de salir: nombres, cédulas y NUNC se reemplazan por marcadores genéricos. El proveedor de IA nunca ve el dato real, y solo se activa si tu licencia incluye esa función.</p>
+      </div>
+      <div class="qa-card">
+        <h3>¿Qué usa el sistema de licencias?</h3>
+        <p>Un <strong>ID de dispositivo</strong> generado localmente (no es tu cédula ni un dato biométrico) y el estado de tu licencia. Se verifica contra nuestro servidor propio en Cloudflare Workers cada vez que abres la app.</p>
+        <p>No se instala nada en segundo plano ni se rastrea tu ubicación o actividad fuera de la app.</p>
+      </div>
+      <div class="qa-card">
+        <h3>¿Quién más ve mis datos de pedido?</h3>
+        <p><strong>Nadie fuera de CapturaDocs.</strong> Cloudflare aloja nuestra infraestructura como encargado técnico (igual que cualquier proveedor de hosting), pero no la usa con fines propios.</p>
+        <p>No vendemos ni compartimos tus datos de contacto o pago con terceros para fines comerciales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>¿Alguna duda sobre<em> cómo se maneja tu información?</em></h2>
+    <p>Escríbenos directamente — te respondemos con el mismo nivel de detalle que ves en esta página.</p>
+    <div class="cta-actions">
+      <a href="index.html#descargas" class="btn-p">Probar gratis ahora</a>
+      <a href="index.html#privacidad" class="btn-s">Leer la Política de Privacidad →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;color:var(--white)">🛡️ CapturaDocs<span style="color:var(--gold)"> Express</span></div>
+    <div>Herramienta privada de apoyo — No oficial</div>
+    <div>© 2026 CapturaDocs Express. Todos los derechos reservados.</div>
+  </div>
+  <div style="display:flex;gap:20px">
+    <a href="mailto:contacto@capturadocs.com">contacto@capturadocs.com</a>
+    <a class="wa-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="index.html#privacidad">Términos y condiciones</a>
+  </div>
+</footer>
+
+<script>
+  const WA_NUMBER = '573503593635';
+  document.querySelectorAll('a.wa-link').forEach(el => el.href = 'https://wa.me/' + WA_NUMBER);
+</script>
+
+</body>
+</html>

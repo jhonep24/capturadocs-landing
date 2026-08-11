@@ -532,7 +532,7 @@
       </details>
       <details class="fitem">
         <summary>¿Qué pasa con los datos de mis capturados?<span class="fplus">+</span></summary>
-        <div class="fa">Los datos de los procedimientos nunca salen de tu dispositivo. La conexión a Internet se usa <strong>únicamente</strong> para verificar tu licencia y consultar actualizaciones — nombres, cédulas y demás datos del caso ni siquiera nosotros los vemos. Puedes comprobarlo tú mismo: abre las herramientas de red de tu navegador (F12 → pestaña Red) mientras diligencias un caso y verás que no se envía ninguna solicitud con los datos del formulario, solo las llamadas de licencia al iniciar la app. La única excepción es si usas voluntariamente la <strong>mejora de redacción con IA</strong>: en ese caso se envía solo el texto de tu narración, ya despojado de nombres, cédulas y demás identificadores, a un proveedor externo de IA — nunca los datos completos del caso.</div>
+        <div class="fa">Los datos de los procedimientos nunca salen de tu dispositivo. La conexión a Internet se usa <strong>únicamente</strong> para verificar tu licencia y consultar actualizaciones — nombres, cédulas y demás datos del caso ni siquiera nosotros los vemos. Puedes comprobarlo tú mismo: abre las herramientas de red de tu navegador (F12 → pestaña Red) mientras diligencias un caso y verás que no se envía ninguna solicitud con los datos del formulario, solo las llamadas de licencia al iniciar la app. La única excepción es si usas voluntariamente la <strong>mejora de redacción con IA</strong>: en ese caso se envía solo el texto de tu narración, ya despojado de nombres, cédulas y demás identificadores, a un proveedor externo de IA — nunca los datos completos del caso. Ver el diagrama completo en <a href="seguridad.html" style="color:var(--gold)">Arquitectura de privacidad</a>.</div>
       </details>
       <details class="fitem">
         <summary>¿Cómo empiezo, y cómo pago cuando quiera activar la licencia?<span class="fplus">+</span></summary>
@@ -611,6 +611,7 @@
   <div style="display:flex;gap:20px">
     <a href="mailto:contacto@capturadocs.com">contacto@capturadocs.com</a>
     <a class="wa-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="seguridad.html">Cómo protegemos tus datos</a>
     <a href="#" onclick="abrirTerminos();return false">Términos y condiciones</a>
   </div>
 </footer>
@@ -924,6 +925,13 @@
       else if(!e.shiftKey && document.activeElement===last){e.preventDefault();first.focus();}
     }
   });
+
+  // #privacidad abre el modal directo en la pestaña Privacidad — lo usa
+  // seguridad.html para enlazar a la política completa sin duplicar el texto.
+  if (location.hash === '#privacidad') {
+    abrirTerminos();
+    showTab('pp');
+  }
 
   // --- Chat / compra directa desde la landing ---
   const CHAT_API = 'https://chat.capturadocs.com/webhook';
