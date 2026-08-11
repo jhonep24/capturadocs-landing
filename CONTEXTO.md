@@ -229,9 +229,11 @@ A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó
 - **Cláusula "9. Soporte técnico"** y **"10. Versión e historial de actualizaciones"**
   (v1.6.10) en la pestaña Términos.
 - **Hash SHA-256 del instalador de Windows**, calculado descargando el `.zip` real del
-  último release y publicado junto al botón de descarga en `#descargas`. Hay que
-  recalcularlo y actualizarlo a mano cada vez que se publique un instalador nuevo —
-  no hay automatización todavía.
+  último release. Se publicó junto al botón de descarga en `#descargas` el 2026-08-10,
+  pero el usuario pidió quitarlo de ahí (2026-08-11, "no es necesario" verlo en la
+  página principal) — queda solo documentado aquí. Hay que recalcularlo a mano cada
+  vez que se publique un instalador nuevo (no hay automatización todavía):
+  - v1.6.10: `6df2d48bf78e5c8b6b7db48672d40b3c18a7d4c9b4a394e755789f58d3914f98`
 - **Frase de privacidad reescrita** ("los datos de los procedimientos nunca salen del
   dispositivo...") en la FAQ, con la salvedad correcta de que la mejora de redacción con
   IA sí envía el texto de la narración (ya anonimizado) a un proveedor externo — para no
