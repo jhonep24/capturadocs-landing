@@ -220,6 +220,38 @@ escribir el ID. Lógica de negocio (cálculo de días, validación del
 código contra el Worker) vive del lado de n8n, no en el HTML — ver
 `capturadocs-bot-pagos/CONTEXTO.md` (sección "Cotizador de la landing").
 
+## Transparencia legal y detección de inconsistencias (2026-08-10)
+
+A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó:
+- **Responsable identificado**: Johnn Eduardo Pacanchique Martínez, persona natural,
+  en las pestañas Términos y Privacidad del modal (`#modal`) — sin NIT, no tiene
+  negocio registrado.
+- **Cláusula "9. Soporte técnico"** y **"10. Versión e historial de actualizaciones"**
+  (v1.6.10) en la pestaña Términos.
+- **Hash SHA-256 del instalador de Windows**, calculado descargando el `.zip` real del
+  último release y publicado junto al botón de descarga en `#descargas`. Hay que
+  recalcularlo y actualizarlo a mano cada vez que se publique un instalador nuevo —
+  no hay automatización todavía.
+- **Frase de privacidad reescrita** ("los datos de los procedimientos nunca salen del
+  dispositivo...") en la FAQ, con la salvedad correcta de que la mejora de redacción con
+  IA sí envía el texto de la narración (ya anonimizado) a un proveedor externo — para no
+  contradecir lo que hace `anonimizar.js` en el repo `informes-ponal`.
+  **Cuidado si se retoca esta frase**: no prometer "cero datos salen nunca" sin esa
+  salvedad, o queda desactualizada en cuanto alguien use esa función.
+- **Aclaración de que la IA de redacción nunca aplica un cambio por su cuenta**: solo
+  sugiere, y el usuario decide con el botón "Usar" — verificado leyendo
+  `informes-ponal/src/components/pasos/PasoHechos.jsx` antes de escribirlo, no de
+  memoria.
+- **Nueva tarjeta de función + maqueta del panel "preview"** (sección `#funciones`)
+  mostrando el ejemplo real de detección de inconsistencias del paso Resumen de la app
+  (🟢 Nombre/Cédula consistentes, 🔴 Edad/Hora incompatibles).
+
+El mismo bloque de cambios se replicó en los documentos legales de la app
+(`informes-ponal/src/terminos_condiciones.md`, `politica_privacidad.md`,
+`politica_licencias.md`) y en el modal "Acerca de" (`ModalAcercaDe.jsx`) — ver
+`informes-ponal/README_TECNICO.md` sección 11 (#12). De paso se corrigió ahí un Nequi
+desactualizado que había quedado en `politica_licencias.md`.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
