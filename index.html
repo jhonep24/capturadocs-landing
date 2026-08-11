@@ -659,25 +659,43 @@
       <div id="content-pp" role="tabpanel" aria-labelledby="tab-pp" style="display:none">
         <h2>1. Responsable del tratamiento</h2>
         <p><strong>Johnn Eduardo Pacanchique Martínez</strong>, persona natural, desarrollador independiente de CapturaDocs Express, con domicilio en Bogotá, D.C., Colombia. Contacto: contacto@capturadocs.com · WhatsApp: <span class="cfg-whatsapp">350 3593635</span>.</p>
-        <h2>2. Datos que se recopilan</h2>
-        <p>CapturaDocs Express <strong>no recopila ni transmite datos personales a servidores externos</strong>. Toda la información ingresada (nombres, documentos de identidad, NUNC, datos de capturados) se procesa y almacena únicamente en el dispositivo del usuario.</p>
-        <p>Los únicos datos que permanecen en el dispositivo son:</p>
-        <ul><li>Estado de la licencia (activa/prueba/vencida)</li><li>Identificador del dispositivo (generado localmente, no vinculado a identidad personal)</li><li>Borradores de casos guardados por el propio usuario</li></ul>
+        <h2>2. Categorías de datos y qué sale de tu dispositivo</h2>
+        <p>Hay dos grupos de datos, con tratamiento distinto:</p>
+        <h3>a) Datos del procedimiento (el caso que estás diligenciando)</h3>
+        <p>Nombres, cédulas, NUNC y demás información del capturado o del caso se procesan <strong>exclusivamente en tu dispositivo</strong>. Nunca se envían a nuestros servidores ni a ningún tercero — ni siquiera nosotros los vemos.</p>
+        <h3>b) Datos de gestión de pedidos, soporte y contacto</h3>
+        <p>Si usas el chat de la app o de esta página para cotizar, pagar, consultar el estado de tu pedido o escribirnos, <strong>sí se envían a nuestra infraestructura</strong> (no a un tercero ajeno) los datos que tú mismo escribes en esos formularios:</p>
+        <ul>
+          <li><strong>ID de dispositivo</strong>: identificador generado localmente por la app (no es un dato biométrico ni está ligado a tu cédula) — se envía a nuestro servidor únicamente para verificar y activar tu licencia.</li>
+          <li><strong>Comprobante de pago</strong>: la imagen que subes, para validar tu compra. Se procesa (incluido OCR automático) y se conserva mientras gestionamos tu pedido.</li>
+          <li><strong>Nombre, correo o WhatsApp</strong> que ingreses en "Cotizar", "Ya pagué" o "Sugerencias o contacto": para poder responderte y entregarte tu clave.</li>
+          <li><strong>Mensajes que escribes</strong> en el chat de ayuda: para poder atenderte, con respaldo de un asistente con IA (ver punto 6).</li>
+        </ul>
+        <p>Esta distinción es importante: la afirmación de "procesamiento 100% local" aplica al <strong>contenido del procedimiento policial</strong>, no a los datos que tú decides enviarnos para gestionar tu pago o pedir ayuda.</p>
         <h2>3. Finalidad del tratamiento</h2>
-        <p>Los datos ingresados en la aplicación se usan exclusivamente para generar los documentos de captura solicitados por el usuario. No se usan para ningún otro fin.</p>
-        <h2>4. Derechos del usuario (Ley 1581 de 2012)</h2>
-        <p>El usuario tiene derecho a conocer, actualizar, rectificar y suprimir sus datos. Dado que CapturaDocs Express no almacena datos en servidores propios, el usuario ejerce estos derechos directamente desde su dispositivo (borrando el caché o los borradores guardados).</p>
-        <h2>5. Seguridad</h2>
-        <p>Al no transmitir datos a servidores externos, el riesgo de interceptación es mínimo. El usuario es responsable de la seguridad de su propio dispositivo y de los documentos generados.</p>
-        <h2>6. Conexiones que realiza el software</h2>
-        <p>CapturaDocs Express solo se conecta a <strong>un único servidor propio</strong> (<code>capturadocs-licencias.capturadocs.workers.dev</code>, en Cloudflare Workers) — reforzado en el código, no solo declarado aquí. Se usa para verificar la licencia, registrar activaciones/canjes de códigos y consultar si hay una versión nueva disponible. Ninguna otra conexión recibe datos desde el software, ni siquiera al usar la mejora de redacción con IA: en ese caso nuestro propio servidor reenvía el texto ya anonimizado al proveedor de IA — el navegador o la app nunca lo contactan directamente.</p>
-        <h2>7. Procedimiento de actualización</h2>
+        <p>Los datos del procedimiento se usan exclusivamente para generar los documentos que tú solicitas, dentro de tu propio dispositivo. Los datos de gestión de pedidos y contacto (punto 2b) se usan únicamente para activar tu licencia, procesar pagos, darte soporte y responder tus mensajes — no se usan para ningún otro fin, ni se venden ni se ceden a terceros con fines comerciales.</p>
+        <h2>4. Dónde y cuánto tiempo se almacena</h2>
+        <p>Los datos de gestión de pedidos y contacto (punto 2b) se almacenan en nuestra propia infraestructura, alojada sobre Cloudflare (Workers, base de datos y túnel — ver punto 7), mientras dure la gestión de tu pedido o solicitud. No hay un borrado automático programado todavía; si quieres que eliminemos un dato puntual (por ejemplo, una imagen de comprobante ya procesada), puedes pedirlo por los medios del punto 6.</p>
+        <h2>5. Medidas de seguridad</h2>
+        <p>El contenido del procedimiento nunca sale de tu dispositivo, así que no hay riesgo de interceptación sobre esos datos. Los datos de gestión de pedidos viajan cifrados (HTTPS) hacia nuestra infraestructura en Cloudflare y no se comparten con más terceros que los estrictamente necesarios para operar (ver punto 7 — Cloudflare como encargado técnico, y el proveedor de IA solo para texto ya anonimizado). El usuario es responsable de la seguridad de su propio dispositivo.</p>
+        <h2>6. Derechos del usuario y cómo ejercerlos (Ley 1581 de 2012)</h2>
+        <p>Tienes derecho a conocer, actualizar, rectificar y suprimir tus datos de gestión de pedidos y contacto (punto 2b) — los del procedimiento (2a) nunca salen de tu dispositivo, así que los administras tú directamente (borrando el caché o los borradores guardados).</p>
+        <p>Para ejercer estos derechos sobre tus datos de pedidos o contacto: escríbenos a <strong>contacto@capturadocs.com</strong> o por <strong>WhatsApp</strong> (<span class="cfg-whatsapp">350 3593635</span>) indicando qué dato quieres conocer, corregir o eliminar. Respondemos en un plazo máximo de <strong>15 días hábiles</strong>, como exige la ley.</p>
+        <h2>7. Encargados del tratamiento (terceros que procesan datos por nosotros)</h2>
+        <p>No vendemos ni compartimos tus datos con terceros para fines comerciales. Sí usamos proveedores técnicos para operar:</p>
+        <ul>
+          <li><strong>Cloudflare</strong>: aloja nuestro servidor de licencias (Workers), la base de datos de pedidos y la conexión del chat (Tunnel). Actúa como encargado técnico de infraestructura, no accede al contenido con fines propios.</li>
+          <li><strong>Proveedor de IA</strong>: solo recibe el texto de la narración del procedimiento cuando usas la mejora de redacción, y siempre <strong>ya anonimizado</strong> por nuestro propio servidor antes de salir — nunca ve nombres, cédulas ni NUNC reales. Ver también punto 8.</li>
+        </ul>
+        <h2>8. Conexiones que realiza el software</h2>
+        <p>CapturaDocs Express solo se conecta a <strong>un único servidor propio</strong> (<code>capturadocs-licencias.capturadocs.workers.dev</code>, en Cloudflare Workers) — reforzado en el código, no solo declarado aquí. Se usa para verificar la licencia, registrar activaciones/canjes de códigos y consultar si hay una versión nueva disponible. El chat de esta página y de la app se conecta además a nuestro backend de gestión de pedidos (Cloudflare Tunnel). Ninguna otra conexión recibe datos desde el software, ni siquiera al usar la mejora de redacción con IA: en ese caso nuestro propio servidor reenvía el texto ya anonimizado al proveedor de IA — el navegador o la app nunca lo contactan directamente.</p>
+        <h2>9. Procedimiento de actualización</h2>
         <p>Cada verificación de licencia informa si tu versión quedó desactualizada. La app lo avisa dentro de la interfaz, con un enlace directo a la versión nueva en esta página. <strong>No hay actualización automática ni silenciosa</strong> — tú decides cuándo instalarla.</p>
-        <h2>8. Cookies y almacenamiento local</h2>
+        <h2>10. Cookies y almacenamiento local</h2>
         <p>La aplicación usa <strong>localStorage</strong> y <strong>cookies</strong> del navegador exclusivamente para guardar el estado de la licencia y los borradores de casos. No se usan cookies de seguimiento ni publicidad.</p>
-        <h2>9. Menores de edad</h2>
+        <h2>11. Menores de edad</h2>
         <p>CapturaDocs Express está dirigido exclusivamente a servidores de policía mayores de edad en ejercicio de sus funciones.</p>
-        <h2>10. Cambios a esta política</h2>
+        <h2>12. Cambios a esta política</h2>
         <p>Cualquier cambio se notificará mediante aviso dentro de la aplicación con al menos 15 días de anticipación.</p>
         <hr><p style="font-size:.78rem;text-align:center;color:#555">Política de Privacidad · CapturaDocs Express · Última actualización: agosto de 2026</p>
       </div>

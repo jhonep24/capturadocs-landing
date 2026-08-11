@@ -112,6 +112,8 @@ esto — se deja la entrada en el backlog de abajo tachada por trazabilidad.
 - **Reactivar descargas de Android e iPhone** cuando corresponda (hoy deshabilitadas a propósito, ver punto 6.5) — el código/binarios siguen listos, solo hay que quitar el estado `dlbtn-disabled`.
 - **Definir precio del espacio publicitario** (punto 10.5): la sección ya está, pero cotiza por chat en vez de mostrar un precio fijo. (La sección de referidos, punto 8.5, ya no está pendiente — se rediseñó el 2026-08-10; la mecánica del programa en sí, `REF-XXXXXXXX`/+7 días, vive en `informes-ponal` sin cambios de este lado.)
 - **#20.1** — Rate limit en Cloudflare (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard. (El punto 2 de este pendiente, exigir correo, ya quedó resuelto — ver abajo.)
+- **#21** — Cambiar "🔒 100% privado" (Funciones, franja de confianza, FAQ) por un texto no absoluto tipo "Procesamiento local" — sugerido por la auditoría externa del 2026-08-11, el usuario pidió priorizar primero el refuerzo de la Política de Privacidad (ver sección de transparencia legal más abajo).
+- **#22** — Página `/seguridad` con diagrama de arquitectura de privacidad (qué sale del dispositivo, qué no, qué hace la IA) — sugerida por la misma auditoría, es la pieza más grande de las 3, no se abordó todavía.
 
 Resuelto: **#17** — no se migró el hosting a Vercel/Netlify, pero se
 compró dominio propio (`capturadocs.com`) y se configuró como custom
@@ -240,6 +242,33 @@ A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó
   contradecir lo que hace `anonimizar.js` en el repo `informes-ponal`.
   **Cuidado si se retoca esta frase**: no prometer "cero datos salen nunca" sin esa
   salvedad, o queda desactualizada en cuanto alguien use esa función.
+
+### Refuerzo de la Política de Privacidad (2026-08-11)
+
+Segunda ronda de feedback de la misma auditoría externa. Se reescribió por completo
+la pestaña "Privacidad" del modal (`#content-pp`), que pasó de 9 a 12 secciones:
+
+- **Se corrigió una imprecisión real**: la versión anterior decía "no recopila ni
+  transmite datos personales a servidores externos" de forma absoluta, pero eso es
+  falso para los datos de **gestión de pedidos y contacto** — nombre, correo/WhatsApp,
+  ID de dispositivo y la imagen del comprobante de pago sí viajan a la infraestructura
+  propia (n8n en `capturadocs-bot-pagos`, vía Cloudflare Tunnel) cuando el usuario usa
+  el chat para cotizar, pagar o escribir. Ahora el punto 2 distingue explícitamente
+  **(a) datos del procedimiento** (100% local, nunca sale) de **(b) datos de gestión
+  de pedidos/contacto** (sí se envían y almacenan, solo para eso). Esta distinción es
+  la más importante de todo el refuerzo — si se vuelve a simplificar el texto, no
+  perder esta separación.
+- Secciones nuevas: **"Encargados del tratamiento"** (Cloudflare como infraestructura
+  técnica, proveedor de IA solo para texto ya anonimizado) y **"Dónde y cuánto tiempo
+  se almacena"**.
+- Sección de derechos ahora incluye **procedimiento explícito** para ejercerlos
+  (contacto@capturadocs.com o WhatsApp, respuesta en máx. 15 días hábiles) en vez de
+  solo enunciarlos.
+- Se dejó **fuera de esta ronda**, a pedido del usuario, cambiar el texto absoluto
+  "🔒 100% privado" de la sección Funciones/franja de confianza/FAQ por algo tipo
+  "Procesamiento local" — sigue pendiente, ver backlog. También queda pendiente la
+  página `/seguridad` con diagrama de arquitectura que sugirió la misma auditoría —
+  es la pieza más grande de las 3 recomendadas, no se abordó todavía.
 - **Aclaración de que la IA de redacción nunca aplica un cambio por su cuenta**: solo
   sugiere, y el usuario decide con el botón "Usar" — verificado leyendo
   `informes-ponal/src/components/pasos/PasoHechos.jsx` antes de escribirlo, no de
