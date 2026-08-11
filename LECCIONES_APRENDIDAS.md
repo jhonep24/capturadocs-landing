@@ -10,6 +10,80 @@ estructura de secciones de la landing.
 
 ---
 
+## 2026-08-11 — Auditoría externa de privacidad: política reforzada, página /seguridad y limpieza de detalles
+
+### Qué se hizo (en orden)
+
+1. **SHA-256 fuera de la vista principal**: el usuario pidió quitar el hash
+   del instalador de Windows que se veía debajo del botón de descarga en
+   `#descargas` — "no es necesario" verlo ahí. Se quitó del HTML y quedó
+   solo documentado en `CONTEXTO.md` (con el valor exacto, para no
+   perderlo) por si hace falta para verificación técnica.
+2. **#19 — Centralizar el número de WhatsApp**: quedaban 2 enlaces
+   `wa.me/<numero>` hardcodeados (footer y menú del chat). Se movieron a
+   una sola constante `const WA_NUMBER` en el `<script>` principal, con
+   los anchors usando `class="wa-link"` y `href="#"` hasta que el JS los
+   completa en runtime. Hubo que actualizar `check_wa_number.py` (el hook
+   de pre-commit) porque validaba buscando `wa.me/<numero>` literal en el
+   HTML — ya no aparece ahí, así que el script se reescribió para validar
+   la constante `WA_NUMBER` en su lugar.
+3. **Segunda ronda de feedback de una auditoría externa de IA** sobre la
+   landing (la primera ronda fue la del 2026-08-10, ver entrada de esa
+   fecha en este archivo). Traía 3 recomendaciones — se resolvieron en
+   dos pasos porque el usuario priorizó cuáles atacar primero:
+   - **Refuerzo de la Política de Privacidad** (pestaña `#content-pp` del
+     modal, de 9 a 12 secciones). El hallazgo más importante fue una
+     **imprecisión real, no solo de tono**: el texto decía "no recopila ni
+     transmite datos personales a servidores externos" de forma absoluta,
+     pero eso es falso para nombre/correo/WhatsApp/ID de dispositivo/imagen
+     del comprobante que sí viajan a la infraestructura propia
+     (`capturadocs-bot-pagos` vía Cloudflare Tunnel) cuando alguien usa el
+     chat para cotizar, pagar o escribir. Se corrigió distinguiendo
+     explícitamente **(a) datos del procedimiento** (100% local) de
+     **(b) datos de gestión de pedidos/contacto** (sí se envían, solo para
+     eso) — ver detalle en `CONTEXTO.md`, sección "Transparencia legal".
+   - **Cambiar "100% privado"**: el usuario no quiso perder el "100%" (a
+     diferencia de lo que sugería la auditoría, que prefería evitar
+     absolutos del todo) — se acordó un punto medio acotando el "100%" a
+     un hecho verificable: **"100% seguros los datos de tu procedimiento"**
+     en vez de una promesa de seguridad genérica sobre toda la app.
+   - **Página `/seguridad.html`** con diagrama de arquitectura de
+     privacidad (dos columnas: 📱 local / ☁️ infraestructura propia) — la
+     pieza más grande de las 3. Reutiliza el sistema de diseño pero con su
+     propio `<style>` recortado (no todo el de `index.html`). El botón
+     "Leer la Política de Privacidad" apunta a `index.html#privacidad`, y
+     se agregó un bloque corto de JS en `index.html` que abre el modal
+     directo en la pestaña Privacidad si detecta ese hash al cargar — así
+     el texto legal sigue viviendo en un solo lugar, sin duplicarlo.
+
+### Por qué
+
+Todo nace de comentarios de una IA externa auditando la landing (no es
+`/security-review` de Claude Code, es una revisión aparte que el usuario
+pidió evaluar). El punto más importante no era de redacción: la política
+de privacidad **contradecía lo que el código realmente hace** en cuanto se
+usa el chat de pedidos — eso sí era un problema real que corregir, más allá
+de si el texto sonaba "profesional".
+
+### Problemas encontrados al verificar
+
+- El entorno de preview (Browser pane) marca los archivos `file://` fuera
+  de la carpeta del proyecto como "instantáneas estáticas": los clics en
+  enlaces no navegan de verdad ahí, aunque la lógica en sí sea correcta
+  (se confirmó llamando las funciones a mano). Esto llevó a probar el hash
+  `#privacidad` directo contra producción (`capturadocs.com`) con un clic
+  real, que sí navegó y abrió el modal correctamente — **la prueba que
+  importa es siempre la de producción**, no la del preview local con
+  archivos fuera del proyecto. Mismo tipo de lección que la del timeout de
+  ~30s del `javascript_tool` documentada en la entrada del 2026-08-08: no
+  confundir una limitación de la herramienta de prueba con un bug real.
+- La herramienta `navigate` con `force:true` sobre una URL `file://` con
+  fragmento (`#privacidad`) a veces lo pierde silenciosamente al abrir —
+  otra razón más para no fiarse de esa ruta de prueba y verificar en el
+  sitio real.
+
+---
+
 ## 2026-08-10 — Rediseño de la sección de referidos
 
 ### Qué se hizo
