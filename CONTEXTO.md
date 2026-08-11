@@ -359,6 +359,24 @@ las constantes numéricas, `handleReasignar`/similar para el flujo de
 reasignación), no lo que ya esté escrito en ningún documento — verificar
 ahí antes de copiar texto de un documento a otro.
 
+### Segunda pasada de verificación (mismo día, sin hallazgos nuevos)
+
+El usuario pidió una revisión adicional para no dejar nada por fuera. Se
+comparó cada dato numérico/legal citado en ambos repos contra su constante
+real en `worker/index.js` — todo consistente, sin cambios adicionales:
+
+| Dato | Landing | App | Constante en `worker/index.js` |
+|---|---|---|---|
+| Casos/generaciones gratis | 5 | 5 | `TRIAL_LIMIT=5` |
+| Generaciones por código regalo | +5 | +5 | `TRIAL_GIFT=5` |
+| Días de gracia | 3 | 3 | `GRACE_DAYS=3` |
+| Aviso previo al vencimiento | 1 día | 1 día | `WARN_DAYS=1` |
+| Bono referido (quien refiere) | +7 días | no lo menciona (sin conflicto) | `REFERIDO_DIAS_BONUS=7` |
+| Precios S/M/N | $12k/$35k/$100k | $12k/$35k/$100k | `PLANES` |
+| Negocio/Estación solo PC | sí | sí | `soloPc:true`, bloqueado en Android en el Worker |
+| Reasignación de dispositivo | gratis | gratis | — (ya corregido arriba) |
+| Versión | v1.6.10 | v1.6.10 | `package.json` de `informes-ponal` |
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
