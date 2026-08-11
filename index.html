@@ -610,7 +610,7 @@
   </div>
   <div style="display:flex;gap:20px">
     <a href="mailto:contacto@capturadocs.com">contacto@capturadocs.com</a>
-    <a href="https://wa.me/573503593635" target="_blank" rel="noopener">WhatsApp</a>
+    <a class="wa-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
     <a href="#" onclick="abrirTerminos();return false">Términos y condiciones</a>
   </div>
 </footer>
@@ -737,7 +737,7 @@
       <button class="chat-menu-btn" onclick="chatShowView('comprobante')">📤 Ya pagué, subir comprobante</button>
       <button class="chat-menu-btn" onclick="chatShowView('estado')">🔍 Consultar mi pedido</button>
       <button class="chat-menu-btn" onclick="chatShowView('contacto')">📮 Sugerencias o contacto</button>
-      <a class="chat-menu-btn chat-wa" href="https://wa.me/573503593635" target="_blank" rel="noopener">💬 Contáctanos por WhatsApp</a>
+      <a class="chat-menu-btn chat-wa wa-link" href="#" target="_blank" rel="noopener">💬 Contáctanos por WhatsApp</a>
     </div>
 
     <div id="chat-view-precios" class="chat-view" style="display:none">
@@ -823,6 +823,12 @@
 </div>
 
 <script>
+  // Único lugar donde vive el número real — los enlaces wa.me del HTML llevan
+  // class="wa-link" y el href se completa aquí, para no repetir el número a
+  // mano en cada uno (ver #19 en CONTEXTO.md).
+  const WA_NUMBER = '573503593635';
+  document.querySelectorAll('a.wa-link').forEach(el => el.href = 'https://wa.me/' + WA_NUMBER);
+
   function showTab(tab) {
     ['tc','pp','pl'].forEach(t => {
       document.getElementById('content-' + t).style.display = t === tab ? '' : 'none';

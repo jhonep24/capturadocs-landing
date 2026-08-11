@@ -108,7 +108,7 @@ esto — se deja la entrada en el backlog de abajo tachada por trazabilidad.
 
 - ~~**#14** — Enlazar botones a la app real, no solo a WhatsApp.~~ **Resuelto 2026-08-08** — ver nota de CTAs arriba.
 - **#15** — Reemplazar la maqueta falsa de `.preview` (sección Funciones) por una captura o GIF real de la app funcionando.
-- **#19** — Centralizar el número de WhatsApp (hoy repetido "a mano" en ~9 lugares del HTML) en una constante de JS. Parcialmente mitigado: el texto mostrado en el modal legal ya se sincroniza solo (punto 12), pero los `href="wa.me/..."` siguen hardcodeados.
+- ~~**#19** — Centralizar el número de WhatsApp en una constante de JS.~~ **Resuelto 2026-08-11** — quedan solo 2 enlaces reales (footer y menú del chat, `class="wa-link"`), ambos sin `href` fijo: se completan en runtime desde `const WA_NUMBER` (ver `<script>` principal). `check_wa_number.py` se actualizó para validar esa constante en vez de buscar `wa.me/<numero>` hardcodeado en el HTML.
 - **Reactivar descargas de Android e iPhone** cuando corresponda (hoy deshabilitadas a propósito, ver punto 6.5) — el código/binarios siguen listos, solo hay que quitar el estado `dlbtn-disabled`.
 - **Definir precio del espacio publicitario** (punto 10.5): la sección ya está, pero cotiza por chat en vez de mostrar un precio fijo. (La sección de referidos, punto 8.5, ya no está pendiente — se rediseñó el 2026-08-10; la mecánica del programa en sí, `REF-XXXXXXXX`/+7 días, vive en `informes-ponal` sin cambios de este lado.)
 - **#20.1** — Rate limit en Cloudflare (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard. (El punto 2 de este pendiente, exigir correo, ya quedó resuelto — ver abajo.)
