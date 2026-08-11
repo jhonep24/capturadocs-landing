@@ -10,6 +10,62 @@ estructura de secciones de la landing.
 
 ---
 
+## 2026-08-11 (segunda parte) — Auditoría de consistencia landing ↔ app
+
+### Qué se hizo
+
+El usuario pidió validar si había inconsistencias entre esta landing y la
+app (`informes-ponal`) en Términos/Privacidad/Licencias — "todo debe
+quedar igual". Se comparó texto por texto contra los `.md` legales de la
+app y contra el código real (`worker/index.js`), no solo entre los dos
+HTML. Se encontraron 3 inconsistencias reales:
+
+1. **Contradicción legal grave — cambio de dispositivo**: el modal de esta
+   landing (Términos §7, Licencias §6) decía que había que **comprar una
+   licencia nueva** al cambiar de dispositivo. Pero la propia FAQ pública
+   de esta misma landing, y los documentos oficiales de la app
+   (`terminos_condiciones.md`, `politica_licencias.md`), decían que la
+   reasignación es **gratis por WhatsApp**. Es decir, el modal se
+   contradecía con la FAQ **de la misma página**. Corregido para que las
+   tres fuentes digan lo mismo: reasignación gratis, sin licencia nueva.
+2. **Generaciones del código de regalo**: la landing decía correctamente
+   "+5" (verificado contra `TRIAL_GIFT = 5` en el Worker), pero
+   `informes-ponal/src/politica_licencias.md` decía "hasta 10" — corregido
+   ahí.
+3. **Hash SHA-256 "junto al enlace de descarga"**: la política de
+   licencias de la app seguía prometiendo que el hash estaba al lado del
+   botón de descarga — una promesa que dejó de ser cierta la sesión
+   anterior, cuando se movió de ahí a pedido del usuario. El usuario
+   definió dónde debía quedar: visible en la landing, pero dentro de la
+   documentación de seguridad, no al lado del botón. Se agregó una sección
+   `.hashbox` nueva en `seguridad.html` con el hash, la versión y el
+   comando para calcularlo (`certutil -hashfile ... SHA256`), y se
+   actualizó la referencia en `politica_licencias.md` para apuntar ahí.
+
+### Por qué
+
+Con 3 documentos legales casi idénticos en 2 repos distintos (landing y
+app), y ediciones frecuentes en ambos por sesiones separadas, es fácil que
+uno se actualice y el otro no — exactamente lo que pasó aquí. La lección
+operativa: cuando se toca un texto legal en un repo, revisar si el mismo
+hecho está descrito en el otro, y si el número/regla que se está por
+escribir tiene una fuente de verdad en código (constantes del Worker,
+flujos de reasignación) verificarla ahí antes de copiar de un documento a
+otro — así fue como se detectó que "+10" en la app estaba mal y "+5" en la
+landing estaba bien, no al revés.
+
+### Verificación
+
+Todo se verificó contra el código antes de escribir el texto (no se copió
+de un documento a otro sin más): `TRIAL_GIFT` y `REFERIDO_DIAS_BONUS` leídos
+directo de `worker/index.js`, la reasignación gratuita confirmada en 3
+fuentes independientes (FAQ, `terminos_condiciones.md`,
+`politica_licencias.md`) antes de asumir cuál lado era el erróneo. Cambios
+probados localmente (modal Términos/Licencias, `#hash-win` en
+`seguridad.html`) antes de publicar.
+
+---
+
 ## 2026-08-11 — Auditoría externa de privacidad: política reforzada, página /seguridad y limpieza de detalles
 
 ### Qué se hizo (en orden)
