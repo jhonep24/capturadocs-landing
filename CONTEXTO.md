@@ -220,7 +220,7 @@ escribir el ID. Lógica de negocio (cálculo de días, validación del
 código contra el Worker) vive del lado de n8n, no en el HTML — ver
 `capturadocs-bot-pagos/CONTEXTO.md` (sección "Cotizador de la landing").
 
-## Transparencia legal y detección de inconsistencias (2026-08-10)
+## Transparencia legal y validación del resumen (2026-08-10)
 
 A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó:
 - **Responsable identificado**: Johnn Eduardo Pacanchique Martínez, persona natural,
@@ -242,9 +242,17 @@ A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó
   sugiere, y el usuario decide con el botón "Usar" — verificado leyendo
   `informes-ponal/src/components/pasos/PasoHechos.jsx` antes de escribirlo, no de
   memoria.
-- **Nueva tarjeta de función + maqueta del panel "preview"** (sección `#funciones`)
-  mostrando el ejemplo real de detección de inconsistencias del paso Resumen de la app
-  (🟢 Nombre/Cédula consistentes, 🔴 Edad/Hora incompatibles).
+- **Nueva tarjeta de función + maqueta del panel "preview"** (sección `#funciones`).
+  **Ojo, esto se corrigió el mismo día**: la primera versión inventaba un detector
+  automático de inconsistencias entre documentos (🟢/🔴 comparando edad vs. fecha de
+  nacimiento, hora vs. otro documento) que **no existe** en el código real — el usuario
+  lo notó y lo señaló. `PasoResumen.jsx` solo marca en rojo los campos obligatorios que
+  faltan (componente `Campo` con `req`) y dos campos con recordatorio permanente de
+  revisar dos veces (prop `alerta`: `fecha_captura` y `fecha_fiscal`), sin comparar
+  valores entre sí. La tarjeta y la maqueta quedaron corregidas para describir
+  exactamente eso — validación de completitud + recordatorio de fechas, no un motor de
+  consistencia automática. Si se vuelve a tocar esta sección, verificar primero contra
+  `PasoResumen.jsx` (buscar `alerta` y `req`), no redactar de memoria.
 
 El mismo bloque de cambios se replicó en los documentos legales de la app
 (`informes-ponal/src/terminos_condiciones.md`, `politica_privacidad.md`,
