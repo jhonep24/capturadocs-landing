@@ -377,6 +377,29 @@ real en `worker/index.js` — todo consistente, sin cambios adicionales:
 | Reasignación de dispositivo | gratis | gratis | — (ya corregido arriba) |
 | Versión | v1.6.10 | v1.6.10 | `package.json` de `informes-ponal` |
 
+## Corrección: botón de chat "aparecía solo al final" en móvil (2026-08-11)
+
+El usuario reportó que en vista de celular el widget de chat (`#chatToggle`)
+no se comportaba como fijo — solo se veía al llegar al final de la página,
+en vez de acompañar el scroll desde el inicio. Causa: `overflow-x:hidden`
+estaba puesto en `<body>`. Es un bug conocido de Safari/iOS — cuando el
+`<body>` (no el `<html>`) tiene cualquier `overflow` distinto de `visible`,
+los descendientes `position:fixed` (el botón del chat, y también `nav`)
+pueden dejar de fijarse al viewport y renderizarse en su posición normal
+del flujo del documento — que para `#chatToggle`/`#chatPanel` es justo al
+final del `<body>` en el HTML fuente, coincidiendo exactamente con el
+síntoma reportado.
+
+**Arreglo**: mover `overflow-x:hidden` de `body` a `html` en ambos
+archivos (`index.html` y `seguridad.html`) — sigue sin haber scroll
+horizontal, pero ya no rompe `position:fixed` en el body. **Si se agrega
+overflow (de cualquier tipo) a `body` en el futuro, revisar primero que no
+rompa el chat ni el `nav`** (ambos son `position:fixed`, hijos directos de
+`body`) — el fix correcto casi siempre es ponerlo en `html`, no en `body`.
+No se pudo reproducir visualmente en el navegador de pruebas (Chromium no
+tiene este bug de WebKit), así que quedó pendiente que el usuario confirme
+en su celular real tras el deploy.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
