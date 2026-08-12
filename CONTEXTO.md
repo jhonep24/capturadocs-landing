@@ -400,6 +400,17 @@ No se pudo reproducir visualmente en el navegador de pruebas (Chromium no
 tiene este bug de WebKit), así que quedó pendiente que el usuario confirme
 en su celular real tras el deploy.
 
+**Segundo hallazgo, este sí visible y reproducido con capturas**: la fila
+de links del footer (`<div style="display:flex;gap:20px">`, el bloque con
+correo/WhatsApp/"Cómo protegemos tus datos"/Términos) no tenía
+`flex-wrap`. Con 4 links ahí (creció a 4 cuando se agregó "Cómo protegemos
+tus datos" el 2026-08-11), en pantallas angostas el texto se salía del
+viewport por la derecha y quedaba cortado — eso era lo que se veía "mal al
+final". Arreglado agregando `flex-wrap:wrap;justify-content:center` a ese
+div (mismo fix en `index.html` y `seguridad.html`), verificado con
+`getBoundingClientRect()` en 375px de ancho: el link más largo ahora
+termina en 310px, dentro del viewport.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
