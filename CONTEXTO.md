@@ -173,12 +173,24 @@ pública:
 POST https://pwabuilder-windows-docker.azurewebsites.net/msix/generatezip
 Content-Type: application/json
 
-{"url":"https://capturadocs-app.capturadocs.workers.dev/","packageId":"CapturaDocs.CapturaDocsExpress","name":"CapturaDocs Express","version":"1.6.0.0","allowSigning":false,"generateModernPackage":true,"publisher":{"displayName":"CapturaDocs","commonName":"CN=3a54a224-05dd-42aa-85bd-3f3c1478fdca"}}
+{"url":"https://capturadocs-app.capturadocs.workers.dev/?origen=win-instalado","packageId":"CapturaDocs.CapturaDocsExpress","name":"CapturaDocs Express","version":"1.6.0.0","allowSigning":false,"generateModernPackage":true,"publisher":{"displayName":"CapturaDocs","commonName":"CN=3a54a224-05dd-42aa-85bd-3f3c1478fdca"}}
 ```
 Devuelve un `.zip` con `*.sideload.msix` + `install.ps1` + `utils/pwainstaller.exe`
 — ese `.zip` completo es el que se sube al release, no solo el `.msix` suelto
 (el usuario final necesita `install.ps1` para que el certificado de prueba se
 instale junto con el paquete).
+
+**El `?origen=win-instalado` en la URL es obligatorio si el gate de
+`informes-ponal/worker-gate.js` está activo** (`GATE_ACTIVO=true`): esa marca
+es lo único que distingue al instalador oficial de alguien abriendo la URL
+directo en el navegador de una PC — sin ella, el `.msix` recién instalado
+mostraría la página de bloqueo en vez de la app real. Los instaladores viejos
+que ya se hayan usado con éxito siguen funcionando aunque no la tengan
+(el service worker ya cacheó todo localmente y no vuelve a pasar por este
+Worker para lo que ya tiene en caché), pero cualquier instalación nueva o
+reinstalación necesita la URL con la marca. Ver el comentario de
+`worker-gate.js` para el detalle completo (cookie que siembra en la primera
+petición para que el resto del bundle también pase el gate).
 
 **Publicar**: subir los dos archivos (`CapturaDocs-Express-Android.apk`,
 `CapturaDocs-Express-Windows.zip`) como assets de un nuevo GitHub Release en
