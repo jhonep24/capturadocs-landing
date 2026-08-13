@@ -192,6 +192,17 @@ reinstalación necesita la URL con la marca. Ver el comentario de
 `worker-gate.js` para el detalle completo (cookie que siembra en la primera
 petición para que el resto del bundle también pase el gate).
 
+**Si al llamar a la API de PWABuilder falla con `500` al generar los íconos
+(2026-08-13)**: no es un problema de PWABuilder — es el gate bloqueando sus
+peticiones. PWABuilder lee `manifest.webmanifest` y los íconos que declara
+(`pwa-192.png`, `pwa-512.png`, `pwa-maskable-512.png`) con peticiones sueltas
+del lado del servidor, sin cookie ni el marcador `?origen=...`, así que el
+gate se las bloquea igual que a cualquier visitante sin marca. Esas rutas ya
+están en `RUTAS_SIEMPRE_PERMITIDAS` de `worker-gate.js` (junto a `/logo.png`,
+`/favicon.ico`, `/apple-touch-icon.png`) — si se agregan íconos nuevos al
+manifest, hay que sumarlos ahí también o la regeneración del instalador
+vuelve a fallar en silencio.
+
 **Publicar**: subir los dos archivos (`CapturaDocs-Express-Android.apk`,
 `CapturaDocs-Express-Windows.zip`) como assets de un nuevo GitHub Release en
 **`capturadocs-landing`** (repo público) — nunca en `informes-ponal` (privado,
