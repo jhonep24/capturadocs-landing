@@ -203,15 +203,37 @@ están en `RUTAS_SIEMPRE_PERMITIDAS` de `worker-gate.js` (junto a `/logo.png`,
 manifest, hay que sumarlos ahí también o la regeneración del instalador
 vuelve a fallar en silencio.
 
-**Publicar**: subir los dos archivos (`CapturaDocs-Express-Android.apk`,
-`CapturaDocs-Express-Windows.zip`) como assets de un nuevo GitHub Release en
+**Windows — `.exe` de Electron (desde 2026-08-14, vía principal ahora)**: el
+`.msix` de arriba necesita el sistema de paquetes AppX de Windows, ausente en
+versiones "Lite" recortadas — ahí la instalación fallaba con un crash de
+`pwainstaller.exe` sin importar el certificado. La alternativa es empaquetar
+la app con Electron (código en `informes-ponal/electron/main.cjs` +
+`package.json` sección `"build"`): un instalador NSIS normal, autocontenido
+con su propio Chromium, que no depende de AppX en absoluto.
+```bash
+cd informes-ponal
+npm run electron:build   # vite build && electron-builder --win
+```
+Genera `dist-electron/CapturaDocs Express Setup <version>.exe` (~111 MB, sin
+firmar — no hay certificado de código pagado, así que Windows muestra el
+aviso estándar de SmartScreen, pero a diferencia del `.msix` la instalación
+en sí siempre funciona). El ID de dispositivo depende de que Electron sirva
+la app siempre en el mismo puerto local (`PORT = 47821` en `main.cjs`) — si
+alguna vez se cambia ese puerto, todos los usuarios pierden su deviceId al
+actualizar (ver `informes-ponal/README_TECNICO.md`, Error 36).
+
+**Publicar**: subir el `.apk` y el instalador de Windows (hoy el `.exe`, antes
+el `.zip` del `.msix`) como assets de un nuevo GitHub Release en
 **`capturadocs-landing`** (repo público) — nunca en `informes-ponal` (privado,
 los links públicos dan 404 aunque el asset se suba bien, ver Falla más abajo).
 `gh release create <tag> archivo1 archivo2 --repo jhonep24/capturadocs-landing`.
 Los links de la landing usan `releases/latest/download/<nombre-exacto>`, así
 que basta con que el nuevo release quede marcado "Latest" (por defecto, el más
-reciente) — no hace falta tocar `index.html` de nuevo si los nombres de
-archivo no cambian.
+reciente) — pero si el nombre del archivo cambia (ej. de `.zip` a `.exe`, como
+pasó el 2026-08-14 con la release `v1.6.10-windows-exe`), sí hay que actualizar
+el `href` en `index.html` (sección `#descargas`) al nombre nuevo. GitHub
+reemplaza espacios del nombre de archivo por puntos en la URL de descarga
+real (`CapturaDocs Express Setup 1.6.10.exe` → `CapturaDocs.Express.Setup.1.6.10.exe`).
 
 ## Verificación del número de WhatsApp (`check_wa_number.py`)
 
