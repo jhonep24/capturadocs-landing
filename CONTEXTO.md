@@ -20,10 +20,11 @@ prefijados `[capturadocs-landing]`) — detalle en `../homelab/CONTEXTO.md`.
 ## Qué es este repo
 
 Landing estática (sin build, sin frameworks) para **CapturaDocs Express**,
-la app de informes de captura de `informes-ponal`. Dos páginas HTML:
+la app de informes de captura de `informes-ponal`. Tres páginas HTML:
 `index.html` (la landing principal, con toda la lógica de precios/chat/
-config-publica) y `seguridad.html` (agregada 2026-08-11, ver punto 14 más
-abajo — página estática simple, sin JS propio salvo el link de WhatsApp).
+config-publica), `seguridad.html` (agregada 2026-08-11, ver punto 14 más
+abajo) y `guia.html` (agregada 2026-08-11, ver punto 15) — las dos últimas
+son páginas estáticas simples, sin JS propio salvo el link de WhatsApp.
 Se publica en GitHub Pages, con dominio propio:
 https://capturadocs.com/ (el link de GitHub sigue funcionando como alias:
 https://jhonep24.github.io/capturadocs-landing/). El dominio se compró en
@@ -100,6 +101,30 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 14. `seguridad.html` (página nueva, 2026-08-11) — "Arquitectura de privacidad": reemplaza la promesa genérica "100% privado" por un diagrama HTML/CSS de dos columnas (`.dcol.local` / `.dcol.remote`, sin librerías externas) que muestra qué se queda 100% en el dispositivo (datos del procedimiento, generación de documentos, borradores) vs. qué sí llega a la infraestructura propia y por qué (ID de dispositivo + licencia, pedidos/comprobantes/contacto, texto anonimizado para la IA). 3 tarjetas de preguntas puntuales debajo (qué hace la IA, qué usa el sistema de licencias, quién más ve los datos de pedido). No tiene su propio `<script>` de negocio — copia solo el CSS necesario del sistema de diseño (no todo el `<style>` de `index.html`) más el snippet de `WA_NUMBER` para el link de WhatsApp del footer. Enlazada desde: nav de `index.html` no (para no saturarlo), sí desde la respuesta de la FAQ "¿Qué pasa con los datos de mis capturados?" y desde el footer ("Cómo protegemos tus datos"). El botón "Leer la Política de Privacidad →" de `seguridad.html` apunta a `index.html#privacidad`, que dispara un pequeño bloque de JS en `index.html` (justo después del listener de teclado del modal) que abre el modal directo en la pestaña Privacidad si `location.hash === '#privacidad'` — así el texto legal completo sigue viviendo en un solo lugar (el modal), sin duplicarlo en la página nueva. Agregada a `sitemap.xml`.
     - **Cuidado si se edita el diagrama**: debe reflejar EXACTAMENTE la distinción de "Categorías de datos" del punto 12 (2a datos del procedimiento vs. 2b datos de gestión de pedidos/contacto) — si se retoca uno, retocar el otro, para no volver a tener dos fuentes de verdad desalineadas (fue justo el problema que motivó el refuerzo de la política, ver "Transparencia legal" más abajo).
     - **Sección `.hashbox`** (agregada 2026-08-11), debajo de las 3 tarjetas de preguntas: aquí vive el hash SHA-256 del instalador de Windows (`#hash-win`), movido desde `#descargas` — ver nota del punto anterior de "Transparencia legal" sobre por qué se movió aquí en vez de quitarlo del todo.
+15. `guia.html` (página nueva, 2026-08-11) — "Guía de uso", pedida por el usuario:
+    instructivo paso a paso desde instalar hasta tener los 5 documentos generados.
+    6 secciones numeradas (`.gsec`, con índice rápido `.toc` arriba que enlaza a cada
+    una por ancla): instalar, primer uso/prueba gratis, activar licencia, diligenciar
+    un caso, dónde quedan los documentos descargados (distingue Windows —
+    `<a download>` a la carpeta Descargas del navegador— de Android —hoja de compartir
+    del sistema, código en `informes-ponal/src/descargar.js`—), y un bloque destacado
+    (`.gtrick`) con el truco pedido explícitamente por el usuario: abrir el
+    `rotulo_APELLIDO.docx` en Word → Exportar a PDF → Imprimir → escala 60% — para
+    que el rótulo (FPJ-7) quede lo bastante pequeño como para pegarlo en un celular
+    incautado. Todo el contenido (nombres de los 5 documentos, patrón de nombre de
+    archivo del rótulo, comportamiento de descarga por plataforma, flujo de registro
+    de correo en el primer uso) se verificó leyendo el código real de `informes-ponal`
+    (`PasoResumen.jsx`, `docx/fpj7.js`, `descargar.js`, `RegistroInicial.jsx`) antes de
+    escribirlo — no se redactó de memoria. Mismo patrón que `seguridad.html`: CSS
+    propio recortado (no todo el `<style>` de `index.html`), sin `<script>` de negocio.
+    Enlazada desde el footer de `index.html` ("Guía de uso"), desde la FAQ "¿Cómo
+    empiezo...?", y desde el propio footer de `guia.html`/`seguridad.html` entre sí.
+    Agregada a `sitemap.xml`.
+    - **Si se agrega Android/iPhone a descargas** (ver pendiente de reactivarlos):
+      actualizar la sección 1 de esta guía, que hoy dice que están deshabilitados.
+    - **Si cambia el patrón de nombre de archivo del rótulo** (`rotulo_APELLIDO.docx`
+      en `fpj7.js`) o el mecanismo de descarga en Android: actualizar la sección 5 y
+      el paso 1 del truco del rótulo (sección 6) para que sigan siendo exactos.
 
 **CTAs ya NO apuntan a WhatsApp por defecto** (cambiado 2026-08-08, pedido
 explícito: *"wsp va a ser el último lugar... no quiero incentivar el uso de

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guía de uso — CapturaDocs Express</title>
+  <meta name="description" content="Guía completa de CapturaDocs Express: cómo instalar, activar tu licencia, diligenciar un caso, generar los 5 documentos, dónde encontrarlos descargados, y cómo imprimir el rótulo en tamaño reducido para pegarlo en un celular."/>
+  <link rel="icon" type="image/png" href="logo.png"/>
+  <link rel="apple-touch-icon" href="logo.png"/>
+  <link rel="canonical" href="https://capturadocs.com/guia.html"/>
+  <meta name="theme-color" content="#070f1f"/>
+  <meta name="robots" content="index,follow"/>
+
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Guía de uso — CapturaDocs Express"/>
+  <meta property="og:description" content="Paso a paso: instalar, activar, diligenciar un caso, generar los documentos y dónde encontrarlos — incluye el truco para imprimir el rótulo en tamaño reducido."/>
+  <meta property="og:url" content="https://capturadocs.com/guia.html"/>
+  <meta property="og:image" content="https://capturadocs.com/logo-og.jpg"/>
+  <meta property="og:locale" content="es_CO"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Barlow+Condensed:wght@700;800&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root{--navy:#070f1f;--navy2:#0d1a2e;--navy3:#162035;--gold:#f0a500;--gold2:#cc8800;--accent:#2e7fff;--green:#25d366;--white:#f0f4ff;--muted:#7a8aaa;--border:#1e3050}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{background:var(--navy);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(7,15,31,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .nav-icon{width:36px;height:36px;border-radius:8px;display:block}
+    .nav-text{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.15rem;color:var(--white);letter-spacing:1px}
+    .nav-text span{color:var(--gold)}
+    .nav-cta{background:var(--green);color:#fff;padding:9px 22px;border-radius:8px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;transition:opacity .2s}
+    .nav-cta:hover{opacity:.85}
+    .nav-links{display:flex;align-items:center;gap:24px}
+    .nav-link{color:var(--muted);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.9rem;transition:color .2s}
+    .nav-link:hover{color:var(--white)}
+    section{position:relative;z-index:1}
+    .container{max-width:1000px;margin:0 auto;padding:0 24px}
+    .stag{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+    .stitle{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin-bottom:16px}
+    .ssub{color:var(--muted);font-size:1.05rem;max-width:640px;line-height:1.6}
+    .sec-hero{padding:150px 0 60px;text-align:center}
+    .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,165,0,.1);border:1px solid rgba(240,165,0,.3);border-radius:100px;padding:6px 16px;font-size:.78rem;color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+    .btn-p{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:14px 32px;border-radius:10px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;box-shadow:0 4px 24px rgba(240,165,0,.3);transition:transform .2s,box-shadow .2s;display:inline-block}
+    .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(240,165,0,.4)}
+    .btn-s{background:rgba(46,127,255,.1);border:1px solid rgba(46,127,255,.3);color:var(--accent);padding:14px 32px;border-radius:10px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem;transition:background .2s;display:inline-block}
+    .btn-s:hover{background:rgba(46,127,255,.18)}
+
+    /* Índice rápido */
+    .toc{padding:0 0 40px}
+    .toc-box{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:20px 24px;display:flex;flex-wrap:wrap;gap:10px}
+    .toc-link{color:var(--muted);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.85rem;background:var(--navy);border:1px solid var(--border);border-radius:20px;padding:6px 14px;transition:color .2s,border-color .2s}
+    .toc-link:hover{color:var(--gold);border-color:rgba(240,165,0,.4)}
+
+    /* Pasos numerados */
+    .gsec{padding:36px 0}
+    .gsec-hdr{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+    .gnum{flex-shrink:0;width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.15rem}
+    .gsec-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem}
+    .gcard{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:22px 24px;margin-bottom:12px}
+    .gcard h4{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.98rem;margin-bottom:6px;color:var(--white)}
+    .gcard p{color:var(--muted);font-size:.9rem;line-height:1.65}
+    .gcard p+p{margin-top:8px}
+    .gcard code{background:var(--navy);border-radius:4px;padding:1px 6px;font-size:.85em;color:var(--gold)}
+    .glist{list-style:none;display:flex;flex-direction:column;gap:10px;margin:6px 0}
+    .glist li{color:var(--muted);font-size:.9rem;line-height:1.6;padding-left:26px;position:relative}
+    .glist li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:700}
+    .gwarn{background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:10px;padding:14px 18px;color:var(--muted);font-size:.88rem;line-height:1.6;margin-top:10px}
+    .gwarn strong{color:var(--gold)}
+
+    /* Truco del rótulo — destacado */
+    .gtrick{background:linear-gradient(155deg,var(--navy3),var(--navy2));border:1px solid rgba(240,165,0,.4);border-radius:18px;padding:30px 28px;box-shadow:0 8px 30px rgba(240,165,0,.08)}
+    .gtrick-steps{counter-reset:trick;display:flex;flex-direction:column;gap:14px;margin-top:18px}
+    .gtrick-step{counter-increment:trick;display:flex;gap:14px;align-items:flex-start}
+    .gtrick-step::before{content:counter(trick);flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(240,165,0,.15);border:1px solid rgba(240,165,0,.4);color:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.85rem}
+    .gtrick-step div{color:var(--white);font-size:.92rem;line-height:1.6;padding-top:3px}
+    .gtrick-step div span{color:var(--muted);display:block;font-size:.85rem;margin-top:2px}
+
+    footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.82rem}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--white)}
+    @media(max-width:600px){nav{padding:14px 20px}footer{flex-direction:column;text-align:center}}
+  </style>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b1c89c7467ba41fbb947cce3577347db"}'></script>
+  <!-- End Cloudflare Web Analytics -->
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img class="nav-icon" src="logo.png" alt="CapturaDocs Express" width="36" height="36"/>
+    <div class="nav-text">Captura<span>Docs</span> Express</div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">← Volver al inicio</a>
+    <a href="index.html#descargas" class="nav-cta">Obtener acceso</a>
+  </div>
+</nav>
+
+<section class="sec-hero">
+  <div class="container">
+    <div class="badge">📖 Guía de uso</div>
+    <h1 class="stitle" style="max-width:760px;margin:0 auto 16px">De instalar la app a tener tus 5 documentos listos.</h1>
+    <p class="ssub" style="margin:0 auto">Paso a paso: instalación, primer uso, activación de licencia, cómo diligenciar un caso, dónde quedan tus documentos descargados, y el truco para imprimir el rótulo en tamaño reducido.</p>
+  </div>
+</section>
+
+<section class="toc">
+  <div class="container">
+    <div class="toc-box">
+      <a class="toc-link" href="#instalar">1. Instalar</a>
+      <a class="toc-link" href="#primer-uso">2. Primer uso y prueba gratis</a>
+      <a class="toc-link" href="#activar">3. Activar tu licencia</a>
+      <a class="toc-link" href="#diligenciar">4. Diligenciar un caso</a>
+      <a class="toc-link" href="#documentos">5. Dónde quedan tus documentos</a>
+      <a class="toc-link" href="#rotulo">6. Imprimir el rótulo en pequeño</a>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="instalar">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">1</div><h2 class="gsec-title">Instalar CapturaDocs Express</h2></div>
+    <div class="gcard">
+      <h4>💻 Windows</h4>
+      <p>Descarga el instalador desde <a href="index.html#descargas" style="color:var(--gold)">capturadocs.com/#descargas</a>, descomprime el <code>.zip</code> y ejecútalo. No necesitas instalar nada más — es una app de escritorio lista para usar.</p>
+    </div>
+    <div class="gcard">
+      <h4>📱 Android e iPhone</h4>
+      <p>Están temporalmente deshabilitados mientras se termina de preparar la publicación — de momento solo Windows está activo. Cuando estén listos, aparecerán habilitados en la misma sección de descargas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="primer-uso">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">2</div><h2 class="gsec-title">Primer uso y prueba gratis</h2></div>
+    <div class="gcard">
+      <p>La primera vez que abres la app te pide registrar tu correo (dos veces, para evitar errores de tipeo). Ese correo se usa <strong>únicamente</strong> para tu licencia y soporte — no tiene nada que ver con los datos de tus casos, que siguen siendo 100% locales.</p>
+      <p>Si tienes un <strong>código de referido</strong>, este es el momento de ingresarlo — así tu compañero y tú ganan días extra cuando actives tu primera licencia (ver detalle en la sección "Programa de referidos" de la página principal).</p>
+      <ul class="glist">
+        <li>5 casos gratis, sin necesidad de tarjeta ni pago</li>
+        <li>Una prueba por dispositivo</li>
+        <li>Acceso completo a la generación de documentos (sin la mejora de redacción con IA, exclusiva de las licencias pagas)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="activar">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">3</div><h2 class="gsec-title">Activar tu licencia</h2></div>
+    <div class="gcard">
+      <p>Cuando se acaben tus 5 casos gratis, o si ya quieres pasar directo a un plan pago:</p>
+      <ul class="glist">
+        <li>Abre el ícono 🎁 dentro de la app — ahí ves tu <strong>ID de dispositivo</strong> único</li>
+        <li>Escríbenos por el chat de esta página (botón 💬 abajo a la derecha) o por WhatsApp, indicando tu ID y el plan que quieres</li>
+        <li>Realiza el pago por Nequi o Llave</li>
+        <li>Recibes tu clave de activación — la ingresas en la app y queda activa al instante</li>
+      </ul>
+      <div class="gwarn"><strong>¿Cambiaste de celular o computador?</strong> Escríbenos por WhatsApp y te reasignamos tu licencia existente al nuevo dispositivo sin costo — no necesitas comprar una licencia nueva.</div>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="diligenciar">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">4</div><h2 class="gsec-title">Diligenciar un caso y generar los documentos</h2></div>
+    <div class="gcard">
+      <p>El formulario está dividido en pasos (Encabezado, Capturados, Víctimas, Testigos, Elementos incautados/Vehículos, Hechos) — vas avanzando por el menú de la izquierda. Lo que escribes una vez se reutiliza automáticamente en todos los documentos, sin que tengas que repetirlo.</p>
+      <p>En el último paso ("Resumen") encuentras el botón para generar cada uno de los <strong>5 documentos</strong>:</p>
+      <ul class="glist">
+        <li><strong>FPJ-5</strong> — Informe de Captura en Flagrancia</li>
+        <li><strong>FPJ-6</strong> — Acta de Derechos del Capturado (una por capturado)</li>
+        <li><strong>FPJ-7</strong> — Rótulo (uno por elemento incautado y por vehículo)</li>
+        <li><strong>FPJ-8</strong> — Cadena de Custodia (uno por elemento incautado y por vehículo)</li>
+        <li><strong>Acta de Incautación</strong> — una por capturado con elementos incautados</li>
+      </ul>
+      <p>Antes de generar, revisa el resumen: los campos obligatorios que falten quedan marcados en rojo, y hay un recordatorio permanente para verificar dos veces la fecha de captura y la fecha del fiscal.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="documentos">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">5</div><h2 class="gsec-title">Dónde quedan tus documentos descargados</h2></div>
+    <div class="gcard">
+      <h4>💻 En Windows (o cualquier navegador)</h4>
+      <p>Cada documento se descarga como un archivo <code>.docx</code> (editable en Word) directo a la carpeta <strong>Descargas</strong> de tu computador — la misma donde caen todas tus descargas normales del navegador. El rótulo, por ejemplo, se llama <code>rotulo_APELLIDO.docx</code>.</p>
+      <h4 style="margin-top:14px">📱 En la app de Android (cuando esté disponible)</h4>
+      <p>Como los celulares no siempre tienen una carpeta de "Descargas" accesible igual que un computador, ahí no se descarga directo: se abre la <strong>hoja de compartir</strong> de tu celular (el mismo menú que usas para compartir por WhatsApp) para que elijas dónde guardarlo — WhatsApp, Drive, Archivos, correo, o la app que prefieras.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="rotulo">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">6</div><h2 class="gsec-title">Truco: imprimir el rótulo en tamaño reducido</h2></div>
+    <div class="gtrick">
+      <p style="color:var(--muted);font-size:.92rem;line-height:1.6">El rótulo (FPJ-7) se genera en tamaño de hoja normal, pero para pegarlo sobre un elemento pequeño — como un celular incautado — conviene imprimirlo reducido. Así es como lo estamos haciendo mientras no existe un tamaño reducido dentro de la propia app:</p>
+      <div class="gtrick-steps">
+        <div class="gtrick-step"><div>Abre el archivo <code>rotulo_APELLIDO.docx</code> que descargaste, en Word.<span>Lo encuentras en tu carpeta de Descargas — ver sección 5 arriba.</span></div></div>
+        <div class="gtrick-step"><div>En Word, ve a <strong>Archivo → Exportar</strong> (o "Guardar como") y elige <strong>Crear PDF/XPS</strong>.<span>Esto convierte el rótulo a un archivo PDF, que es el que vas a imprimir.</span></div></div>
+        <div class="gtrick-step"><div>Abre ese PDF y dale <strong>Imprimir</strong>.<span>Se abre el cuadro de diálogo de impresión de tu computador.</span></div></div>
+        <div class="gtrick-step"><div>Busca la opción de <strong>tamaño o escala de impresión</strong> y ponla en <strong>60%</strong> (personalizado), en vez de "Tamaño real" o "Ajustar a la página".<span>El nombre exacto de esta opción varía según tu impresora/visor de PDF — normalmente dice "Escala", "Tamaño personalizado" o "Reducir/Ampliar a".</span></div></div>
+        <div class="gtrick-step"><div>Imprime.<span>El rótulo sale mucho más pequeño, del tamaño justo para pegarlo fácilmente sobre un celular u otro elemento incautado pequeño.</span></div></div>
+      </div>
+      <div class="gwarn" style="margin-top:18px"><strong>Nota:</strong> el 60% es el tamaño que hoy nos ha funcionado bien para un celular — si el elemento incautado es más grande o más pequeño, puedes ajustar ese porcentaje a tu necesidad.</div>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" style="text-align:center;padding:50px 0 90px">
+  <div class="container">
+    <p style="color:var(--muted);font-size:.92rem;margin-bottom:18px">¿Te quedó alguna duda que no cubre esta guía?</p>
+    <a href="index.html#preguntas" class="btn-s" style="margin-right:12px">Ver preguntas frecuentes</a>
+    <a href="index.html#descargas" class="btn-p">Ir a descargas</a>
+  </div>
+</section>
+
+<footer>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;color:var(--white)">🛡️ CapturaDocs<span style="color:var(--gold)"> Express</span></div>
+    <div>Herramienta privada de apoyo — No oficial</div>
+    <div>© 2026 CapturaDocs Express. Todos los derechos reservados.</div>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px">
+    <a href="mailto:contacto@capturadocs.com">contacto@capturadocs.com</a>
+    <a class="wa-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="seguridad.html">Cómo protegemos tus datos</a>
+    <a href="index.html#privacidad">Términos y condiciones</a>
+  </div>
+</footer>
+
+<script>
+  const WA_NUMBER = '573503593635';
+  document.querySelectorAll('a.wa-link').forEach(el => el.href = 'https://wa.me/' + WA_NUMBER);
+</script>
+
+</body>
+</html>
