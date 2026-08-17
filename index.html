@@ -1048,6 +1048,9 @@
         html += `<span style="color:#b33">Código de referido: ${escapeHtml(data.referidoError)}</span><br>`;
       }
       html += `Con esto tu licencia quedaría activa <b>${data.diasTotal} días</b> en total, por <b>$${Number(data.precio).toLocaleString('es-CO')} COP</b>.`;
+      if (data.nequi) {
+        html += `<br><br>Transfiere por <b>Nequi</b> a <b>${escapeHtml(data.nequi)}</b> (o por llave <b>Bre-B</b> a ese mismo número) y cuando pagues sube el pantallazo del comprobante abajo.`;
+      }
       el.innerHTML = html;
       const pagarBtn = document.createElement('button');
       pagarBtn.className = 'chat-btn';
