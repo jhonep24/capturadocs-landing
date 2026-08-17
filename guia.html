@@ -71,6 +71,18 @@
     .gwarn{background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:10px;padding:14px 18px;color:var(--muted);font-size:.88rem;line-height:1.6;margin-top:10px}
     .gwarn strong{color:var(--gold)}
 
+    /* Acordeón de problemas comunes */
+    .gaccord{display:flex;flex-direction:column;gap:12px}
+    .gitem{background:var(--navy2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .gitem[open]{border-color:rgba(240,165,0,.35)}
+    .gitem summary{list-style:none;cursor:pointer;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;color:var(--white)}
+    .gitem summary::-webkit-details-marker{display:none}
+    .gplus{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(240,165,0,.12);border:1px solid rgba(240,165,0,.3);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:transform .25s}
+    .gitem[open] .gplus{transform:rotate(45deg)}
+    .gitem .ga{padding:0 22px 18px;color:var(--muted);font-size:.88rem;line-height:1.65}
+    .gitem .ga strong{color:var(--white)}
+    .gitem .ga code{background:var(--navy);border-radius:4px;padding:1px 6px;font-size:.85em;color:var(--gold)}
+
     /* Truco del rótulo — destacado */
     .gtrick{background:linear-gradient(155deg,var(--navy3),var(--navy2));border:1px solid rgba(240,165,0,.4);border-radius:18px;padding:30px 28px;box-shadow:0 8px 30px rgba(240,165,0,.08)}
     .gtrick-steps{counter-reset:trick;display:flex;flex-direction:column;gap:14px;margin-top:18px}
@@ -119,6 +131,7 @@
       <a class="toc-link" href="#diligenciar">4. Diligenciar un caso</a>
       <a class="toc-link" href="#documentos">5. Dónde quedan tus documentos</a>
       <a class="toc-link" href="#rotulo">6. Imprimir el rótulo en pequeño</a>
+      <a class="toc-link" href="#problemas">Problemas comunes</a>
     </div>
   </div>
 </section>
@@ -214,6 +227,38 @@
         <div class="gtrick-step"><div>Imprime.<span>El rótulo sale mucho más pequeño, del tamaño justo para pegarlo fácilmente sobre un celular u otro elemento incautado pequeño.</span></div></div>
       </div>
       <div class="gwarn" style="margin-top:18px"><strong>Nota:</strong> el 60% es el tamaño que hoy nos ha funcionado bien para un celular — si el elemento incautado es más grande o más pequeño, puedes ajustar ese porcentaje a tu necesidad.</div>
+    </div>
+  </div>
+</section>
+
+<section class="gsec" id="problemas">
+  <div class="container">
+    <div class="gsec-hdr"><div class="gnum">?</div><h2 class="gsec-title">Problemas comunes</h2></div>
+    <div class="gaccord">
+      <details class="gitem">
+        <summary>No tengo Word instalado, ¿cómo exporto el rótulo a PDF?<span class="gplus">+</span></summary>
+        <div class="ga">Puedes usar <strong>Google Docs</strong> (subes el <code>.docx</code> a Google Drive, lo abres, y en Archivo → Descargar eliges PDF) o <strong>LibreOffice Writer</strong> (gratis), que también tiene la opción Archivo → Exportar como PDF. El resultado es el mismo: un PDF listo para imprimir en 60%.</div>
+      </details>
+      <details class="gitem">
+        <summary>No me aparece el botón "Abrir carpeta CapturaDocs" en el Resumen<span class="gplus">+</span></summary>
+        <div class="ga">Ese botón solo aparece si tienes <strong>el programa instalado en Windows</strong> (la app de escritorio). Si en cambio estás usando CapturaDocs Express dentro de un navegador sin instalarlo, en ese lugar ves un texto que dice "tus documentos se guardan en tu carpeta de Descargas de Windows" — busca ahí en vez de en <code>Documentos\CapturaDocs</code>.</div>
+      </details>
+      <details class="gitem">
+        <summary>No encuentro la carpeta Documentos\CapturaDocs<span class="gplus">+</span></summary>
+        <div class="ga">Esa carpeta se crea automáticamente la <strong>primera vez que generas un documento</strong>, no antes ni al instalar la app. Si nunca has generado ninguno todavía, es normal que no exista aún — genera tu primer documento y vuelve a buscarla, o usa directamente el botón "Abrir carpeta CapturaDocs" del paso Resumen.</div>
+      </details>
+      <details class="gitem">
+        <summary>El rótulo no me sale del tamaño esperado al imprimir<span class="gplus">+</span></summary>
+        <div class="ga">Revisa que la impresión NO esté en "Ajustar a la página" (eso ignora tu escala y lo deja al tamaño de la hoja) — debe estar en <strong>escala/tamaño personalizado, 60%</strong>. Si tienes dudas, imprime primero una vez a tamaño real (100%) para confirmar que el documento en sí está bien, y luego repite el proceso cambiando solo la escala.</div>
+      </details>
+      <details class="gitem">
+        <summary>Generé el mismo documento dos veces por error, ¿se sobrescribió?<span class="gplus">+</span></summary>
+        <div class="ga">No — nunca se sobrescribe nada. Si el nombre ya existía, el nuevo archivo se guarda como <code>nombre (1).docx</code>, <code>nombre (2).docx</code>, etc. Revisa tu carpeta si no encuentras la versión que esperabas, puede que sea la que tiene el número al final.</div>
+      </details>
+      <details class="gitem">
+        <summary>Se cerró la app o se fue la luz mientras diligenciaba un caso, ¿perdí todo?<span class="gplus">+</span></summary>
+        <div class="ga">No. Tu caso se va guardando automáticamente mientras lo diligencias, así que no pierdes tu avance si se corta la conexión, cierras la app por error o se apaga el equipo — al volver a abrir, sigues donde ibas.</div>
+      </details>
     </div>
   </div>
 </section>

@@ -119,6 +119,23 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
     - **Si cambia el patrón de nombre de archivo del rótulo** (`rotulo_APELLIDO.docx`
       en `fpj7.js`) o el mecanismo de descarga en Android: actualizar la sección 5 y
       el paso 1 del truco del rótulo (sección 6) para que sigan siendo exactos.
+    - **Sección "Problemas comunes"** (`#problemas`, agregada 2026-08-11): acordeón
+      `.gaccord`/`.gitem` (mismo patrón visual que `.faccord`/`.fitem` de la FAQ en
+      `index.html`, pero con su propia clase para no depender de ese `<style>`) con 6
+      preguntas — sin Word instalado, no aparece el botón "Abrir carpeta", no existe
+      la carpeta `Documentos\CapturaDocs` todavía, el rótulo no sale del tamaño
+      esperado, duplicados `(1)`/`(2)`, y el autoguardado del caso. Pedida por el
+      usuario como mejora barata (sin capturas) mientras se preparan las capturas de
+      pantalla reales de los pasos 3/4/6 — ver pendiente de capturas más abajo.
+    - **Pendiente: capturas de pantalla reales**, pedidas al usuario (mientras las
+      toma, se avanzó con la sección de arriba): `guia-registro.png` (pantalla de
+      registro de correo), `guia-deviceid.png` (ícono 🎁 con el ID de dispositivo),
+      `guia-resumen.png` (paso Resumen con los 5 botones + "Abrir carpeta
+      CapturaDocs"), `guia-explorador.png` (Explorador de Windows en
+      `Documentos\CapturaDocs`), `guia-word-exportar.png` (Word, Archivo → Exportar →
+      Crear PDF/XPS) y `guia-imprimir-escala.png` (diálogo de impresión con la escala
+      en 60%). Van sin datos reales de casos, solo datos de prueba. Cuando lleguen,
+      insertarlas junto al paso correspondiente de cada sección.
 
 **CTAs ya NO apuntan a WhatsApp por defecto** (cambiado 2026-08-08, pedido
 explícito: *"wsp va a ser el último lugar... no quiero incentivar el uso de
