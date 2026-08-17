@@ -105,17 +105,11 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
     instructivo paso a paso desde instalar hasta tener los 5 documentos generados.
     6 secciones numeradas (`.gsec`, con índice rápido `.toc` arriba que enlaza a cada
     una por ancla): instalar, primer uso/prueba gratis, activar licencia, diligenciar
-    un caso, dónde quedan los documentos descargados (distingue Windows —
-    `<a download>` a la carpeta Descargas del navegador— de Android —hoja de compartir
-    del sistema, código en `informes-ponal/src/descargar.js`—), y un bloque destacado
+    un caso, dónde quedan los documentos descargados, y un bloque destacado
     (`.gtrick`) con el truco pedido explícitamente por el usuario: abrir el
     `rotulo_APELLIDO.docx` en Word → Exportar a PDF → Imprimir → escala 60% — para
     que el rótulo (FPJ-7) quede lo bastante pequeño como para pegarlo en un celular
-    incautado. Todo el contenido (nombres de los 5 documentos, patrón de nombre de
-    archivo del rótulo, comportamiento de descarga por plataforma, flujo de registro
-    de correo en el primer uso) se verificó leyendo el código real de `informes-ponal`
-    (`PasoResumen.jsx`, `docx/fpj7.js`, `descargar.js`, `RegistroInicial.jsx`) antes de
-    escribirlo — no se redactó de memoria. Mismo patrón que `seguridad.html`: CSS
+    incautado. Mismo patrón que `seguridad.html`: CSS
     propio recortado (no todo el `<style>` de `index.html`), sin `<script>` de negocio.
     Enlazada desde el footer de `index.html` ("Guía de uso"), desde la FAQ "¿Cómo
     empiezo...?", y desde el propio footer de `guia.html`/`seguridad.html` entre sí.
@@ -480,6 +474,39 @@ final". Arreglado agregando `flex-wrap:wrap;justify-content:center` a ese
 div (mismo fix en `index.html` y `seguridad.html`), verificado con
 `getBoundingClientRect()` en 375px de ancho: el link más largo ahora
 termina en 310px, dentro del viewport.
+
+## Corrección: dónde guarda los documentos la app de Windows (2026-08-11)
+
+La primera versión de `guia.html` (sección 5, "Dónde quedan tus documentos")
+decía que en Windows los documentos caían en la carpeta **Descargas** del
+navegador. El usuario lo corrigió: **desde que la app de Windows es
+Electron (no una PWA en el navegador), todo se guarda automáticamente en
+`Documentos\CapturaDocs`** — carpeta que la propia app crea la primera vez.
+Verificado leyendo `informes-ponal/electron/main.cjs`:
+
+- `ventana.webContents.session.on("will-download", ...)` intercepta toda
+  descarga del renderer y la redirige con `item.setSavePath(...)` a
+  `carpetaCapturaDocs()` = `path.join(app.getPath("documents"), "CapturaDocs")`.
+  Nunca se pregunta "guardar como".
+- Si el nombre ya existe, `nombreDisponible()` agrega `(1)`, `(2)`... —
+  nunca sobrescribe.
+- Hay un botón dedicado **"Abrir carpeta CapturaDocs"** en el paso Resumen
+  (`PasoResumen.jsx`, visible solo si `window.electronAPI` existe) que abre
+  esa carpeta en el Explorador vía `ipcMain.handle("abrir-descargas", ...)`.
+
+**Esto NO aplica si alguien usa la app dentro de un navegador sin instalar
+el programa** (la opción "web, cualquier navegador" que también existe,
+ver `politica_licencias.md` — Negocio/Estación, por ejemplo, se activa solo
+en esa modalidad web) — ahí sí se comporta como una descarga normal, a la
+carpeta Descargas del navegador. El propio código de `PasoResumen.jsx`
+distingue los dos casos con `window.electronAPI ? <botón> : <texto que dice
+"tu carpeta de Descargas de Windows">`.
+
+**Si se vuelve a describir dónde se guardan los documentos, en cualquier
+doc**: la respuesta depende de si es la app instalada (Electron →
+`Documentos\CapturaDocs`) o la versión web en navegador (→ Descargas del
+navegador) — no asumir que ambas se comportan igual. Verificar contra
+`electron/main.cjs` y `PasoResumen.jsx`, no redactar de memoria.
 
 ## Cómo desplegar cambios
 
