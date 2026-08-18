@@ -10,6 +10,46 @@ estructura de secciones de la landing.
 
 ---
 
+## 2026-08-18 — Publicar el `.exe` nuevo: el hash de integridad llevaba rato mal
+
+### Qué se hizo
+
+Se subió al release `v1.6.10-windows-exe` el instalador recién compilado (arreglo
+de la numeración de derechos, ids de gráficos y el espacio del FPJ-6) con
+`gh release upload --clobber`. El nombre de archivo no cambió, así que el `href`
+de `#descargas` en `index.html` siguió sirviendo sin tocarlo. Se actualizó
+`#hash-win` en `seguridad.html` al SHA-256 del build nuevo
+(`5ce7b577…40b8bb1b`), **verificado descargando el archivo desde el link público
+real** (`releases/latest/download/...`), no desde la copia local — que es lo único
+que prueba que el usuario recibe exactamente lo que la página promete.
+
+### Problemas encontrados y cómo se resolvieron
+
+1. **El hash publicado estaba desactualizado, y las dos copias no coincidían entre
+   sí.** `seguridad.html` decía `c92261ff…` y `CONTEXTO.md` decía `6df2d48b…` —
+   distintos, y ninguno correspondía ya al `.exe` que se estaba descargando de la
+   landing. O sea que cualquiera que siguiera las instrucciones de verificación
+   habría concluido que el instalador estaba **alterado**. En una página que se
+   llama "Arquitectura de privacidad" eso es peor que no publicar hash.
+   **Arreglado de raíz**: el valor ahora vive solo en `seguridad.html` (la página
+   que lo publica) y `CONTEXTO.md` apunta ahí en vez de repetirlo. Duplicarlo no
+   daba respaldo, solo una segunda cosa que se desincroniza en silencio.
+
+2. **El comando de verificación citaba un archivo que ya no existe.** La nota decía
+   `certutil -hashfile CapturaDocs-Express-Windows.zip SHA256`, nombre heredado de
+   la época del `.msix` empaquetado en `.zip`. Desde el 2026-08-14 lo que se
+   descarga es `CapturaDocs.Express.Setup.1.6.10.exe`, así que el comando fallaba
+   con "no se encuentra el archivo". Corregido al nombre real (entre comillas: lleva
+   puntos y es largo).
+
+**Lección**: un dato que se publica para que el usuario *verifique* algo tiene que
+actualizarse en el mismo paso en que se publica lo verificado, o se vuelve activamente
+dañino — no queda "viejo pero inofensivo", queda **acusando de fraude a tu propio
+instalador**. Al republicar un binario: subir asset → recalcular hash desde el link
+público → actualizar la página, en ese orden y en la misma sesión.
+
+---
+
 ## 2026-08-11 (segunda parte) — Auditoría de consistencia landing ↔ app
 
 ### Qué se hizo

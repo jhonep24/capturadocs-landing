@@ -324,9 +324,14 @@ A raíz de feedback de una auditoría externa de IA sobre la landing, se agregó
   sección "Verificación de integridad del instalador (Windows)"), no al lado del botón
   de descarga pero sí visible públicamente, con instrucciones de cómo calcularlo
   (`certutil -hashfile ... SHA256`). Hay que recalcularlo a mano cada vez que se
-  publique un instalador nuevo (no hay automatización todavía) y actualizarlo en los
-  dos lugares que lo citan: aquí y `#hash-win` en `seguridad.html`:
-  - v1.6.10: `6df2d48bf78e5c8b6b7db48672d40b3c18a7d4c9b4a394e755789f58d3914f98`
+  publique un instalador nuevo (no hay automatización todavía).
+  **El valor vive en UN solo lugar: `#hash-win` en `seguridad.html`** — que es la
+  página que lo publica, así que es la única copia que puede estar equivocada de
+  cara al usuario. Antes también se repetía aquí, y el 2026-08-18 se descubrió que
+  las dos copias llevaban rato distintas (`6df2d48b…` aquí vs. `c92261ff…` en la
+  página) — ninguna de las dos correspondía ya al `.exe` publicado. Duplicar el hash
+  no daba respaldo, solo una segunda cosa que se desactualiza en silencio; para
+  saber el vigente, mirar `seguridad.html` o recalcularlo del release.
 - **Frase de privacidad reescrita** ("los datos de los procedimientos nunca salen del
   dispositivo...") en la FAQ, con la salvedad correcta de que la mejora de redacción con
   IA sí envía el texto de la narración (ya anonimizado) a un proveedor externo — para no
