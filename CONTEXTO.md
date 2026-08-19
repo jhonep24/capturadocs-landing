@@ -102,34 +102,44 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
     - **Cuidado si se edita el diagrama**: debe reflejar EXACTAMENTE la distinción de "Categorías de datos" del punto 12 (2a datos del procedimiento vs. 2b datos de gestión de pedidos/contacto) — si se retoca uno, retocar el otro, para no volver a tener dos fuentes de verdad desalineadas (fue justo el problema que motivó el refuerzo de la política, ver "Transparencia legal" más abajo).
     - **Sección `.hashbox`** (agregada 2026-08-11), debajo de las 3 tarjetas de preguntas: aquí vive el hash SHA-256 del instalador de Windows (`#hash-win`), movido desde `#descargas` — ver nota del punto anterior de "Transparencia legal" sobre por qué se movió aquí en vez de quitarlo del todo.
 15. `guia.html` (página nueva, 2026-08-11) — "Guía de uso", pedida por el usuario.
-    **Reestructurada el mismo día** siguiendo feedback de una auditoría externa de IA
-    (evaluado y priorizado con el usuario, que pidió solo el punto de reordenar en un
-    recorrido real — dejó fuera por ahora: caso de ejemplo ficticio completo y
-    separar en 3 niveles rápida/completa/SOS). Ahora son **9 secciones numeradas**
-    (`.gsec`, índice `.toc` arriba con ancla a cada una), en el orden real en que se
-    usa la app: **1** antes de empezar (qué necesitas, ¿necesito internet? — sí solo
-    para verificar/activar licencia, actualizaciones y la IA; no para diligenciar ni
-    generar), **2** primer ingreso (correo, referido, qué es el ID de dispositivo),
-    **3** crear un procedimiento (los 8 pasos reales del formulario — ver
-    `informes-ponal/src/modelos.js:STEPS` antes de listar nombres de memoria, no son
-    "Encabezado, Capturados..." nada más, también están Policías y Vehículos por
-    separado), **4** revisar antes de generar (campos rojos, fecha captura/fiscal, y
-    que el clic en un valor del Resumen navega directo al paso a corregir — ver
-    `onNavegar`/`onIrAlPaso` en `PasoResumen.jsx`), **5** generar los documentos
-    (los 5 documentos + dónde quedan según plataforma + el truco del rótulo anidado
-    aquí dentro como bloque `.gtrick`), **6** guardar y continuar (autoguardado local,
-    botón "Nuevo caso (limpiar todo)"), **7** la IA — qué hace y qué no (aviso
-    destacado de que nunca decide sola, solo sugiere; anonimización local; requiere
-    internet y licencia Mensual/Negocio), **8** activar tu licencia, **9** problemas
-    frecuentes (acordeón `.gaccord`/`.gitem`, 9 preguntas — se sumaron "¿dónde
-    encuentro mi ID?", "no puedo activar" y "la IA no funciona" a las 6 que ya había).
+    Recibió feedback de una auditoría externa de IA sugiriendo reordenar todo en 9
+    secciones tipo recorrido real; se probó esa versión pero **al usuario no le
+    gustó — pidió volver a la estructura original de 6 secciones + Problemas
+    comunes, complementada con el contenido bueno de la versión de 9** (no un
+    revert puro). Estructura final, **6 secciones numeradas** (`.gsec`, índice
+    `.toc` arriba) + Problemas comunes:
+    - **1 Instalar** — Windows / Android-iPhone (deshabilitados) + tarjeta nueva
+      "¿Necesito internet?" (no para diligenciar/generar; sí para
+      verificar/activar licencia, actualizaciones, y usar la IA).
+    - **2 Primer uso y prueba gratis** — correo, código de referido, 5 casos
+      gratis + línea nueva explicando qué es el ID de dispositivo + aviso nuevo
+      sobre la IA (nunca decide sola, solo sugiere; anonimización local).
+    - **3 Activar tu licencia** — sin cambios.
+    - **4 Diligenciar un caso y generar los documentos** — lista de pasos
+      corregida a los 8 reales (`informes-ponal/src/modelos.js:STEPS`: Encabezado,
+      Policías, Capturados, Víctimas, Testigos, Vehículos, Elementos Incautados,
+      Hechos — antes decía mal "Encabezado, Capturados... Elementos
+      incautados/Vehículos" como si fuera un solo paso), + frase nueva sobre que el
+      clic en un valor del Resumen navega directo al paso a corregir
+      (`onNavegar`/`onIrAlPaso` en `PasoResumen.jsx`), + tarjeta nueva "Checklist
+      antes de generar" (`.gcheck`, 7 puntos).
+    - **5 Dónde quedan tus documentos descargados** — sin cambios (Windows
+      instalado → `Documentos\CapturaDocs`; web → Descargas del navegador;
+      Android → hoja de compartir).
+    - **6 Truco: imprimir el rótulo en tamaño reducido** — paso 2 corregido de
+      "Archivo → Exportar → Crear PDF/XPS" a **"Archivo → Guardar como" → Tipo:
+      PDF**, para que coincida con la captura real que mandó el usuario.
+    - **Problemas comunes** — de 6 a **9 preguntas**: se sumaron "¿dónde encuentro
+      mi ID de dispositivo?", "no puedo activar mi licencia" y "la IA no aparece o
+      no funciona".
     Mismo patrón que `seguridad.html`: CSS propio recortado, sin `<script>` de
     negocio. Enlazada desde el footer de `index.html`, la FAQ "¿Cómo empiezo...?", y
     entre `guia.html`/`seguridad.html`. Agregada a `sitemap.xml`.
-    - **El truco del rótulo pasó de "Exportar → Crear PDF/XPS" a "Guardar como" →
-      Tipo PDF**: el usuario mandó una captura real de su flujo y usa "Guardar como",
-      no "Exportar" — se ajustó el texto para que coincida exactamente con lo que
-      va a ver en la imagen cuando se inserte.
+    - **Lección de esta ronda**: el usuario prefiere iteraciones incrementales
+      sobre una estructura ya aprobada, no una reescritura completa aunque el
+      contenido nuevo sea bueno — la próxima vez que se sugiera una reestructuración
+      grande (por auditoría externa o no), ofrecer agregar el contenido de valor
+      *dentro* de la estructura existente como primera opción, no reemplazarla.
     - **Si se agrega Android/iPhone a descargas**: actualizar la sección 1.
     - **Si cambia algo del formulario** (pasos, nombres, navegación de corrección) o
       del rótulo/carpeta de descargas: releer `modelos.js`, `PasoResumen.jsx`,
