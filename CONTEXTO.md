@@ -101,41 +101,52 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 14. `seguridad.html` (página nueva, 2026-08-11) — "Arquitectura de privacidad": reemplaza la promesa genérica "100% privado" por un diagrama HTML/CSS de dos columnas (`.dcol.local` / `.dcol.remote`, sin librerías externas) que muestra qué se queda 100% en el dispositivo (datos del procedimiento, generación de documentos, borradores) vs. qué sí llega a la infraestructura propia y por qué (ID de dispositivo + licencia, pedidos/comprobantes/contacto, texto anonimizado para la IA). 3 tarjetas de preguntas puntuales debajo (qué hace la IA, qué usa el sistema de licencias, quién más ve los datos de pedido). No tiene su propio `<script>` de negocio — copia solo el CSS necesario del sistema de diseño (no todo el `<style>` de `index.html`) más el snippet de `WA_NUMBER` para el link de WhatsApp del footer. Enlazada desde: nav de `index.html` no (para no saturarlo), sí desde la respuesta de la FAQ "¿Qué pasa con los datos de mis capturados?" y desde el footer ("Cómo protegemos tus datos"). El botón "Leer la Política de Privacidad →" de `seguridad.html` apunta a `index.html#privacidad`, que dispara un pequeño bloque de JS en `index.html` (justo después del listener de teclado del modal) que abre el modal directo en la pestaña Privacidad si `location.hash === '#privacidad'` — así el texto legal completo sigue viviendo en un solo lugar (el modal), sin duplicarlo en la página nueva. Agregada a `sitemap.xml`.
     - **Cuidado si se edita el diagrama**: debe reflejar EXACTAMENTE la distinción de "Categorías de datos" del punto 12 (2a datos del procedimiento vs. 2b datos de gestión de pedidos/contacto) — si se retoca uno, retocar el otro, para no volver a tener dos fuentes de verdad desalineadas (fue justo el problema que motivó el refuerzo de la política, ver "Transparencia legal" más abajo).
     - **Sección `.hashbox`** (agregada 2026-08-11), debajo de las 3 tarjetas de preguntas: aquí vive el hash SHA-256 del instalador de Windows (`#hash-win`), movido desde `#descargas` — ver nota del punto anterior de "Transparencia legal" sobre por qué se movió aquí en vez de quitarlo del todo.
-15. `guia.html` (página nueva, 2026-08-11) — "Guía de uso", pedida por el usuario:
-    instructivo paso a paso desde instalar hasta tener los 5 documentos generados.
-    6 secciones numeradas (`.gsec`, con índice rápido `.toc` arriba que enlaza a cada
-    una por ancla): instalar, primer uso/prueba gratis, activar licencia, diligenciar
-    un caso, dónde quedan los documentos descargados, y un bloque destacado
-    (`.gtrick`) con el truco pedido explícitamente por el usuario: abrir el
-    `rotulo_APELLIDO.docx` en Word → Exportar a PDF → Imprimir → escala 60% — para
-    que el rótulo (FPJ-7) quede lo bastante pequeño como para pegarlo en un celular
-    incautado. Mismo patrón que `seguridad.html`: CSS
-    propio recortado (no todo el `<style>` de `index.html`), sin `<script>` de negocio.
-    Enlazada desde el footer de `index.html` ("Guía de uso"), desde la FAQ "¿Cómo
-    empiezo...?", y desde el propio footer de `guia.html`/`seguridad.html` entre sí.
-    Agregada a `sitemap.xml`.
-    - **Si se agrega Android/iPhone a descargas** (ver pendiente de reactivarlos):
-      actualizar la sección 1 de esta guía, que hoy dice que están deshabilitados.
-    - **Si cambia el patrón de nombre de archivo del rótulo** (`rotulo_APELLIDO.docx`
-      en `fpj7.js`) o el mecanismo de descarga en Android: actualizar la sección 5 y
-      el paso 1 del truco del rótulo (sección 6) para que sigan siendo exactos.
-    - **Sección "Problemas comunes"** (`#problemas`, agregada 2026-08-11): acordeón
-      `.gaccord`/`.gitem` (mismo patrón visual que `.faccord`/`.fitem` de la FAQ en
-      `index.html`, pero con su propia clase para no depender de ese `<style>`) con 6
-      preguntas — sin Word instalado, no aparece el botón "Abrir carpeta", no existe
-      la carpeta `Documentos\CapturaDocs` todavía, el rótulo no sale del tamaño
-      esperado, duplicados `(1)`/`(2)`, y el autoguardado del caso. Pedida por el
-      usuario como mejora barata (sin capturas) mientras se preparan las capturas de
-      pantalla reales de los pasos 3/4/6 — ver pendiente de capturas más abajo.
-    - **Pendiente: capturas de pantalla reales**, pedidas al usuario (mientras las
-      toma, se avanzó con la sección de arriba): `guia-registro.png` (pantalla de
-      registro de correo), `guia-deviceid.png` (ícono 🎁 con el ID de dispositivo),
-      `guia-resumen.png` (paso Resumen con los 5 botones + "Abrir carpeta
-      CapturaDocs"), `guia-explorador.png` (Explorador de Windows en
-      `Documentos\CapturaDocs`), `guia-word-exportar.png` (Word, Archivo → Exportar →
-      Crear PDF/XPS) y `guia-imprimir-escala.png` (diálogo de impresión con la escala
-      en 60%). Van sin datos reales de casos, solo datos de prueba. Cuando lleguen,
-      insertarlas junto al paso correspondiente de cada sección.
+15. `guia.html` (página nueva, 2026-08-11) — "Guía de uso", pedida por el usuario.
+    **Reestructurada el mismo día** siguiendo feedback de una auditoría externa de IA
+    (evaluado y priorizado con el usuario, que pidió solo el punto de reordenar en un
+    recorrido real — dejó fuera por ahora: caso de ejemplo ficticio completo y
+    separar en 3 niveles rápida/completa/SOS). Ahora son **9 secciones numeradas**
+    (`.gsec`, índice `.toc` arriba con ancla a cada una), en el orden real en que se
+    usa la app: **1** antes de empezar (qué necesitas, ¿necesito internet? — sí solo
+    para verificar/activar licencia, actualizaciones y la IA; no para diligenciar ni
+    generar), **2** primer ingreso (correo, referido, qué es el ID de dispositivo),
+    **3** crear un procedimiento (los 8 pasos reales del formulario — ver
+    `informes-ponal/src/modelos.js:STEPS` antes de listar nombres de memoria, no son
+    "Encabezado, Capturados..." nada más, también están Policías y Vehículos por
+    separado), **4** revisar antes de generar (campos rojos, fecha captura/fiscal, y
+    que el clic en un valor del Resumen navega directo al paso a corregir — ver
+    `onNavegar`/`onIrAlPaso` en `PasoResumen.jsx`), **5** generar los documentos
+    (los 5 documentos + dónde quedan según plataforma + el truco del rótulo anidado
+    aquí dentro como bloque `.gtrick`), **6** guardar y continuar (autoguardado local,
+    botón "Nuevo caso (limpiar todo)"), **7** la IA — qué hace y qué no (aviso
+    destacado de que nunca decide sola, solo sugiere; anonimización local; requiere
+    internet y licencia Mensual/Negocio), **8** activar tu licencia, **9** problemas
+    frecuentes (acordeón `.gaccord`/`.gitem`, 9 preguntas — se sumaron "¿dónde
+    encuentro mi ID?", "no puedo activar" y "la IA no funciona" a las 6 que ya había).
+    Mismo patrón que `seguridad.html`: CSS propio recortado, sin `<script>` de
+    negocio. Enlazada desde el footer de `index.html`, la FAQ "¿Cómo empiezo...?", y
+    entre `guia.html`/`seguridad.html`. Agregada a `sitemap.xml`.
+    - **El truco del rótulo pasó de "Exportar → Crear PDF/XPS" a "Guardar como" →
+      Tipo PDF**: el usuario mandó una captura real de su flujo y usa "Guardar como",
+      no "Exportar" — se ajustó el texto para que coincida exactamente con lo que
+      va a ver en la imagen cuando se inserte.
+    - **Si se agrega Android/iPhone a descargas**: actualizar la sección 1.
+    - **Si cambia algo del formulario** (pasos, nombres, navegación de corrección) o
+      del rótulo/carpeta de descargas: releer `modelos.js`, `PasoResumen.jsx`,
+      `fpj7.js`, `descargar.js` y `electron/main.cjs` antes de tocar el texto — no
+      redactar de memoria, ya pasó dos veces en esta página (rótulo y carpeta).
+    - **Pendiente: capturas de pantalla reales**. El usuario mandó 5 de las 6 que se
+      habían pedido (pegadas directo en el chat, no como archivos en disco — hay que
+      pedirle que las guarde como archivo en la carpeta del repo para poder
+      insertarlas): `guia-licencia.png` (modal "Licencia activa" con ID de
+      dispositivo, código de referido y renovación — mejor que el plan original de
+      solo el ícono 🎁, va en sección 8), `guia-resumen.png` (paso Resumen con los 5
+      botones + "Abrir carpeta CapturaDocs" — sección 5), `guia-explorador.png`
+      (Explorador en `Documentos\CapturaDocs` — sección 5), `guia-word-pdf.png`
+      (Word, "Guardar como" con Tipo: PDF — sección 5, truco del rótulo),
+      `guia-imprimir-escala.png` (diálogo de impresión con escala 60% — sección 5,
+      truco del rótulo). **Sigue faltando**: `guia-registro.png` (pantalla de
+      registro de correo, primer uso — sección 2). Todas sin datos reales de casos.
 
 **CTAs ya NO apuntan a WhatsApp por defecto** (cambiado 2026-08-08, pedido
 explícito: *"wsp va a ser el último lugar... no quiero incentivar el uso de
