@@ -71,6 +71,11 @@
     .gwarn{background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25);border-radius:10px;padding:14px 18px;color:var(--muted);font-size:.88rem;line-height:1.6;margin-top:10px}
     .gwarn strong{color:var(--gold)}
 
+    /* Checklist antes de generar */
+    .gcheck{list-style:none;display:flex;flex-direction:column;gap:9px;margin:6px 0}
+    .gcheck li{color:var(--white);font-size:.9rem;line-height:1.5;padding-left:30px;position:relative}
+    .gcheck li::before{content:'';position:absolute;left:0;top:1px;width:18px;height:18px;border-radius:4px;border:1.5px solid rgba(240,165,0,.5);background:var(--navy)}
+
     /* Acordeón de problemas comunes */
     .gaccord{display:flex;flex-direction:column;gap:12px}
     .gitem{background:var(--navy2);border:1px solid var(--border);border-radius:12px;overflow:hidden}
@@ -196,6 +201,19 @@
         <li><strong>Campos en rojo</strong> — son los obligatorios que todavía te faltan por diligenciar</li>
         <li><strong>Fecha de captura y fecha a disposición del fiscal</strong> — tienen un recordatorio permanente para que las verifiques dos veces, son las que más suelen generar inconsistencias entre documentos</li>
         <li><strong>Corregir un dato</strong> — no tienes que ir hasta el paso manualmente: haz clic directo sobre el valor que quieres corregir dentro del Resumen, y te lleva directo a ese paso</li>
+      </ul>
+    </div>
+    <div class="gcard">
+      <h4>✅ Checklist antes de generar</h4>
+      <p>Un último repaso rápido, además de lo que la propia app te marca en rojo:</p>
+      <ul class="gcheck">
+        <li>Nombre completo del capturado, sin errores de tipeo</li>
+        <li>Número de identificación verificado</li>
+        <li>Fecha y hora de captura correctas</li>
+        <li>Fecha a disposición del fiscal correcta</li>
+        <li>Narración revisada — que cuente lo que realmente pasó, en orden</li>
+        <li>Elementos incautados completos, con quién los halló/recolectó/embaló</li>
+        <li>Ningún campo obligatorio en rojo en el Resumen</li>
       </ul>
     </div>
   </div>
