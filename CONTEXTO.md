@@ -79,7 +79,7 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 
 1. `nav` — logo + botón "Obtener acceso" → `#descargas` (ya NO abre WhatsApp directo, ver nota de CTAs más abajo)
 2. `.hero` — titular, subtítulo, 2 CTAs (Probar gratis → `#descargas`; Ver cómo funciona → `#como-funciona`), franja de stats (5 casos gratis, ~30min, 5 documentos, app instalable)
-3. `.how#como-funciona` — 4 pasos numerados
+3. `.how#como-funciona` — 4 pasos numerados + botón "📖 Ver la guía de uso completa →" (agregado 2026-08-11) enlazando a `guia.html`
 4. `.features#funciones` — lista de funcionalidades + maqueta visual de "5 archivos generados" (**pendiente #15: reemplazar por captura/GIF real**)
 5. `.compare` — antes (a mano) vs. después (con la app)
 6. `.pricing#precios` — 4 planes: prueba gratis (→ app), semanal/mensual/Negocio (→ chat en "Cotizar" con el plan preseleccionado, `abrirChatEnVista('cotizar', plan)`). Los 3 precios pagos (`#price-S`/`#price-M`/`#price-N`) se sincronizan solos, ver punto 12.
