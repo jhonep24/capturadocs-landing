@@ -654,3 +654,41 @@ no estaba editando al mismo tiempo.
   Cuando el clic por coordenadas no registre en este entorno de
   pruebas, no asumir que el código está roto — verificar llamando la
   función directamente antes de reportar un problema.
+
+## 2026-08-21 — Número de WhatsApp centralizado, meta robots y `setup.sh`
+
+### Qué se hizo
+
+- El número de WhatsApp pasó de estar en tres constantes `WA_NUMBER`
+  (una por página: `index`, `guia`, `seguridad`) a vivir en un solo
+  `config.js` (`window.CAPTURADOCS`), que las tres páginas cargan en el
+  `<head>` (Vikunja #64).
+- `<meta name="robots" content="index, follow, max-image-preview:large">`
+  explícito en las tres páginas (Vikunja #42).
+- `setup.sh`: deja el clon listo (activa `core.hooksPath` y comprueba que
+  el chequeo del número corra de verdad), en vez de depender de que
+  alguien se acuerde del comando suelto (Vikunja #38).
+
+### Problemas encontrados y cómo se resolvieron
+
+- **El refactor rompió el validador que existía para cuidar justo ese
+  valor.** `check_wa_number.py` buscaba `WA_NUMBER = '<numero>'` dentro
+  de `index.html`; al mover el número a `config.js` dejó de encontrarlo
+  y devolvió `1` — o sea, el `pre-commit` habría bloqueado el commit.
+  Se reescribió el script para la estructura nueva: ahora lee el número
+  de `config.js` y **falla si una página lo vuelve a hardcodear**, si
+  una página usa `WA_NUMBER` sin cargar `config.js`, o si `config.js`
+  define dos números distintos.
+
+  Lección general: cuando un refactor mueve el dato que un validador
+  vigila, el validador es parte del refactor, no algo que se revisa
+  después. Y hay que probarlo **en los dos sentidos** — que pase con el
+  estado bueno y que falle con uno malo. Acá se verificó simulando un
+  `wa.me/573009999999` hardcodeado: el script lo detectó y devolvió `1`.
+  Un validador que solo se prueba en verde puede estar aprobando todo.
+
+- **Un `grep` inicial decía que el número estaba repetido en ~10 sitios**
+  (así estaba descrita la tarea) pero en realidad eran 3, y ya dentro de
+  constantes. La tarea seguía siendo válida, pero mucho más chica de lo
+  que decía el tablero — otra razón para verificar contra el código antes
+  de estimar.

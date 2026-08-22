@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="robots" content="index, follow, max-image-preview:large"/>
   <title>CapturaDocs Express — Software para informes de captura en flagrancia</title>
   <meta name="description" content="Software para generar informes de captura en flagrancia. Un solo formulario llena automáticamente el Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación. Sin transcribir datos, sin inconsistencias entre documentos. 5 casos gratis."/>
   <link rel="icon" type="image/png" href="logo.png"/>
@@ -267,6 +268,7 @@
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b1c89c7467ba41fbb947cce3577347db"}'></script>
   <!-- End Cloudflare Web Analytics -->
+  <script src="/config.js"></script>
 </head>
 <body>
 
@@ -849,7 +851,7 @@
   // Único lugar donde vive el número real — los enlaces wa.me del HTML llevan
   // class="wa-link" y el href se completa aquí, para no repetir el número a
   // mano en cada uno (ver #19 en CONTEXTO.md).
-  const WA_NUMBER = '573503593635';
+  const WA_NUMBER = window.CAPTURADOCS.WA_NUMBER;
   document.querySelectorAll('a.wa-link').forEach(el => el.href = 'https://wa.me/' + WA_NUMBER);
 
   function showTab(tab) {

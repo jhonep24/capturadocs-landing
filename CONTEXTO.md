@@ -299,18 +299,29 @@ El número `573503593635` está repetido a mano en ~9 enlaces `wa.me/` de
 eso vuelve el CTA principal del sitio dependiente de que JS cargue bien —
 demasiado riesgo para el único camino de conversión de la landing).
 
-En su lugar, `check_wa_number.py` (raíz del repo) escanea `index.html` y
-falla si encuentra más de un número distinto en los enlaces `wa.me/`. Está
-enganchado como git hook en `.githooks/pre-commit`, pero **el hook no se
-activa solo** — hay que correr una vez, en cada clon del repo:
+En su lugar, `check_wa_number.py` (raíz del repo) verifica que el número
+esté en un solo lugar, y está enganchado como git hook en
+`.githooks/pre-commit`.
+
+**Dónde vive el número (actualizado 2026-08-21, Vikunja #64)**: en
+`config.js`, dentro de `window.CAPTURADOCS`. Antes cada página tenía su
+propia constante `WA_NUMBER` (index, guia y seguridad: tres copias del
+mismo número, y cambiarlo obligaba a acordarse de las tres). Ahora las
+páginas cargan `config.js` en el `<head>` y leen
+`window.CAPTURADOCS.WA_NUMBER`.
+
+Si cambia el número: se toca **solo `config.js`**. El hook falla si
+alguien vuelve a hardcodearlo en una página, si una página usa
+`WA_NUMBER` sin cargar `config.js`, o si `config.js` define dos números
+distintos.
+
+**El hook no se activa solo** — git no ejecuta nada al clonar, a
+propósito. Por eso hay un `setup.sh` (Vikunja #38) que se corre una vez
+por clon y además comprueba que el chequeo realmente pase:
 
 ```bash
-git config core.hooksPath .githooks
+./setup.sh
 ```
-
-Si cambia el número de WhatsApp: reemplázalo en todo `index.html` (buscar
-`573503593635`) y el hook (o `python check_wa_number.py` a mano) avisa si
-quedó alguno desincronizado.
 
 ## Chat de la landing — cotizador (2026-08-10)
 
