@@ -173,7 +173,21 @@ esto — se deja la entrada en el backlog de abajo tachada por trazabilidad.
 - **#15** — Reemplazar la maqueta falsa de `.preview` (sección Funciones) por una captura o GIF real de la app funcionando.
 - ~~**#19** — Centralizar el número de WhatsApp en una constante de JS.~~ **Resuelto 2026-08-11** — quedan solo 2 enlaces reales (footer y menú del chat, `class="wa-link"`), ambos sin `href` fijo: se completan en runtime desde `const WA_NUMBER` (ver `<script>` principal). `check_wa_number.py` se actualizó para validar esa constante en vez de buscar `wa.me/<numero>` hardcodeado en el HTML.
 - **Reactivar descargas de Android e iPhone** cuando corresponda (hoy deshabilitadas a propósito, ver punto 6.5) — el código/binarios siguen listos, solo hay que quitar el estado `dlbtn-disabled`.
-- ~~**Definir precio del espacio publicitario**~~ **Resuelto 2026-08-11** — el usuario fijó $150.000 COP/mes (precio de arranque, sin datos de tráfico todavía — se ajustará con los primeros anunciantes). Mostrado en `.ads-promo-price` (punto 10.5), entre el texto y los chips de beneficios. El botón "Quiero anunciarme →" sigue abriendo el chat en "Contacto" — ahora sirve para coordinar el pago, no para cotizar desde cero. (La sección de referidos, punto 8.5, ya no está pendiente — se rediseñó el 2026-08-10; la mecánica del programa en sí, `REF-XXXXXXXX`/+7 días, vive en `informes-ponal` sin cambios de este lado.)
+- **Precio del espacio publicitario definido, pero NO público**: el usuario fijó
+  $150.000 COP/mes (precio de arranque, sin datos de tráfico todavía — se ajustará
+  con los primeros anunciantes) — **es el precio para cuando alguien pida cotizar
+  por el chat, no debe aparecer escrito en la landing** (pedido explícito
+  2026-08-11, tras un primer intento de mostrarlo en `.ads-promo-price` que se
+  revirtió el mismo día). La sección `.ads-promo` (punto 10.5) sigue sin precio
+  visible a propósito — el botón "Quiero anunciarme →" abre el chat en "Contacto"
+  para que se cotice ahí. **Este precio de $150.000/mes solo vive en este archivo
+  y en la cabeza de quien responda el chat de publicidad** — no hay automatización
+  todavía que lo aplique solo (a diferencia de los precios de licencias, que sí
+  están en `PLANES` del Worker). Si en el futuro se agrega un flujo automático de
+  cotización de publicidad, usar este valor como el vigente salvo que el usuario
+  indique uno nuevo. (La sección de referidos, punto 8.5, ya no está pendiente —
+  se rediseñó el 2026-08-10; la mecánica del programa en sí, `REF-XXXXXXXX`/+7
+  días, vive en `informes-ponal` sin cambios de este lado.)
 - **#20.1** — Rate limit en Cloudflare (WAF → Rate limiting rules, `chat.capturadocs.com` + `/webhook/landing-status`) — sigue sin confirmarse si se activó, requiere el dashboard. (El punto 2 de este pendiente, exigir correo, ya quedó resuelto — ver abajo.)
 - ~~**#21** — Cambiar "🔒 100% privado".~~ **Resuelto 2026-08-11** — el usuario prefirió mantener el "100%" pero acotado a un hecho verificable: "100% seguros los datos de tu procedimiento" / "Se procesan en tu dispositivo. Ningún dato del caso sale de tu navegador o celular." (sección Funciones). No se tocó la franja de confianza ("Datos 100% en tu dispositivo") ni la FAQ porque ya usaban una frase igual de acotada, no la absoluta que preocupaba a la auditoría.
 - ~~**#22** — Página `/seguridad` con diagrama de arquitectura de privacidad.~~ **Resuelto 2026-08-11** — ver punto 14 de la estructura de secciones más arriba.
