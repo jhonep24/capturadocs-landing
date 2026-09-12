@@ -20,7 +20,16 @@ prefijados `[capturadocs-landing]`) — detalle en `../homelab/CONTEXTO.md`.
 ## Qué es este repo
 
 Landing estática (sin build, sin frameworks) para **CapturaDocs Express**,
-la app de informes de captura de `informes-ponal`. Tres páginas HTML:
+la app de documentación policial de `informes-ponal`.
+
+⚠️ **La landing describe un producto más chico del que existe hoy.** Desde la
+v1.8.0 (2026-09-11) la app sirve **dos procesos**: captura en flagrancia y
+primer respondiente (FPJ-4), y la landing sigue hablando solo del primero,
+nombrando 4 documentos y anunciando la v1.6.10. El detalle del proceso nuevo
+vive en `../informes-ponal/PLAN-FPJ4.md` (dueño de ese hecho, no copiarlo
+acá). El trabajo de actualizar `index.html`, `guia.html` y la versión está en
+Vikunja, **CapturaDocs Landing #126**, y depende de que se publique el
+instalador de la 1.8.0. Tres páginas HTML:
 `index.html` (la landing principal, con toda la lógica de precios/chat/
 config-publica), `seguridad.html` (agregada 2026-08-11, ver punto 14 más
 abajo) y `guia.html` (agregada 2026-08-11, ver punto 15) — las dos últimas
