@@ -22,14 +22,23 @@ prefijados `[capturadocs-landing]`) — detalle en `../homelab/CONTEXTO.md`.
 Landing estática (sin build, sin frameworks) para **CapturaDocs Express**,
 la app de documentación policial de `informes-ponal`.
 
-⚠️ **La landing describe un producto más chico del que existe hoy.** Desde la
-v1.8.0 (2026-09-11) la app sirve **dos procesos**: captura en flagrancia y
-primer respondiente (FPJ-4), y la landing sigue hablando solo del primero,
-nombrando 4 documentos y anunciando la v1.6.10. El detalle del proceso nuevo
-vive en `../informes-ponal/PLAN-FPJ4.md` (dueño de ese hecho, no copiarlo
-acá). El trabajo de actualizar `index.html`, `guia.html` y la versión está en
-Vikunja, **CapturaDocs Landing #126**, y depende de que se publique el
-instalador de la 1.8.0. Tres páginas HTML:
+⚠️ **La landing describe un producto más chico del que existe hoy**, y la
+distancia creció entre el 11 y el 28 de septiembre de 2026. Desde la v1.8.0 la
+app sirve **dos procesos** —captura en flagrancia y primer respondiente
+(FPJ-4)— y además incorporó bicicletas incautadas, atribución de elementos a
+cualquier persona del caso y reutilización de direcciones y personas. La
+landing sigue hablando solo de flagrancia, nombrando 4 documentos y anunciando
+la v1.6.10. El detalle de todo eso vive en `../informes-ponal/README.md`
+(novedades) y `../informes-ponal/PLAN-FPJ4.md` (el proceso nuevo) — son los
+dueños de ese hecho, no copiarlo acá. El trabajo de actualizar `index.html`,
+`guia.html` y la versión está en Vikunja, **CapturaDocs Landing #126**, y
+depende de que se publique el instalador de la 1.8.0.
+
+⚠️ **El hash de `seguridad.html` se recalcula del archivo que se suba.** El
+instalador de la 1.8.0 se ha recompilado varias veces, así que cualquier hash
+anotado en otra parte puede estar vencido. Publicar uno viejo hace que el
+cliente que siga los pasos de verificación concluya que el instalador fue
+alterado — ya pasó una vez (ver punto 14). Tres páginas HTML:
 `index.html` (la landing principal, con toda la lógica de precios/chat/
 config-publica), `seguridad.html` (agregada 2026-08-11, ver punto 14 más
 abajo) y `guia.html` (agregada 2026-08-11, ver punto 15) — las dos últimas
