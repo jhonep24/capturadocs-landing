@@ -594,6 +594,38 @@ doc**: la respuesta depende de si es la app instalada (Electron →
 navegador) — no asumir que ambas se comportan igual. Verificar contra
 `electron/main.cjs` y `PasoResumen.jsx`, no redactar de memoria.
 
+## Publicar una versión nueva del `.exe` (2026-09-28)
+
+El instalador NO vive en este repo: pesa ~117 MB y GitHub rechaza archivos de
+más de 100 MB. Va como **asset de una GitHub Release** de este mismo repo, y
+el botón de la landing apunta a `releases/latest/download/<nombre>`, que
+resuelve solo a la release marcada como *Latest*.
+
+Pasos, en este orden:
+
+1. Compilar en `informes-ponal` (`npm run electron:build`) con la app cerrada
+   y sin el servidor de desarrollo corriendo.
+2. Copiar el `.exe` a un nombre **sin espacios** (`CapturaDocs.Express.Setup.
+   <version>.exe`): GitHub convierte los espacios en puntos y así el nombre
+   del asset no depende de esa conversión.
+3. `gh release create v<version>-windows-exe <archivo> --repo
+   jhonep24/capturadocs-landing --title ... --notes ...`
+4. **Bajar el archivo desde la URL pública** (`releases/latest/download/...`)
+   y calcularle el SHA-256. Ese, y no el del archivo local, es el que se
+   publica.
+5. Actualizar en la landing: el enlace de descarga y la línea "Versión
+   actual" de `index.html`, y el hash + la etiqueta de versión + el nombre en
+   el ejemplo de `certutil` de `seguridad.html`.
+6. Commit y push (esto ya publica, ver abajo).
+
+**El hash vive en UN solo lugar**, `seguridad.html`, y tiene que salir del
+archivo realmente subido. Un hash que no corresponde le dice al cliente que
+el instalador fue manipulado — ya pasó una vez.
+
+Hasta el 2026-09-28 la landing ofrecía la **1.6.10** aunque la app ya iba por
+la 1.8.0: publicar una versión nueva de la app y actualizar la landing son
+dos tareas distintas, y la segunda se había quedado atrás tres versiones.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
