@@ -638,6 +638,36 @@ Hasta el 2026-09-28 la landing ofrecía la **1.6.10** aunque la app ya iba por
 la 1.8.0: publicar una versión nueva de la app y actualizar la landing son
 dos tareas distintas, y la segunda se había quedado atrás tres versiones.
 
+## Venta solo para escritorio (provisional, desde 2026-09-29)
+
+**Esto es temporal y está pensado para revertirse.** Mientras dure, la landing
+vende solo la versión de computador; la de celular existe pero no se ofrece
+(ver `README_VERSION_CAMPO.md` en `informes-ponal`: el APK de campo captura el
+caso y lo envía al PC, que es donde se generan los documentos).
+
+Qué se cambió, todo en **un solo commit** para poder deshacerlo con
+`git revert <sha>`:
+
+- Las cuatro tarjetas de planes dicen "Para computador con Windows" en vez de
+  "Web, Android y Windows".
+- **"Empezar gratis" ahora baja el instalador.** Antes apuntaba a la versión
+  web, que desde un computador muestra la página de bloqueo del portero y lo
+  manda a descargar la app igual — un rodeo sin sentido si solo se vende
+  escritorio.
+- La sección Descargas se queda solo con Windows (las tarjetas de Android e
+  iPhone estaban en "Próximamente"). La rejilla pasa a una columna acotada: con
+  una sola tarjeta, las tres columnas la dejaban pegada a la izquierda.
+- Las preguntas frecuentes y la ficha `operatingSystem` dejan de prometer
+  celular.
+
+**Lo que NO se tocó, a propósito:** los términos y condiciones siguen diciendo
+que la licencia vale en la app de Android. Es texto legal frente a clientes que
+YA pagaron esperando usarla en su celular; recortarlo es una decisión distinta
+de dejar de anunciarlo, y la tomó el dueño (2026-09-29) al escoger el alcance.
+
+**Para volver atrás:** `git revert` del commit y push. La página queda
+exactamente como estaba, incluidas las tarjetas de Android e iPhone.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
