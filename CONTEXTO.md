@@ -251,8 +251,20 @@ la sección Descargas:
 3. Requiere **JDK 21** (no 17/20) — `capacitor.build.gradle` lo exige. Si no
    está instalado, usar la versión `.zip` portátil de Temurin en vez del
    instalador `.msi` (el `.msi` requiere admin, que esta sesión no tenía).
+   En esta máquina vive en `C:/Users/Jhon/jdk21/jdk-21.0.12+8` — **con el
+   subdirectorio**; apuntar `JAVA_HOME` a `jdk21` a secas falla.
 4. `JAVA_HOME=<ruta-jdk21> ./gradlew.bat assembleRelease` dentro de
    `informes-ponal/android` → genera `app/build/outputs/apk/release/app-release.apk`.
+5. **Subir `versionCode` en `android/app/build.gradle` en cada APK que se
+   distribuya.** Android se niega a instalar encima uno cuyo `versionCode` no
+   sea mayor: falla con "aplicación no instalada" y toca desinstalar, lo que
+   borra los casos guardados. El 2026-09-29 estaba en 1 con `versionName
+   "1.6"` mientras la app iba por la 1.9.0 (quedó en 2 / "1.9.0").
+6. **Verificar el artefacto, no el código de salida.** `gradlew` sale con 0
+   aunque `JAVA_HOME` sea inválido y no compile nada. Y `jarsigner -verify`
+   dice "jar is unsigned" en un APK que sí está firmado, porque solo entiende
+   el esquema v1: usar `apksigner verify` y `aapt2 dump badging` de las
+   build-tools del SDK.
 
 **Windows** (`.msix`): no usar la interfaz web de pwabuilder.com — sus
 componentes son Lit/shadow-DOM y el click automatizado no siempre dispara el
