@@ -44,8 +44,6 @@
     "inLanguage": "es-CO",
     "offers": [
       {"@type":"Offer","name":"Prueba gratuita","price":"0","priceCurrency":"COP"},
-      {"@type":"Offer","name":"Licencia semanal","price":"12000","priceCurrency":"COP"},
-      {"@type":"Offer","name":"Licencia mensual","price":"35000","priceCurrency":"COP"},
       {"@type":"Offer","name":"Licencia Negocio/Estación","price":"100000","priceCurrency":"COP"}
     ]
   }
@@ -329,7 +327,7 @@
         <div class="flist">
           <div class="fi"><div class="fi-icon">📝</div><div><h4>5 documentos simultáneos</h4><p>El Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación, generados de una sola vez con los mismos datos.</p></div></div>
           <div class="fi"><div class="fi-icon">👥</div><div><h4>Múltiples capturados</h4><p>Soporta varios capturados en el mismo procedimiento con documentación individual.</p></div></div>
-          <div class="fi"><div class="fi-icon">✍️</div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te propone una versión más clara y coherente <strong>sin cambiar los hechos</strong>. La IA <strong>nunca aplica el cambio por sí sola</strong>: solo te muestra la sugerencia y tú decides si la usas, la editas o la descartas. <strong>Exclusivo de las licencias Mensual y Negocio/Estación.</strong></p></div></div>
+          <div class="fi"><div class="fi-icon">✍️</div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te propone una versión más clara y coherente <strong>sin cambiar los hechos</strong>. La IA <strong>nunca aplica el cambio por sí sola</strong>: solo te muestra la sugerencia y tú decides si la usas, la editas o la descartas. <strong>Incluido en la licencia Negocio/Estación.</strong></p></div></div>
           <div class="fi"><div class="fi-icon">📱</div><div><h4>App instalable</h4><p>Se instala en tu computador — todos los documentos, sin depender de internet para diligenciar.</p></div></div>
           <div class="fi"><div class="fi-icon">🧭</div><div><h4>Valida que todo esté bien diligenciado</h4><p>El resumen final marca en rojo cualquier dato obligatorio que falte, y deja las fechas de captura y fiscal siempre resaltadas como recordatorio de revisarlas dos veces — para que no llegues a imprimir con un campo vacío o una fecha mal escrita.</p></div></div>
           <div class="fi"><div class="fi-icon">💾</div><div><h4>Guardar y continuar</h4><p>Guarda el caso en cualquier momento y retómalo después sin perder nada.</p></div></div>
@@ -388,7 +386,7 @@
       <h2 class="stitle">Simple y accesible.</h2>
       <p class="ssub" style="margin:0 auto">Empieza gratis, activa cuando estés listo.</p>
     </div>
-    <div class="pgrid">
+    <div class="pgrid" style="grid-template-columns:repeat(2,1fr);max-width:620px">
       <div class="plan">
         <div class="pname">Prueba gratuita</div>
         <div class="pprice">$0</div>
@@ -397,26 +395,11 @@
         <a href="https://github.com/jhonep24/capturadocs-landing/releases/latest/download/CapturaDocs.Express.Setup.1.9.0.exe" class="pbtn po">Empezar gratis →</a>
       </div>
       <div class="plan">
-        <div class="pname">Licencia semanal</div>
-        <div class="pprice" id="price-S">$12.000 <span>COP</span></div>
-        <div class="pper">7 días · casos ilimitados</div>
-        <ul class="pfeats"><li>Casos ilimitados por 7 días</li><li>Todos los documentos</li><li>Para computador con Windows</li><li>Ideal para uso esporádico</li></ul>
-        <a href="#" onclick="abrirChatEnVista('cotizar','S');return false" class="pbtn po">Cotizar y activar</a>
-      </div>
-      <div class="plan ft">
-        <div class="ptag">⭐ MÁS POPULAR</div>
-        <div class="pname">Licencia mensual</div>
-        <div class="pprice" id="price-M">$35.000 <span>COP</span></div>
-        <div class="pper">30 días · casos ilimitados</div>
-        <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>Mejora de redacción con IA</li><li>Para computador con Windows</li><li>Soporte por WhatsApp</li></ul>
-        <a href="#" onclick="abrirChatEnVista('cotizar','M');return false" class="pbtn pp">Cotizar y activar</a>
-      </div>
-      <div class="plan">
         <div class="pname">Negocio/Estación</div>
         <div class="pprice" id="price-N">$100.000 <span>COP</span></div>
         <div class="pper">30 días · casos ilimitados</div>
         <ul class="pfeats"><li>Casos ilimitados por 30 días</li><li>Todos los documentos</li><li>Mejora de redacción con IA</li><li>Pensada para negocios y estaciones</li><li>Solo para computador (versión web)</li></ul>
-        <a href="#" onclick="abrirChatEnVista('cotizar','N');return false" class="pbtn po">Cotizar y activar</a>
+        <a href="#" onclick="abrirChatEnVista('cotizar','N');return false" class="pbtn pp">Cotizar y activar</a>
       </div>
     </div>
   </div>
@@ -551,11 +534,11 @@
       </details>
       <details class="fitem">
         <summary>¿La mejora de redacción con IA tiene costo aparte?<span class="fplus">+</span></summary>
-        <div class="fa">No es un costo aparte, pero sí es <strong>exclusiva de las licencias Mensual y Negocio/Estación</strong>. La prueba gratuita y la licencia semanal generan los documentos igual, sin esa asistencia.</div>
+        <div class="fa">No es un costo aparte, pero sí es <strong>exclusiva de la licencia Negocio/Estación</strong>. La prueba gratuita genera los documentos igual, sin esa asistencia.</div>
       </details>
       <details class="fitem">
         <summary>¿Qué es la licencia Negocio/Estación?<span class="fplus">+</span></summary>
-        <div class="fa">Es para negocios, estaciones u otras instituciones que quieran tener CapturaDocs Express disponible en un computador para varios funcionarios — no para el uso individual de un solo policía. Cuesta más que la mensual normal y está pensada para uso en computador.</div>
+        <div class="fa">Es para negocios, estaciones u otras instituciones que quieran tener CapturaDocs Express disponible en un computador para varios funcionarios — no para el uso individual de un solo policía. Está pensada para uso en computador.</div>
       </details>
     </div>
     <div style="text-align:center;margin-top:36px">
@@ -767,8 +750,6 @@
       <input id="chat-cotizar-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
       <label class="chat-label" for="chat-plan-select">Plan</label>
       <select id="chat-plan-select" class="chat-input">
-        <option value="S">Semanal (7 días) — $12.000</option>
-        <option value="M">Mensual (30 días) — $35.000</option>
         <option value="N">Negocio/Estación (30 días) — $100.000</option>
       </select>
       <label class="chat-label" for="chat-cotizar-referido">Código de referido (opcional)</label>
@@ -784,8 +765,6 @@
       <input id="chat-comp-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
       <label class="chat-label" for="chat-comp-plan">Plan que estás pagando</label>
       <select id="chat-comp-plan" class="chat-input">
-        <option value="S">Semanal (7 días) — $12.000</option>
-        <option value="M">Mensual (30 días) — $35.000</option>
         <option value="N">Negocio/Estación (30 días) — $100.000</option>
       </select>
       <label class="chat-label" for="chat-comp-nombre">Nombre (opcional)</label>

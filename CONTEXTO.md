@@ -668,6 +668,34 @@ de dejar de anunciarlo, y la tomó el dueño (2026-09-29) al escoger el alcance.
 **Para volver atrás:** `git revert` del commit y push. La página queda
 exactamente como estaba, incluidas las tarjetas de Android e iPhone.
 
+### Segunda parte: solo se vende Estación (2026-10-01)
+
+También provisional, también en **un solo commit** para revertirlo igual. Se
+retiran de la venta las licencias **Semanal y Mensual**; quedan visibles la
+prueba gratuita y Negocio/Estación.
+
+No basta con quitar las dos tarjetas: los planes vivían en cinco sitios más, y
+dejar cualquiera habría permitido seguir pidiéndolos.
+
+- Las tarjetas (la rejilla pasa de 4 a 2 columnas acotadas).
+- **Las dos listas del chat**: la de cotizar y la de enviar comprobante. Esta es
+  la importante — sin tocarla, el cliente seguía escogiendo "Semanal" y pidiendo
+  esa licencia aunque la tarjeta ya no estuviera.
+- La ficha de precios de la página (`schema.org`), que es lo que leen Google y
+  las redes al mostrar el enlace.
+- Los textos que decían que la IA era "exclusiva de Mensual y Negocio/Estación"
+  y que Estación "cuesta más que la mensual" — comparaciones con un plan que ya
+  no se ofrece.
+
+**Efecto secundario conocido:** quien hubiera acordado por WhatsApp un precio
+semanal o mensual ANTES del cambio ya no puede reportar su pago desde el chat,
+porque esa opción desapareció de la lista de comprobantes. Ese caso se atiende
+por WhatsApp directamente.
+
+**Lo que NO se tocó:** la Política de Licencias sigue describiendo las licencias
+semanal y mensual. Quien ya compró una se rige por ese texto; retirarlo sería
+cambiarle las condiciones a un cliente que ya pagó.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
