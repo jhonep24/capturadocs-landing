@@ -986,13 +986,31 @@
 
   const CHAT_PLAN_NOMBRES = { S: 'Semanal (7 días)', M: 'Mensual (30 días)', N: 'Negocio/Estación (30 días)' };
 
+  // PROVISIONAL (2026-10-01): solo se vende Negocio/Estación.
+  // La lista de precios del chat la sirve el BOT (chat.capturadocs.com), no
+  // esta página, y el bot sigue devolviendo los cuatro planes. Por eso no basta
+  // con haber quitado las tarjetas y las listas desplegables: el cliente entraba
+  // a "Ver precios" y ahí seguían la semanal y la mensual.
+  // Se filtra aquí para no depender de un cambio en el bot. Para volver a
+  // venderlos todos: poner null (muestra lo que devuelva el bot) o revertir el
+  // commit de este cambio.
+  const CHAT_PLANES_EN_VENTA = ['N'];
+
   async function chatCargarPrecios(){
     const el = document.getElementById('chat-precios-body');
     el.textContent = 'Cargando…';
     try {
       const data = await chatPost('landing-chat', { accion: 'precios' });
       if (!data.ok) { el.textContent = 'No pudimos cargar los precios, intenta de nuevo.'; return; }
-      el.innerHTML = Object.entries(data.precios).map(([plan, precio]) =>
+      const filas = Object.entries(data.precios)
+        .filter(([plan]) => !CHAT_PLANES_EN_VENTA || CHAT_PLANES_EN_VENTA.includes(plan));
+      // Si el bot cambiara los nombres de los planes, el filtro podría dejar la
+      // lista vacía: mejor mandar a WhatsApp que mostrar un recuadro en blanco.
+      if (!filas.length) {
+        el.innerHTML = 'Escríbenos por WhatsApp y te pasamos el precio al momento.';
+        return;
+      }
+      el.innerHTML = filas.map(([plan, precio]) =>
         `<div class="chat-plan-row"><span>${escapeHtml(CHAT_PLAN_NOMBRES[plan] || plan)}</span><b>$${Number(precio).toLocaleString('es-CO')}</b></div>`
       ).join('');
     } catch (e) {

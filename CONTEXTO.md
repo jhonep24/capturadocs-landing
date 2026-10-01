@@ -696,6 +696,20 @@ por WhatsApp directamente.
 semanal y mensual. Quien ya compró una se rige por ese texto; retirarlo sería
 cambiarle las condiciones a un cliente que ya pagó.
 
+**Faltaba un sitio, reportado por el usuario el mismo día:** la vista
+"Ver precios" del chat. Esa lista **no sale de esta página: la sirve el bot**
+(`chat.capturadocs.com/webhook`, acción `precios`), y el bot sigue devolviendo
+los cuatro planes. El chat pintaba tal cual lo que recibía, así que ahí seguían
+la semanal y la mensual aunque las tarjetas y los desplegables ya no estuvieran.
+
+Se filtra en la landing con `CHAT_PLANES_EN_VENTA = ['N']` en vez de cambiar el
+bot: así todo el cambio provisional vive en un solo repositorio y se revierte de
+una sola vez, sin tocar el bot de pagos (donde además trabajan otras sesiones).
+
+**Consecuencia que hay que tener presente:** el bot sigue conociendo y
+devolviendo esos precios. Si el bot cotiza por WhatsApp o Telegram, ese camino
+NO está cubierto por este filtro — hay que revisarlo aparte.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
