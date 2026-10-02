@@ -710,6 +710,35 @@ una sola vez, sin tocar el bot de pagos (donde además trabajan otras sesiones).
 devolviendo esos precios. Si el bot cotiza por WhatsApp o Telegram, ese camino
 NO está cubierto por este filtro — hay que revisarlo aparte.
 
+## El APK de Android publicado (2026-10-01)
+
+La app de Android vuelve a estar en Descargas. **No es la app completa**:
+captura el caso en el celular y lo envía al computador en un `.cdx`; los
+documentos se generan en la app de Windows. Es la rama `apk-solo-cdx` de
+`informes-ponal` (ver su `README_VERSION_CAMPO.md`).
+
+Se presenta como una descarga normal, igual que Windows, por decisión del
+dueño (2026-10-01) y a pesar de la advertencia de que quien la instale esperando
+que genere documentos va a escribir preguntando.
+
+**Detalle técnico que NO se puede perder de vista:** el APK vive en su propia
+release, `v1.8.5-campo-android`, creada con **`--latest=false`**, y la landing
+enlaza a la **URL del tag**, no a `releases/latest/download/`.
+
+El motivo: `latest/download/` resuelve a la release marcada como *Latest*, y
+solo puede haber una. Si la del APK se hubiera llevado esa marca, **el botón de
+descarga de Windows habría dejado de funcionar**. Al publicar una versión nueva
+del APK hay que repetir las dos cosas: `--latest=false` y actualizar el enlace
+al tag nuevo.
+
+Se ajustaron además dos textos que habrían quedado mintiendo: la respuesta de
+"¿funciona en celular?" decía que la versión de celular no se ofrecía, y la
+ficha `operatingSystem` decía solo Windows.
+
+**Ojo con retirarlo:** ese APK tiene un apagador (`MIN_APP_VERSION` a 1.9.0 lo
+bloquea al instante, ver `README_VERSION_CAMPO.md`). Publicado en la landing,
+ese apagador alcanza a cualquiera que lo haya descargado, no solo a conocidos.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
