@@ -739,6 +739,25 @@ ficha `operatingSystem` decía solo Windows.
 bloquea al instante, ver `README_VERSION_CAMPO.md`). Publicado en la landing,
 ese apagador alcanza a cualquiera que lo haya descargado, no solo a conocidos.
 
+## iPhone: la PWA como opción de descarga (2026-10-01)
+
+La tarjeta de iPhone ya no dice "Próximamente": enlaza a
+`https://capturadocs-app.capturadocs.workers.dev/`, que es la PWA.
+
+**No es un archivo que se instale**: es una dirección web que el iPhone abre y
+que se puede añadir a la pantalla de inicio. Por eso el botón dice "Abrir en
+iPhone" y no "Descargar". Ese Worker **solo deja pasar a iPhone**
+(`worker-gate.js` bloquea Android y Windows con un aviso que los manda a su
+propia app), así que no hay riesgo de que alguien entre por ahí desde un PC.
+
+Igual que el APK, esa PWA es la versión de **captura en campo**: no genera
+documentos, captura el caso y lo envía al computador (ver
+`informes-ponal/README_VERSION_CAMPO.md`). Se compila desde la rama
+`apk-solo-cdx` — el flujo `deploy-app.yml` quedó apuntando ahí.
+
+Las tres tarjetas de Descargas quedan: Android (APK), iPhone (PWA) y Windows
+(instalador). La rejilla vuelve a sus tres columnas de siempre.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
