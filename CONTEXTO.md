@@ -758,6 +758,22 @@ documentos, captura el caso y lo envía al computador (ver
 Las tres tarjetas de Descargas quedan: Android (APK), iPhone (PWA) y Windows
 (instalador). La rejilla vuelve a sus tres columnas de siempre.
 
+## El primer respondiente NO se anuncia todavía (decisión, 2026-10-02)
+
+`index.html` no menciona el proceso de **primer respondiente** ni el **FPJ-4**,
+y dice "5 documentos" — que es lo correcto para flagrancia, el proceso que la
+página vende. **No es un olvido: es a propósito.** Ese proceso sigue en pruebas
+y por eso ni siquiera descuenta generaciones de la licencia (ver el comentario
+de `handleGenerarFPJ4` en `informes-ponal/src/App.jsx`).
+
+`guia.html` **sí** lo documenta, porque quien ya tiene la app lo tiene
+disponible y necesita saber cómo usarlo. Esa asimetría es deliberada.
+
+Cuando se implemente bien y se decida anunciarlo, hay que tocar: el título y la
+descripción de la página (hoy dicen "informes de captura en flagrancia"), la
+tarjeta de "5 documentos simultáneos", el paso 03 de "Cómo funciona" y la ficha
+de ofertas.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
