@@ -774,6 +774,32 @@ descripción de la página (hoy dicen "informes de captura en flagrancia"), la
 tarjeta de "5 documentos simultáneos", el paso 03 de "Cómo funciona" y la ficha
 de ofertas.
 
+## La 1.10.1 publicada — versión de seguridad (2026-10-03)
+
+Release `v1.10.1-windows-exe`, marcada *Latest*. Procedimiento de arriba
+seguido tal cual, incluido el paso 4: el hash de `seguridad.html`
+(`1ca8f227…`) se sacó **bajando el archivo desde la URL pública**, y coincide
+con el del archivo local.
+
+No cambia nada visible ni de uso. Lleva tres arreglos de seguridad:
+
+- Electron 43.4.0 → 43.7.7 (cuatro avisos *high* del propio Electron).
+- El servidor interno de la app ya no se sale de su carpeta por un error al
+  comparar rutas con `startsWith`.
+- Se cerró el camino para estirar el periodo de prueba trabajando sin
+  internet.
+
+**`MIN_APP_VERSION` se queda en 1.8.5, a propósito.** Subirla a 1.10.1
+apagaría de un golpe el APK de campo (que está marcado 1.8.5 justamente para
+poder apagarlo cuando se quiera) y además dejaría fuera a quien tenga la
+1.10.0 instalada y todavía no actualice. Esta versión no arregla nada que
+obligue a forzar la actualización.
+
+El enlace del APK sigue apuntando a su **tag**
+(`releases/download/v1.8.5-campo-android/...`), no a `latest`, así que
+publicar un `.exe` nuevo como *Latest* no lo rompe. Verificado.
+
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
