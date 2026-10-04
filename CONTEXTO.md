@@ -850,6 +850,30 @@ certificado**.
 El detalle de los dos cambios vive en `informes-ponal`: `README_TECNICO.md`
 (Errores 64 y 65) y `README_VERSION_CAMPO.md` (sección del `versionCode 7`).
 
+## Una afirmación de privacidad que era incompleta y hoy sí es exacta (2026-10-04)
+
+`index.html` dice, y sigue diciendo:
+
+> La conexión a Internet se usa **únicamente** para verificar tu licencia y
+> consultar actualizaciones.
+
+Hasta el 2026-10-04 eso **no era del todo cierto**, y nadie lo había notado: la
+app también le pedía las tipografías a `fonts.googleapis.com` en cada arranque,
+con lo que Google recibía la IP y el equipo desde el que trabaja un policía. No
+viajaban datos del caso, así que el fondo del mensaje se sostenía, pero el
+"únicamente" no.
+
+Salió de la auditoría del APK, no de una revisión de los textos. **No hubo que
+cambiar la frase: se cambió la app para que la frase fuera verdad** — las
+tipografías ahora viajan dentro (ver el registro del APK v7 más arriba, y
+`informes-ponal/README_TECNICO.md`, Error 64). Los tres canales ya quedaron así.
+
+Vale como recordatorio para los textos de esta landing: una afirmación
+absoluta ("únicamente", "nunca", "jamás sale de tu dispositivo") hay que poder
+sostenerla mirando el tráfico real de la app, no la intención con la que se
+escribió. Si algún día se agrega algo que llame a un tercero —una fuente, un
+icono, una analítica, un mapa— esta frase es la primera que hay que revisar.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
