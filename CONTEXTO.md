@@ -800,6 +800,28 @@ El enlace del APK sigue apuntando a su **tag**
 publicar un `.exe` nuevo como *Latest* no lo rompe. Verificado.
 
 
+## La 1.11.0 publicada — el relato en un cuadro que crece (2026-10-03)
+
+Release `v1.11.0-windows-exe`, marcada *Latest*. Procedimiento de arriba
+seguido tal cual, incluido el paso 4: el hash de `seguridad.html`
+(`11d42a6c…`) se sacó **bajando el archivo desde la URL pública**, y coincide
+con el del archivo local.
+
+**Qué cambia para el cliente**: en el primer respondiente, la narración de los
+hechos ya no se parte en los 13 renglones del formato impreso — va en un solo
+cuadro que se agranda. El texto ya no se corta, los puntos y aparte se
+respetan y queda justificado. Cierra de raíz dos problemas que el usuario
+había reportado (texto cortado a mitad del relato, texto que se salía de la
+caja). Además las tipografías viajan dentro de la app, así que se ve igual sin
+señal.
+
+**`MIN_APP_VERSION` se queda en 1.8.5**, por lo mismo que en la 1.10.1:
+subirla apagaría el APK de campo y dejaría fuera a quien no haya actualizado.
+Nada de esta versión obliga a forzar la actualización.
+
+El enlace del APK sigue apuntando a su **tag**, no a `latest`, así que
+publicar este `.exe` como *Latest* no lo rompe. Verificado otra vez.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
