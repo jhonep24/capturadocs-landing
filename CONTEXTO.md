@@ -722,8 +722,10 @@ dueño (2026-10-01) y a pesar de la advertencia de que quien la instale esperand
 que genere documentos va a escribir preguntando.
 
 **Detalle técnico que NO se puede perder de vista:** el APK vive en su propia
-release, `v1.8.5-campo-android`, creada con **`--latest=false`**, y la landing
-enlaza a la **URL del tag**, no a `releases/latest/download/`.
+release, creada con **`--latest=false`**, y la landing enlaza a la **URL del
+tag**, no a `releases/latest/download/`. El tag vigente es
+`v1.8.5-campo-android-v7` (ver abajo, 2026-10-04); el primero fue
+`v1.8.5-campo-android`.
 
 El motivo: `latest/download/` resuelve a la release marcada como *Latest*, y
 solo puede haber una. Si la del APK se hubiera llevado esa marca, **el botón de
@@ -821,6 +823,32 @@ Nada de esta versión obliga a forzar la actualización.
 
 El enlace del APK sigue apuntando a su **tag**, no a `latest`, así que
 publicar este `.exe` como *Latest* no lo rompe. Verificado otra vez.
+
+## El APK de campo recompilado — v7 (2026-10-04)
+
+Release `v1.8.5-campo-android-v7`, con **`--latest=false`** y el enlace de la
+landing apuntando a ese tag, igual que siempre (ver "El APK de Android
+publicado" más arriba para el porqué). Verificado después: el `.exe` **sigue
+siendo *Latest*** y las dos descargas responden.
+
+**SHA-256**: `c14a92f06de93726832cc4f4865f30b59855d1d228fd903ca9a71f4316cdafcf`,
+sacado del archivo **bajado desde la URL pública**, y publicado en
+`seguridad.html` como "Android v7".
+
+**No cambia nada de lo que el cliente ve ni de cómo se usa.** Lo que trae es que
+las tipografías ahora viajan dentro del APK: antes se descargaban de internet en
+cada arranque, así que **sin señal la app se veía con otra letra** — y sin señal
+es justo cuando se usa en campo. Se acotó además un permiso interno de compartir
+archivos que abarcaba más de lo necesario.
+
+**El APK sigue marcado 1.8.5**, y eso es a propósito: de ese número depende el
+apagador de la versión de campo. Lo que subió es el `versionCode` (6 → 7), que
+es lo único que Android exige para instalar encima. Se instala sobre el anterior
+sin desinstalar y sin perder casos guardados, porque va firmado con el **mismo
+certificado**.
+
+El detalle de los dos cambios vive en `informes-ponal`: `README_TECNICO.md`
+(Errores 64 y 65) y `README_VERSION_CAMPO.md` (sección del `versionCode 7`).
 
 ## Cómo desplegar cambios
 
