@@ -874,6 +874,21 @@ sostenerla mirando el tráfico real de la app, no la intención con la que se
 escribió. Si algún día se agrega algo que llame a un tercero —una fuente, un
 icono, una analítica, un mapa— esta frase es la primera que hay que revisar.
 
+## La 1.12.0 publicada — primer cliente con las capas de seguridad (2026-10-08)
+
+Release `v1.12.0-windows-exe`, marcada *Latest*. Hash de `seguridad.html`
+(`24537c7f…`) sacado del archivo **bajado desde la URL pública**, coincide.
+
+Es el primer `.exe` que lleva la defensa en profundidad del candado de licencia
+(marca de agua invisible, verificación Ed25519 del token, candado 3b) — todo en
+**modo gracia**: nada bloquea, nada cambia para el usuario. El Worker ya firma
+tokens (secreto `TOKEN_PRIV_KEY` cargado y desplegado antes). El bloqueo real
+sigue apagado hasta prender `enforceToken`. Detalle en
+`informes-ponal/README_TECNICO.md`, sección 7b.
+
+El enlace del APK sigue apuntando a su **tag** (`v1.8.5-campo-android-v7`), no a
+`latest`, así que publicar este `.exe` como *Latest* no lo rompe. Verificado.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
