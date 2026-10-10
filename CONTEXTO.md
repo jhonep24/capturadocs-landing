@@ -889,6 +889,25 @@ sigue apagado hasta prender `enforceToken`. Detalle en
 El enlace del APK sigue apuntando a su **tag** (`v1.8.5-campo-android-v7`), no a
 `latest`, así que publicar este `.exe` como *Latest* no lo rompe. Verificado.
 
+## La 1.13.0 (.exe) y el APK v8 publicados (2026-10-10)
+
+Dos releases, ambos con el hash sacado del archivo **bajado de la URL pública**
+(coinciden):
+- **`v1.13.0-windows-exe`** (*Latest*), SHA `55f1f120…`. Trae: ofuscación del
+  candado de licencia, firma por documento (#5 liviana), y dos arreglos — el
+  resumen avisa si falta la dirección de los hechos, y el acta de derechos ya
+  no se pasa a una tercera hoja.
+- **`v1.8.5-campo-android-v8`** (`--latest=false`), SHA `5c57b5a9…`. Solo trae
+  el aviso de dirección de los hechos (lo demás no aplica a la versión de campo,
+  que no genera documentos). versionCode 8, versionName sigue 1.8.5.
+
+El enlace del APK apunta a su **tag** (`v8`), no a `latest`, así que publicar el
+`.exe` como *Latest* no lo rompe. Verificado que ambas descargas responden.
+
+Pendiente de seguridad que sigue abierto (decisión del dueño): firmar el `.exe`
+(Authenticode) para quitar la alerta de SmartScreen y endurecer la
+redistribución. Y prender `enforceToken` cuando la base ya esté en 1.12.0+.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
