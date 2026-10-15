@@ -908,6 +908,34 @@ Pendiente de seguridad que sigue abierto (decisión del dueño): firmar el `.exe
 (Authenticode) para quitar la alerta de SmartScreen y endurecer la
 redistribución. Y prender `enforceToken` cuando la base ya esté en 1.12.0+.
 
+## La 1.13.1 (.exe) y el APK v9 — Fase 1 de la auditoría (2026-10-15)
+
+Release de seguridad de la **Fase 1** de la auditoría de código (ver
+`informes-ponal/AUDITORIA_SEGURIDAD_2026-10.md`, que vive solo local, no en el
+repo). Dos releases, ambos con el hash sacado del archivo **bajado de la URL
+pública** (coinciden):
+- **`v1.13.1-windows-exe`** (*Latest*), SHA `1c64c864…`. CSP en la app +
+  cabeceras de seguridad (X-Frame-Options/nosniff/Referrer-Policy) en el server
+  local de Electron. Sigue sin firmar (Authenticode pendiente).
+- **`v1.8.5-campo-android-v9`** (`--latest=false`), SHA `8a3f67c7…`. Lo de
+  verdad importante del APK: **`@capacitor/android` 8.4.1 → 8.5.3**, que cierra
+  GHSA-rvm3-566m-v7fv (carga de contenido remoto en el origen vía el proxy HTTP
+  interno de Capacitor) — la única vuln de dependencia que viajaba en el APK.
+  Más la CSP. versionCode 9, mismo certificado que v8 (instala encima),
+  versionName sigue 1.8.5-campo. Obligó a compilar con **JDK 21** (el JBR de
+  Android Studio): Capacitor 8.5.x subió el toolchain mínimo.
+- La **PWA de iPhone** también recibió la CSP + cabeceras (se compila desde
+  `apk-solo-cdx`, verificado en vivo con User-Agent de iPhone).
+
+El enlace del APK en la landing se actualizó a su nuevo **tag** (`v9`), no a
+`latest`, así que el `.exe` como *Latest* no lo rompe. Verificado: ambas
+descargas responden 200 y los hashes de `seguridad.html` cuadran con lo
+publicado.
+
+Mitigado de paso (ya estaba): A3 de la auditoría — las PCs de producción
+corren `npm run produccion` (build + preview), no el `vite dev`, así que el
+aviso de esbuild del dev-server no aplica.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
