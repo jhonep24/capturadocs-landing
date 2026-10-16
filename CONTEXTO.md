@@ -119,7 +119,7 @@ las decisiones de SEO/accesibilidad tomadas y problemas ya resueltos.
 14. `seguridad.html` (página nueva, 2026-08-11) — "Arquitectura de privacidad": reemplaza la promesa genérica "100% privado" por un diagrama HTML/CSS de dos columnas (`.dcol.local` / `.dcol.remote`, sin librerías externas) que muestra qué se queda 100% en el dispositivo (datos del procedimiento, generación de documentos, borradores) vs. qué sí llega a la infraestructura propia y por qué (ID de dispositivo + licencia, pedidos/comprobantes/contacto, texto anonimizado para la IA). 3 tarjetas de preguntas puntuales debajo (qué hace la IA, qué usa el sistema de licencias, quién más ve los datos de pedido). No tiene su propio `<script>` de negocio — copia solo el CSS necesario del sistema de diseño (no todo el `<style>` de `index.html`) más el snippet de `WA_NUMBER` para el link de WhatsApp del footer. Enlazada desde: nav de `index.html` no (para no saturarlo), sí desde la respuesta de la FAQ "¿Qué pasa con los datos de mis capturados?" y desde el footer ("Cómo protegemos tus datos"). El botón "Leer la Política de Privacidad →" de `seguridad.html` apunta a `index.html#privacidad`, que dispara un pequeño bloque de JS en `index.html` (justo después del listener de teclado del modal) que abre el modal directo en la pestaña Privacidad si `location.hash === '#privacidad'` — así el texto legal completo sigue viviendo en un solo lugar (el modal), sin duplicarlo en la página nueva. Agregada a `sitemap.xml`.
     - **Cuidado si se edita el diagrama**: debe reflejar EXACTAMENTE la distinción de "Categorías de datos" del punto 12 (2a datos del procedimiento vs. 2b datos de gestión de pedidos/contacto) — si se retoca uno, retocar el otro, para no volver a tener dos fuentes de verdad desalineadas (fue justo el problema que motivó el refuerzo de la política, ver "Transparencia legal" más abajo).
     - **Sección `.hashbox`** (agregada 2026-08-11), debajo de las 3 tarjetas de preguntas: aquí vive el hash SHA-256 del instalador de Windows (`#hash-win`), movido desde `#descargas` — ver nota del punto anterior de "Transparencia legal" sobre por qué se movió aquí en vez de quitarlo del todo.
-15. `guia.html` (página nueva, 2026-08-11) — "Guía de uso", pedida por el usuario.
+15. `guia.html` (página nueva, 2026-08-11) — "Guía de uso", pedida por el usuario. *(Desde 2026-10-16 admite un video por sección clave — ver "Videos tutoriales en `guia.html`" más abajo.)*
     Recibió feedback de una auditoría externa de IA sugiriendo reordenar todo en 9
     secciones tipo recorrido real; se probó esa versión pero **al usuario no le
     gustó — pidió volver a la estructura original de 6 secciones + Problemas
@@ -935,6 +935,41 @@ publicado.
 Mitigado de paso (ya estaba): A3 de la auditoría — las PCs de producción
 corren `npm run produccion` (build + preview), no el `vite dev`, así que el
 aviso de esbuild del dev-server no aplica.
+
+## Videos tutoriales en `guia.html` (2026-10-16)
+
+El usuario quiere videos de cómo usar el programa. Se montó la **infraestructura**
+y los guiones; los videos los graba y sube él.
+
+- **Cuatro videos**, cada uno dentro de la sección de la guía que ya explicaba lo
+  mismo (no se creó página ni sección nueva): `instalar` (sección 1), `licencia`
+  (3), `diligenciar` (4) y `rotulo` (6, "dónde quedan los archivos e imprimir al
+  60 %"). Los guiones, las reglas de grabación y cómo subirlos viven en
+  **`GUIONES_VIDEOS.md`** — dueño de ese hecho, no copiarlo acá.
+- **Los IDs viven en `config.js`** (`window.CAPTURADOCS.VIDEOS`), el mismo patrón
+  que el número de WhatsApp. **Un ID vacío o inválido deja el hueco oculto**
+  (`hidden`): no hay portadas rotas ni espacios vacíos, así que se puede publicar
+  uno a uno. Hoy los cuatro están vacíos, o sea que la guía se ve igual que antes.
+- **Alojamiento: YouTube, dominio `youtube-nocookie.com`, carga al dar play.**
+  Decisión del usuario (2026-10-16) entre YouTube / archivos propios / solo
+  enlaces. La portada es propia (botón con ▶ y el título): **no se pide ni la
+  miniatura a YouTube**, porque eso ya sería una conexión a un tercero antes de
+  que el visitante decida nada. El `<iframe>` se crea solo en el clic. Se verificó
+  en vista previa que antes del play hay cero peticiones a YouTube/Google.
+- **Defensa:** el ID se valida con `/^[A-Za-z0-9_-]{11}$/` antes de armar la URL
+  y los textos se ponen con `textContent`, nunca `innerHTML`; un valor raro en
+  `config.js` no puede inyectar nada.
+- **Pendiente de privacidad (decisión del usuario, no hecho):** cuando se publique
+  el primer video, `guia.html` hará una conexión a YouTube al dar play. La
+  portada ya lo avisa en la propia página, pero el **modal de Privacidad no lo
+  menciona** (tampoco menciona hoy Google Fonts ni Cloudflare Web Analytics, que
+  la landing ya usa). Es texto legal: redactarlo con visto bueno del usuario.
+  Esto es de la **página web**, no de la app — la frase "únicamente para verificar
+  licencia y consultar actualizaciones" habla del software y no se afecta.
+- **Mantenimiento:** los videos 2, 3 y 4 muestran pantallas de la app. Si cambia
+  un nombre de botón, el orden de pasos o la carpeta de guardado, hay que repetir
+  la escena y corregir a la vez el texto de la sección (mismo cuidado que ya hay
+  con la guía escrita). Por eso los guiones piden **no decir precios ni versiones**.
 
 ## Cómo desplegar cambios
 

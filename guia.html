@@ -96,6 +96,15 @@
     .gtrick-step div{color:var(--white);font-size:.92rem;line-height:1.6;padding-top:3px}
     .gtrick-step div span{color:var(--muted);display:block;font-size:.85rem;margin-top:2px}
 
+    /* Video tutorial: portada propia, YouTube no recibe nada hasta dar play */
+    .gvideo{margin:0 0 16px}
+    .gvideo-poster{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;aspect-ratio:16/9;border:1px solid rgba(240,165,0,.35);border-radius:14px;background:linear-gradient(155deg,var(--navy3),var(--navy2));color:var(--white);cursor:pointer;font:inherit;padding:16px;text-align:center;transition:border-color .2s}
+    .gvideo-poster:hover,.gvideo-poster:focus-visible{border-color:var(--gold);outline:none}
+    .gvideo-play{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.5rem;padding-left:4px;box-shadow:0 4px 24px rgba(240,165,0,.3)}
+    .gvideo-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.05rem}
+    .gvideo-note{font-size:.75rem;color:var(--muted)}
+    .gvideo iframe{display:block;width:100%;aspect-ratio:16/9;border:0;border-radius:14px}
+
     footer{border-top:1px solid var(--border);padding:32px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;color:var(--muted);font-size:.82rem}
     footer a{color:var(--muted);text-decoration:none}
     footer a:hover{color:var(--white)}
@@ -145,6 +154,7 @@
 <section class="gsec" id="instalar">
   <div class="container">
     <div class="gsec-hdr"><div class="gnum">1</div><h2 class="gsec-title">Instalar CapturaDocs Express</h2></div>
+    <div class="gvideo" data-video="instalar" data-titulo="Instalar y primer ingreso" hidden></div>
     <div class="gcard">
       <h4>💻 Windows</h4>
       <p>Descarga el instalador desde <a href="index.html#descargas" style="color:var(--gold)">capturadocs.com/#descargas</a> y ejecútalo: es un archivo <code>.exe</code> que instala la app en tu computador. No necesitas instalar nada más — es una app de escritorio lista para usar.</p>
@@ -180,6 +190,7 @@
 <section class="gsec" id="activar">
   <div class="container">
     <div class="gsec-hdr"><div class="gnum">3</div><h2 class="gsec-title">Activar tu licencia</h2></div>
+    <div class="gvideo" data-video="licencia" data-titulo="Activar tu licencia" hidden></div>
     <div class="gcard">
       <p>Cuando se acaben tus 5 casos gratis, o si ya quieres pasar directo a un plan pago:</p>
       <ul class="glist">
@@ -196,6 +207,7 @@
 <section class="gsec" id="diligenciar">
   <div class="container">
     <div class="gsec-hdr"><div class="gnum">4</div><h2 class="gsec-title">Diligenciar un caso y generar los documentos</h2></div>
+    <div class="gvideo" data-video="diligenciar" data-titulo="Diligenciar un caso y generar los documentos" hidden></div>
     <div class="gcard">
       <p>Lo primero que escoges al abrir la app es <strong>qué procedimiento vas a documentar</strong>, porque de eso dependen los pasos y los documentos que salen al final:</p>
       <ul class="glist">
@@ -252,6 +264,7 @@
 <section class="gsec" id="rotulo">
   <div class="container">
     <div class="gsec-hdr"><div class="gnum">6</div><h2 class="gsec-title">Truco: imprimir el rótulo en tamaño reducido</h2></div>
+    <div class="gvideo" data-video="rotulo" data-titulo="Dónde quedan tus archivos e imprimir el rótulo al 60%" hidden></div>
     <div class="gtrick">
       <p style="color:var(--muted);font-size:.92rem;line-height:1.6">El rótulo (FPJ-7) se genera en tamaño de hoja normal, pero para pegarlo sobre un elemento pequeño — como un celular incautado — conviene imprimirlo reducido. Así es como lo estamos haciendo mientras no existe un tamaño reducido dentro de la propia app:</p>
       <div class="gtrick-steps">
@@ -335,6 +348,54 @@
 <script>
   const WA_NUMBER = window.CAPTURADOCS.WA_NUMBER;
   document.querySelectorAll('a.wa-link').forEach(el => el.href = 'https://wa.me/' + WA_NUMBER);
+
+  // Videos tutoriales. Los IDs viven en config.js (window.CAPTURADOCS.VIDEOS);
+  // un ID vacío o inválido deja el hueco oculto, como si no existiera. La
+  // portada es propia a propósito: ni siquiera la miniatura se pide a YouTube,
+  // porque eso ya sería una conexión a un tercero antes de que el visitante
+  // decida ver nada. El iframe (youtube-nocookie.com) solo se crea al dar play.
+  function montarVideos() {
+    const ids = (window.CAPTURADOCS && window.CAPTURADOCS.VIDEOS) || {};
+    document.querySelectorAll('.gvideo[data-video]').forEach(el => {
+      const id = ids[el.dataset.video];
+      if (!/^[A-Za-z0-9_-]{11}$/.test(id || '')) { el.hidden = true; return; }
+      if (el.dataset.listo) return;
+      const titulo = el.dataset.titulo || 'Video tutorial';
+
+      const portada = document.createElement('button');
+      portada.type = 'button';
+      portada.className = 'gvideo-poster';
+      portada.setAttribute('aria-label', 'Reproducir video: ' + titulo);
+      const play = document.createElement('span');
+      play.className = 'gvideo-play';
+      play.setAttribute('aria-hidden', 'true');
+      play.textContent = '▶';
+      const t = document.createElement('span');
+      t.className = 'gvideo-title';
+      t.textContent = '🎬 ' + titulo;
+      const nota = document.createElement('span');
+      nota.className = 'gvideo-note';
+      nota.textContent = 'Al dar play, el video se carga desde YouTube (youtube-nocookie.com).';
+      portada.append(play, t, nota);
+
+      portada.addEventListener('click', () => {
+        const f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        f.title = titulo;
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.allowFullscreen = true;
+        f.referrerPolicy = 'strict-origin-when-cross-origin';
+        el.textContent = '';
+        el.appendChild(f);
+      });
+
+      el.textContent = '';
+      el.appendChild(portada);
+      el.dataset.listo = '1';
+      el.hidden = false;
+    });
+  }
+  montarVideos();
 </script>
 
 </body>
