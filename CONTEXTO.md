@@ -640,6 +640,9 @@ dos tareas distintas, y la segunda se había quedado atrás tres versiones.
 
 ## Venta solo para escritorio (provisional, desde 2026-09-29)
 
+> ⚠️ **REVERTIDO el 2026-10-17** — ver "Vuelven las ventas normales" más abajo. Esta
+> sección se deja como historia (qué se tocó y por qué); **ya no describe la landing.**
+
 **Esto es temporal y está pensado para revertirse.** Mientras dure, la landing
 vende solo la versión de computador; la de celular existe pero no se ofrece
 (ver `README_VERSION_CAMPO.md` en `informes-ponal`: el APK de campo captura el
@@ -992,6 +995,51 @@ capturaba y enviaba el caso al PC). Decisión del dueño.
   Decisión de negocio asumida. El apagador del APK de campo (MIN_APP_VERSION
   por APP_VERSION 1.8.5) sigue disponible si se quiere forzar a los equipos de
   campo a migrar.
+
+## Vuelven las ventas normales (2026-10-17)
+
+Pedido del dueño: *"ajusta ya las ventas normales, ya la apk está funcionando
+full"*. Las dos restricciones provisionales ("Venta solo para escritorio" y "solo
+se vende Estación", ver arriba) existían porque el celular no generaba documentos;
+con el APK completo (y la PWA de iPhone completa) dejaron de tener razón de ser.
+
+**Eran DOS mitades y hubo que mover las dos, en este orden:**
+
+1. **Worker** (`informes-ponal/worker/index.js`): `PLANES_EN_VENTA` volvió de
+   `["N"]` a `["S","M","N"]` (commit `fad5856` de `informes-ponal`). Esa constante
+   filtra lo que publica `/config-publica` y lo que recibe el **bot** de cotización
+   por `/admin/config-consultar`. **Un push a `main` que toque `worker/**` lo
+   despliega solo** (GitHub Actions `deploy-worker.yml`); no hace falta `wrangler`.
+   Verificado en vivo: `/config-publica` devuelve `{"S":12000,"M":35000,"N":100000}`.
+   La prueba `test:worker` dejó de fijar *cuáles* planes están en venta: verifica
+   que el bot reciba exactamente los de `PLANES_EN_VENTA`.
+2. **Landing** (este repo): se restauraron las tarjetas **Semanal** y **Mensual**
+   (rejilla otra vez de 4 columnas), las dos listas del chat (cotizar y comprobante),
+   las ofertas de `schema.org` (4: gratis, semanal, mensual, Negocio/Estación), y se
+   **eliminó** el filtro `CHAT_PLANES_EN_VENTA` de "Ver precios". Los textos que
+   comparaban con un plan que "ya no se ofrecía" volvieron: la IA es **exclusiva de
+   Mensual y Negocio/Estación** (tarjeta de funciones, FAQ y `guia.html`), y la FAQ de
+   Estación otra vez dice que "cuesta más que la mensual normal".
+
+**Decisiones que conviene no perder:**
+
+- **"Empezar gratis" ahora va a `#descargas`**, no directo al `.exe`. Con tres
+  plataformas, mandar a todos al instalador de Windows no tiene sentido; la sección
+  de descargas deja escoger. Los textos de plataforma de las tarjetas dicen **"Windows,
+  Android e iPhone"** (antes "Para computador con Windows").
+- **Negocio/Estación sigue siendo solo para computador.** No lo cambió esta reversión:
+  es una regla del Worker (`soloPc: true` en `PLANES`; no se emite ni se reasigna a un
+  dispositivo Android) y la tarjeta lo sigue diciendo ("Solo para computador").
+- **Los precios de las tarjetas son el respaldo estático** ($12.000 / $35.000 /
+  $100.000); `sincronizarConfigPublica()` los reemplaza por lo que devuelva el
+  Worker. Mientras el Worker solo publicaba N, S y M se quedaban con el valor del HTML
+  (la función ignora un plan que no venga en la respuesta).
+- **Los términos y la política de licencias nunca se tocaron** durante el retiro (a
+  propósito, por los clientes que ya habían pagado), así que no hubo que restaurar
+  nada legal.
+- **La palanca queda armada.** Para retirar otro plan sin borrarlo: quitarlo de
+  `PLANES_EN_VENTA` en el Worker (y, si se quiere, de la landing). No borra nada:
+  quien ya lo compró conserva su licencia.
 
 ## Guía paso a paso en PDF (2026-10-16) — hecha, SIN publicar
 
