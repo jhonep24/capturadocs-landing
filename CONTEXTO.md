@@ -971,6 +971,28 @@ y los guiones; los videos los graba y sube él.
   la escena y corregir a la vez el texto de la sección (mismo cuidado que ya hay
   con la guía escrita). Por eso los guiones piden **no decir precios ni versiones**.
 
+## Android ahora genera documentos (2026-10-16)
+
+El canal **Android** de la landing pasó a ser la **app completa** (que genera
+todos los documentos en el teléfono), reemplazando al APK de campo (que solo
+capturaba y enviaba el caso al PC). Decisión del dueño.
+
+- Release: **`v1.13.1-android`** (`--latest=false`), asset
+  `CapturaDocs.Express.Android.apk`, SHA `c15e4685…`. Se compila desde `main`
+  (con generadores), versionCode 10, mismo certificado que el de campo (v8/v9):
+  se instala **encima** conservando los casos. El `.exe` sigue siendo *Latest*.
+- Se actualizó el botón de descarga (apunta al tag `v1.13.1-android`), el hash
+  de `seguridad.html` (etiqueta "Android v1.13.1") y el texto que describía el
+  celular como "solo captura": ahora **Windows y Android generan**, y **solo el
+  iPhone** (PWA, que se sigue compilando desde `apk-solo-cdx`) captura y envía
+  al computador.
+- ⚠️ Nota de seguridad: la app completa lleva los generadores y plantillas
+  dentro del APK; a diferencia del de campo, eso permite generar sin pagar a
+  quien manipule el teléfono (hueco conocido de la generación client-side).
+  Decisión de negocio asumida. El apagador del APK de campo (MIN_APP_VERSION
+  por APP_VERSION 1.8.5) sigue disponible si se quiere forzar a los equipos de
+  campo a migrar.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
