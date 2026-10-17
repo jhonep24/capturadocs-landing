@@ -1081,9 +1081,7 @@ quedaron como tareas en Vikunja, no se tocaron):
   "Configuración inicial" los muestra precargados a todo usuario que instala. Un
   NUNC identifica un caso. Si son de una estación o un caso real, están en el
   instalador público. En las capturas se reemplazaron por valores inventados.
-- **El modal de licencia de la app sigue ofreciendo Semanal y Mensual con precio**
-  aunque la landing vende solo Estación desde el 1-oct (ver "Venta solo para
-  escritorio"). El retiro provisional se hizo solo en la landing y el chat.
+- ~~El modal de licencia de la app ofrecía Semanal y Mensual aunque la landing vendía solo Estación~~ — **resuelto 2026-10-17**: se venden los tres planes otra vez, ya no hay discrepancia.
 - **"Configuración inicial" no está en `guia.html`.** Tras registrar el correo la app
   pide NUNC, departamento, municipio y destino; la sección 2 de la guía en línea no
   lo menciona (el PDF sí, paso 3).
