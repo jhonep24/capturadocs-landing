@@ -993,6 +993,53 @@ capturaba y enviaba el caso al PC). Decisión del dueño.
   por APP_VERSION 1.8.5) sigue disponible si se quiere forzar a los equipos de
   campo a migrar.
 
+## Guía paso a paso en PDF (2026-10-16) — hecha, SIN publicar
+
+El usuario pidió una guía **descargable para estudiar**, con capturas. Vive en
+`guia-pdf/` (cómo regenerarla y qué hay dentro: **`guia-pdf/LEEME.md`**, dueño de
+ese detalle, no copiarlo acá). Decisiones que conviene no perder:
+
+- **Las capturas las genera un script, no una persona.** Abre la app (`origin/main`
+  de `informes-ponal`) con Playwright, red simulada y datos inventados; así cuando
+  cambie la app se regenera con `sh guia-pdf/regenerar.sh` (~1 min) en vez de
+  volver a tomar 13 pantallas. Reutiliza `aislarRed()` de `e2e/utilidades.js` de la
+  app, que ya corta el internet y simula el Worker: **nada llega a producción**.
+- **Se captura desde una copia limpia de `origin/main`**, no desde el directorio de
+  `informes-ponal`: ahí suele haber cambios sin commitear de otra sesión (el
+  15-oct eran los de licencia y la auditoría de seguridad) y servir eso a medias
+  habría dado capturas de algo que no está publicado.
+- **Recortadas a la zona útil.** Una captura de pantalla completa en una hoja A4
+  deja el texto de la app en ~5 pt; recortada a la tarjeta central, en ~8 pt.
+- **Sin precios.** El modal de licencia muestra botones de plan con precios; en el
+  PDF se reemplazan por "Plan disponible", porque el archivo circula meses.
+- **El botón "Abrir carpeta del caso" sí sale**, aunque la captura es de la versión
+  web: la app solo lo pinta si existe `window.electronAPI`, y el script lo declara
+  para mostrar la pantalla real de la app instalada (ver `prepararRed`).
+- **Faltan 3 imágenes que no salen de la app** (Explorador, Word *Guardar como PDF*
+  y cuadro de impresión al 60 %): el usuario las tiene que tomar y dejar en
+  `guia-pdf/generador/img-usuario/` (`explorador.png`, `word-pdf.png`,
+  `imprimir-escala.png`). Las 5 que pegó en el chat el 11-ago NO quedaron guardadas
+  en disco, hay que pedirlas como archivos. Sin ellas el paso 12 sale solo con texto.
+- **Pendiente para publicar:** (1) las 3 imágenes; (2) visto bueno del usuario al
+  PDF; (3) subir el `.pdf` al repo y poner un botón "Descargar la guía en PDF" en
+  `guia.html`; (4) agregar el PDF al `sitemap.xml` solo si se quiere indexar.
+
+**Hallazgos de esta tarea que NO son de la landing** (la app es de otra sección;
+quedaron como tareas en Vikunja, no se tocaron):
+
+- **La app trae de fábrica un NUNC y una URI que parecen reales.** `src/borrador.js`
+  (líneas ~14-17) deja como predeterminado de cualquier equipo nuevo
+  `nunc: "1100160000172026"` y `destino: "URI ENGATIVÁ LA GRANJA"`, y la pantalla
+  "Configuración inicial" los muestra precargados a todo usuario que instala. Un
+  NUNC identifica un caso. Si son de una estación o un caso real, están en el
+  instalador público. En las capturas se reemplazaron por valores inventados.
+- **El modal de licencia de la app sigue ofreciendo Semanal y Mensual con precio**
+  aunque la landing vende solo Estación desde el 1-oct (ver "Venta solo para
+  escritorio"). El retiro provisional se hizo solo en la landing y el chat.
+- **"Configuración inicial" no está en `guia.html`.** Tras registrar el correo la app
+  pide NUNC, departamento, municipio y destino; la sección 2 de la guía en línea no
+  lo menciona (el PDF sí, paso 3).
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni

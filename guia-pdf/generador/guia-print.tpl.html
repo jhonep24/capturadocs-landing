@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<title>CapturaDocs Express — Guía paso a paso</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+  *{box-sizing:border-box}
+  body{font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif;color:#1b2740;font-size:10.5pt;line-height:1.5;margin:0}
+  h1,h2,h3{font-family:"Segoe UI Semibold","Segoe UI",Arial,sans-serif;margin:0}
+  .portada{height:255mm;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;page-break-after:always}
+  .portada img{width:34mm;height:34mm;border-radius:7mm;margin-bottom:10mm}
+  .portada h1{font-size:30pt;color:#0d1a2e;line-height:1.1}
+  .portada h1 span{color:#b87800}
+  .portada .sub{font-size:14pt;color:#4a5878;margin-top:6mm}
+  .portada .fecha{margin-top:14mm;font-size:10pt;color:#6b7893}
+  .portada .aviso{margin-top:10mm;max-width:120mm;font-size:9.5pt;color:#4a5878;border:1px solid #d6dcea;border-radius:3mm;padding:4mm 5mm}
+  h2.parte{font-size:19pt;color:#0d1a2e;border-bottom:3px solid #f0a500;padding-bottom:2mm;margin:0 0 6mm;break-after:avoid}
+  .pagina-salto{page-break-before:always}
+  .paso{break-inside:avoid;margin:0 0 9mm}
+  .paso h3{font-size:13.5pt;color:#0d1a2e;display:flex;align-items:center;gap:3mm;margin-bottom:3mm;break-after:avoid}
+  .paso h3 .num{flex:none;width:8mm;height:8mm;border-radius:2mm;background:#f0a500;color:#0d1a2e;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:11pt}
+  figure{margin:0 0 3mm}
+  figure img{display:block;width:100%;border:1px solid #c9d1e3;border-radius:2mm}
+  figure.chica img{width:62%;margin:0 auto}
+  .paso.lado{display:grid;grid-template-columns:76mm 1fr;column-gap:7mm;align-items:start}
+  .paso.lado h3{grid-column:1/-1}
+  .paso.lado figure{grid-column:1;grid-row:2 / span 8;margin:0}
+  .paso.lado > :not(h3):not(figure){grid-column:2}
+  figcaption{font-size:8.5pt;color:#6b7893;margin-top:1.2mm;text-align:center}
+  ol.llamadas{list-style:none;margin:0 0 2mm;padding:0}
+  ol.llamadas li{display:flex;gap:2.5mm;align-items:flex-start;margin:0 0 1.6mm}
+  ol.llamadas li b.n{flex:none;width:5.2mm;height:5.2mm;border-radius:50%;background:#ff5a36;color:#fff;font-size:8.5pt;display:flex;align-items:center;justify-content:center;margin-top:.5mm}
+  p{margin:0 0 2mm;orphans:3;widows:3}
+  .nota{background:#fff7e3;border-left:3px solid #f0a500;padding:2.5mm 3.5mm;border-radius:0 2mm 2mm 0;font-size:9.5pt;margin:2mm 0 0}
+  .nota b{color:#8a5a00}
+  ul.lista{margin:0 0 2mm;padding-left:5mm}
+  ul.lista li{margin:0 0 1mm}
+  code{background:#eef1f8;border-radius:1mm;padding:0 1.2mm;font-family:Consolas,monospace;font-size:9.2pt}
+  .check{list-style:none;padding:0;margin:0}
+  .check{columns:2;column-gap:8mm}
+  .check li{padding-left:7mm;position:relative;margin:0 0 1.6mm;break-inside:avoid}
+  .check li::before{content:"";position:absolute;left:0;top:1.2mm;width:4mm;height:4mm;border:1.4px solid #b87800;border-radius:1mm}
+  .indice{columns:2;column-gap:10mm;margin:6mm 0 0;padding:0;list-style:none}
+  .indice li{margin:0 0 1.6mm;break-inside:avoid}
+  .indice li b{color:#b87800}
+  table.docs{border-collapse:collapse;width:100%;font-size:9.5pt;margin:1mm 0 2mm}
+  table.docs td{border:1px solid #d6dcea;padding:1.4mm 2.4mm;vertical-align:top}
+  table.docs td:first-child{white-space:nowrap;font-weight:600;background:#f4f6fb}
+  .intro{break-after:avoid}
+  .cierre{break-inside:avoid;border:1px solid #d6dcea;border-radius:3mm;padding:5mm 6mm;margin-top:6mm;font-size:10pt}
+</style>
+</head>
+<body>
+
+<section class="portada">
+  <img src="img/logo.png" alt=""/>
+  <h1>Captura<span>Docs</span> Express</h1>
+  <div class="sub">Guía paso a paso<br/>Del primer ingreso a tus documentos listos</div>
+  <div class="fecha">Octubre de 2026</div>
+  <div class="aviso">Todos los datos que ves en las imágenes (nombres, cédulas, direcciones, números de caso) son <b>inventados</b>, solo para esta guía. Nunca uses datos reales de un caso mientras practicas.</div>
+</section>
+
+<section>
+  <h2 class="parte">Antes de empezar</h2>
+  <p>Esta guía te lleva, en orden, por todo lo que vas a hacer con la aplicación de Windows: abrirla por primera vez, diligenciar un caso, revisarlo, generar los documentos y activar tu licencia. Los números rojos de las imágenes (①②③) corresponden a los números de cada explicación.</p>
+  <ul class="indice">
+    <li><b>1.</b> Aceptar los términos</li>
+    <li><b>2.</b> Registrar tu correo</li>
+    <li><b>3.</b> Configuración inicial</li>
+    <li><b>4.</b> La pantalla principal</li>
+    <li><b>5.</b> Encabezado</li>
+    <li><b>6.</b> Capturados (y demás personas)</li>
+    <li><b>7.</b> Policías</li>
+    <li><b>8.</b> Elementos incautados</li>
+    <li><b>9.</b> Hechos</li>
+    <li><b>10.</b> Revisar en el Resumen</li>
+    <li><b>11.</b> Generar los documentos</li>
+    <li><b>12.</b> Imprimir el rótulo en tamaño reducido</li>
+    <li><b>13.</b> Activar tu licencia</li>
+  </ul>
+  <div class="nota" style="margin-top:6mm"><b>¿Necesito internet?</b> No para diligenciar el formulario ni para generar los documentos: eso funciona sin conexión y tu caso se guarda solo mientras avanzas. Sí necesitas conexión en momentos puntuales: al abrir la app (verifica tu licencia), al activar o reasignar una licencia, para consultar si hay una versión nueva, y si usas la mejora de redacción con IA.</div>
+  <div class="nota"><b>Tus datos se quedan contigo.</b> Lo que escribes de un caso (nombres, documentos, relatos) se procesa solo en tu equipo. Detalle en capturadocs.com/seguridad.html.</div>
+</section>
+
+<section>
+  <h2 class="parte">Primer ingreso</h2>
+
+  <div class="paso lado">
+    <h3><span class="num">1</span>Acepta los términos</h3>
+    <figure><img src="img/01b-terminos-marcado.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Marca la casilla: confirmas que leíste los Términos y Condiciones, la Política de Privacidad y la de Licencias, y que entiendes que es una herramienta privada y no oficial.</span></li>
+      <li><b class="n">2</b><span>Toca <b>Aceptar y continuar</b>. El botón solo se activa después de marcar la casilla.</span></li>
+    </ol>
+  </div>
+
+  <div class="paso lado">
+    <h3><span class="num">2</span>Registra tu correo</h3>
+    <figure><img src="img/02-registro-correo.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Escribe tu correo electrónico.</span></li>
+      <li><b class="n">2</b><span>Escríbelo otra vez. Esa casilla no deja pegar, a propósito, para que detectes errores de tipeo.</span></li>
+      <li><b class="n">3</b><span>Si alguien te compartió un código de referido, escríbelo aquí y ganas días extra en tu primera compra. Si no tienes, déjalo vacío.</span></li>
+      <li><b class="n">4</b><span>Toca <b>Continuar</b>.</span></li>
+    </ol>
+    <div class="nota"><b>Para qué sirve tu correo:</b> únicamente para tu licencia, la prueba gratuita y el soporte. No tiene nada que ver con los datos de tus casos.</div>
+  </div>
+</section>
+
+<section>
+  <div class="paso lado">
+    <h3><span class="num">3</span>Configuración inicial</h3>
+    <figure><img src="img/03-configuracion-inicial.jpg" alt=""/></figure>
+    <p>Son cuatro datos que la aplicación guarda en tu equipo y usa por defecto en cada caso nuevo: <b>NUNC</b>, <b>departamento</b>, <b>municipio</b> y <b>destino del informe</b> (URI o Fiscalía). Reemplaza lo que aparezca por los datos de tu unidad y toca <b>Guardar y continuar</b> <b class="n" style="display:inline-block;width:5mm;height:5mm;border-radius:50%;background:#ff5a36;color:#fff;text-align:center;font-size:8.5pt;line-height:5mm">1</b>.</p>
+    <div class="nota">Puedes cambiarlos cuando quieras desde la pestaña <b>Config</b> de la ventana <b>Acerca de</b>.</div>
+  </div>
+
+  <h2 class="parte" style="margin-top:8mm">La pantalla principal</h2>
+  <div class="paso">
+    <h3><span class="num">4</span>Conoce dónde está todo</h3>
+    <figure><img src="img/04-pantalla-principal.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Escoge el procedimiento: <b>Captura en flagrancia</b> o <b>Primer respondiente</b>. De esa elección dependen los pasos y los documentos que salen al final. Más abajo eliges cuántos capturados, víctimas y testigos hay.</span></li>
+      <li><b class="n">2</b><span>El menú de pasos. Avanzas con el botón <b>Siguiente</b> o tocando el paso que quieras; los pasos completos se marcan con una ✓.</span></li>
+      <li><b class="n">3</b><span><b>Modo prueba</b>: te dice cuántas de tus 5 generaciones gratuitas te quedan. Cuando se acaben, activas tu licencia (paso 13).</span></li>
+      <li><b class="n">4</b><span><b>Guardar</b> guarda el caso en un archivo (<code>.cdx</code>) y <b>Abrir</b> carga uno guardado. Sirve, por ejemplo, para pasar un caso del celular al computador.</span></li>
+    </ol>
+    <div class="nota">También arriba: <b>Acerca de</b> (términos, privacidad, configuración y licencias), <b>Cómo funciona</b> y <b>Nuestra página</b>.</div>
+  </div>
+</section>
+
+<section style="page-break-before:always">
+  <h2 class="parte">Diligenciar el caso</h2>
+  <p class="intro">Lo que escribes una sola vez se reutiliza en todos los documentos: no hay que repetirlo. Los campos con asterisco (*) son obligatorios.</p>
+
+  <div class="paso">
+    <h3><span class="num">5</span>Encabezado</h3>
+    <figure><img src="img/05-encabezado.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span><b>NUNC</b>: viene de la configuración inicial; verifica que corresponda a este caso.</span></li>
+      <li><b class="n">2</b><span><b>Presunto delito</b>: la conducta que se investiga. Más abajo van la dirección y el barrio del lugar de los hechos.</span></li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="num">6</span>Capturados (y demás personas)</h3>
+    <figure><img src="img/06-capturados.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Nombres y apellidos completos, sin errores de tipeo.</span></li>
+      <li><b class="n">2</b><span>Tipo y número de documento. La edad se calcula sola a partir de la fecha de nacimiento.</span></li>
+    </ol>
+    <p>Para más de un capturado usa <b>+ Agregar capturado</b>. <b>Víctimas</b>, <b>Testigos</b>, <b>Vehículos</b> y <b>Bicicletas</b> funcionan igual: escoges cuántos hay y diligencias la ficha de cada uno.</p>
+  </div>
+</section>
+
+<section>
+  <div class="paso">
+    <h3><span class="num">7</span>Policías</h3>
+    <figure><img src="img/07-policias.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span><b>Servidor 1</b> es obligatorio: nombre completo, identificación, cargo, teléfono y correo. Más abajo hay un <b>Servidor 2</b> opcional, por si participó otro policía.</span></li>
+    </ol>
+  </div>
+
+  <div class="paso">
+    <h3><span class="num">8</span>Elementos incautados</h3>
+    <figure><img src="img/08-elementos.jpg" alt=""/></figure>
+    <p>Escoge cuántos elementos hay (de 0 a 6, o <b>+</b> para más) y diligencia la ficha de cada uno. A cada elemento la aplicación le genera automáticamente su <b>rótulo (FPJ-7)</b> y su <b>cadena de custodia (FPJ-8)</b>.</p>
+    <div class="nota"><b>Ojo:</b> los vehículos no se cuentan aquí; van en su propio paso, <b>Vehículos</b>.</div>
+  </div>
+</section>
+
+<section>
+  <div class="paso">
+    <h3><span class="num">9</span>Hechos</h3>
+    <figure><img src="img/09-hechos.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span><b>Fecha y hora de la captura.</b></span></li>
+      <li><b class="n">2</b><span><b>Fecha a disposición del fiscal</b> (solo en captura en flagrancia). Revisa las dos fechas dos veces: son las que más inconsistencias causan entre documentos.</span></li>
+      <li><b class="n">3</b><span><b>Narración de los hechos</b>: cuenta lo que realmente pasó, en orden, con tus palabras. La aplicación no cambia lo que escribes.</span></li>
+    </ol>
+    <div class="nota"><b>Sobre la mejora de redacción con IA:</b> es opcional y solo viene con las licencias que la incluyen. Nunca decide los hechos ni reemplaza tu texto por su cuenta: te muestra una sugerencia aparte y solo se aplica si tú presionas <b>Usar</b>. El texto se anonimiza en tu equipo antes de salir.</div>
+  </div>
+</section>
+
+<section>
+  <h2 class="parte">Revisar y generar</h2>
+
+  <div class="paso">
+    <h3><span class="num">10</span>Revisa en el Resumen</h3>
+    <figure><img src="img/10-resumen-revisar.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Las filas en <b>rojo</b> con <b>(falta)</b> son datos importantes que todavía no has diligenciado.</span></li>
+      <li><b class="n">2</b><span>Cada tarjeta indica cuántos le faltan (<b>Falta 9</b>, por ejemplo).</span></li>
+    </ol>
+    <p>No tienes que volver al paso a mano: <b>haz clic sobre el valor</b> que quieres corregir y la aplicación te lleva directo a ese paso.</p>
+  </div>
+
+  <div class="paso">
+    <h3>Antes de generar, repasa</h3>
+    <ul class="check">
+      <li>Nombre completo del capturado, sin errores de tipeo</li>
+      <li>Número de identificación verificado</li>
+      <li>Fecha y hora de captura correctas</li>
+      <li>Fecha a disposición del fiscal correcta (solo en flagrancia)</li>
+      <li>Narración revisada: cuenta lo que realmente pasó, en orden</li>
+      <li>Elementos incautados completos, con quién los halló, recolectó y embaló</li>
+      <li>Ningún campo obligatorio en rojo en el Resumen</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="paso">
+    <h3><span class="num">11</span>Genera los documentos</h3>
+    <figure><img src="img/11-resumen-generar.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span><b>Abrir carpeta del caso</b>: abre en el Explorador de Windows la carpeta donde se guardan los documentos de este caso.</span></li>
+      <li><b class="n">2</b><span>Un botón por documento. Cada uno genera un archivo de Word (<code>.docx</code>), y el círculo de la derecha se marca en verde cuando ya se generó con los datos actuales.</span></li>
+    </ol>
+    <table class="docs">
+      <tr><td>FPJ-5</td><td>Informe de Captura en Flagrancia</td></tr>
+      <tr><td>FPJ-6</td><td>Acta de Derechos del Capturado (una por capturado)</td></tr>
+      <tr><td>FPJ-7</td><td>Rótulo (uno por elemento incautado, por vehículo y por bicicleta)</td></tr>
+      <tr><td>FPJ-8</td><td>Cadena de Custodia (una por elemento, por vehículo y por bicicleta)</td></tr>
+      <tr><td>Acta de Incautación</td><td>Una por cada persona a quien se le incautó algo</td></tr>
+    </table>
+    <div class="nota"><b>¿Dónde quedan?</b> En <code>Documentos\CapturaDocs</code>, y dentro de esa carpeta <b>cada caso tiene la suya</b> (por ejemplo <code>HURTO_PEREZ</code>), para que no se te revuelvan los papeles. La aplicación la crea sola, sin preguntarte dónde guardar. Si generas el mismo documento dos veces, el segundo queda como <code>(1)</code>, <code>(2)</code>… y nunca se sobrescribe uno anterior.</div>
+  </div>
+</section>
+
+<section>
+  <div class="paso">
+    <h3><span class="num">12</span>Imprimir el rótulo en tamaño reducido</h3>
+    <p>El rótulo (FPJ-7) sale del tamaño de una hoja. Para pegarlo sobre algo pequeño, como un celular incautado, conviene imprimirlo reducido. Así lo hacemos hoy:</p>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Abre el archivo <code>rotulo_APELLIDO.docx</code> con Word. Lo más rápido es el botón <b>Abrir carpeta del caso</b> del Resumen.</span></li>
+    </ol>
+    {{img:explorador|El archivo del rótulo, dentro de la carpeta del caso}}
+    <ol class="llamadas" start="2">
+      <li><b class="n">2</b><span>En Word: <b>Archivo → Guardar como</b> y, en <b>Tipo</b>, elige <b>PDF</b>. Guarda.</span></li>
+    </ol>
+    {{img:word-pdf|Guardar el rótulo como PDF desde Word}}
+    <ol class="llamadas" start="3">
+      <li><b class="n">3</b><span>Abre ese PDF y dale <b>Imprimir</b>.</span></li>
+      <li><b class="n">4</b><span>En el tamaño o escala de impresión, en vez de «Ajustar» o «Tamaño real», escoge <b>Escala personalizada: 60 %</b>.</span></li>
+    </ol>
+    {{img:imprimir-escala|Cuadro de impresión con la escala personalizada en 60 %}}
+    <div class="nota"><b>Nota:</b> el 60 % es el tamaño que hoy nos ha funcionado bien para un celular; si el elemento es más grande o más pequeño, ajusta el porcentaje. Si no tienes Word, puedes abrir el archivo con <b>Google Docs</b> o <b>LibreOffice</b> (gratis) y exportarlo a PDF desde ahí.</div>
+  </div>
+</section>
+
+<section>
+  <h2 class="parte">Activar tu licencia</h2>
+  <div class="paso lado">
+    <h3><span class="num">13</span>Activa cuando se acaben tus casos gratis</h3>
+    <figure><img src="img/12-licencia.jpg" alt=""/></figure>
+    <ol class="llamadas">
+      <li><b class="n">1</b><span>Tu <b>ID de dispositivo</b>: un código que la aplicación genera sola en tu equipo (no es tu cédula ni un dato personal). Con él sabemos a qué computador corresponde tu licencia. Lo ves tocando <b>Activar licencia</b> o el contador de generaciones de la barra superior.</span></li>
+      <li><b class="n">2</b><span>Pega aquí la clave de activación que te enviamos.</span></li>
+      <li><b class="n">3</b><span>Toca <b>Activar Licencia</b>. Queda activa al instante.</span></li>
+    </ol>
+    <p><b>Cómo conseguir la clave:</b></p>
+    <ul class="lista">
+      <li>Escríbenos por el chat de capturadocs.com (o por WhatsApp) con tu ID de dispositivo y el plan que quieres.</li>
+      <li>Realiza el pago por Nequi o Llave.</li>
+      <li>Te enviamos tu clave de activación.</li>
+    </ul>
+    <div class="nota"><b>¿Cambiaste de computador?</b> Escríbenos: te movemos la licencia al equipo nuevo sin costo; no tienes que comprar otra. Los planes disponibles y sus precios vigentes están siempre en capturadocs.com.</div>
+  </div>
+
+  <div class="cierre">
+    <b>¿Algo no te quedó claro?</b><br/>
+    Guía en línea (se mantiene al día): <b>capturadocs.com/guia.html</b><br/>
+    Correo: <b>contacto@capturadocs.com</b> · Chat y WhatsApp: <b>capturadocs.com</b><br/>
+    <span style="color:#6b7893;font-size:9pt">CapturaDocs Express es una herramienta privada e independiente; no está afiliada ni avalada por la Policía Nacional de Colombia ni por ninguna entidad del Estado. Si alguna pantalla se ve distinta a la de esta guía, consulta la guía en línea.</span>
+  </div>
+</section>
+
+</body>
+</html>

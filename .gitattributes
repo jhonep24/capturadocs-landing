@@ -1,0 +1,4 @@
+# Los scripts de shell tienen que quedar con saltos de línea LF. Con CRLF (el
+# valor por defecto de Git en Windows al clonar) `sh` falla con
+# "\r: command not found" (afecta a setup.sh y guia-pdf/regenerar.sh).
+*.sh text eol=lf
