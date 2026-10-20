@@ -693,6 +693,9 @@
         <ul>
           <li><strong>Cloudflare</strong>: aloja nuestro servidor de licencias (Workers), la base de datos de pedidos y la conexión del chat (Tunnel). Actúa como encargado técnico de infraestructura, no accede al contenido con fines propios.</li>
           <li><strong>Proveedor de IA</strong>: solo recibe el texto de la narración del procedimiento cuando usas la mejora de redacción, y siempre <strong>ya anonimizado por tu propio dispositivo</strong> antes de salir de él — nunca ve nombres, cédulas ni NUNC reales. Ver también punto 8.</li>
+          <li><strong>Google Fonts</strong>: esta página web carga sus tipos de letra desde Google, por lo que Google puede recibir tu dirección IP al abrirla. <strong>No aplica a la aplicación de escritorio.</strong></li>
+          <li><strong>YouTube (youtube-nocookie.com)</strong>: los videos tutoriales de la guía solo se cargan si tú tocas «reproducir»; hasta ese momento no se envía nada a YouTube. Al reproducirlo, YouTube recibe tu IP y los datos propios de la reproducción. <strong>No aplica a la aplicación.</strong></li>
+          <li><strong>Cloudflare Web Analytics</strong>: estadística de visitas a esta página web, sin cookies y sin identificar personas.</li>
         </ul>
         <h2>8. Conexiones que realiza el software</h2>
         <p>CapturaDocs Express solo se conecta a <strong>un único servidor propio</strong> (<code>capturadocs-licencias.capturadocs.workers.dev</code>, en Cloudflare Workers) — reforzado en el código, no solo declarado aquí. Se usa para verificar la licencia, registrar activaciones/canjes de códigos y consultar si hay una versión nueva disponible. El chat de esta página y de la app se conecta además a nuestro backend de gestión de pedidos (Cloudflare Tunnel). Ninguna otra conexión recibe datos desde el software, ni siquiera al usar la mejora de redacción con IA: en ese caso <strong>tu propio dispositivo anonimiza el texto antes de enviarlo</strong> (reemplaza nombres, cédulas y NUNC por marcadores genéricos), y nuestro servidor solo reenvía ese texto ya anonimizado al proveedor de IA — ni nuestro servidor ni el proveedor de IA llegan a ver el dato real, y el navegador o la app nunca contactan al proveedor de IA directamente.</p>
@@ -704,7 +707,7 @@
         <p>CapturaDocs Express está dirigido exclusivamente a servidores de policía mayores de edad en ejercicio de sus funciones.</p>
         <h2>12. Cambios a esta política</h2>
         <p>Cualquier cambio se notificará mediante aviso dentro de la aplicación con al menos 15 días de anticipación.</p>
-        <hr><p style="font-size:.78rem;text-align:center;color:#555">Política de Privacidad · CapturaDocs Express · Última actualización: agosto de 2026</p>
+        <hr><p style="font-size:.78rem;text-align:center;color:#555">Política de Privacidad · CapturaDocs Express · Última actualización: octubre de 2026</p>
       </div>
 
       <!-- POLÍTICA DE LICENCIAS -->

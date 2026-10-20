@@ -29,16 +29,16 @@ se conecta al Worker de licencias real.
 | `playwright.guia.config.js` | Build de producción en el puerto 5179, tamaño de pantalla |
 | `img-usuario/` | Las 3 imágenes que NO salen de la app (ver abajo) |
 
-## Las 3 imágenes que se ponen a mano
+## Las 3 imágenes de Windows/Word/impresión (ilustraciones)
 
-El Explorador de Windows, Word y el cuadro de impresión no existen en la versión
-web que se captura. Se toman a mano y se guardan en `generador/img-usuario/` con
-estos nombres exactos (la guía las incluye sola al regenerar; si faltan, esa
-página sale solo con texto):
-
-- `explorador.png` — la carpeta del caso en `Documentos\CapturaDocs`, con los `.docx`
-- `word-pdf.png` — Word, *Archivo → Guardar como*, *Tipo: PDF*
-- `imprimir-escala.png` — cuadro de impresión con *Escala personalizada: 60 %*
+El Explorador de Windows, Word y el cuadro de impresión no existen en la versión web
+que se captura. Se dibujan como **ilustraciones** (HTML en `generador/ilustraciones/`,
+datos inventados, estilo claro) y se guardan ya generadas en `generador/img-usuario/`
+(`explorador.png`, `word-pdf.png`, `imprimir-escala.png`; la guía las incluye sola).
+Una captura real de la pantalla del dueño salía ilegible (4K a 300 %) y mostraba
+carpetas personales. Para cambiarlas: editar el HTML y correr
+`node generador/e2e-guia/ilustraciones.mjs <ilustraciones> <img-usuario>` (con
+`@playwright/test` disponible, p. ej. desde `informes-ponal`), y recortar el blanco sobrante.
 
 ## Cuidados
 

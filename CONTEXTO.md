@@ -1041,6 +1041,19 @@ con el APK completo (y la PWA de iPhone completa) dejaron de tener razón de ser
   `PLANES_EN_VENTA` en el Worker (y, si se quiere, de la landing). No borra nada:
   quien ya lo compró conserva su licencia.
 
+## Guías terminadas y publicadas (2026-10-20)
+
+El dueño pidió entregar las guías ya terminadas. Se cerró:
+- **PDF (14 págs.) publicado** en `guia-pdf/` y enlazado desde `guia.html` (botón
+  "Descargar la guía en PDF" y enlace en el índice). Las 3 imágenes pendientes se
+  resolvieron como **ilustraciones** (ver `guia-pdf/LEEME.md`), no capturas reales.
+- **`guia.html`**: sección 1 con aviso de SmartScreen, sección 2 con "Configuración
+  inicial" (Vikunja #165, #167). El PDF tiene también el aviso de SmartScreen.
+- **Política de privacidad** (punto 7 del modal de `index.html`): se agregaron Google
+  Fonts, YouTube (solo al dar play) y Cloudflare Web Analytics; fecha → octubre 2026 (#164).
+- **Videos (#163)**: siguen sin grabar; los 4 huecos están ocultos hasta que
+  `config.js` `VIDEOS` tenga los IDs. Es lo único que depende del dueño.
+
 ## Guía paso a paso en PDF (2026-10-16) — hecha, SIN publicar
 
 El usuario pidió una guía **descargable para estudiar**, con capturas. Vive en
