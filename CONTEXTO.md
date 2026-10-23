@@ -1059,6 +1059,20 @@ Se probó una portada totalmente nueva (papel/azul) y **el dueño la rechazó**:
   `prefers-reduced-motion`.
 - Sin plugins extra: se usó `frontend-design` solo como guía; `audit-suite` no se instaló.
 
+### Segunda ronda: animación "fuera del molde" (2026-10-22)
+El dueño dijo que las animaciones de aparición/hover **no se notaban** y pidió algo radical.
+- **Escena de scroll `#escena`** (después de la portada, antes de "Cómo funciona"): sección
+  fijada (`position:sticky`, pista de 430vh; 520vh en móvil) donde **el scroll dirige la
+  animación**: se escribe un formulario (4 campos con cursor) → "fichas" doradas vuelan por
+  curvas Bézier a cada uno de los 5 documentos → sellos "LISTO" → tarjeta de descarga. Texto de
+  4 pasos que se resalta según el avance. Es JS propio (~60 líneas, sin librerías); fases por
+  `p` (0–1): escribir 0–.28, volar .30–.66, sellar .70–.90, listo .93. Datos de ejemplo
+  inventados. Con `prefers-reduced-motion` se muestra el estado final sin pista larga.
+- Portada: el título sube **palabra por palabra** desde una máscara; botón principal con imán
+  hacia el cursor; foco de luz dorado que sigue al cursor en tarjetas de plan, testimonios y pasos.
+- Se probó con `matchMedia` forzado a "sin reducir movimiento" (el panel del navegador lo
+  emula siempre activo): para ver la animación real hay que abrir la página en un navegador normal.
+
 ## Guías terminadas y publicadas (2026-10-20)
 
 El dueño pidió entregar las guías ya terminadas. Se cerró:

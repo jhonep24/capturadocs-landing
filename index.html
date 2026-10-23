@@ -308,6 +308,85 @@
       .scrollbar{display:none}
       .btn-p::before,.step::after{display:none}
     }
+
+    /* ── Escena de scroll: un formulario se reparte en cinco documentos ── */
+    .escena{position:relative;background:var(--navy);border-top:1px solid var(--border)}
+    .escena-pista{height:430vh;position:relative}
+    .escena-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:minmax(260px,5fr) minmax(0,8fr);gap:48px;align-items:center;max-width:1240px;margin:0 auto;padding:84px 32px 28px;overflow:hidden}
+    .escena-cap .stitle{margin:6px 0 26px}
+    .escena-pasos{list-style:none;display:grid;gap:6px}
+    .escena-pasos li{display:flex;gap:14px;padding:12px 14px;border-radius:12px;border:1px solid transparent;opacity:.38;transition:opacity .35s,background .35s,border-color .35s}
+    .escena-pasos li b{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--muted);border:1.5px solid var(--border);transition:all .35s}
+    .escena-pasos li span{font-size:.92rem;color:var(--muted);line-height:1.4}
+    .escena-pasos li strong{display:block;font-family:'Rajdhani',sans-serif;font-size:1.1rem;color:var(--white);font-weight:700}
+    .escena-pasos li.on{opacity:1;background:rgba(240,165,0,.07);border-color:rgba(240,165,0,.28)}
+    .escena-pasos li.on b{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+    .escena-pasos li.hecho{opacity:.7}
+    .escena-pasos li.hecho b{border-color:var(--gold);color:var(--gold)}
+    .escena-lienzo{position:relative;display:grid;grid-template-columns:minmax(0,4.2fr) minmax(0,6fr);gap:26px;align-items:center}
+    .ef-form{background:var(--navy2);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.45);transition:opacity .5s}
+    .ef-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--navy3);border-bottom:1px solid var(--border);font-size:.74rem;color:var(--muted)}
+    .ef-bar i{width:9px;height:9px;border-radius:50%;background:#2a3a5a}.ef-bar span{margin-left:8px}
+    .ef-campos{padding:16px;display:grid;gap:12px}
+    .ef-c{background:var(--navy);border:1px solid var(--border);border-radius:8px;padding:8px 12px;min-height:54px;transition:border-color .25s,box-shadow .25s}
+    .ef-c small{display:block;font-size:.68rem;color:var(--muted);margin-bottom:2px}
+    .ef-v{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1.02rem;color:var(--white);white-space:nowrap;overflow:hidden;display:block;min-height:1.3em}
+    .ef-c.act{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,165,0,.16)}
+    .ef-c.act .ef-v::after{content:"";display:inline-block;width:2px;height:1em;background:var(--gold);margin-left:2px;vertical-align:-.15em;animation:parpadeo .7s steps(1) infinite}
+    @keyframes parpadeo{50%{opacity:0}}
+    .ef-docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .ef-doc{position:relative;background:#f3f6fc;color:#17233f;border-radius:6px;padding:11px 11px 14px;min-height:150px;font-family:'Barlow',sans-serif;font-size:.7rem;line-height:1.35;box-shadow:0 10px 26px rgba(0,0,0,.4);opacity:.32;transform:translateY(14px) scale(.96);transition:opacity .45s,transform .45s cubic-bezier(.2,.9,.3,1.2),box-shadow .4s}
+    .ef-doc h4{font-family:'Rajdhani',sans-serif;font-size:.84rem;font-weight:700;color:#1b3b8c;border-bottom:2px solid #1b3b8c;padding-bottom:3px;margin-bottom:6px}
+    .ef-doc p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#4b5775;margin-bottom:2px}
+    .ef-doc b{font-weight:600;color:#17233f;border-radius:3px;padding:0 2px;transition:background .3s}
+    .ef-doc b.lleno{background:rgba(240,165,0,.4)}
+    .ef-doc i{display:block;height:5px;background:#dbe2f0;border-radius:2px;margin:7px 0}
+    .ef-doc.vivo{opacity:1;transform:none}
+    .ef-sello{position:absolute;right:9px;bottom:9px;border:2.5px solid #1e9e62;color:#1e9e62;border-radius:5px;padding:0 6px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:1px;transform:rotate(-9deg) scale(2.2);opacity:0;transition:transform .32s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+    .ef-doc.sellado .ef-sello{transform:rotate(-9deg) scale(1);opacity:.95}
+    .ef-doc.sellado{box-shadow:0 10px 26px rgba(0,0,0,.4),0 0 0 2px rgba(30,158,98,.45)}
+    .ef-dl{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);font-size:.8rem}
+    .ef-dl .ic{width:34px;height:34px;stroke-width:1.5}
+    .ef-dl strong{font-family:'Rajdhani',sans-serif;font-size:1.15rem;line-height:1}
+    .ef-chips{position:absolute;inset:0;pointer-events:none;z-index:5}
+    .ef-chip{position:absolute;left:0;top:0;padding:2px 9px;border-radius:99px;background:var(--gold);color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;white-space:nowrap;box-shadow:0 0 14px rgba(240,165,0,.7);opacity:0;will-change:transform,opacity}
+    .escena-prog{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--navy3)}
+    .escena-prog i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--accent));transform-origin:0 50%;transform:scaleX(0)}
+    @media (max-width:980px){
+      .escena-pista{height:520vh}
+      .escena-stage{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr;gap:12px;padding:70px 14px 14px;align-items:start}
+      .escena-cap .stag{display:none}
+      .escena-cap .stitle{font-size:1.5rem;margin:0 0 8px}
+      .escena-pasos{grid-template-columns:repeat(4,1fr);gap:4px}
+      .escena-pasos li{padding:6px;flex-direction:column;align-items:center;text-align:center;gap:4px}
+      .escena-pasos li span{display:none}
+      .escena-lienzo{grid-template-columns:minmax(0,1fr);gap:12px;align-self:center}
+      .ef-campos{grid-template-columns:1fr 1fr;padding:10px;gap:8px}
+      .ef-c{min-height:46px;padding:6px 9px}
+      .ef-docs{gap:8px}
+      .ef-doc{min-height:104px;padding:7px 7px 10px;font-size:.58rem}
+      .ef-doc h4{font-size:.7rem}
+      .ef-sello{font-size:.6rem;padding:0 4px;border-width:2px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .escena-pista{height:auto}.escena-stage{position:relative;height:auto;padding-top:96px}
+      .ef-doc{opacity:1;transform:none}.ef-doc .ef-sello{opacity:.95;transform:rotate(-9deg)}
+      .escena-pasos li{opacity:1}.escena-prog{display:none}
+    }
+
+    /* Pantallas bajitas: la escena debe caber completa */
+    @media (max-width:980px){.ef-bar{display:none}}
+    @media (max-width:980px) and (max-height:760px){.escena-cap .stitle{display:none}.escena-stage{padding-top:64px}.ef-doc{min-height:84px}.ef-doc p:nth-of-type(n+4){display:none}.ef-campos{gap:6px;padding:8px}.ef-c{min-height:40px}}
+    /* Portada: el título sube palabra por palabra, desde una máscara */
+    .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
+    .w>span{display:inline-block;transform:translateY(112%);animation:sube .85s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i) * 80ms + 120ms)}
+    @keyframes sube{to{transform:none}}
+    h1.partido{animation:none}
+    /* Foco de luz que sigue al cursor sobre las tarjetas */
+    .plan::before,.tcard::before,.step::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(240,165,0,.15),transparent 62%);opacity:0;transition:opacity .3s;pointer-events:none}
+    .plan:hover::before,.tcard:hover::before,.step:hover::before{opacity:1}
+    .tcard{position:relative}
+    @media (prefers-reduced-motion:reduce){.w>span{transform:none;animation:none}}
   </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -341,6 +420,44 @@
       <div class="stat"><div class="stat-n">~30min</div><div class="stat-l">por informe completo</div></div>
       <div class="stat"><div class="stat-n">5</div><div class="stat-l">documentos generados</div></div>
       <div class="stat"><div class="stat-n"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-smartphone"/></svg></div><div class="stat-l">app instalable</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="escena" id="escena" aria-label="Cómo un solo formulario genera los cinco documentos">
+  <div class="escena-pista">
+    <div class="escena-stage">
+      <div class="escena-cap">
+        <div class="stag">Así funciona</div>
+        <h2 class="stitle">Un formulario.<br>Cinco documentos.</h2>
+        <ol class="escena-pasos">
+          <li class="on"><b>1</b><span><strong>Lo escribes una vez</strong>Datos del capturado, del lugar y de lo incautado.</span></li>
+          <li><b>2</b><span><strong>Se reparte solo</strong>Cada dato viaja a todos los formatos donde se necesita.</span></li>
+          <li><b>3</b><span><strong>Se sellan los documentos</strong>Con formato oficial, sin inconsistencias entre ellos.</span></li>
+          <li><b>4</b><span><strong>Listos para descargar</strong>En Word, para imprimir y firmar.</span></li>
+        </ol>
+      </div>
+      <div class="escena-lienzo" aria-hidden="true">
+        <div class="ef-form">
+          <div class="ef-bar"><i></i><i></i><i></i><span>Caso nuevo</span></div>
+          <div class="ef-campos">
+            <div class="ef-c" data-k="nombre"><small>Capturado</small><span class="ef-v"></span></div>
+            <div class="ef-c" data-k="cc"><small>Cédula</small><span class="ef-v"></span></div>
+            <div class="ef-c" data-k="lugar"><small>Lugar de los hechos</small><span class="ef-v"></span></div>
+            <div class="ef-c" data-k="elem"><small>Elemento incautado</small><span class="ef-v"></span></div>
+          </div>
+        </div>
+        <div class="ef-docs">
+          <article class="ef-doc" data-d="0"><h4>Informe de Captura</h4><p>Capturado <b data-k="nombre"></b></p><p>C.C. <b data-k="cc"></b></p><p>Lugar <b data-k="lugar"></b></p><p>Elemento <b data-k="elem"></b></p><span class="ef-sello">LISTO</span></article>
+          <article class="ef-doc" data-d="1"><h4>Acta de Derechos</h4><p>Se informa a <b data-k="nombre"></b></p><p>C.C. <b data-k="cc"></b></p><i></i><i></i><span class="ef-sello">LISTO</span></article>
+          <article class="ef-doc" data-d="2"><h4>Rótulo</h4><p>Persona <b data-k="nombre"></b></p><p>Elemento <b data-k="elem"></b></p><i></i><span class="ef-sello">LISTO</span></article>
+          <article class="ef-doc" data-d="3"><h4>Cadena de Custodia</h4><p>Elemento <b data-k="elem"></b></p><p>Lugar <b data-k="lugar"></b></p><i></i><span class="ef-sello">LISTO</span></article>
+          <article class="ef-doc" data-d="4"><h4>Acta de Incautación</h4><p>A <b data-k="nombre"></b></p><p>C.C. <b data-k="cc"></b></p><p>Elemento <b data-k="elem"></b></p><span class="ef-sello">LISTO</span></article>
+          <div class="ef-doc ef-dl" data-d="5"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg><strong>5 documentos</strong><span>listos en Word</span></div>
+        </div>
+        <div class="ef-chips"></div>
+      </div>
+      <div class="escena-prog" aria-hidden="true"><i></i></div>
     </div>
   </div>
 </section>
@@ -1368,6 +1485,116 @@
     function paso(t){ t0 = t0 || t; var k = Math.min(1, (t - t0) / 1100); el.textContent = m[1] + Math.round(meta * (1 - Math.pow(1 - k, 3))) + m[3]; if (k < 1) requestAnimationFrame(paso); }
     el.textContent = m[1] + '0' + m[3];
     setTimeout(function(){ requestAnimationFrame(paso); }, 500);
+  });
+})();
+</script>
+<script>
+// Escena de scroll: el avance del scroll DIRIGE la animación (escribir → repartir → sellar → listo).
+(function(){
+  var pista = document.querySelector('.escena-pista'); if (!pista) return;
+  var V = {nombre:'Carlos A. Ramírez', cc:'1.020.345.678', lugar:'Cra. 7 con Cl. 45', elem:'Celular Samsung A14'};
+  var orden = ['nombre','cc','lugar','elem'];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    pista.querySelectorAll('.ef-c').forEach(function(c){ c.querySelector('.ef-v').textContent = V[c.dataset.k]; });
+    pista.querySelectorAll('.ef-doc b').forEach(function(b){ b.textContent = V[b.dataset.k]; b.classList.add('lleno'); });
+    pista.querySelectorAll('.ef-doc').forEach(function(d){ d.classList.add('vivo','sellado'); });
+    return;
+  }
+  var lienzo = pista.querySelector('.escena-lienzo'), capa = pista.querySelector('.ef-chips'), prog = pista.querySelector('.escena-prog i');
+  var form = pista.querySelector('.ef-form'), pasos = pista.querySelectorAll('.escena-pasos li'), docs = pista.querySelectorAll('.ef-doc');
+  var campos = {}; pista.querySelectorAll('.ef-c').forEach(function(c){ campos[c.dataset.k] = c; });
+  var fichas = [];
+  docs.forEach(function(d, di){ d.querySelectorAll('b[data-k]').forEach(function(b){ fichas.push({k:b.dataset.k, b:b, doc:di}); }); });
+  fichas.forEach(function(f, i){
+    f.el = document.createElement('span'); f.el.className = 'ef-chip'; f.el.textContent = V[f.k]; capa.appendChild(f.el);
+    f.ini = 0.30 + (i / fichas.length) * 0.30; f.dur = 0.13; f.lleno = false;
+  });
+  var geo = false;
+  function medir(){
+    var L = lienzo.getBoundingClientRect(); geo = true;
+    fichas.forEach(function(f){
+      var o = campos[f.k].getBoundingClientRect(), d = f.b.getBoundingClientRect();
+      f.x0 = o.right - L.left - 30; f.y0 = o.top - L.top + o.height / 2;
+      f.x1 = d.left - L.left + 6;   f.y1 = d.top - L.top + d.height / 2;
+      f.cx = (f.x0 + f.x1) / 2 + ((f.doc % 2) ? 30 : -30); f.cy = Math.min(f.y0, f.y1) - 60 - f.doc * 10;
+    });
+  }
+  function suave(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+  function lim(x){ return x < 0 ? 0 : x > 1 ? 1 : x; }
+  var pend = false;
+  function dibujar(){
+    pend = false;
+    var r = pista.getBoundingClientRect(), total = r.height - innerHeight, p = lim(-r.top / total);
+    prog.style.transform = 'scaleX(' + p + ')';
+    var tA = lim(p / 0.28) * orden.length;
+    orden.forEach(function(k, i){
+      var t = lim(tA - i), txt = V[k];
+      campos[k].querySelector('.ef-v').textContent = txt.slice(0, Math.round(txt.length * t));
+      campos[k].classList.toggle('act', t > 0 && t < 1);
+    });
+    docs.forEach(function(d, i){ if (i < 5) d.classList.toggle('vivo', p > 0.26 + i * 0.02); });
+    if (!geo) medir();
+    fichas.forEach(function(f){
+      var t = lim((p - f.ini) / f.dur), e = suave(t);
+      if (t <= 0 || t >= 1) f.el.style.opacity = 0;
+      else {
+        var x = (1-e)*(1-e)*f.x0 + 2*(1-e)*e*f.cx + e*e*f.x1, y = (1-e)*(1-e)*f.y0 + 2*(1-e)*e*f.cy + e*e*f.y1;
+        f.el.style.opacity = t < .12 ? t / .12 : 1;
+        f.el.style.transform = 'translate(' + x + 'px,' + y + 'px) translateY(-50%) scale(' + (0.8 + 0.3 * Math.sin(e * Math.PI)) + ')';
+      }
+      var ya = t >= 1;
+      if (ya !== f.lleno){ f.lleno = ya; f.b.textContent = ya ? V[f.k] : ''; f.b.classList.toggle('lleno', ya); }
+    });
+    docs.forEach(function(d, i){ if (i < 5) d.classList.toggle('sellado', p > 0.70 + i * 0.04); });
+    docs[5].classList.toggle('vivo', p > 0.93);
+    form.style.opacity = p > 0.92 ? .45 : 1;
+    var idx = p < 0.28 ? 0 : p < 0.68 ? 1 : p < 0.92 ? 2 : 3;
+    pasos.forEach(function(li, i){ li.classList.toggle('on', i === idx); li.classList.toggle('hecho', i < idx); });
+  }
+  function pedir(){ if (!pend){ pend = true; requestAnimationFrame(dibujar); } }
+  addEventListener('scroll', pedir, {passive:true});
+  addEventListener('resize', function(){ geo = false; pedir(); });
+  addEventListener('load', function(){ geo = false; pedir(); });
+  dibujar();
+})();
+</script>
+
+<script>
+// Portada y tarjetas: título por palabras, foco de luz con el cursor, botón con imán.
+(function(){
+  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var h1 = document.querySelector('.hero h1');
+  if (h1 && !quieto){
+    var n = 0;
+    (function partir(nodo){
+      Array.prototype.slice.call(nodo.childNodes).forEach(function(c){
+        if (c.nodeType === 3){
+          var f = document.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function(t){
+            if (!t) return;
+            if (/^\s+$/.test(t)) { f.appendChild(document.createTextNode(' ')); return; }
+            var w = document.createElement('span'); w.className = 'w';
+            var i = document.createElement('span'); i.textContent = t; i.style.setProperty('--i', n++); w.appendChild(i); f.appendChild(w);
+          });
+          nodo.replaceChild(f, c);
+        } else if (c.nodeType === 1) partir(c);
+      });
+    })(h1);
+    h1.classList.add('partido');
+  }
+  if (quieto) return;
+  document.querySelectorAll('.plan, .tcard, .step').forEach(function(el){
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px'); el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+  if (matchMedia('(hover:hover)').matches) document.querySelectorAll('.hero .btn-p').forEach(function(b){
+    b.addEventListener('pointermove', function(e){
+      var r = b.getBoundingClientRect();
+      b.style.transform = 'translate(' + ((e.clientX - r.left - r.width/2) * .18) + 'px,' + ((e.clientY - r.top - r.height/2) * .28) + 'px)';
+    });
+    b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
   });
 })();
 </script>
