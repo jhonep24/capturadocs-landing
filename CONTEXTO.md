@@ -1041,6 +1041,24 @@ con el APK completo (y la PWA de iPhone completa) dejaron de tener razón de ser
   `PLANES_EN_VENTA` en el Worker (y, si se quiere, de la landing). No borra nada:
   quien ya lo compró conserva su licencia.
 
+## Íconos profesionales y animaciones (2026-10-22)
+
+Los programadores a quienes el dueño mostró la landing dijeron que "parecía hecha con IA".
+Se probó una portada totalmente nueva (papel/azul) y **el dueño la rechazó**: quiere
+**mantener colores y estilo** (azul marino + dorado) y solo cambiar dos cosas.
+- **Emojis → íconos Lucide** (licencia ISC): sprite propio `icons.svg`, usado con
+  `<svg class="ic"><use href="icons.svg#i-NOMBRE"/></svg>`; hereda `currentColor`, tamaño
+  `1em`. Aplicado en `index.html`, `guia.html`, `seguridad.html` (incl. el chat). Para un
+  ícono nuevo: copiar su `<path>` de `lucide-static` como `<symbol id="i-…">` en `icons.svg`.
+  Los `✓` `✕` de listas/comparación se dejaron (son tipografía, no emoji). **No poner
+  emojis/íconos dentro de atributos HTML ni de `textContent`** (no renderizan SVG).
+- **Animaciones** (CSS + un `<script>` al final de `index.html`, sin librerías): aparición al
+  hacer scroll con retraso escalonado (`.rv`/`.on`, solo si hay JS), barra de progreso
+  superior, nav que se compacta, contadores de la portada, brillo del botón principal,
+  elevación/ícono en tarjetas, resplandor del plan destacado. Todo respeta
+  `prefers-reduced-motion`.
+- Sin plugins extra: se usó `frontend-design` solo como guía; `audit-suite` no se instaló.
+
 ## Guías terminadas y publicadas (2026-10-20)
 
 El dueño pidió entregar las guías ya terminadas. Se cerró:
