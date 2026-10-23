@@ -1041,6 +1041,14 @@ con el APK completo (y la PWA de iPhone completa) dejaron de tener razón de ser
   `PLANES_EN_VENTA` en el Worker (y, si se quiere, de la landing). No borra nada:
   quien ya lo compró conserva su licencia.
 
+> ⚠️ **REVERTIDO el 2026-10-22 (pedido del dueño, "mientras definimos todo"):** la landing
+> volvió al estado del commit `02bec43` (emojis originales, sin `icons.svg`, sin escena de
+> scroll). Todo lo descrito en las dos secciones siguientes **ya no está publicado**, pero
+> sigue en el historial de git (`95d7cef`, `dbfc2b3`, `b8519e1`) para recuperarlo. El dueño
+> está investigando skills de diseño y quiere un **rediseño respetando los colores** (azul
+> marino + dorado, representan la app). Rechazó la propuesta "papel/azul". Pendiente: definir
+> la dirección con él antes de tocar nada.
+
 ## Íconos profesionales y animaciones (2026-10-22)
 
 Los programadores a quienes el dueño mostró la landing dijeron que "parecía hecha con IA".
