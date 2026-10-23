@@ -51,6 +51,11 @@
   }
   </script>
 
+<script>
+// Windows con «animaciones desactivadas» => el navegador pide movimiento reducido. Se respeta, salvo que la persona lo active aquí.
+(function(){var r=matchMedia('(prefers-reduced-motion: reduce)').matches,o=false;try{o=localStorage.getItem('cd-mov')==='1'}catch(e){}
+window.__reduce=r;window.__quieto=r&&!o;if(window.__quieto)document.documentElement.classList.add('quieto');})();
+</script>
   <style>
     :root{--navy:#070f1f;--navy2:#0d1a2e;--navy3:#162035;--gold:#f0a500;--gold2:#cc8800;--accent:#2e7fff;--green:#25d366;--white:#f0f4ff;--muted:#7a8aaa;--border:#1e3050}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -302,12 +307,11 @@
     .tcard:hover{transform:translateY(-4px);border-color:rgba(240,165,0,.35)}
     .fitem summary .fplus{transition:transform .3s}
     .fitem[open] summary .fplus{transform:rotate(45deg)}
-    @media (prefers-reduced-motion:reduce){
-      .js .rv{opacity:1;transform:none;transition:none}
-      .hero-glow,.plan.ft{animation:none}
-      .scrollbar{display:none}
-      .btn-p::before,.step::after{display:none}
-    }
+    /* movimiento reducido (activa html.quieto) */
+    html.quieto .js .rv{opacity:1;transform:none;transition:none}
+    html.quieto .hero-glow,html.quieto .plan.ft{animation:none}
+    html.quieto .scrollbar{display:none}
+    html.quieto .btn-p::before,html.quieto .step::after{display:none}
 
     /* ── Escena de scroll: un formulario se reparte en cinco documentos ── */
     .escena{position:relative;background:var(--navy);border-top:1px solid var(--border)}
@@ -368,11 +372,13 @@
       .ef-doc h4{font-size:.7rem}
       .ef-sello{font-size:.6rem;padding:0 4px;border-width:2px}
     }
-    @media (prefers-reduced-motion:reduce){
-      .escena-pista{height:auto}.escena-stage{position:relative;height:auto;padding-top:96px}
-      .ef-doc{opacity:1;transform:none}.ef-doc .ef-sello{opacity:.95;transform:rotate(-9deg)}
-      .escena-pasos li{opacity:1}.escena-prog{display:none}
-    }
+    /* movimiento reducido (activa html.quieto) */
+    html.quieto .escena-pista{height:auto}
+    html.quieto .escena-stage{position:relative;height:auto;padding-top:96px}
+    html.quieto .ef-doc{opacity:1;transform:none}
+    html.quieto .ef-doc .ef-sello{opacity:.95;transform:rotate(-9deg)}
+    html.quieto .escena-pasos li{opacity:1}
+    html.quieto .escena-prog{display:none}
 
     /* Pantallas bajitas: la escena debe caber completa */
     @media (max-width:980px){.ef-bar{display:none}}
@@ -386,7 +392,11 @@
     .plan::before,.tcard::before,.step::before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),rgba(240,165,0,.15),transparent 62%);opacity:0;transition:opacity .3s;pointer-events:none}
     .plan:hover::before,.tcard:hover::before,.step:hover::before{opacity:1}
     .tcard{position:relative}
-    @media (prefers-reduced-motion:reduce){.w>span{transform:none;animation:none}}
+    /* movimiento reducido (activa html.quieto) */
+    html.quieto .w>span{transform:none;animation:none}
+
+    .escena-mov{margin:0 0 18px;padding:12px 14px;border:1px dashed rgba(240,165,0,.45);border-radius:10px;font-size:.88rem;color:var(--muted)}
+    .escena-mov button{display:block;margin-top:8px;background:var(--gold);color:var(--navy);border:0;border-radius:7px;padding:8px 14px;font:700 .9rem 'Rajdhani',sans-serif;cursor:pointer}
   </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -430,6 +440,7 @@
       <div class="escena-cap">
         <div class="stag">Así funciona</div>
         <h2 class="stitle">Un formulario.<br>Cinco documentos.</h2>
+        <p class="escena-mov" hidden>Tu equipo tiene las animaciones desactivadas, por eso ves esta escena ya terminada. <button type="button">Activar la animación de esta sección</button></p>
         <ol class="escena-pasos">
           <li class="on"><b>1</b><span><strong>Lo escribes una vez</strong>Datos del capturado, del lugar y de lo incautado.</span></li>
           <li><b>2</b><span><strong>Se reparte solo</strong>Cada dato viaja a todos los formatos donde se necesita.</span></li>
@@ -1443,7 +1454,7 @@
 <script>
 // Movimiento de la página: aparición al hacer scroll, contadores, barra de progreso y barra superior.
 (function(){
-  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var quieto = window.__quieto;
   document.documentElement.classList.add('js');
   var barra = document.createElement('div'); barra.className = 'scrollbar'; barra.setAttribute('aria-hidden','true'); document.body.appendChild(barra);
   var nav = document.querySelector('nav');
@@ -1494,7 +1505,7 @@
   var pista = document.querySelector('.escena-pista'); if (!pista) return;
   var V = {nombre:'Carlos A. Ramírez', cc:'1.020.345.678', lugar:'Cra. 7 con Cl. 45', elem:'Celular Samsung A14'};
   var orden = ['nombre','cc','lugar','elem'];
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (window.__quieto) {
     pista.querySelectorAll('.ef-c').forEach(function(c){ c.querySelector('.ef-v').textContent = V[c.dataset.k]; });
     pista.querySelectorAll('.ef-doc b').forEach(function(b){ b.textContent = V[b.dataset.k]; b.classList.add('lleno'); });
     pista.querySelectorAll('.ef-doc').forEach(function(d){ d.classList.add('vivo','sellado'); });
@@ -1562,7 +1573,7 @@
 <script>
 // Portada y tarjetas: título por palabras, foco de luz con el cursor, botón con imán.
 (function(){
-  var quieto = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var quieto = window.__quieto;
   var h1 = document.querySelector('.hero h1');
   if (h1 && !quieto){
     var n = 0;
@@ -1596,6 +1607,14 @@
     });
     b.addEventListener('pointerleave', function(){ b.style.transform = ''; });
   });
+})();
+</script>
+
+<script>
+(function(){
+  var b = document.querySelector('.escena-mov'); if (!b || !window.__quieto) return;
+  b.hidden = false;
+  b.querySelector('button').addEventListener('click', function(){ try { localStorage.setItem('cd-mov','1'); } catch(e){} location.reload(); });
 })();
 </script>
 </body>

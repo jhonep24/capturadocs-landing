@@ -1073,6 +1073,16 @@ El dueño dijo que las animaciones de aparición/hover **no se notaban** y pidi�
 - Se probó con `matchMedia` forzado a "sin reducir movimiento" (el panel del navegador lo
   emula siempre activo): para ver la animación real hay que abrir la página en un navegador normal.
 
+**Por qué el dueño "no veía" la animación (2026-10-22):** su Windows tiene **desactivadas
+las animaciones del sistema** (`SystemParametersInfo(SPI_GETCLIENTAREAANIMATION)` = False), así
+que el navegador reporta `prefers-reduced-motion: reduce` y la página mostraba el estado final.
+Es el mismo motivo por el que el panel de pruebas de la app siempre ve la escena "quieta".
+Solución: la detección vive en un `<script>` del `<head>` (`window.__quieto`, clase `html.quieto`;
+el CSS de movimiento reducido ahora cuelga de `html.quieto`, no de la media query) y la sección
+muestra un botón **"Activar la animación de esta sección"** (guarda `cd-mov=1` en
+`localStorage` y recarga). Se sigue respetando la preferencia por defecto. Ojo al probar:
+`requestAnimationFrame` no corre si el panel del navegador está oculto.
+
 ## Guías terminadas y publicadas (2026-10-20)
 
 El dueño pidió entregar las guías ya terminadas. Se cerró:
