@@ -1149,6 +1149,21 @@ quedaron como tareas en Vikunja, no se tocaron):
   pide NUNC, departamento, municipio y destino; la sección 2 de la guía en línea no
   lo menciona (el PDF sí, paso 3).
 
+## 1.13.2 publicada (2026-10-23)
+
+Release de los ajustes del **primer respondiente (FPJ-4)** + arreglos de la
+sesión. Dos releases, hashes bajados de la URL pública (coinciden):
+- **`v1.13.2-windows-exe`** (*Latest*), SHA `e56a87ba…`.
+- **`v1.13.2-android`** (`--latest=false`), SHA `6019c559…`, versionCode 11,
+  mismo certificado que v10 (se instala encima). App completa (genera).
+- **PWA** redesplegada desde `main` (app completa, 1.13.2).
+
+Cambios: en primer respondiente, capturados arranca en 0, la fecha del FPJ-4
+sale en negro, y la hora de la actuación se usa tal cual la escribe el policía
+(la narración queda en blanco). Más: candado offline más estricto por
+vencimiento, registro de errores de generación en `/admin/errores`, y carga de
+plantillas robusta. Se actualizaron los enlaces y los hashes de `seguridad.html`.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
