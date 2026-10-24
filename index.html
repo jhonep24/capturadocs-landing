@@ -263,6 +263,31 @@
     .chat-libre-input-row{display:flex;gap:8px}
     .chat-libre-input-row .chat-input{margin-bottom:0}
     @media(max-width:480px){.chat-panel{right:12px;left:12px;width:auto;bottom:88px}.chat-toggle{right:16px;bottom:16px}}
+
+    /* ── Rediseño: iconos de línea (Lucide, icons.svg) ── */
+    .ic{width:1em;height:1em;flex-shrink:0;vertical-align:-.14em;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+    .step-i,.fi-icon,.ti-ic{color:var(--gold)}
+    .step-i{display:inline-grid;place-items:center;width:58px;height:58px;font-size:1.7rem;margin-bottom:18px;border-radius:16px;background:linear-gradient(145deg,rgba(240,165,0,.18),rgba(240,165,0,.04));border:1px solid rgba(240,165,0,.32);box-shadow:0 8px 26px rgba(240,165,0,.08)}
+    .fi-icon{width:50px;height:50px;font-size:1.4rem;border-radius:14px;background:linear-gradient(145deg,rgba(240,165,0,.18),rgba(240,165,0,.04));border-color:rgba(240,165,0,.32)}
+    .ti-ic{display:inline-grid;place-items:center;width:46px;height:46px;font-size:1.35rem;border-radius:13px;background:linear-gradient(145deg,rgba(240,165,0,.18),rgba(240,165,0,.04));border:1px solid rgba(240,165,0,.3);flex-shrink:0}
+    .refico .ic{stroke-width:1.75}
+    .chat-menu-btn .ic,.pbtn .ic,.btn-s .ic,.btn-p .ic,.ads-promo-perk .ic{margin-right:6px}
+    /* ── Rediseño: portada con documentos en vuelo, alineada a la izquierda ── */
+    .hero{justify-content:flex-start;text-align:left;padding:120px max(24px,calc((100vw - 1180px)/2)) 120px;isolation:isolate;min-height:min(100vh,860px)}
+    .hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-3;display:block}
+    .hero-veil{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(7,15,31,.9) 0%,rgba(7,15,31,.6) 42%,rgba(7,15,31,.05) 78%),linear-gradient(0deg,var(--navy) 0%,rgba(7,15,31,0) 22%)}
+    .hero-glow,.hero-grid{display:none}
+    .hero h1,.hero .hero-sub{max-width:660px}
+    .hero .hero-sub{margin:0 0 40px}
+    .hero-actions,.stats{justify-content:flex-start}
+    .stats{gap:34px;border-top-color:rgba(46,127,255,.25)}
+    .badge{margin-bottom:26px}
+    /* ── Rediseño: cortes diagonales entre secciones ── */
+    .features,.trust{position:relative;clip-path:polygon(0 4.5vw,100% 0,100% calc(100% - 4.5vw),0 100%);margin:-2.2vw 0;padding-top:calc(100px + 4.5vw);padding-bottom:calc(100px + 4.5vw)}
+    .trust{padding-top:calc(80px + 4.5vw);padding-bottom:calc(80px + 4.5vw)}
+    .how{padding-bottom:calc(100px + 3vw)}
+    @media (max-width:700px){.hero{padding-top:104px;padding-bottom:90px}.hero-veil{background:linear-gradient(0deg,rgba(7,15,31,.55),rgba(7,15,31,.8))}.features,.trust{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}}
+    @media (prefers-reduced-motion:reduce){.hero-canvas{opacity:.9}}
   </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -281,10 +306,12 @@
 </nav>
 
 <section class="hero">
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero-veil"></div>
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div style="position:relative;z-index:1">
-    <div class="badge">🏛️ Herramienta para Policía Nacional de Colombia</div>
+    <div class="badge"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-landmark"/></svg> Herramienta para Policía Nacional de Colombia</div>
     <h1>Software para informes<em>de captura en flagrancia.</em></h1>
     <p class="hero-sub"><strong>Diligencias una sola vez</strong> y el sistema genera automáticamente el Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación — sin transcribir datos, sin inconsistencias entre documentos.</p>
     <div class="hero-actions">
@@ -295,7 +322,7 @@
       <div class="stat"><div class="stat-n">5</div><div class="stat-l">casos gratis</div></div>
       <div class="stat"><div class="stat-n">~30min</div><div class="stat-l">por informe completo</div></div>
       <div class="stat"><div class="stat-n">5</div><div class="stat-l">documentos generados</div></div>
-      <div class="stat"><div class="stat-n">📱</div><div class="stat-l">app instalable</div></div>
+      <div class="stat"><div class="stat-n"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-smartphone"/></svg></div><div class="stat-l">app instalable</div></div>
     </div>
   </div>
 </section>
@@ -308,13 +335,13 @@
       <p class="ssub" style="margin:0 auto">Digita los datos una sola vez y el sistema llena todos los formatos simultáneamente.</p>
     </div>
     <div class="steps">
-      <div class="step"><div class="step-n">01</div><span class="step-i">📋</span><h3>Ingresa los datos</h3><p>Diligencia el formulario guiado: datos del servidor de policía, del capturado, de la conducta, de los elementos incautados y de los hechos. Una sola vez.</p></div>
-      <div class="step"><div class="step-n">02</div><span class="step-i">⚡</span><h3>Sin repetir datos</h3><p>Lo que ingresas se distribuye automáticamente en todos los formatos. Sin transcribir, sin inconsistencias.</p></div>
-      <div class="step"><div class="step-n">03</div><span class="step-i">📄</span><h3>Descarga en Word</h3><p>Un botón por documento (FPJ-5, FPJ-6, FPJ-7, FPJ-8 y el Acta) — cada uno ya listo para imprimir y firmar, con los mismos datos que digitaste una sola vez.</p></div>
-      <div class="step"><div class="step-n">04</div><span class="step-i">✅</span><h3>Listo para entregar</h3><p>Documentos correctamente diligenciados y con formato oficial PONAL.</p></div>
+      <div class="step"><div class="step-n">01</div><span class="step-i"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-clipboard-list"/></svg></span><h3>Ingresa los datos</h3><p>Diligencia el formulario guiado: datos del servidor de policía, del capturado, de la conducta, de los elementos incautados y de los hechos. Una sola vez.</p></div>
+      <div class="step"><div class="step-n">02</div><span class="step-i"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-zap"/></svg></span><h3>Sin repetir datos</h3><p>Lo que ingresas se distribuye automáticamente en todos los formatos. Sin transcribir, sin inconsistencias.</p></div>
+      <div class="step"><div class="step-n">03</div><span class="step-i"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg></span><h3>Descarga en Word</h3><p>Un botón por documento (FPJ-5, FPJ-6, FPJ-7, FPJ-8 y el Acta) — cada uno ya listo para imprimir y firmar, con los mismos datos que digitaste una sola vez.</p></div>
+      <div class="step"><div class="step-n">04</div><span class="step-i"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-circle-check"/></svg></span><h3>Listo para entregar</h3><p>Documentos correctamente diligenciados y con formato oficial PONAL.</p></div>
     </div>
     <div style="text-align:center;margin-top:36px">
-      <a href="guia.html" class="btn-s">📖 Ver la guía de uso completa →</a>
+      <a href="guia.html" class="btn-s"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-book-open"/></svg> Ver la guía de uso completa →</a>
     </div>
   </div>
 </section>
@@ -327,13 +354,13 @@
         <h2 class="stitle">Un formulario.<br>Todos los documentos.</h2>
         <p class="ssub" style="margin-bottom:48px">Elimina errores de inconsistencia entre documentos. Lo que escribes una vez aparece correcto en todos los formatos.</p>
         <div class="flist">
-          <div class="fi"><div class="fi-icon">📝</div><div><h4>5 documentos simultáneos</h4><p>El Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación, generados de una sola vez con los mismos datos.</p></div></div>
-          <div class="fi"><div class="fi-icon">👥</div><div><h4>Múltiples capturados</h4><p>Soporta varios capturados en el mismo procedimiento con documentación individual.</p></div></div>
-          <div class="fi"><div class="fi-icon">✍️</div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te propone una versión más clara y coherente <strong>sin cambiar los hechos</strong>. La IA <strong>nunca aplica el cambio por sí sola</strong>: solo te muestra la sugerencia y tú decides si la usas, la editas o la descartas. <strong>Exclusivo de las licencias Mensual y Negocio/Estación.</strong></p></div></div>
-          <div class="fi"><div class="fi-icon">📱</div><div><h4>En el computador y en la calle</h4><p>En <strong>Windows</strong>, <strong>Android</strong> e <strong>iPhone</strong> tienes la app completa, que genera todos los documentos en el mismo equipo y sin depender de internet. La diligencias en el lugar de los hechos y generas ahí mismo, o la terminas después en el computador — como prefieras.</p></div></div>
-          <div class="fi"><div class="fi-icon">🧭</div><div><h4>Valida que todo esté bien diligenciado</h4><p>El resumen final marca en rojo cualquier dato obligatorio que falte, y deja las fechas de captura y fiscal siempre resaltadas como recordatorio de revisarlas dos veces — para que no llegues a imprimir con un campo vacío o una fecha mal escrita.</p></div></div>
-          <div class="fi"><div class="fi-icon">💾</div><div><h4>Guardar y continuar</h4><p>Guarda el caso en cualquier momento y retómalo después sin perder nada.</p></div></div>
-          <div class="fi"><div class="fi-icon">🔒</div><div><h4>100% seguros los datos de tu procedimiento</h4><p>Se procesan en tu propio equipo: nosotros nunca vemos los datos del caso. Lo único que sale es lo que <strong>tú decidas enviar</strong> — por ejemplo cuando mandas el caso del celular a tu computador.</p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-pen"/></svg></div><div><h4>5 documentos simultáneos</h4><p>El Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación, generados de una sola vez con los mismos datos.</p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-users"/></svg></div><div><h4>Múltiples capturados</h4><p>Soporta varios capturados en el mismo procedimiento con documentación individual.</p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-pen-line"/></svg></div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te propone una versión más clara y coherente <strong>sin cambiar los hechos</strong>. La IA <strong>nunca aplica el cambio por sí sola</strong>: solo te muestra la sugerencia y tú decides si la usas, la editas o la descartas. <strong>Exclusivo de las licencias Mensual y Negocio/Estación.</strong></p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-smartphone"/></svg></div><div><h4>En el computador y en la calle</h4><p>En <strong>Windows</strong>, <strong>Android</strong> e <strong>iPhone</strong> tienes la app completa, que genera todos los documentos en el mismo equipo y sin depender de internet. La diligencias en el lugar de los hechos y generas ahí mismo, o la terminas después en el computador — como prefieras.</p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-compass"/></svg></div><div><h4>Valida que todo esté bien diligenciado</h4><p>El resumen final marca en rojo cualquier dato obligatorio que falte, y deja las fechas de captura y fiscal siempre resaltadas como recordatorio de revisarlas dos veces — para que no llegues a imprimir con un campo vacío o una fecha mal escrita.</p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-save"/></svg></div><div><h4>Guardar y continuar</h4><p>Guarda el caso en cualquier momento y retómalo después sin perder nada.</p></div></div>
+          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-lock"/></svg></div><div><h4>100% seguros los datos de tu procedimiento</h4><p>Se procesan en tu propio equipo: nosotros nunca vemos los datos del caso. Lo único que sale es lo que <strong>tú decidas enviar</strong> — por ejemplo cuando mandas el caso del celular a tu computador.</p></div></div>
         </div>
       </div>
       <div class="preview">
@@ -341,12 +368,12 @@
         <div class="plist">
           <div class="di"><span class="dn">Nombre del capturado</span><span style="color:#27c93f;font-weight:700">✓ Diligenciado</span></div>
           <div class="di" style="border-color:rgba(255,95,86,.5)"><span class="dn">Documento de identidad</span><span style="color:#ff5f56;font-weight:700">✕ (falta)</span></div>
-          <div class="di" style="border-color:rgba(240,165,0,.5)"><span class="dn">Fecha captura</span><span style="color:var(--gold);font-weight:700">⚠ Revisar dos veces</span></div>
-          <div class="di" style="border-color:rgba(240,165,0,.5)"><span class="dn">Fecha fiscal</span><span style="color:var(--gold);font-weight:700">⚠ Revisar dos veces</span></div>
+          <div class="di" style="border-color:rgba(240,165,0,.5)"><span class="dn">Fecha captura</span><span style="color:var(--gold);font-weight:700"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-triangle-alert"/></svg> Revisar dos veces</span></div>
+          <div class="di" style="border-color:rgba(240,165,0,.5)"><span class="dn">Fecha fiscal</span><span style="color:var(--gold);font-weight:700"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-triangle-alert"/></svg> Revisar dos veces</span></div>
         </div>
         <div style="padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
           <span style="font-size:.8rem;color:var(--muted)">⏱ ~30 minutos</span>
-          <span style="font-size:.8rem;color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700">⚠ Revisa antes de generar</span>
+          <span style="font-size:.8rem;color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-triangle-alert"/></svg> Revisa antes de generar</span>
         </div>
       </div>
     </div>
@@ -404,7 +431,7 @@
         <a href="#" onclick="abrirChatEnVista('cotizar','S');return false" class="pbtn po">Cotizar y activar</a>
       </div>
       <div class="plan ft">
-        <div class="ptag">⭐ MÁS POPULAR</div>
+        <div class="ptag"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-star"/></svg> MÁS POPULAR</div>
         <div class="pname">Licencia mensual</div>
         <div class="pprice" id="price-M">$35.000 <span>COP</span></div>
         <div class="pper">30 días · casos ilimitados</div>
@@ -476,11 +503,11 @@
 <section class="trust">
   <div class="container">
     <div class="tinner">
-      <div class="ti"><span style="font-size:1.4rem">🔐</span><span>Datos 100% en tu dispositivo</span></div>
-      <div class="ti"><span style="font-size:1.4rem">📡</span><span>Funciona sin conexión</span></div>
-      <div class="ti"><span style="font-size:1.4rem">🏛️</span><span>Formato oficial PONAL</span></div>
-      <div class="ti"><span style="font-size:1.4rem">💬</span><span>Soporte directo por WhatsApp</span></div>
-      <div class="ti"><span style="font-size:1.4rem">🔄</span><span>Actualizaciones constantes</span></div>
+      <div class="ti"><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-lock-keyhole"/></svg></span><span>Datos 100% en tu dispositivo</span></div>
+      <div class="ti"><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-wifi-off"/></svg></span><span>Funciona sin conexión</span></div>
+      <div class="ti"><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-landmark"/></svg></span><span>Formato oficial PONAL</span></div>
+      <div class="ti"><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg></span><span>Soporte directo por WhatsApp</span></div>
+      <div class="ti"><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-refresh-cw"/></svg></span><span>Actualizaciones constantes</span></div>
     </div>
   </div>
 </section>
@@ -490,32 +517,32 @@
     <div class="phdr">
       <div class="stag">Programa de referidos</div>
       <h2 class="stitle">Tú recomiendas, los dos ganan.</h2>
-      <p class="ssub" style="margin:0 auto">Cada usuario tiene su propio código de referido, visible dentro de la app (ícono 🎁 → Activar licencia). Compártelo con un compañero y ambos reciben días extra de licencia — sin costo, sin trámites.</p>
+      <p class="ssub" style="margin:0 auto">Cada usuario tiene su propio código de referido, visible dentro de la app (ícono <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> → Activar licencia). Compártelo con un compañero y ambos reciben días extra de licencia — sin costo, sin trámites.</p>
     </div>
     <div class="refgrid">
       <div class="refcard">
         <div class="refnum">1</div>
-        <div class="refico" aria-hidden="true">🎁</div>
+        <div class="refico" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg></div>
         <h3 class="reftitle">Comparte tu código</h3>
         <p class="reftext">Envíaselo a un compañero antes de que active su licencia por primera vez.</p>
       </div>
       <div class="refarrow" aria-hidden="true">→</div>
       <div class="refcard">
         <div class="refnum">2</div>
-        <div class="refico" aria-hidden="true">✅</div>
+        <div class="refico" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-circle-check"/></svg></div>
         <h3 class="reftitle">Él activa con tu código</h3>
         <p class="reftext">En su primera compra, recibe <strong>7 días extra</strong> de regalo en el plan que eligió.</p>
       </div>
       <div class="refarrow" aria-hidden="true">→</div>
       <div class="refcard refcard-reward">
         <div class="refnum">3</div>
-        <div class="refico" aria-hidden="true">💰</div>
+        <div class="refico" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-banknote"/></svg></div>
         <h3 class="reftitle">Tú recibes tu recompensa</h3>
         <p class="reftext">Se suman automáticamente <strong>7 días extra</strong> a tu propia licencia. Sin límite de referidos.</p>
       </div>
     </div>
     <div style="text-align:center;margin-top:32px">
-      <a href="#" onclick="abrirChatEnVista('libre');return false" class="pbtn pp" style="display:inline-block;padding:12px 28px">💬 Preguntar cómo funciona</a>
+      <a href="#" onclick="abrirChatEnVista('libre');return false" class="pbtn pp" style="display:inline-block;padding:12px 28px"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg> Preguntar cómo funciona</a>
     </div>
   </div>
 </section>
@@ -597,9 +624,9 @@
         <h3 class="ads-promo-title">Tu marca frente a policías de toda Colombia.</h3>
         <p class="ads-promo-text">Reserva un espacio publicitario dentro de la app — lo ven los usuarios mientras generan sus informes, uno por uno, sin distracción. Ideal para negocios y servicios relacionados con la labor policial.</p>
         <div class="ads-promo-perks">
-          <span class="ads-promo-perk">🎯 Audiencia policial segmentada</span>
-          <span class="ads-promo-perk">🖼️ Banner con imagen y link propio</span>
-          <span class="ads-promo-perk">📍 Espacio limitado y exclusivo</span>
+          <span class="ads-promo-perk"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-target"/></svg> Audiencia policial segmentada</span>
+          <span class="ads-promo-perk"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-image"/></svg> Banner con imagen y link propio</span>
+          <span class="ads-promo-perk"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-map-pin"/></svg> Espacio limitado y exclusivo</span>
         </div>
       </div>
       <a href="#" onclick="abrirChatEnVista('contacto', null, 'publicidad');return false" class="btn-p ads-promo-cta">Quiero anunciarme →</a>
@@ -609,7 +636,7 @@
 
 <footer>
   <div style="display:flex;flex-direction:column;gap:4px">
-    <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;color:var(--white)">🛡️ CapturaDocs<span style="color:var(--gold)"> Express</span></div>
+    <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;color:var(--white)"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-shield-check"/></svg> CapturaDocs<span style="color:var(--gold)"> Express</span></div>
     <div>Herramienta privada de apoyo — No oficial</div>
     <div>© 2026 CapturaDocs Express. Todos los derechos reservados.</div>
   </div>
@@ -626,7 +653,7 @@
   <div class="mb">
     <div class="mhdr"><h3 id="modal-title">Términos y Condiciones de Uso</h3><button class="mcls" onclick="cerrarModal()" aria-label="Cerrar">✕</button></div>
     <div class="mbody">
-      <div class="warn">⚠️ CapturaDocs Express es una herramienta <strong>privada e independiente</strong>. No está afiliada, avalada ni relacionada con la Policía Nacional de Colombia ni ninguna entidad del Estado.</div>
+      <div class="warn"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-triangle-alert"/></svg> CapturaDocs Express es una herramienta <strong>privada e independiente</strong>. No está afiliada, avalada ni relacionada con la Policía Nacional de Colombia ni ninguna entidad del Estado.</div>
 
       <!-- TABS -->
       <div role="tablist" style="display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--border);padding-bottom:0">
@@ -654,7 +681,7 @@
         <h2>7. Pagos y reembolsos</h2>
         <ul><li>El pago es <strong>definitivo</strong> una vez activada la licencia</li><li>No se realizan reembolsos por períodos no utilizados</li><li>Si hay un problema técnico imputable al software, se evaluará el caso y podrá ofrecerse extensión como compensación</li><li>Si cambias de dispositivo, escríbenos por WhatsApp: reasignamos tu licencia existente al nuevo equipo <strong>sin costo adicional</strong>, no necesitas comprar una licencia nueva</li><li>Precios sujetos a cambios con 15 días de aviso previo</li></ul>
         <h2>8. Contacto</h2>
-        <p>📧 contacto@capturadocs.com · 💬 WhatsApp: <span class="cfg-whatsapp">350 3593635</span> · Bogotá, Colombia</p>
+        <p><svg class="ic" aria-hidden="true"><use href="icons.svg#i-mail"/></svg> contacto@capturadocs.com · <svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg> WhatsApp: <span class="cfg-whatsapp">350 3593635</span> · Bogotá, Colombia</p>
         <h2>9. Soporte técnico</h2>
         <p>Canal formal de soporte: WhatsApp <span class="cfg-whatsapp">350 3593635</span>, lunes a sábado 8:00 am – 8:00 pm. Fuera de ese horario, respuesta al siguiente día hábil. Para usuarios con licencia activa, la respuesta máxima es de 24 horas hábiles.</p>
         <h2>10. Versión e historial de actualizaciones</h2>
@@ -749,23 +776,23 @@
   </div>
 </div>
 
-<button id="chatToggle" class="chat-toggle" aria-label="Abrir chat de CapturaDocs" aria-expanded="false" aria-controls="chatPanel">💬</button>
+<button id="chatToggle" class="chat-toggle" aria-label="Abrir chat de CapturaDocs" aria-expanded="false" aria-controls="chatPanel"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg></button>
 
 <div id="chatPanel" class="chat-panel" role="dialog" aria-label="Chat de CapturaDocs Express" aria-hidden="true">
   <div class="chat-hdr">
-    <span>🛡️ CapturaDocs Express</span>
+    <span><svg class="ic" aria-hidden="true"><use href="icons.svg#i-shield-check"/></svg> CapturaDocs Express</span>
     <button class="chat-close" onclick="cerrarChat()" aria-label="Cerrar chat">✕</button>
   </div>
   <div class="chat-body">
     <div id="chat-view-menu" class="chat-view">
       <p class="chat-intro">¿En qué podemos ayudarte?</p>
-      <button class="chat-menu-btn" onclick="chatShowView('libre')">✍️ Escríbenos (ayuda, renovar, estado, referidos)</button>
-      <button class="chat-menu-btn" onclick="chatShowView('precios')">💰 Ver precios</button>
-      <button class="chat-menu-btn" onclick="chatShowView('cotizar')">🧮 Cotizar un plan</button>
-      <button class="chat-menu-btn" onclick="chatShowView('comprobante')">📤 Ya pagué, subir comprobante</button>
-      <button class="chat-menu-btn" onclick="chatShowView('estado')">🔍 Consultar mi pedido</button>
-      <button class="chat-menu-btn" onclick="chatShowView('contacto')">📮 Sugerencias o contacto</button>
-      <a class="chat-menu-btn chat-wa wa-link" href="#" target="_blank" rel="noopener">💬 Contáctanos por WhatsApp</a>
+      <button class="chat-menu-btn" onclick="chatShowView('libre')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-pen-line"/></svg> Escríbenos (ayuda, renovar, estado, referidos)</button>
+      <button class="chat-menu-btn" onclick="chatShowView('precios')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-banknote"/></svg> Ver precios</button>
+      <button class="chat-menu-btn" onclick="chatShowView('cotizar')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-calculator"/></svg> Cotizar un plan</button>
+      <button class="chat-menu-btn" onclick="chatShowView('comprobante')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-send"/></svg> Ya pagué, subir comprobante</button>
+      <button class="chat-menu-btn" onclick="chatShowView('estado')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-search"/></svg> Consultar mi pedido</button>
+      <button class="chat-menu-btn" onclick="chatShowView('contacto')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-mailbox"/></svg> Sugerencias o contacto</button>
+      <a class="chat-menu-btn chat-wa wa-link" href="#" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg> Contáctanos por WhatsApp</a>
     </div>
 
     <div id="chat-view-precios" class="chat-view" style="display:none">
@@ -775,7 +802,7 @@
 
     <div id="chat-view-cotizar" class="chat-view" style="display:none">
       <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
-      <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono 🎁 → arriba.</p>
+      <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> → arriba.</p>
       <label class="chat-label" for="chat-cotizar-deviceid">ID de dispositivo</label>
       <input id="chat-cotizar-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
       <label class="chat-label" for="chat-plan-select">Plan</label>
@@ -792,7 +819,7 @@
 
     <div id="chat-view-comprobante" class="chat-view" style="display:none">
       <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
-      <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono 🎁 → arriba.</p>
+      <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> → arriba.</p>
       <label class="chat-label" for="chat-comp-deviceid">ID de dispositivo</label>
       <input id="chat-comp-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
       <label class="chat-label" for="chat-comp-plan">Plan que estás pagando</label>
@@ -1051,7 +1078,7 @@
       if (data.diasActivos > 0) html += `Ya tienes <b>${data.diasActivos} días</b> activos en tu licencia actual.<br>`;
       html += `El plan <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.plan] || data.plan)}</b> agrega <b>${data.diasPlan} días</b>.<br>`;
       if (data.bonoReferido > 0) {
-        html += `Tu código de referido suma <b>${data.bonoReferido} días</b> extra 🎁 (se acreditan al confirmarse el pago).<br>`;
+        html += `Tu código de referido suma <b>${data.bonoReferido} días</b> extra <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> (se acreditan al confirmarse el pago).<br>`;
       } else if (data.referidoError) {
         html += `<span style="color:#b33">Código de referido: ${escapeHtml(data.referidoError)}</span><br>`;
       }
@@ -1062,7 +1089,7 @@
       el.innerHTML = html;
       const pagarBtn = document.createElement('button');
       pagarBtn.className = 'chat-btn';
-      pagarBtn.textContent = '✅ Ya pagué, subir comprobante';
+      pagarBtn.textContent = 'Ya pagué, subir comprobante';
       pagarBtn.onclick = () => {
         chatShowView('comprobante');
         document.getElementById('chat-comp-deviceid').value = deviceId;
@@ -1147,7 +1174,7 @@
       el.className = 'chat-result ok';
       let html = `Estado: <b>${escapeHtml(CHAT_ESTADO_TEXTOS[data.pedido.estado] || data.pedido.estado)}</b>`;
       if (data.licencia.clave) {
-        html += `<div class="chat-clave">${escapeHtml(data.licencia.clave)}</div><p style="margin-top:8px;color:var(--muted)">Actívala en la app: ícono 🎁 → pegar la clave → Activar.</p>`;
+        html += `<div class="chat-clave">${escapeHtml(data.licencia.clave)}</div><p style="margin-top:8px;color:var(--muted)">Actívala en la app: ícono <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> → pegar la clave → Activar.</p>`;
       }
       el.innerHTML = html;
     } catch (e) {
@@ -1276,6 +1303,62 @@
     abrirChat();
     chatShowView(view);
   })();
+</script>
+<script>
+// Portada: hojas de documento translúcidas que flotan con profundidad (se pausa fuera de pantalla y en movimiento reducido).
+(function(){
+  var cv = document.querySelector('.hero-canvas'); if (!cv) return;
+  var ctx = cv.getContext('2d'), W = 0, H = 0, docs = [], vivo = true, last = performance.now();
+  var quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var GOLD = '240,165,0', BLUE = '46,127,255';
+  function crear(){
+    docs = []; var n = W < 700 ? 9 : 16;
+    for (var i = 0; i < n; i++){
+      var z = .35 + Math.random() * .9;
+      docs.push({x:Math.random()*W, y:Math.random()*H, z:z, r:(Math.random()-.5)*.9, vr:(Math.random()-.5)*.0004, vx:.012+z*.03, w:70+z*100});
+    }
+  }
+  function medir(){
+    var r = cv.getBoundingClientRect(), d = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = W*d; cv.height = H*d; ctx.setTransform(d,0,0,d,0,0); crear();
+  }
+  function dibujar(t, dt){
+    var g = ctx.createLinearGradient(0,H,W,0); g.addColorStop(0,'#2a1d05'); g.addColorStop(.35,'#0b2352'); g.addColorStop(1,'#070f1f');
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+    var h = ctx.createRadialGradient(W*.8,H*.2,0,W*.8,H*.2,W*.55); h.addColorStop(0,'rgba('+BLUE+',.35)'); h.addColorStop(1,'rgba('+BLUE+',0)');
+    ctx.fillStyle = h; ctx.fillRect(0,0,W,H);
+    docs.sort(function(a,b){ return a.z - b.z; });
+    docs.forEach(function(d){
+      d.x += d.vx*dt; d.r += d.vr*dt; d.y += Math.sin(t*.0006 + d.x*.01)*.05;
+      if (d.x > W + d.w) d.x = -d.w;
+      var w = d.w, hh = w*1.3;
+      ctx.save(); ctx.translate(d.x,d.y); ctx.rotate(d.r); ctx.globalAlpha = .06 + d.z*.2;
+      ctx.shadowColor = 'rgba('+GOLD+',.35)'; ctx.shadowBlur = 10*d.z;
+      ctx.fillStyle = 'rgba(235,242,255,.92)'; ctx.fillRect(-w/2,-hh/2,w,hh); ctx.shadowBlur = 0;
+      ctx.fillStyle = 'rgba('+BLUE+',.8)'; ctx.fillRect(-w/2+w*.1,-hh/2+hh*.08,w*.5,hh*.04);
+      for (var l = 0; l < 6; l++){
+        ctx.fillStyle = l === 2 ? 'rgba('+GOLD+',.85)' : 'rgba(120,140,185,.5)';
+        ctx.fillRect(-w/2+w*.1,-hh/2+hh*(.2+l*.1), w*(l === 2 ? .5 : .8-(l%3)*.12), hh*.025);
+      }
+      ctx.restore();
+    });
+    ctx.globalAlpha = 1;
+  }
+  function cuadro(now){
+    var dt = Math.min(50, now - last); last = now;
+    dibujar(now, dt);
+    if (!quieto && vivo) requestAnimationFrame(cuadro);
+  }
+  medir();
+  if (quieto){ for (var i = 0; i < 30; i++) dibujar(i*16, 16); }
+  else {
+    requestAnimationFrame(cuadro);
+    if ('IntersectionObserver' in window) new IntersectionObserver(function(es){
+      var v = es[0].isIntersecting; if (v && !vivo){ vivo = true; last = performance.now(); requestAnimationFrame(cuadro); } vivo = v;
+    }).observe(cv);
+  }
+  addEventListener('resize', function(){ medir(); if (quieto) dibujar(0,16); });
+})();
 </script>
 </body>
 </html>
