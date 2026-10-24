@@ -1149,6 +1149,18 @@ quedaron como tareas en Vikunja, no se tocaron):
   pide NUNC, departamento, municipio y destino; la sección 2 de la guía en línea no
   lo menciona (el PDF sí, paso 3).
 
+## 1.13.3 publicada (2026-10-23)
+
+Arregla un bug SOLO del `.exe`: tras actualizar, los documentos se generaban
+con las plantillas VIEJAS (la fecha del FPJ-4 salía gris) porque el Chromium
+de Electron cacheaba las plantillas (URL fija) y la caché sobrevíve a
+reinstalar. Fix: el server local manda `Cache-Control: no-store`. Instalar la
+1.13.3 encima lo resuelve (reinstalar la 1.13.2 NO, por la caché).
+
+- **`v1.13.3-windows-exe`** (*Latest*), SHA `11caa75c…`.
+- **`v1.13.3-android`** (`--latest=false`), SHA `45c0e8b4…`, versionCode 12
+  (Android no tenía el bug; se alinea a 1.13.3). PWA redesplegada.
+
 ## 1.13.2 publicada (2026-10-23)
 
 Release de los ajustes del **primer respondiente (FPJ-4)** + arreglos de la
