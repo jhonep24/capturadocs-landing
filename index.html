@@ -345,6 +345,19 @@
     .faq{background-color:var(--navy2);background-image:radial-gradient(rgba(122,138,170,.16) 1px,transparent 1.3px);background-size:22px 22px}
     .cta{background:linear-gradient(135deg,#143c9c 0%,#0a1f4a 48%,#3a2a08 100%)}
     .cta::before{background:radial-gradient(circle,rgba(240,165,0,.22) 0%,transparent 70%);width:900px;height:900px}
+
+    /* ── Cortes diagonales en más secciones (alternando la inclinación) ── */
+    .compare,.downloads,.testimonios,.cta{position:relative;margin:-2.2vw 0;padding-top:calc(100px + 4.5vw);padding-bottom:calc(100px + 4.5vw)}
+    .compare,.testimonios{clip-path:polygon(0 0,100% 4.5vw,100% 100%,0 calc(100% - 4.5vw))}
+    .downloads{clip-path:polygon(0 4.5vw,100% 0,100% calc(100% - 4.5vw),0 100%)}
+    .cta{clip-path:polygon(0 4.5vw,100% 0,100% 100%,0 100%);padding-top:calc(120px + 4.5vw);padding-bottom:120px;margin-bottom:0}
+    .pricing{position:relative;z-index:0}
+    @media (max-width:700px){
+      .compare,.downloads,.testimonios,.cta{margin:-1.4vw 0;padding-top:calc(80px + 3vw);padding-bottom:calc(80px + 3vw)}
+      .compare,.testimonios{clip-path:polygon(0 0,100% 3vw,100% 100%,0 calc(100% - 3vw))}
+      .downloads{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}
+      .cta{clip-path:polygon(0 3vw,100% 0,100% 100%,0 100%);padding-bottom:80px;margin-bottom:0}
+    }
   </style>
 
   <!-- Cloudflare Web Analytics -->
