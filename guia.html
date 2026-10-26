@@ -143,6 +143,27 @@
     .nav-cta{background:rgba(240,165,0,.1);color:var(--gold);border:1.5px solid rgba(240,165,0,.7);border-radius:10px;padding:8px 20px;box-shadow:0 0 18px rgba(240,165,0,.14);transition:background .2s,color .2s,box-shadow .25s,transform .2s}
     .nav-cta:hover{opacity:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);box-shadow:0 8px 26px rgba(240,165,0,.4);transform:translateY(-1px)}
     .nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+    /* ── Coherencia con la landing: dorado, medallones, fondos por sección y cortes diagonales ── */
+    .glist li::before{color:var(--gold)}
+    .gnum{color:#ffc533;background:linear-gradient(145deg,rgba(240,165,0,.2),rgba(240,165,0,.05));border:1px solid rgba(240,165,0,.5);box-shadow:0 8px 26px rgba(240,165,0,.22),inset 0 0 14px rgba(240,165,0,.1)}
+    .gnum .ic{filter:drop-shadow(0 0 6px rgba(240,165,0,.5))}
+    .gcard h4 .ic{color:#ffc533;border-color:rgba(240,165,0,.5);box-shadow:0 6px 18px rgba(240,165,0,.2),inset 0 0 10px rgba(240,165,0,.1)}
+    .gsec{background:none!important;position:relative;margin:-1.6vw 0;padding:calc(48px + 3vw) 0}
+    #instalar{background:linear-gradient(180deg,#143475 0%,#0d2150 55%,#0d1a2e 100%)!important;clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}
+    #primer-uso{clip-path:polygon(0 0,100% 3vw,100% 100%,0 calc(100% - 3vw))}
+    #activar{background:linear-gradient(180deg,#5c3d05 0%,#2c2008 45%,#0f1b36 100%)!important;clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}
+    #diligenciar{clip-path:polygon(0 0,100% 3vw,100% 100%,0 calc(100% - 3vw))}
+    #documentos{background:linear-gradient(180deg,#143475 0%,#0d2150 55%,#0d1a2e 100%)!important;clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}
+    #rotulo{clip-path:polygon(0 0,100% 3vw,100% 100%,0 calc(100% - 3vw))}
+    #problemas{background:linear-gradient(180deg,#5c3d05 0%,#2c2008 45%,#0f1b36 100%)!important;clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}
+    @media (max-width:700px){
+      .gsec{margin:-1vw 0;padding:calc(40px + 2vw) 0}
+      nav{gap:10px}.nav-text{white-space:nowrap;font-size:1rem}
+      footer a{display:inline-block;padding:15px 8px}
+    }
+
+    @media (max-width:700px){.nav-cta{white-space:nowrap;padding:8px 14px;font-size:.88rem}.nav-link{display:none}.toc-link{display:inline-flex;align-items:center;min-height:44px;padding:0 16px}}
 </style>
 
   <!-- Cloudflare Web Analytics -->
