@@ -116,6 +116,11 @@
     .gsec:nth-of-type(3n){background:linear-gradient(180deg,rgba(60,42,8,.35) 0%,rgba(7,15,31,0) 100%)}
     .diagram{background:linear-gradient(160deg,rgba(18,50,119,.4) 0%,rgba(7,15,31,0) 70%)}
     .cta{background:linear-gradient(135deg,#143c9c 0%,#0a1f4a 48%,#3a2a08 100%)}
+
+    /* Botón de la barra superior: dorado de la marca (antes verde) */
+    .nav-cta{background:rgba(240,165,0,.1);color:var(--gold);border:1.5px solid rgba(240,165,0,.7);border-radius:10px;padding:8px 20px;box-shadow:0 0 18px rgba(240,165,0,.14);transition:background .2s,color .2s,box-shadow .25s,transform .2s}
+    .nav-cta:hover{opacity:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);box-shadow:0 8px 26px rgba(240,165,0,.4);transform:translateY(-1px)}
+    .nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 </style>
 
   <!-- Cloudflare Web Analytics -->

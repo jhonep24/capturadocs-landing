@@ -388,7 +388,12 @@
       .trust{padding-top:calc(56px + 3vw);padding-bottom:calc(40px + 3vw)}
       footer a{display:inline-block;padding:15px 8px}
     }
-  </style>
+  
+    /* Botón de la barra superior: dorado de la marca (antes verde) */
+    .nav-cta{background:rgba(240,165,0,.1);color:var(--gold);border:1.5px solid rgba(240,165,0,.7);border-radius:10px;padding:8px 20px;box-shadow:0 0 18px rgba(240,165,0,.14);transition:background .2s,color .2s,box-shadow .25s,transform .2s}
+    .nav-cta:hover{opacity:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);box-shadow:0 8px 26px rgba(240,165,0,.4);transform:translateY(-1px)}
+    .nav-cta:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+</style>
 
   <!-- Cloudflare Web Analytics -->
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b1c89c7467ba41fbb947cce3577347db"}'></script>
