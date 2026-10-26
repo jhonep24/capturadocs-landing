@@ -288,6 +288,31 @@
     .how{padding-bottom:calc(100px + 3vw)}
     @media (max-width:700px){.hero{padding-top:104px;padding-bottom:90px}.hero-veil{background:linear-gradient(0deg,rgba(7,15,31,.55),rgba(7,15,31,.8))}.features,.trust{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}}
     @media (prefers-reduced-motion:reduce){.hero-canvas{opacity:.9}}
+
+    /* ── Mockups: la app en computador y en teléfono ── */
+    .dispositivos{position:relative;padding:110px 0 120px;overflow:hidden;background:radial-gradient(60% 70% at 78% 55%,rgba(240,165,0,.14),transparent 70%),radial-gradient(50% 60% at 95% 10%,rgba(46,127,255,.16),transparent 70%)}
+    .disp-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:56px;align-items:center}
+    .disp-txt .ssub{margin-bottom:28px}
+    .disp-lista{list-style:none;display:grid;gap:18px;margin:0 0 34px}
+    .disp-lista li{display:flex;gap:14px;align-items:flex-start}
+    .disp-lista strong{display:block;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white)}
+    .disp-lista span:not(.ti-ic){color:var(--muted);font-size:.93rem;line-height:1.5}
+    .disp-escena{position:relative;padding:0 0 70px}
+    .laptop{width:100%;filter:drop-shadow(0 30px 50px rgba(0,0,0,.55))}
+    .laptop-pantalla{background:#0a1224;border:2px solid #2a3a5a;border-bottom:0;border-radius:14px 14px 0 0;padding:14px 14px 0;aspect-ratio:16/10.4;overflow:hidden}
+    .laptop-pantalla img{display:block;width:100%;height:100%;object-fit:cover;object-position:top;border-radius:6px 6px 0 0}
+    .laptop-base{height:16px;margin:0 -2%;background:linear-gradient(#2b3a5c,#141f38);border-radius:0 0 18px 18px;position:relative}
+    .laptop-base::after{content:"";position:absolute;left:50%;top:0;width:18%;height:6px;transform:translateX(-50%);background:#0d1627;border-radius:0 0 8px 8px}
+    .movil{position:absolute;width:23%;background:#0a1224;border:2px solid #34466b;border-radius:28px;padding:7px;filter:drop-shadow(0 24px 34px rgba(0,0,0,.6))}
+    .movil-pantalla{border-radius:21px;overflow:hidden;aspect-ratio:540/1169;position:relative}
+    .movil-pantalla::before{content:"";position:absolute;top:7px;left:50%;width:30%;height:10px;transform:translateX(-50%);background:#0a1224;border-radius:8px;z-index:1}
+    .movil img{display:block;width:100%;height:100%;object-fit:cover}
+    .movil-a{right:-1%;bottom:-2%;animation:flota 7s ease-in-out infinite}
+    .movil-b{right:20%;bottom:-8%;transform:rotate(-6deg);width:21%;animation:flota 8s ease-in-out -3s infinite}
+    @keyframes flota{50%{translate:0 -10px}}
+    .disp-nota{position:absolute;left:0;bottom:6px;font-size:.78rem;color:var(--muted)}
+    @media (max-width:900px){.disp-grid{grid-template-columns:minmax(0,1fr);gap:36px}.dispositivos{padding:80px 0 90px}.movil{width:26%}.movil-b{right:24%;width:23%}}
+    @media (prefers-reduced-motion:reduce){.movil-a,.movil-b{animation:none}}
   </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -376,6 +401,31 @@
           <span style="font-size:.8rem;color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-triangle-alert"/></svg> Revisa antes de generar</span>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="dispositivos" id="dispositivos">
+  <div class="container disp-grid">
+    <div class="disp-txt">
+      <div class="stag">En todos tus equipos</div>
+      <h2 class="stitle">En el computador<br>y en la calle.</h2>
+      <p class="ssub">La app completa funciona en Windows, Android e iPhone. Diligencias el caso en el lugar de los hechos y generas ahí mismo los documentos, sin depender de internet.</p>
+      <ul class="disp-lista">
+        <li><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-monitor"/></svg></span><div><strong>Windows</strong><span>Instalador para tu computador. Los documentos quedan en una carpeta por caso.</span></div></li>
+        <li><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-smartphone"/></svg></span><div><strong>Android e iPhone</strong><span>El mismo formulario y los mismos cinco documentos. Los compartes por WhatsApp, correo o Drive.</span></div></li>
+        <li><span class="ti-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-wifi-off"/></svg></span><div><strong>Sin conexión</strong><span>Tus datos se quedan en el equipo. Internet solo se usa para validar la licencia.</span></div></li>
+      </ul>
+      <a href="#descargas" class="btn-p">Ver las descargas</a>
+    </div>
+    <div class="disp-escena" aria-label="La aplicación en computador y en teléfono, con datos de ejemplo">
+      <div class="laptop">
+        <div class="laptop-pantalla"><img src="img/app-pc.jpg" width="1600" height="1000" alt="Pantalla de la aplicación con los botones para generar los cinco documentos" loading="lazy"></div>
+        <div class="laptop-base"></div>
+      </div>
+      <div class="movil movil-b"><div class="movil-pantalla"><img src="img/app-movil-2.jpg" width="540" height="1169" alt="La aplicación en el teléfono generando documentos" loading="lazy"></div></div>
+      <div class="movil movil-a"><div class="movil-pantalla"><img src="img/app-movil-1.jpg" width="540" height="1169" alt="La aplicación en el teléfono, pantalla de inicio" loading="lazy"></div></div>
+      <p class="disp-nota">Datos de ejemplo inventados.</p>
     </div>
   </div>
 </section>
