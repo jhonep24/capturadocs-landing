@@ -1068,6 +1068,13 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
   en su lienzo. Generar imágenes gasta créditos (saldo figuraba negativo): **no se usó**; el fondo
   se hizo en código. `.superdesign/` está en `.gitignore`.
 - Plugins instalados por el dueño: `frontend-design`, `superdesign`.
+- **Guía de uso con capturas reales** (2026-10-26): 11 capturas de la app de Windows en `img/guia-*.jpg`
+  (términos, correo, configuración inicial, licencia, inicio, encabezado, capturados, elementos, hechos,
+  resumen, generar), con ampliación al tocar (`.lightbox`). Fondos variados por sección en la landing y
+  mismo estilo (íconos + portada con hojas) en `guia.html` y `seguridad.html`.
+- **Checklist "antes de generar"** reescrito para reflejar lo que la app SÍ hace (Resumen con "Falta N",
+  campos en rojo que llevan al paso, fechas "Revisar dos veces") y lo que solo confirma la persona (cédula,
+  narración, elementos). Está igual en `guia.html` y en el PDF (`guia-print.tpl.html`); si se toca uno, tocar el otro.
 - Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).

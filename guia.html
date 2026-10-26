@@ -123,6 +123,21 @@
     .gsec:nth-of-type(3n){background:linear-gradient(180deg,rgba(60,42,8,.35) 0%,rgba(7,15,31,0) 100%)}
     .diagram{background:linear-gradient(160deg,rgba(18,50,119,.4) 0%,rgba(7,15,31,0) 70%)}
     .cta{background:linear-gradient(135deg,#143c9c 0%,#0a1f4a 48%,#3a2a08 100%)}
+
+    /* Capturas reales dentro de la guía */
+    .gshots{display:grid;gap:18px;margin:22px 0 6px}
+    .gshots.tres{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .gshots.dos{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .gshots.una{grid-template-columns:minmax(0,520px);justify-content:center}
+    .gshot{margin:0;background:var(--navy);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.35)}
+    .gshot img{display:block;width:100%;height:auto;cursor:zoom-in;transition:transform .35s}
+    .gshot:hover img{transform:scale(1.02)}
+    .gshot figcaption{padding:11px 14px;font-size:.84rem;line-height:1.4;color:var(--muted);border-top:1px solid var(--border)}
+    .gshots.una .gshot{overflow:hidden}
+    @media (max-width:820px){.gshots.tres,.gshots.dos{grid-template-columns:minmax(0,1fr)}}
+    .lightbox{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(4,9,20,.9);cursor:zoom-out}
+    .lightbox.on{display:flex}
+    .lightbox img{max-width:min(1200px,100%);max-height:100%;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.7)}
 </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -194,6 +209,7 @@
     <div class="gcard">
       <p>La primera vez que abres la app te pide registrar tu correo (dos veces, para evitar errores de tipeo). Ese correo se usa <strong>únicamente</strong> para tu licencia y soporte — no tiene nada que ver con los datos de tus casos, que siguen siendo 100% locales.</p>
       <p>Después de registrar el correo, la app te muestra <strong>«Configuración inicial»</strong>: cuatro datos que guarda en tu equipo y usa por defecto en cada caso nuevo — <strong>NUNC</strong>, <strong>departamento</strong>, <strong>municipio</strong> y <strong>destino del informe</strong> (URI o Fiscalía). Reemplaza lo que aparezca por los datos de tu unidad y toca <em>Guardar y continuar</em>. Puedes cambiarlos cuando quieras desde la pestaña <em>Config</em> de la ventana <em>Acerca de</em>.</p>
+      <div class="gshots tres"><figure class="gshot"><img src="img/guia-terminos.jpg" width="520" height="742" alt="Pantalla de términos y condiciones de la app" loading="lazy"><figcaption>1. Aceptas los términos para entrar.</figcaption></figure><figure class="gshot"><img src="img/guia-correo.jpg" width="520" height="707" alt="Pantalla para registrar el correo electrónico" loading="lazy"><figcaption>2. Registras tu correo, dos veces.</figcaption></figure><figure class="gshot"><img src="img/guia-config.jpg" width="520" height="655" alt="Pantalla de configuración inicial con NUNC, departamento, municipio y destino" loading="lazy"><figcaption>3. Configuras los datos de tu unidad.</figcaption></figure></div>
       <p>Si tienes un <strong>código de referido</strong>, este es el momento de ingresarlo — así tu compañero y tú ganan días extra cuando actives tu primera licencia (ver detalle en la sección "Programa de referidos" de la página principal).</p>
       <ul class="glist">
         <li>5 casos gratis, sin necesidad de tarjeta ni pago</li>
@@ -218,6 +234,7 @@
         <li>Realiza el pago por Nequi o Llave</li>
         <li>Recibes tu clave de activación — la ingresas en la app y queda activa al instante</li>
       </ul>
+      <div class="gshots una"><figure class="gshot"><img src="img/guia-licencia.jpg" width="520" height="599" alt="Ventana de modo prueba con el ID de dispositivo y el campo para la clave de activación" loading="lazy"><figcaption>Aquí ves tu ID de dispositivo y pegas la clave que te enviamos.</figcaption></figure></div>
       <div class="gwarn"><strong>¿Cambiaste de celular o computador?</strong> Escríbenos por WhatsApp y te reasignamos tu licencia existente al nuevo dispositivo sin costo — no necesitas comprar una licencia nueva.</div>
     </div>
   </div>
@@ -246,16 +263,20 @@
       <p>Antes de generar, revisa el resumen: los campos obligatorios que falten quedan marcados en rojo, y hay un recordatorio permanente para verificar dos veces las fechas. No tienes que ir hasta el paso manualmente para corregir algo — haz clic directo sobre el valor dentro del Resumen, y te lleva directo a ese paso.</p>
     </div>
     <div class="gcard">
+      <h4><svg class="ic" aria-hidden="true"><use href="icons.svg#i-clipboard-list"/></svg> Así se ve cada paso</h4>
+      <p>Capturas reales de la app (versión de Windows) con datos de ejemplo inventados. Toca una imagen para verla más grande.</p>
+      <div class="gshots dos"><figure class="gshot"><img src="img/guia-inicio.jpg" width="1100" height="905" alt="Pantalla de inicio donde se escoge el procedimiento" loading="lazy"><figcaption>Inicio: escoges el procedimiento y cuántos capturados hay.</figcaption></figure><figure class="gshot"><img src="img/guia-encabezado.jpg" width="1100" height="905" alt="Paso Encabezado del informe" loading="lazy"><figcaption>Encabezado: NUNC, fecha, lugar y destino del informe.</figcaption></figure><figure class="gshot"><img src="img/guia-capturados.jpg" width="1100" height="905" alt="Paso Capturados con los datos de la persona" loading="lazy"><figcaption>Capturados: datos de cada persona; la edad se calcula sola.</figcaption></figure><figure class="gshot"><img src="img/guia-elementos.jpg" width="1100" height="905" alt="Paso Elementos incautados" loading="lazy"><figcaption>Elementos incautados: uno por cada elemento, con su rótulo y cadena.</figcaption></figure><figure class="gshot"><img src="img/guia-hechos.jpg" width="1100" height="905" alt="Paso Hechos con la narración" loading="lazy"><figcaption>Hechos: fechas y narración de lo ocurrido.</figcaption></figure><figure class="gshot"><img src="img/guia-revisar.jpg" width="900" height="844" alt="Resumen con los datos que faltan marcados en rojo" loading="lazy"><figcaption>Resumen: te marca en rojo lo que falta antes de generar.</figcaption></figure></div>
+    </div>
+    <div class="gcard">
       <h4><svg class="ic" aria-hidden="true"><use href="icons.svg#i-circle-check"/></svg> Checklist antes de generar</h4>
-      <p>Un último repaso rápido, además de lo que la propia app te marca en rojo:</p>
+      <p>La app te ayuda en el <strong>Resumen</strong>, pero hay cosas que solo puedes confirmar tú:</p>
       <ul class="gcheck">
-        <li>Nombre completo del capturado, sin errores de tipeo</li>
-        <li>Número de identificación verificado</li>
-        <li>Fecha y hora de captura correctas</li>
-        <li>Fecha a disposición del fiscal correcta (solo en captura en flagrancia)</li>
-        <li>Narración revisada — que cuente lo que realmente pasó, en orden</li>
-        <li>Elementos incautados completos, con quién los halló/recolectó/embaló</li>
-        <li>Ningún campo obligatorio en rojo en el Resumen</li>
+        <li>En el Resumen, abre cada persona y cada elemento: si dice <strong>«Falta N»</strong>, toca el campo en rojo y la app te lleva al paso para completarlo</li>
+        <li>Confirma las fechas marcadas con <strong>«Revisar dos veces»</strong>: la fecha de captura y la fecha a disposición del fiscal (esta última solo en captura en flagrancia)</li>
+        <li>Compara con la cédula el nombre y el número de documento del capturado: la app avisa lo que falta, pero no detecta un error de tipeo</li>
+        <li>Lee la narración completa. Si usaste la mejora con IA, comprueba que solo cambió la redacción y que los hechos siguen igual</li>
+        <li>En cada elemento incautado, revisa que estén la descripción y la cantidad, y quién lo halló, recolectó y embaló</li>
+        <li>Genera los documentos y ábrelos en Word: revísalos una última vez antes de imprimir y firmar</li>
       </ul>
     </div>
   </div>
@@ -264,6 +285,10 @@
 <section class="gsec" id="documentos">
   <div class="container">
     <div class="gsec-hdr"><div class="gnum">5</div><h2 class="gsec-title">Dónde quedan tus documentos descargados</h2></div>
+    <div class="gcard">
+      <p>Al final, en el Resumen, hay un botón por cada documento. Cuando generas uno, el círculo de su derecha se marca en verde.</p>
+      <div class="gshots una"><figure class="gshot"><img src="img/guia-generar.jpg" width="900" height="844" alt="Resumen con los botones para generar cada documento" loading="lazy"><figcaption>Un botón por documento: informe, acta de derechos, rótulo, cadena de custodia y acta de incautación.</figcaption></figure></div>
+    </div>
     <div class="gcard">
       <h4><svg class="ic" aria-hidden="true"><use href="icons.svg#i-monitor"/></svg> En la app de Windows</h4>
       <p>Los documentos no caen en Descargas: se guardan en <strong><code>Documentos\CapturaDocs</code></strong>, y dentro de esa carpeta <strong>cada caso tiene la suya propia</strong>, para que no se te revuelvan los papeles de varios casos.</p>
@@ -472,6 +497,20 @@
     }).observe(cv);
   }
   addEventListener('resize', function(){ medir(); if (quieto) dibujar(0,16); });
+})();
+</script>
+
+<script>
+// Toca una captura para verla grande; toca de nuevo o Escape para cerrar.
+(function(){
+  var lb = document.createElement('div'); lb.className = 'lightbox'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Captura ampliada');
+  var im = document.createElement('img'); lb.appendChild(im); document.body.appendChild(lb);
+  function cerrar(){ lb.classList.remove('on'); }
+  lb.addEventListener('click', cerrar);
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') cerrar(); });
+  document.querySelectorAll('.gshot img').forEach(function(i){
+    i.addEventListener('click', function(){ im.src = i.src; im.alt = i.alt; lb.classList.add('on'); });
+  });
 })();
 </script>
 </body>
