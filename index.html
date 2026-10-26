@@ -401,6 +401,49 @@
     .refico,.ads-promo-icon{color:#ffc533;background:linear-gradient(145deg,rgba(240,165,0,.2),rgba(240,165,0,.05));border:1px solid rgba(240,165,0,.5);box-shadow:0 8px 26px rgba(240,165,0,.22),inset 0 0 14px rgba(240,165,0,.1)}
     .refico .ic,.ads-promo-icon .ic,.ads-promo-icon svg{filter:drop-shadow(0 0 6px rgba(240,165,0,.5))}
     .mbody{overflow-x:hidden;overflow-wrap:anywhere}
+
+    /* ── Asistente: agente 3D saludando (imagen fija; la mano no se mueve) ── */
+    .chat-toggle{width:84px;height:84px;padding:0;overflow:hidden;background:#0b1a3a;border:2px solid var(--gold);box-shadow:0 10px 30px rgba(240,165,0,.35),0 0 0 4px rgba(240,165,0,.12);animation:flota 5s ease-in-out infinite}
+    .chat-toggle .bot-img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+    .chat-toggle:hover{animation-play-state:paused;box-shadow:0 14px 38px rgba(240,165,0,.5),0 0 0 5px rgba(240,165,0,.2)}
+    .chat-toggle:hover .bot-img{transform:scale(1.1)}
+    @keyframes flota{50%{transform:translateY(-5px)}}
+    .chat-saludo{position:fixed;right:118px;bottom:46px;z-index:997;max-width:210px;padding:10px 16px;border-radius:14px 14px 4px 14px;background:var(--navy2);border:1px solid rgba(240,165,0,.55);color:var(--white);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.98rem;line-height:1.3;box-shadow:0 10px 28px rgba(0,0,0,.45);opacity:0;transform:translateY(8px) scale(.96);pointer-events:none;transition:opacity .35s,transform .35s}
+    .chat-saludo.on{opacity:1;transform:none}
+    .chat-quien{display:inline-flex;align-items:center;gap:10px}
+    .bot-mini{width:42px;height:42px;border-radius:50%;object-fit:cover;border:1.5px solid var(--gold);flex-shrink:0}
+    @media (max-width:480px){.chat-toggle{width:74px;height:74px}.chat-saludo{right:102px;bottom:32px;max-width:170px;font-size:.9rem}}
+    html.quieto .chat-toggle{animation:none}
+
+    /* ── Chat: mismo diseño que la página (íconos dorados, texto blanco, título de la sección) ── */
+    .chat-panel{border-color:rgba(240,165,0,.35);box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 0 1px rgba(240,165,0,.08)}
+    .chat-hdr{background:linear-gradient(135deg,#0f2250,var(--navy2) 70%);border-radius:16px 16px 0 0}
+    .chat-menu-btn{display:flex;align-items:center;gap:12px;padding:10px 12px;color:var(--white);background:linear-gradient(170deg,rgba(22,40,78,.9),rgba(13,26,46,.9))}
+    .chat-menu-btn:hover{border-color:rgba(240,165,0,.7);box-shadow:0 8px 22px rgba(240,165,0,.14);transform:translateY(-1px)}
+    .chat-menu-btn{transition:border-color .2s,box-shadow .25s,transform .2s}
+    .chat-menu-btn .cm-tx{flex:1;min-width:0;line-height:1.35}
+    .chat-menu-btn::after{content:"\203A";color:var(--gold);font-size:1.5rem;line-height:1;margin-left:auto;flex:none}
+    .cm-ic{display:inline-grid;place-items:center;width:38px;height:38px;flex:none;font-size:1.2rem;color:#ffc533;border-radius:11px;background:linear-gradient(145deg,rgba(240,165,0,.2),rgba(240,165,0,.05));border:1px solid rgba(240,165,0,.5);box-shadow:0 4px 14px rgba(240,165,0,.18),inset 0 0 10px rgba(240,165,0,.1)}
+    .cm-ic .ic{filter:drop-shadow(0 0 5px rgba(240,165,0,.5))}
+    .cm-sm{width:30px;height:30px;font-size:1rem;border-radius:9px}
+    .chat-wa .cm-ic{color:var(--green);border-color:rgba(37,211,102,.45);background:rgba(37,211,102,.1);box-shadow:none}
+    .chat-wa .cm-ic .ic{filter:none}.chat-wa::after{color:var(--green)}
+    .chat-vhdr{display:flex;align-items:center;gap:12px;margin:-2px 0 16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+    .chat-back{margin:0;flex:none;padding:6px 12px;border:1.5px solid rgba(240,165,0,.55);border-radius:9px;background:rgba(240,165,0,.08);color:var(--gold);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;transition:background .2s,color .2s}
+    .chat-back:hover{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy)}
+    .chat-vtitle{margin:0;display:flex;align-items:center;gap:10px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1.12rem;line-height:1.15;color:var(--white)}
+    .chat-intro .ic{color:var(--gold)}
+    .chat-label{color:#b8c4dc}
+    .chat-input:focus{box-shadow:0 0 0 3px rgba(240,165,0,.16)}
+    .chat-btn:hover{opacity:1;box-shadow:0 8px 24px rgba(240,165,0,.35);transform:translateY(-1px)}
+    .chat-btn{transition:box-shadow .25s,transform .2s,opacity .2s}
+    .chat-plan-row{border:1px solid var(--border);background:linear-gradient(170deg,rgba(22,40,78,.7),rgba(13,26,46,.7))}
+    :where(.chat-menu-btn,.chat-back,.chat-btn,.chat-close):focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+    .chat-body{scrollbar-width:thin;scrollbar-color:rgba(240,165,0,.55) transparent}
+    .chat-body::-webkit-scrollbar{width:8px}.chat-body::-webkit-scrollbar-track{background:transparent}
+    .chat-body::-webkit-scrollbar-thumb{background:rgba(240,165,0,.45);border-radius:8px}
+    .chat-libre-mensajes{scrollbar-width:thin;scrollbar-color:rgba(240,165,0,.55) transparent}
+    .chat-vtitle{min-width:0}
 </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -906,32 +949,33 @@
   </div>
 </div>
 
-<button id="chatToggle" class="chat-toggle" aria-label="Abrir chat de CapturaDocs" aria-expanded="false" aria-controls="chatPanel"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg></button>
+<button id="chatToggle" class="chat-toggle" aria-label="Abrir el chat de ayuda: asistente de CapturaDocs" aria-expanded="false" aria-controls="chatPanel"><img class="bot-img" src="img/agente-chat.jpg" width="360" height="360" alt=""></button>
+<div id="chatSaludo" class="chat-saludo" aria-hidden="true">¡A la orden! ¿En qué le ayudo?</div>
 
 <div id="chatPanel" class="chat-panel" role="dialog" aria-label="Chat de CapturaDocs Express" aria-hidden="true">
   <div class="chat-hdr">
-    <span><svg class="ic" aria-hidden="true"><use href="icons.svg#i-shield-check"/></svg> CapturaDocs Express</span>
+    <span class="chat-quien"><img class="bot-mini" src="img/agente-chat.jpg" width="360" height="360" alt=""> CapturaDocs Express</span>
     <button class="chat-close" onclick="cerrarChat()" aria-label="Cerrar chat">✕</button>
   </div>
   <div class="chat-body">
     <div id="chat-view-menu" class="chat-view">
       <p class="chat-intro">¿En qué podemos ayudarte?</p>
-      <button class="chat-menu-btn" onclick="chatShowView('libre')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-pen-line"/></svg> Escríbenos (ayuda, renovar, estado, referidos)</button>
-      <button class="chat-menu-btn" onclick="chatShowView('precios')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-banknote"/></svg> Ver precios</button>
-      <button class="chat-menu-btn" onclick="chatShowView('cotizar')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-calculator"/></svg> Cotizar un plan</button>
-      <button class="chat-menu-btn" onclick="chatShowView('comprobante')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-send"/></svg> Ya pagué, subir comprobante</button>
-      <button class="chat-menu-btn" onclick="chatShowView('estado')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-search"/></svg> Consultar mi pedido</button>
-      <button class="chat-menu-btn" onclick="chatShowView('contacto')"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-mailbox"/></svg> Sugerencias o contacto</button>
-      <a class="chat-menu-btn chat-wa wa-link" href="#" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg> Contáctanos por WhatsApp</a>
+      <button class="chat-menu-btn" onclick="chatShowView('libre')"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-pen-line"/></svg></span><span class="cm-tx">Escríbenos (ayuda, renovar, estado, referidos)</span></button>
+      <button class="chat-menu-btn" onclick="chatShowView('precios')"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-banknote"/></svg></span><span class="cm-tx">Ver precios</span></button>
+      <button class="chat-menu-btn" onclick="chatShowView('cotizar')"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-calculator"/></svg></span><span class="cm-tx">Cotizar un plan</span></button>
+      <button class="chat-menu-btn" onclick="chatShowView('comprobante')"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-send"/></svg></span><span class="cm-tx">Ya pagué, subir comprobante</span></button>
+      <button class="chat-menu-btn" onclick="chatShowView('estado')"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-search"/></svg></span><span class="cm-tx">Consultar mi pedido</span></button>
+      <button class="chat-menu-btn" onclick="chatShowView('contacto')"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-mailbox"/></svg></span><span class="cm-tx">Sugerencias o contacto</span></button>
+      <a class="chat-menu-btn chat-wa wa-link" href="#" target="_blank" rel="noopener"><span class="cm-ic"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-message-circle"/></svg></span><span class="cm-tx">Contáctanos por WhatsApp</span></a>
     </div>
 
     <div id="chat-view-precios" class="chat-view" style="display:none">
-      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div class="chat-vhdr"><button class="chat-back" onclick="chatShowView('menu')" aria-label="Volver al menú">← Menú</button><h3 class="chat-vtitle"><span class="cm-ic cm-sm"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-banknote"/></svg></span>Planes y precios</h3></div>
       <div id="chat-precios-body" class="chat-result">Cargando…</div>
     </div>
 
     <div id="chat-view-cotizar" class="chat-view" style="display:none">
-      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div class="chat-vhdr"><button class="chat-back" onclick="chatShowView('menu')" aria-label="Volver al menú">← Menú</button><h3 class="chat-vtitle"><span class="cm-ic cm-sm"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-calculator"/></svg></span>Cotizar un plan</h3></div>
       <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> → arriba.</p>
       <label class="chat-label" for="chat-cotizar-deviceid">ID de dispositivo</label>
       <input id="chat-cotizar-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
@@ -948,7 +992,7 @@
     </div>
 
     <div id="chat-view-comprobante" class="chat-view" style="display:none">
-      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div class="chat-vhdr"><button class="chat-back" onclick="chatShowView('menu')" aria-label="Volver al menú">← Menú</button><h3 class="chat-vtitle"><span class="cm-ic cm-sm"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-send"/></svg></span>Ya pagué: subir comprobante</h3></div>
       <p class="chat-intro">Encuentra tu ID de dispositivo en la app: ícono <svg class="ic" aria-hidden="true"><use href="icons.svg#i-gift"/></svg> → arriba.</p>
       <label class="chat-label" for="chat-comp-deviceid">ID de dispositivo</label>
       <input id="chat-comp-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
@@ -967,7 +1011,7 @@
     </div>
 
     <div id="chat-view-estado" class="chat-view" style="display:none">
-      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div class="chat-vhdr"><button class="chat-back" onclick="chatShowView('menu')" aria-label="Volver al menú">← Menú</button><h3 class="chat-vtitle"><span class="cm-ic cm-sm"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-search"/></svg></span>Consultar mi pedido</h3></div>
       <label class="chat-label" for="chat-estado-deviceid">ID de dispositivo</label>
       <input id="chat-estado-deviceid" class="chat-input" type="text" placeholder="XXXX-XXXX" maxlength="9" autocomplete="off"/>
       <label class="chat-label" for="chat-estado-email">Correo con el que registraste la app</label>
@@ -977,7 +1021,7 @@
     </div>
 
     <div id="chat-view-contacto" class="chat-view" style="display:none">
-      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div class="chat-vhdr"><button class="chat-back" onclick="chatShowView('menu')" aria-label="Volver al menú">← Menú</button><h3 class="chat-vtitle"><span class="cm-ic cm-sm"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-mailbox"/></svg></span>Sugerencias o contacto</h3></div>
       <label class="chat-label" for="chat-contacto-tipo">Tipo</label>
       <select id="chat-contacto-tipo" class="chat-input">
         <option value="sugerencia">Sugerencia</option>
@@ -996,7 +1040,7 @@
     </div>
 
     <div id="chat-view-libre" class="chat-view" style="display:none">
-      <button class="chat-back" onclick="chatShowView('menu')">← Volver</button>
+      <div class="chat-vhdr"><button class="chat-back" onclick="chatShowView('menu')" aria-label="Volver al menú">← Menú</button><h3 class="chat-vtitle"><span class="cm-ic cm-sm"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-pen-line"/></svg></span>Escríbenos</h3></div>
       <p class="chat-intro">Escríbenos: ayuda con la app, renovar tu licencia, el estado de tu pedido, tu código de referidos, o lo que necesites.</p>
       <div id="chat-libre-mensajes" class="chat-libre-mensajes"></div>
       <div class="chat-libre-input-row">
@@ -1141,6 +1185,7 @@
     ['menu','libre','precios','cotizar','comprobante','estado','contacto'].forEach(v => {
       document.getElementById('chat-view-' + v).style.display = v === view ? '' : 'none';
     });
+    var cb = document.querySelector('.chat-body'); if (cb) cb.scrollTop = 0;
     if (view === 'precios') chatCargarPrecios();
     if (view === 'libre') chatLibreAbrir(); else chatLibreDetenerPolling();
   }
@@ -1488,6 +1533,17 @@
     }).observe(cv);
   }
   addEventListener('resize', function(){ medir(); if (quieto) dibujar(0,16); });
+})();
+</script>
+
+<script>
+// Saludo del asistente: aparece una vez por visita, unos segundos, y se cierra solo.
+(function(){
+  var g = document.getElementById('chatSaludo'), t = document.getElementById('chatToggle'); if (!g || !t) return;
+  try { if (sessionStorage.getItem('cd-saludo')) return; } catch(e){}
+  setTimeout(function(){ if (t.getAttribute('aria-expanded') === 'true') return; g.classList.add('on'); try { sessionStorage.setItem('cd-saludo','1'); } catch(e){} }, 3200);
+  setTimeout(function(){ g.classList.remove('on'); }, 10500);
+  t.addEventListener('click', function(){ g.classList.remove('on'); });
 })();
 </script>
 </body>
