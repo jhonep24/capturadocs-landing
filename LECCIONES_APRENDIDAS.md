@@ -843,3 +843,25 @@ aprobación del dueño antes de publicar:
 
 ### Qué dejó de bueno el método
 Se dejó una guía reutilizable para las próximas páginas: `Documents\claude\guia-web\GUIA_PAGINAS_WEB.md`.
+
+## 2026-10-27 — Mascota del chat y diseño del chat
+
+### Qué se hizo
+El botón del chat pasó de un ícono a un **agente 3D saludando** con la mano en la gorra; el menú del chat
+usa íconos dorados y texto blanco, y cada sección muestra su título con un botón "← Menú".
+
+### Por qué
+El dueño quería un asistente con personalidad (un policía saludando) y notó dos fallos de claridad: los íconos
+del menú tenían el mismo color que el texto, y al entrar a una sección no se veía en cuál estaba.
+
+### Problemas encontrados y cómo se resolvieron
+- **Los dibujos propios en SVG se ven "básicos"**: un robot azul, cinco mascotas y seis variantes del agente no
+  convencieron. La calidad que el dueño quería solo se logró con **generación de imagen (Seedream, 3D)**.
+  Lección: para personajes/ilustración de marca, ir directo a generar imagen y cotizar; el SVG a mano sirve para íconos.
+- **El dueño no quería el movimiento de la mano**: pidió saludo permanente. Se dejó la imagen fija y solo se animó
+  la flotación. Lección: preguntar qué *no* debe moverse antes de animar un personaje.
+- **`confirm-generation` se cortó por tiempo (30 s) pero la generación siguió**: es idempotente. Se recuperó con
+  `get-generation <id> --wait`; no se repitió ni se cobró dos veces.
+- **El saldo de créditos cambiaba entre cotizaciones** (−64 y luego 100): siempre releer la cotización y pedir
+  confirmación con el precio exacto; no gastar por inercia. El dueño decidió no regenerar para quitar el bigote.
+- **Sin insignias reales**: se pidió "insignia lisa, sin texto ni emblema" para no contradecir el aviso "no oficial".

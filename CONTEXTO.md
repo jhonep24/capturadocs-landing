@@ -1089,6 +1089,12 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
   - Revisión en celular (375 px) hecha el 2026-10-26: sin desbordes; barra superior en una fila,
     enlaces del pie ≥ 44 px.
 - **Método reutilizable para otras páginas:** `Documents\claude\guia-web\GUIA_PAGINAS_WEB.md` (flujo, herramientas, plantillas, checklist). El porqué de cada cambio del rediseño está en `LECCIONES_APRENDIDAS.md` (entradas de oct-2026).
+- **Chat con mascota (2026-10-27):** el botón flotante es un **agente 3D saludando** (`img/agente-chat.jpg`,
+  generado con Superdesign/Seedream, 6 créditos, con bigote por decisión del dueño), mano fija en la gorra;
+  solo flota suave y se acerca al pasar el mouse. Globito "¡A la orden!" una vez por visita (`sessionStorage cd-saludo`).
+  Menú del chat con íconos dorados en medallón y texto blanco; **cada sección tiene su título + "← Menú"**
+  (`.chat-vhdr`). La imagen es un render de IA sin insignias reales (la web dice que NO es oficial de la Policía).
+  Antes se probaron robots y agentes en SVG propio y no gustaron ("muy básicos"): para personajes, usar generación de imagen.
 - Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
