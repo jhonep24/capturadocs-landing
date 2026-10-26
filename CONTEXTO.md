@@ -1199,6 +1199,21 @@ quedaron como tareas en Vikunja, no se tocaron):
   pide NUNC, departamento, municipio y destino; la sección 2 de la guía en línea no
   lo menciona (el PDF sí, paso 3).
 
+## 1.13.4 publicada (2026-10-26)
+
+Arregla DE VERDAD la fecha gris del FPJ-4 (y la hora que no aparecía). **No era
+la caché** (ese fue el diagnóstico equivocado de la 1.13.3): se reproducía hasta
+en un documento generado desde cero, sin Electron. Dos causas de formato OOXML:
+la fecha heredaba el color de TEMA del texto guía (`themeColor` gris, que Word
+usa ignorando el `w:val` negro), y las casillas de la hora tenían una sangría
+grande que empujaba el dígito fuera de la casilla. Además, la fila de encabezado
+(Depto/Municipio/Fecha/Hora) quedó centrada. Afecta a los 3 canales (no solo el
+`.exe`), por eso se publicó en todos.
+
+- **`v1.13.4-windows-exe`** (*Latest*), SHA `7007da1a…`.
+- **`v1.13.4-android`** (`--latest=false`), SHA `54cc17e7…`, versionCode 13.
+- PWA redesplegada desde `main` (commit del fix + docs).
+
 ## 1.13.3 publicada (2026-10-23)
 
 Arregla un bug SOLO del `.exe`: tras actualizar, los documentos se generaban
