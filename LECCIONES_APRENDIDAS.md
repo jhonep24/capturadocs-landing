@@ -692,3 +692,154 @@ no estaba editando al mismo tiempo.
   constantes. La tarea seguía siendo válida, pero mucho más chica de lo
   que decía el tablero — otra razón para verificar contra el código antes
   de estimar.
+
+
+---
+
+> **Nota de cobertura:** las entradas de abajo cubren el trabajo de octubre de 2026 hecho
+> en la sesión de la landing (ventas, guías, rediseño). El tramo entre el 2026-08-21 y el
+> 2026-10-15 (referidos, privacidad, SEO de anuncios, etc.) quedó documentado en
+> `CONTEXTO.md` y en Vikunja, pero no tiene entrada propia aquí todavía.
+
+## 2026-10-16 — Videos tutoriales y guía descargable en PDF
+
+### Qué se hizo
+- `guia.html` tiene 4 huecos de video (instalar, licencia, diligenciar, rótulo) que **se ocultan
+  solos** mientras `config.js → VIDEOS` esté vacío. El video es una portada propia y el
+  iframe (`youtube-nocookie.com`) solo se crea al dar play.
+- `guia-pdf/` genera el PDF paso a paso **con un solo comando** (`sh guia-pdf/regenerar.sh`):
+  extrae `origin/main` de la app, la construye, la recorre con Playwright con **datos
+  inventados**, recorta las capturas y arma el PDF.
+
+### Por qué
+- El dueño quería que los policías aprendieran a usar la app sin depender de WhatsApp. Un
+  video no se puede grabar sin la voz del dueño, pero el PDF sí se puede automatizar entero.
+- Click-to-load para YouTube: ni la miniatura se pide hasta que la persona decide verlo
+  (privacidad del policía y página liviana).
+- Generar las capturas con un script, y no a mano, hace que **actualizar la guía cuando
+  cambie la app cuesta un minuto**, no una tarde.
+
+### Problemas encontrados y cómo se resolvieron
+- **Capturas con datos que parecían reales.** La app trae precargados un NUNC y una URI de
+  fábrica que parecen de un caso real y están en el instalador público. En las capturas se
+  reemplazan por valores inventados (y quedó una tarea en Vikunja para corregir el valor de
+  fábrica en la app). Lección: antes de publicar una captura, preguntarse "¿esto es un dato
+  real de alguien?".
+- **Cada `scrollIntoView` descuadraba los recuadros rojos ya puestos.** Se reescribió el
+  resaltado con coordenadas del documento (no de la ventana) y el "acercar" aparte.
+- **Capturas a pantalla completa salían con letra ilegible al imprimir.** Recortar cada
+  captura a su zona útil y poner el texto en un diseño de flujo, no a página completa.
+- **Scripts `.sh` con saltos de línea de Windows (CRLF) no corren.** Se fijó con
+  `.gitattributes` (`*.sh text eol=lf`). Lección: en Windows, todo script de shell necesita esto.
+- **Las imágenes de Explorador / Word / cuadro de impresión no existen en la app web.** Una
+  captura real de la pantalla del dueño (4K a 300 %) salió ilegible y mostraba carpetas
+  personales, así que se dibujaron como **ilustraciones HTML con datos inventados**
+  (`guia-pdf/generador/ilustraciones/`). Nunca capturar el escritorio personal para un
+  documento público.
+
+## 2026-10-17 — Vuelven las ventas normales (Semanal, Mensual y Estación)
+
+### Qué se hizo
+Con el APK ya generando documentos, se retiró la restricción provisional "solo se vende
+Estación". Fueron **dos mitades que hubo que mover en orden**: primero el Worker
+(`PLANES_EN_VENTA` en `informes-ponal`, que filtra `/config-publica` y lo que ve el bot) y
+después la landing (tarjetas, listas del chat, JSON-LD).
+
+### Por qué
+Las restricciones eran provisionales y estaban pensadas para revertirse: existían porque el
+celular no generaba documentos. Dejarlas habría seguido escondiendo planes que ya funcionan.
+
+### Problemas encontrados y cómo se resolvieron
+- **Publicar solo la landing habría dejado el bot cotizando mal.** El filtro real vive en el
+  Worker; la landing solo lo repetía. Lección: cuando un retiro provisional toca dos
+  sistemas, anotar las **dos** mitades desde el día que se hace.
+- **`test:worker` fallaba porque fijaba el estado provisional.** Se reescribió para
+  verificar que el bot reciba exactamente lo que dice `PLANES_EN_VENTA`, no para fijar
+  *cuáles* planes están en venta. Un test no debe congelar una decisión de negocio temporal.
+- **Textos que comparaban con "un plan que ya no se ofrece"** (la IA, la FAQ de Estación)
+  hubo que restaurarlos a mano. Buscar con `grep` las frases, no solo las constantes.
+- **El PDF de la guía y la guía en línea dicen lo mismo con distinto formato.** Si se corrige
+  uno hay que revisar el otro (pasó con el checklist "antes de generar").
+
+## 2026-10-22 — Primer intento de rediseño: íconos y animaciones (revertido)
+
+### Qué se hizo
+Se reemplazaron los emojis por íconos Lucide y se añadieron animaciones de scroll. Luego se
+probó una escena de scroll (un formulario que se reparte en cinco documentos). **El dueño
+no la veía** y al final pidió volver a la landing original mientras definía el rumbo.
+
+### Por qué
+Unos programadores a quienes el dueño mostró la landing dijeron, de entrada, que "parecía
+hecha con IA". Los emojis y las animaciones estándar (aparecer al hacer scroll) son justo lo
+que delata una página generada.
+
+### Problemas encontrados y cómo se resolvieron
+- **No veía la animación porque su Windows tiene desactivadas las animaciones del sistema**
+  (`SPI_GETCLIENTAREAANIMATION = false`). El navegador entonces reporta
+  `prefers-reduced-motion: reduce` y la página, por accesibilidad, mostraba todo ya
+  terminado. El mismo motivo hace que el panel de pruebas de la app siempre vea todo quieto.
+  Lección: **cuando "no se ve la animación", primero revisar la preferencia de movimiento del
+  sistema**, no el código. Se respeta por defecto y se ofrece un botón para activarla.
+- **El dueño rechazó una propuesta totalmente nueva (papel/azul)**: dijo "se ve muy mal, está
+  mucho mejor el que tenemos". Los **colores representan la app**: cualquier rediseño debe
+  conservarlos. Lección: antes de proponer una dirección nueva, preguntar qué es intocable.
+- **Un regex que "reemplazaba bloques" se tragó medio CSS** (`.*?` con `re.S` hasta la
+  siguiente llave en otro bloque). Para editar bloques anidados, contar llaves, no regex.
+
+## 2026-10-24 a 2026-10-27 — Rediseño dirección "B", por pasos y con aprobación
+
+### Qué se hizo
+Rediseño completo de la landing (y estilo compartido en `guia.html` y `seguridad.html`)
+**manteniendo azul marino + dorado**, en pasos pequeños, cada uno con vista previa privada y
+aprobación del dueño antes de publicar:
+1. **Base:** portada alineada a la izquierda con hojas de documento flotando en un `<canvas>`
+   (tenues), íconos Lucide en medallones dorados, cortes diagonales.
+2. **Mockups:** sección con laptop y teléfonos usando **capturas reales de la app**.
+3. **Validación real, testimonios en franjas, banda de confianza.**
+4. **Fondos variados por sección** y **cortes diagonales** en seis secciones.
+5. **Descargas:** título grande, íconos de plataforma destacados.
+6. **Celular:** barra superior en una fila, enlaces del pie tocables, botones dorados.
+7. **Coherencia:** botón superior dorado (antes verde), palomitas y botones secundarios en
+   dorado, medallones iguales.
+8. **Guía de uso con 11 capturas reales** (ampliables al tocar) y checklist alineado con lo
+   que la app realmente hace.
+
+### Por qué
+- Que no se vea "hecho con IA": sin emojis, sin fondo azul plano en todo, sin tarjetas
+  idénticas, con una imagen propia del producto (la app real) y no maquetas inventadas.
+- Mantener los colores porque identifican la app (el dueño lo pidió dos veces).
+- Hacerlo por pasos con vista previa evita el error del 22-oct: construir mucho y que el
+  dueño lo rechace entero.
+
+### Problemas encontrados y cómo se resolvieron
+- **Las diagonales casi no se notaban** porque la sección y la vecina tenían tonos parecidos
+  (navy contra navy). Un corte diagonal solo se ve si los **fondos contiguos difieren**; se
+  subió el contraste (azul rey ↔ navy ↔ ámbar).
+- **La maqueta falsa de "validación" se reemplazó por una captura real.** Una captura real
+  convence más y no hay que mantener un dibujo que se desactualiza.
+- **La versión compacta de descargas en celular no gustó.** Se probó (ícono a la izquierda) y
+  el dueño prefería el ícono grande arriba. Lección: los ajustes "de optimización" también
+  necesitan aprobación; el dueño decide cómo quiere *verse*, no solo cómo funciona.
+- **Los botones de Android/iPhone se veían apagados** (estilo "deshabilitado") y quien entra
+  desde el teléfono es quien más los necesita. Pasaron a dorado.
+- **El botón verde de la barra superior desentonaba.** El verde de WhatsApp se había colado en
+  un botón que no es de WhatsApp. Auditar colores por familia (verde/rojo/morado) con un
+  script en la página encontró los demás verdes sobrantes.
+- **Superdesign: generar imágenes con IA gasta créditos y el saldo salía negativo.** No se
+  gastó; el fondo se hizo en código (canvas), que además no pesa nada. Lección: cotizar
+  siempre (es gratis), mostrar el costo y no confirmar sin permiso.
+- **El panel de pruebas del navegador se queda en blanco o no corre animaciones** a veces (panel
+  oculto, `requestAnimationFrame` detenido, recarga con scripts). No era un error de la
+  página: abrir una pestaña nueva lo arregla. No concluir "la página está rota" sin repetir.
+- **`localhost` y archivos `file://` no cargan `/config.js`**; usar el servidor local de la
+  landing (`.claude/launch.json`).
+- **Editar HTML con Python en Windows:** los archivos pueden mezclar CRLF/LF. Normalizar
+  (`replace('\r\n','\n')`), editar y volver a escribir con el mismo fin de línea.
+- **Comandos de Bash con más de ~6 KB fallan** en este entorno: escribir el script con la
+  herramienta de archivos y ejecutarlo.
+- **Faltaba un espacio** en el título del cierre desde la versión original
+  ("eliminar**errores**"): al revisar una página completa salen errores viejos; corregirlos y
+  anotarlos.
+
+### Qué dejó de bueno el método
+Se dejó una guía reutilizable para las próximas páginas: `Documents\claude\guia-web\GUIA_PAGINAS_WEB.md`.

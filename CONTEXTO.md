@@ -1088,6 +1088,7 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
     compacta y el dueño prefirió la apilada. Botones de Android/iPhone en dorado.
   - Revisión en celular (375 px) hecha el 2026-10-26: sin desbordes; barra superior en una fila,
     enlaces del pie ≥ 44 px.
+- **Método reutilizable para otras páginas:** `Documents\claude\guia-web\GUIA_PAGINAS_WEB.md` (flujo, herramientas, plantillas, checklist). El porqué de cada cambio del rediseño está en `LECCIONES_APRENDIDAS.md` (entradas de oct-2026).
 - Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
