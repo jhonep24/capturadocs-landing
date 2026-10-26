@@ -1075,6 +1075,19 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
 - **Checklist "antes de generar"** reescrito para reflejar lo que la app SÍ hace (Resumen con "Falta N",
   campos en rojo que llevan al paso, fechas "Revisar dos veces") y lo que solo confirma la persona (cédula,
   narración, elementos). Está igual en `guia.html` y en el PDF (`guia-print.tpl.html`); si se toca uno, tocar el otro.
+- **Reglas de estilo que quedaron (2026-10-26/27), para no romperlas al tocar la landing:**
+  - Paleta fija: azul marino + dorado (+ azul `#2e7fff` en botones secundarios). El verde solo
+    para WhatsApp (botón del chat). Rojo solo en "Antes, a mano" de la comparación.
+  - Botón principal = dorado sólido; secundario = **contorno dorado** (`.pbtn.po`, `.nav-cta`);
+    el botón de la barra superior ya NO es verde. Palomitas de listas en dorado.
+  - Íconos: siempre Lucide en medallón dorado con brillo (`.step-i .fi-icon .ti-ic .refico .ads-promo-icon .dlicon`); nada de emojis.
+  - Cada sección con fondo propio (azul rey / ámbar / navy con resplandor) y **cortes diagonales**
+    (`clip-path` alternando) en features, comparación, descargas, testimonios, trust y cierre. Los
+    cortes solo se ven si la sección vecina tiene un tono distinto: no igualar fondos contiguos.
+  - Descargas en celular: tarjeta apilada (ícono grande arriba, botón abajo). Se probó una versión
+    compacta y el dueño prefirió la apilada. Botones de Android/iPhone en dorado.
+  - Revisión en celular (375 px) hecha el 2026-10-26: sin desbordes; barra superior en una fila,
+    enlaces del pie ≥ 44 px.
 - Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
