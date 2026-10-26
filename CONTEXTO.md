@@ -1049,6 +1049,29 @@ con el APK completo (y la PWA de iPhone completa) dejaron de tener razón de ser
 > marino + dorado, representan la app). Rechazó la propuesta "papel/azul". Pendiente: definir
 > la dirección con él antes de tocar nada.
 
+## Rediseño de la landing, dirección "B" (2026-10-24 a 26) — PUBLICADO por pasos
+
+El dueño eligió la dirección B (cinematográfica) de Superdesign, **manteniendo colores y
+tipografías** (son la marca de la app). Se hace por pasos, con vista previa privada en un
+Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
+1. **Base** (`41730de`): portada alineada a la izquierda con **hojas de documento flotando en
+   un `<canvas>`** (fondo "documentos en vuelo", tenue; se pausa fuera de pantalla y en
+   movimiento reducido), emojis → íconos Lucide (`icons.svg`, `<svg class="ic"><use href="icons.svg#i-…">`),
+   cortes diagonales (`clip-path`) en `.features` y `.trust`.
+2. **Mockups** (`e412a46`): sección `#dispositivos` con laptop + 2 teléfonos CSS y capturas
+   reales de la app (`img/app-pc.jpg`, `app-movil-1/2.jpg`).
+3. **Validación real + testimonios + confianza** (`ba12d3e`): captura real del Resumen
+   (`img/app-validacion.jpg`), testimonios en franjas anchas, `.trust` en banda de 5 columnas.
+- Las capturas salen de `guia-pdf/` (mismo generador de la guía, con `resaltar()` neutralizado
+  para quitar los círculos rojos); datos **inventados**. Si cambia la app, regenerarlas.
+- Superdesign: CLI `npx @superdesign/cli`, cuenta "Personal" ya con login; proyecto y borradores
+  en su lienzo. Generar imágenes gasta créditos (saldo figuraba negativo): **no se usó**; el fondo
+  se hizo en código. `.superdesign/` está en `.gitignore`.
+- Plugins instalados por el dueño: `frontend-design`, `superdesign`.
+- Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
+- La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
+  Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
+
 ## Íconos profesionales y animaciones (2026-10-22)
 
 Los programadores a quienes el dueño mostró la landing dijeron que "parecía hecha con IA".
