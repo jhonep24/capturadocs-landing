@@ -358,6 +358,27 @@
       .downloads{clip-path:polygon(0 3vw,100% 0,100% calc(100% - 3vw),0 100%)}
       .cta{clip-path:polygon(0 3vw,100% 0,100% 100%,0 100%);padding-bottom:80px;margin-bottom:0}
     }
+
+    /* ── Contraste de los cortes diagonales + sección de descargas más llamativa ── */
+    .compare{background:linear-gradient(180deg,#0d2a64 0%,#0a1c45 45%,#17449c 100%)}
+    .downloads{background:linear-gradient(180deg,#6b4806 0%,#33250a 38%,#0f1b36 100%)}
+    .downloads .stitle{font-weight:800;font-size:clamp(2.7rem,6.2vw,4.8rem);line-height:1;letter-spacing:-.5px;margin-bottom:20px}
+    .downloads .stitle em{font-style:normal;color:var(--gold);display:block}
+    .downloads .stag{font-size:.95rem;letter-spacing:3px}
+    .downloads .ssub{font-size:1.2rem;color:#c3cfe8;max-width:620px}
+    .downloads .phdr{margin-bottom:56px}
+    .dlcard{padding:38px 26px 34px;background:linear-gradient(170deg,rgba(22,40,78,.92),rgba(10,20,40,.92));border-color:rgba(240,165,0,.28);box-shadow:0 18px 44px rgba(0,0,0,.4)}
+    .dlcard:hover{border-color:rgba(240,165,0,.7);box-shadow:0 22px 54px rgba(240,165,0,.2)}
+    .dlicon{width:104px;height:104px;margin:0 auto 22px;border-radius:30px;display:grid;place-items:center;color:#ffd36b;background:radial-gradient(circle at 30% 22%,rgba(240,165,0,.5),rgba(240,165,0,.1) 72%);border:1px solid rgba(240,165,0,.6);box-shadow:0 12px 36px rgba(240,165,0,.28),inset 0 0 26px rgba(240,165,0,.14);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+    .dlicon svg{width:54px;height:54px;filter:drop-shadow(0 0 10px rgba(240,165,0,.55))}
+    .dlcard:hover .dlicon{transform:translateY(-4px) rotate(-4deg) scale(1.06)}
+    .dlname{font-size:1.6rem;margin-bottom:24px;color:var(--white)}
+    /* Íconos de funciones, pasos y confianza: más brillo */
+    .step-i,.fi-icon,.ti-ic{color:#ffc533;box-shadow:0 8px 26px rgba(240,165,0,.22),inset 0 0 14px rgba(240,165,0,.1);border-color:rgba(240,165,0,.5)}
+    .step-i .ic,.fi-icon .ic,.ti-ic .ic{filter:drop-shadow(0 0 6px rgba(240,165,0,.5))}
+
+    .features{background:linear-gradient(180deg,#143475 0%,#0d2150 50%,#0d1a2e 100%)}
+    .trust{background:linear-gradient(135deg,#4a3408 0%,#241a08 55%,#101a30 100%)}
   </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -540,7 +561,7 @@
   <div class="container">
     <div class="phdr">
       <div class="stag">Descargas</div>
-      <h2 class="stitle">Instala la app en tu equipo.</h2>
+      <h2 class="stitle">Instala la app <em>en tu equipo.</em></h2>
       <p class="ssub" style="margin:0 auto">Instálala en tu computador con Windows, en tu celular Android, o ábrela en tu iPhone.</p>
     </div>
     <div class="dlgrid">
