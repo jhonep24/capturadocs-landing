@@ -1218,9 +1218,10 @@ Lote de ajustes pedidos por el dueño:
 
 - **`v1.13.5-windows-exe`** (*Latest*), SHA `ff70a6a5…`.
 - **`v1.13.5-android`** (`--latest=false`), SHA `b240b0d9…`, versionCode 14.
-- PWA redesplegada desde `main`. El Worker de licencias **no** se desplegó en
-  este release (las estadísticas de ciudad/URI y el conteo corregido se activan
-  cuando se despliegue).
+- PWA y **Worker** redesplegados **solos** desde `main` (workflows "Deploy app
+  (PWA)" y "Deploy Worker de licencias"). O sea las estadísticas de ciudad/URI y
+  el conteo corregido ya están en vivo. Lo único manual que queda: reimportar el
+  workflow de n8n para que el resumen diario de Telegram muestre esas secciones.
 
 ## 1.13.4 publicada (2026-10-26)
 
