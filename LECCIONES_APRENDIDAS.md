@@ -10,6 +10,27 @@ estructura de secciones de la landing.
 
 ---
 
+> **Índice (2026-10-27): una entrada por tema/fecha.** No leas el archivo entero: busca la entrada con `grep -n "^## "` y lee solo ese bloque. Al agregar una entrada nueva, agrega su línea aquí.
+
+- 2026-08-18 — Publicar el `.exe` nuevo: el hash de integridad llevaba rato mal
+- 2026-08-11 (segunda parte) — Auditoría de consistencia landing ↔ app
+- 2026-08-11 — Auditoría externa de privacidad: política reforzada, página /seguridad y limpieza de detalles
+- 2026-08-10 — Rediseño de la sección de referidos
+- 2026-08-08 — Tono profesional, CTAs al contenido real, revisión de seguridad, comprobante urgente, chat libre y sección de anunciantes
+- 2026-08-07 — Sección de descargas (Android APK, Windows .msix, iPhone PWA)
+- 2026-08-03 — Prioridad media: SEO estructural
+- 2026-08-03 — Prioridad baja: número de WhatsApp y analítica
+- 2026-08-04 — Dominio propio + widget de chat con compra directa
+- 2026-08-04 (más tarde) — Formulario de contacto, estadísticas de visitas, y correo obligatorio en el widget
+- 2026-08-21 — Número de WhatsApp centralizado, meta robots y `setup.sh`
+- 2026-10-16 — Videos tutoriales y guía descargable en PDF
+- 2026-10-17 — Vuelven las ventas normales (Semanal, Mensual y Estación)
+- 2026-10-22 — Primer intento de rediseño: íconos y animaciones (revertido)
+- 2026-10-24 a 2026-10-27 — Rediseño dirección "B", por pasos y con aprobación
+- 2026-10-27 — Mascota del chat y diseño del chat
+
+---
+
 ## 2026-08-18 — Publicar el `.exe` nuevo: el hash de integridad llevaba rato mal
 
 ### Qué se hizo

@@ -4,10 +4,11 @@ Landing y guía de CapturaDocs Express (HTML estático, sin build).
 
 ## Lee primero (en este orden)
 1. `../homelab/ESTADO_PROYECTOS.md` (solo la fila de este proyecto).
-2. `CONTEXTO.md` (~86 KB): lee «Qué es este repo» y la sección que toque; «Pendientes conocidos» está congelada (la lista viva es Vikunja).
+2. `CONTEXTO.md` (~31 KB, núcleo desde 2026-10-27): qué es el repo, sistema de diseño, estructura de secciones, ventas vigentes, rediseño B, pendientes (apuntan a Vikunja). Su índice dice a qué archivo de `ref/` ir (OPERACION, BITACORA_AGO, BITACORA_SEP_OCT).
 
 ## No lo leas entero (gasta tokens)
-- `LECCIONES_APRENDIDAS.md` (~50 KB): busca por tema con grep.
+- `LECCIONES_APRENDIDAS.md` (~50 KB): lee su índice por fecha y abre solo la entrada que aplique (`grep -n "^## "`).
+- `ref/*.md` (≈60 KB entre los tres): bitácoras cerradas y procedimientos; busca con grep la sección que toque.
 
 ## Particularidades
 - Rediseños: por pasos, vista previa privada (Artifact) y esperar «aprobado» antes de cada push. Colores de marca intocables. El Windows del usuario tiene animaciones apagadas.
