@@ -1199,6 +1199,29 @@ quedaron como tareas en Vikunja, no se tocaron):
   pide NUNC, departamento, municipio y destino; la sección 2 de la guía en línea no
   lo menciona (el PDF sí, paso 3).
 
+## 1.13.5 publicada (2026-10-27)
+
+Lote de ajustes pedidos por el dueño:
+
+- **Fechas con teclado numérico:** en el APK, `<input type="date">` solo abría el
+  calendario nativo. Ahora todos los campos de fecha usan un componente propio
+  (`FechaInput`) de texto DD/MM/AAAA con teclado numérico (valida día/mes/año
+  reales) y un botón 📅 de respaldo. Internamente sigue guardando `YYYY-MM-DD`.
+- **Constancia de buen trato (FPJ-6):** el mes ahora va con NOMBRE ("octubre"),
+  no con número.
+- **NUNC por defecto `1100160000`** y **URI en blanco** (antes traía una URI de
+  ejemplo); cuando la URI está vacía aparece un botón **Configurar** al lado que
+  lleva directo a la configuración.
+- **Estadísticas por ciudad/URI** (lado servidor, pendiente de desplegar el
+  Worker) y **conteo de informes corregido** (contaba cada clic; ahora cuenta
+  informes distintos, como el trial).
+
+- **`v1.13.5-windows-exe`** (*Latest*), SHA `ff70a6a5…`.
+- **`v1.13.5-android`** (`--latest=false`), SHA `b240b0d9…`, versionCode 14.
+- PWA redesplegada desde `main`. El Worker de licencias **no** se desplegó en
+  este release (las estadísticas de ciudad/URI y el conteo corregido se activan
+  cuando se despliegue).
+
 ## 1.13.4 publicada (2026-10-26)
 
 Arregla DE VERDAD la fecha gris del FPJ-4 (y la hora que no aparecía). **No era
