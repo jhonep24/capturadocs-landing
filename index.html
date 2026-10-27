@@ -253,6 +253,9 @@
     .chat-result.err{color:#ff6b6b}
     .chat-result.ok{color:var(--white)}
     .chat-plan-row{display:flex;justify-content:space-between;padding:10px 12px;background:var(--navy3);border-radius:8px;margin-bottom:8px;font-size:.88rem}
+    .chat-opt{display:flex;align-items:flex-start;gap:8px;font-size:.88rem;margin:6px 0;cursor:pointer}
+    .chat-opt input{margin-top:3px}
+    .chat-opt.off{opacity:.55;cursor:not-allowed}
     .chat-plan-row b{color:var(--gold);font-family:'Rajdhani',sans-serif}
     .chat-clave{background:var(--navy);border:1px dashed var(--gold);border-radius:8px;padding:12px;margin-top:10px;font-family:monospace;font-size:1rem;color:var(--gold);text-align:center;letter-spacing:1px;word-break:break-all}
     .chat-libre-mensajes{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow-y:auto;margin-bottom:10px;padding-right:2px}
@@ -1004,6 +1007,11 @@
       </select>
       <label class="chat-label" for="chat-comp-nombre">Nombre (opcional)</label>
       <input id="chat-comp-nombre" class="chat-input" type="text" placeholder="Tu nombre" autocomplete="off"/>
+      <div class="chat-label">¿Cómo quieres recibir tu código de activación?</div>
+      <label class="chat-opt"><input type="radio" name="chat-comp-entrega" value="pagina" checked/><span>Verlo aquí en la página (en «Consultar mi pedido»)</span></label>
+      <label class="chat-opt"><input type="radio" name="chat-comp-entrega" value="whatsapp"/><span>Que me lo envíen por WhatsApp</span></label>
+      <input id="chat-comp-tel" class="chat-input" type="tel" inputmode="numeric" placeholder="Tu número de WhatsApp (ej. 3001234567)" maxlength="16" autocomplete="tel" style="display:none"/>
+      <label class="chat-opt off"><input type="radio" name="chat-comp-entrega" value="auto" disabled/><span>Activar automáticamente, sin teclear el código (próximamente)</span></label>
       <label class="chat-label" for="chat-comp-file">Foto del comprobante</label>
       <input id="chat-comp-file" class="chat-input" type="file" accept="image/*"/>
       <button class="chat-btn" onclick="chatEnviarComprobante(this)">Enviar comprobante</button>
@@ -1297,24 +1305,34 @@
     const deviceId = document.getElementById('chat-comp-deviceid').value.trim();
     const plan = document.getElementById('chat-comp-plan').value;
     const nombre = document.getElementById('chat-comp-nombre').value.trim();
+    const entrega = (document.querySelector('input[name="chat-comp-entrega"]:checked') || {}).value === 'whatsapp' ? 'whatsapp' : 'pagina';
+    const telefono = document.getElementById('chat-comp-tel').value.trim();
     const fileInput = document.getElementById('chat-comp-file');
     const file = fileInput.files[0];
     const el = document.getElementById('chat-comp-result');
     el.className = 'chat-result';
     if (!deviceId) { el.className = 'chat-result err'; el.textContent = 'Ingresa tu ID de dispositivo.'; return; }
+    if (entrega === 'whatsapp' && !/^(57)?3[0-9]{9}$/.test(telefono.replace(/[^0-9]/g, ''))) { el.className = 'chat-result err'; el.textContent = 'Escribe un número de WhatsApp válido (10 dígitos, empieza por 3).'; return; }
     if (!file) { el.className = 'chat-result err'; el.textContent = 'Adjunta la foto del comprobante.'; return; }
     if (file.size > 8 * 1024 * 1024) { el.className = 'chat-result err'; el.textContent = 'La imagen es muy pesada (máx. 8MB).'; return; }
     el.textContent = 'Enviando…';
     btn.disabled = true;
     try {
       const imagenBase64 = await chatLeerArchivoBase64(file);
-      const data = await chatPost('landing-chat', { accion: 'comprobante', sessionId: getSessionId(), deviceId, plan, nombre, imagenBase64, mimetype: file.type || 'image/jpeg' });
+      const data = await chatPost('landing-chat', { accion: 'comprobante', sessionId: getSessionId(), deviceId, plan, nombre, entrega, telefono, imagenBase64, mimetype: file.type || 'image/jpeg' });
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'No pudimos procesar el comprobante.'; return; }
       el.className = 'chat-result ok';
       const mensaje = data.mensaje ? escapeHtml(data.mensaje) : 'Comprobante recibido, en revisión.';
       const piePedido = data.pedidoId ? `Pedido #${escapeHtml(data.pedidoId)}. ` : '';
       el.innerHTML = `✓ ${mensaje}<br><span style="color:var(--muted)">${piePedido}Puedes consultar el estado cuando quieras con "Consultar mi pedido".</span>`;
       fileInput.value = '';
+      // Directo a «Consultar mi pedido», con el ID ya puesto y el aviso de que el codigo aparece alli.
+      document.getElementById('chat-estado-deviceid').value = deviceId;
+      const est = document.getElementById('chat-estado-result');
+      est.className = 'chat-result ok';
+      est.innerHTML = '✓ Recibimos tu comprobante. Cuando se apruebe tu pago, tu <b>código de activación</b> aparecerá aquí: escribe tu correo y pulsa <b>Consultar</b> para revisarlo.' + (entrega === 'whatsapp' ? '<br><span style="color:var(--muted)">También te lo enviaremos por WhatsApp al número que indicaste.</span>' : '');
+      chatShowView('estado');
+      document.getElementById('chat-estado-email').focus();
     } catch (e) {
       el.className = 'chat-result err';
       el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
@@ -1322,6 +1340,11 @@
       btn.disabled = false;
     }
   }
+
+  document.querySelectorAll('input[name="chat-comp-entrega"]').forEach(r => r.addEventListener('change', () => {
+    const wa = document.querySelector('input[name="chat-comp-entrega"]:checked');
+    document.getElementById('chat-comp-tel').style.display = wa && wa.value === 'whatsapp' ? '' : 'none';
+  }));
 
   const CHAT_ESTADO_TEXTOS = {
     cotizado: 'Cotizado, esperando tu comprobante.',
