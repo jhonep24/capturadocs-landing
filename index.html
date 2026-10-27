@@ -1250,6 +1250,10 @@
       if (!data.ok) { el.className = 'chat-result err'; el.textContent = data.error || 'Plan inválido.'; return; }
       el.className = 'chat-result ok';
       let html = '';
+      if (data.planCorregido && data.planPedido) {
+        const destino = data.plan === 'N' ? 'es el que corresponde a tu equipo (computador de escritorio)' : 'es el que corresponde a tu dispositivo (el plan Negocio/Estación es solo para computador)';
+        html += `<span style="color:var(--gold)">Ojo: el plan <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.planPedido] || data.planPedido)}</b> no aplica a tu dispositivo, así que te cotizamos <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.plan] || data.plan)}</b>, que ${destino}.</span><br>`;
+      }
       if (data.diasActivos > 0) html += `Ya tienes <b>${data.diasActivos} días</b> activos en tu licencia actual.<br>`;
       html += `El plan <b>${escapeHtml(CHAT_PLAN_NOMBRES[data.plan] || data.plan)}</b> agrega <b>${data.diasPlan} días</b>.<br>`;
       if (data.bonoReferido > 0) {
@@ -1268,7 +1272,7 @@
       pagarBtn.onclick = () => {
         chatShowView('comprobante');
         document.getElementById('chat-comp-deviceid').value = deviceId;
-        document.getElementById('chat-comp-plan').value = plan;
+        document.getElementById('chat-comp-plan').value = data.plan || plan;
       };
       el.appendChild(document.createElement('br'));
       el.appendChild(pagarBtn);
