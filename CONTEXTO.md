@@ -306,6 +306,12 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
   Imágenes `img/doc-fpj*.jpg` = documentos REALES que genera la app con un caso inventado. No afirma que la
   Fiscalía los acepte (la FAQ dice que depende de la autoridad). Cómo regenerarlas: `guia-pdf/generador/e2e-guia/documentos.spec.js`
   (ver `LECCIONES_APRENDIDAS.md`, entrada 2026-10-28). Los datos de las 4 hojas deben coincidir (mismo capturado y policía).
+- **Recorte para celular (2026-10-28):** la página bajó de ~17.800 a ~15.500 px en 375 px. Se quitó la función duplicada
+  "En el computador y en la calle" (ya la cuenta `#dispositivos`) y se compactó con un bloque `@media (max-width:700px)` al
+  final del CSS ("Celular: la misma información, menos alto"): pasos y referidos con ícono a la izquierda, pestañas de
+  documentos en 2 columnas, menos relleno. Enlaces de texto con zona táctil de 44 px (`.fa a`, `.docs-nota a`).
+  Candidatos a recortar más (decisión del dueño, no hechos): anuncios (`.ads-promo`), banda `.trust`, mockups `#dispositivos`,
+  funciones desplegables en celular.
 - Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
