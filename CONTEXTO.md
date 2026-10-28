@@ -305,6 +305,28 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
 
+## 1.13.6 publicada (2026-10-28)
+
+Lote de mejoras de UI pedidas por el dueño (todas en `informes-ponal`):
+
+- **Captura — ¿a quién notificar?**: los campos (nombre/ID/teléfono/hora) solo
+  salen tras elegir Papá/Mamá/Otro, no antes.
+- **Elementos incautados:** el aviso rojo solo aparece con 1+ elementos (antes
+  salía con el contador en 0).
+- **Inicio:** la tarjeta de proceso no seleccionada va en gris apagado y la
+  seleccionada en dorado pleno (se nota la diferencia).
+- **Licencia/prueba terminada:** banner rojo permanente arriba con botón Activar,
+  desde el arranque (antes solo salía al intentar generar).
+- Por dentro (cierra Vikunja Informes PONAL #172): de-versión del userAgent en la
+  huella (actualizar la app ya no la cambia) y ciudad/URI también en `/estado`.
+
+- **`v1.13.6-windows-exe`** (*Latest*), SHA `7836813f…`.
+- **`v1.13.6-android`** (`--latest=false`), SHA `45776f16…`, versionCode 15.
+- Links de `index.html` y hashes de `seguridad.html` actualizados a 1.13.6.
+- PWA y **Worker** redesplegados solos desde `main`. Compilar el APK/AAB exige
+  **JDK 21** (`JAVA_HOME` al JBR de Android Studio); con el JDK 20 del PATH falla.
+- Se generó además el **`.aab`** para Google Play (tarea aparte, aún sin subir).
+
 ## 1.13.5 publicada (2026-10-27)
 
 Lote de ajustes pedidos por el dueño:
