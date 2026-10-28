@@ -447,6 +447,55 @@
     .chat-body::-webkit-scrollbar-thumb{background:rgba(240,165,0,.45);border-radius:8px}
     .chat-libre-mensajes{scrollbar-width:thin;scrollbar-color:rgba(240,165,0,.55) transparent}
     .chat-vtitle{min-width:0}
+
+    /* ── Documentos oficiales: visor con pestañas, hoja en perspectiva y puntos de lectura ── */
+    .docs{padding:110px 0 120px;background:radial-gradient(55% 45% at 50% 0%,rgba(240,165,0,.14),transparent 70%),radial-gradient(40% 50% at 0% 100%,rgba(46,127,255,.14),transparent 70%),var(--navy)}
+    .docs-hdr{text-align:center;margin-bottom:38px}
+    .docs-hdr .ssub{margin:0 auto}
+    .docs-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px}
+    .docs-tab{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;min-height:44px;border-radius:12px;border:1.5px solid rgba(240,165,0,.5);background:rgba(240,165,0,.07);color:var(--white);font-family:'Rajdhani',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;transition:box-shadow .25s,transform .2s}
+    .docs-tab b{color:var(--gold);font-weight:700}
+    .docs-tab .ic{color:#ffc533}
+    .docs-tab:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(240,165,0,.2)}
+    .docs-tab.on{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border-color:var(--gold)}
+    .docs-tab.on b,.docs-tab.on .ic{color:var(--navy)}
+    .docs-tab:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .docs-vista{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:56px;align-items:center}
+    .docs-escena{position:relative;padding:34px 30px 46px}
+    .docs-luz{position:absolute;inset:4% 2% 2%;border-radius:50%;background:radial-gradient(closest-side,rgba(240,165,0,.3),rgba(46,127,255,.12) 55%,transparent 75%);filter:blur(18px);pointer-events:none}
+    .docs-atras{position:absolute;left:8%;right:8%;top:30px;aspect-ratio:var(--ar);background:#fff center top/cover no-repeat;border-radius:5px;opacity:.55;box-shadow:0 18px 40px rgba(0,0,0,.5);transition:background-image .3s}
+    .docs-atras.a1{transform:rotate(-7deg) translate(-5%,3%)}
+    .docs-atras.a2{transform:rotate(5deg) translate(6%,-1%);opacity:.4}
+    .docs-hoja{position:relative;margin:0;z-index:2}
+    .docs-papel{position:relative;transform:perspective(1700px) rotateY(-9deg) rotateX(4deg) rotateZ(-1.2deg);transition:transform .7s cubic-bezier(.2,.8,.2,1);border-radius:6px;box-shadow:-26px 30px 60px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08)}
+    .docs-hoja:hover .docs-papel,.docs-hoja:focus-within .docs-papel{transform:perspective(1700px) rotateY(0) rotateX(0) rotateZ(0)}
+    .docs-papel img{display:block;width:100%;height:auto;border-radius:6px;background:#fff;cursor:zoom-in;transition:opacity .25s}
+    .docs-papel img.cambia{opacity:0}
+    .docs-papel::after{content:"";position:absolute;inset:0;border-radius:6px;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.22) 0%,transparent 32%,transparent 70%,rgba(0,0,0,.16) 100%)}
+    .pin{position:absolute;z-index:3;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;display:grid;place-items:center;font:700 .88rem 'Rajdhani',sans-serif;color:var(--navy);background:linear-gradient(135deg,#ffd36b,var(--gold));border:2px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 4px rgba(240,165,0,.28);transition:transform .25s,box-shadow .25s;pointer-events:none}
+    .pin.nuevo{animation:pin-pulso 1.3s ease-out 2}
+    @keyframes pin-pulso{0%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 0 rgba(240,165,0,.7)}100%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 16px rgba(240,165,0,0)}}
+    .pin.fuerte{transform:scale(1.35);box-shadow:0 6px 18px rgba(0,0,0,.6),0 0 0 7px rgba(240,165,0,.4)}
+    .docs-escena.leyendo .pin:not(.fuerte){opacity:.45}
+    .docs-hoja figcaption{margin-top:20px;text-align:center;font-size:.8rem;color:var(--muted)}
+    .docs-info h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.05;margin-bottom:14px}
+    .docs-info>p{color:#c3cfe8;font-size:1.05rem;line-height:1.6;margin-bottom:20px}
+    .docs-lista{list-style:none;display:grid;gap:8px;margin-bottom:24px}
+    .docs-lista li{display:flex;gap:14px;align-items:flex-start;padding:10px 12px;border-radius:12px;border:1px solid transparent;color:var(--white);font-size:.95rem;line-height:1.5;transition:background .2s,border-color .2s}
+    .docs-lista li:hover{background:rgba(240,165,0,.08);border-color:rgba(240,165,0,.35)}
+    .docs-lista b{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:700 .85rem 'Rajdhani',sans-serif;color:var(--navy);background:linear-gradient(135deg,#ffd36b,var(--gold))}
+    .docs-sello{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:14px;background:linear-gradient(145deg,rgba(240,165,0,.14),rgba(240,165,0,.04));border:1px solid rgba(240,165,0,.4);font-size:.9rem;line-height:1.5;color:#d9e1f4}
+    .docs-sello .ic{flex:none;font-size:1.5rem;color:#ffc533;margin-top:2px}
+    .docs-sello strong{color:var(--white)}
+    .docs .docs-nota{margin:16px 0 0;font-size:.82rem;color:var(--muted)}
+    .docs .docs-nota a{color:var(--gold)}
+    .docs-lb{position:fixed;inset:0;z-index:400;display:none;align-items:flex-start;justify-content:center;padding:24px;background:rgba(4,9,20,.92);cursor:zoom-out;overflow:auto}
+    .docs-lb.on{display:flex}
+    .docs-lb img{max-width:min(1300px,100%);height:auto;border-radius:6px;background:#fff;box-shadow:0 24px 80px rgba(0,0,0,.7)}
+    @media (max-width:900px){.docs{padding:80px 0 90px}.docs-vista{grid-template-columns:minmax(0,1fr);gap:30px}.docs-tab{padding:10px 14px;font-size:.92rem}
+      .docs-escena{padding:22px 14px 32px}.docs-papel{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg)}.pin{width:24px;height:24px;margin:-12px 0 0 -12px;font-size:.78rem}.docs-atras{left:6%;right:6%;top:18px}}
+    @media (prefers-reduced-motion:reduce){.docs-papel,.docs-hoja:hover .docs-papel{transform:none;transition:none}.pin.nuevo{animation:none}.docs-papel img{transition:none}}
+    html.quieto .docs-papel{transform:none}
 </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -552,6 +601,47 @@
       <div class="movil movil-b"><div class="movil-pantalla"><img src="img/app-movil-2.jpg" width="540" height="1169" alt="La aplicación en el teléfono generando documentos" loading="lazy"></div></div>
       <div class="movil movil-a"><div class="movil-pantalla"><img src="img/app-movil-1.jpg" width="540" height="1169" alt="La aplicación en el teléfono, pantalla de inicio" loading="lazy"></div></div>
       <p class="disp-nota">Datos de ejemplo inventados.</p>
+    </div>
+  </div>
+</section>
+
+<section class="docs" id="documentos">
+  <div class="container">
+    <div class="docs-hdr">
+      <div class="stag">Documentos oficiales</div>
+      <h2 class="stitle">Los mismos formatos<br>que llenas a mano.</h2>
+      <p class="ssub">CapturaDocs Express diligencia los formatos FPJ de la Policía Judicial, con su código, su versión y sus casillas. Así salen, con datos de ejemplo.</p>
+    </div>
+    <div class="docs-tabs" role="tablist" aria-label="Documentos que genera la app">
+      <button type="button" role="tab" class="docs-tab on" data-d="fpj5" aria-selected="true"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg><span><b>FPJ-5</b> Informe de Captura</span></button>
+      <button type="button" role="tab" class="docs-tab" data-d="fpj6" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg><span><b>FPJ-6</b> Acta de Derechos</span></button>
+      <button type="button" role="tab" class="docs-tab" data-d="fpj7" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg><span><b>FPJ-7</b> Rótulo</span></button>
+      <button type="button" role="tab" class="docs-tab" data-d="fpj8" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg><span><b>FPJ-8</b> Cadena de Custodia</span></button>
+    </div>
+    <div class="docs-vista">
+      <div class="docs-escena" id="docs-escena" style="--ar:1000/858">
+        <div class="docs-luz" aria-hidden="true"></div>
+        <div class="docs-atras a1" id="docs-a1" aria-hidden="true"></div>
+        <div class="docs-atras a2" id="docs-a2" aria-hidden="true"></div>
+        <figure class="docs-hoja" id="docs-hoja">
+          <div class="docs-papel">
+            <img id="docs-img" src="img/doc-fpj5.jpg" width="1000" height="858" alt="Informe de Captura en Flagrancia FPJ-5 diligenciado con datos de ejemplo">
+            <span class="pin" data-i="0">1</span><span class="pin" data-i="1">2</span><span class="pin" data-i="2">3</span>
+          </div>
+          <figcaption>Toca la hoja para verla en grande · datos inventados</figcaption>
+        </figure>
+      </div>
+      <div class="docs-info" aria-live="polite">
+        <h3 id="docs-titulo">Informe de Captura en Flagrancia · FPJ-5</h3>
+        <p id="docs-desc">Los datos del procedimiento, del lugar de los hechos y del capturado, cada uno en su casilla.</p>
+        <ul class="docs-lista" id="docs-lista">
+          <li data-i="0"><b>1</b><span>Número Único de Noticia Criminal (NUNC), casilla por casilla</span></li>
+          <li data-i="1"><b>2</b><span>Destino del informe y presunta conducta punible</span></li>
+          <li data-i="2"><b>3</b><span>Datos del capturado, con sus padres y su contacto</span></li>
+        </ul>
+        <div class="docs-sello"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-landmark"/></svg><span>Cada hoja conserva el <strong>código, la versión y la fecha de aprobación</strong> del formato oficial, al pie de página.</span></div>
+        <p class="docs-nota">La aceptación final de un documento siempre depende de la autoridad que lo recibe. <a href="#preguntas">Ver la pregunta frecuente</a>.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1571,6 +1661,74 @@
   setTimeout(function(){ if (t.getAttribute('aria-expanded') === 'true') return; g.classList.add('on'); try { sessionStorage.setItem('cd-saludo','1'); } catch(e){} }, 3200);
   setTimeout(function(){ g.classList.remove('on'); }, 10500);
   t.addEventListener('click', function(){ g.classList.remove('on'); });
+})();
+</script>
+<script>
+// Visor de documentos: pestañas, hoja en perspectiva con puntos numerados, leyenda interactiva y ampliación al tocar.
+(function(){
+  var D = {
+    fpj5: {img:'img/doc-fpj5.jpg', w:1000, h:858, alt:'Informe de Captura en Flagrancia FPJ-5 diligenciado con datos de ejemplo',
+      t:'Informe de Captura en Flagrancia · FPJ-5', d:'Los datos del procedimiento, del lugar de los hechos y del capturado, cada uno en su casilla.',
+      l:['Número Único de Noticia Criminal (NUNC), casilla por casilla','Destino del informe y presunta conducta punible','Datos del capturado, con sus padres y su contacto'],
+      p:[[97.5,10],[97.5,39],[97.5,89]]},
+    fpj6: {img:'img/doc-fpj6.jpg', w:1000, h:1310, alt:'Acta de Derechos del Capturado FPJ-6 diligenciada con datos de ejemplo',
+      t:'Acta de Derechos del Capturado · FPJ-6', d:'El texto de los derechos y los datos personales del capturado, ya escritos.',
+      l:['Derechos que se le leen al capturado (art. 303 del C.P.P.)','Nombres, identificación, estado civil y contacto','Un acta por cada capturado'],
+      p:[[97.5,33],[97.5,59],[97.5,17]]},
+    fpj7: {img:'img/doc-fpj7.jpg', w:1400, h:866, alt:'Rótulo de elementos materiales probatorios FPJ-7 diligenciado con datos de ejemplo',
+      t:'Rótulo de elementos materiales probatorios · FPJ-7', d:'Un rótulo por cada elemento incautado, con su descripción y el sitio donde se halló.',
+      l:['NUNC, fecha y hora de recolección','Número del elemento y cantidad','Descripción y lugar del hallazgo'],
+      p:[[97.5,17],[2.5,48],[97.5,58]]},
+    fpj8: {img:'img/doc-fpj8.jpg', w:1400, h:933, alt:'Registro de Cadena de Custodia FPJ-8 diligenciado con datos de ejemplo',
+      t:'Registro de Cadena de Custodia · FPJ-8', d:'Quién halló, recolectó y embaló el elemento, con su documento y su entidad.',
+      l:['Marcas H, R y E según quién intervino','Descripción del elemento','Espacios para las firmas y las fechas'],
+      p:[[2.5,35],[97.5,61],[97.5,35]]}
+  };
+  var ORDEN = ['fpj5','fpj6','fpj7','fpj8'];
+  var tabs = document.querySelectorAll('.docs-tab'), img = document.getElementById('docs-img'); if (!tabs.length || !img) return;
+  var tit = document.getElementById('docs-titulo'), des = document.getElementById('docs-desc'), lis = document.getElementById('docs-lista');
+  var esc = document.getElementById('docs-escena'), a1 = document.getElementById('docs-a1'), a2 = document.getElementById('docs-a2');
+  var pins = document.querySelectorAll('.docs-papel .pin'), actual = 'fpj5';
+
+  function pintar(k){
+    var x = D[k], otros = ORDEN.filter(function(o){ return o !== k; });
+    esc.style.setProperty('--ar', x.w + '/' + x.h);
+    a1.style.backgroundImage = "url('" + D[otros[0]].img + "')"; a2.style.backgroundImage = "url('" + D[otros[1]].img + "')";
+    img.src = x.img; img.width = x.w; img.height = x.h; img.alt = x.alt; img.classList.remove('cambia');
+    tit.textContent = x.t; des.textContent = x.d; lis.innerHTML = '';
+    x.l.forEach(function(s, i){
+      var li = document.createElement('li'); li.dataset.i = i;
+      li.innerHTML = '<b>' + (i + 1) + '</b><span></span>'; li.lastChild.textContent = s; lis.appendChild(li);
+    });
+    pins.forEach(function(p, i){ p.style.left = x.p[i][0] + '%'; p.style.top = x.p[i][1] + '%'; p.classList.remove('nuevo'); void p.offsetWidth; p.classList.add('nuevo'); });
+  }
+  function ir(k){
+    if (!D[k] || k === actual) return; actual = k;
+    tabs.forEach(function(t){ var on = t.dataset.d === k; t.classList.toggle('on', on); t.setAttribute('aria-selected', on ? 'true' : 'false'); });
+    img.classList.add('cambia'); setTimeout(function(){ pintar(k); }, 160);
+  }
+  tabs.forEach(function(t, i){
+    t.addEventListener('click', function(){ ir(t.dataset.d); });
+    t.addEventListener('keydown', function(e){
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); ir(n.dataset.d);
+    });
+  });
+  // La leyenda resalta su punto en la hoja
+  function resaltar(i, on){ pins.forEach(function(p, j){ p.classList.toggle('fuerte', on && j === i); }); esc.classList.toggle('leyendo', on); }
+  lis.addEventListener('mouseover', function(e){ var li = e.target.closest('li'); if (li) resaltar(+li.dataset.i, true); });
+  lis.addEventListener('mouseout', function(){ resaltar(-1, false); });
+  pintar('fpj5');
+
+  // Ampliar al tocar la hoja
+  var lb = document.createElement('div'); lb.className = 'docs-lb'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label','Documento ampliado');
+  var big = document.createElement('img'); lb.appendChild(big); document.body.appendChild(lb);
+  lb.addEventListener('click', function(){ lb.classList.remove('on'); });
+  addEventListener('keydown', function(e){ if (e.key === 'Escape') lb.classList.remove('on'); });
+  img.addEventListener('click', function(){ big.src = img.src; big.alt = img.alt; lb.scrollTop = 0; lb.classList.add('on'); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(function(es, o){
+    if (es[0].isIntersecting){ ORDEN.forEach(function(k){ var p = new Image(); p.src = D[k].img; }); o.disconnect(); }
+  }, {rootMargin:'600px'}).observe(document.getElementById('documentos'));
 })();
 </script>
 </body>
