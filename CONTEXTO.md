@@ -301,6 +301,11 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
   Menú del chat con íconos dorados en medallón y texto blanco; **cada sección tiene su título + "← Menú"**
   (`.chat-vhdr`). La imagen es un render de IA sin insignias reales (la web dice que NO es oficial de la Policía).
   Antes se probaron robots y agentes en SVG propio y no gustaron ("muy básicos"): para personajes, usar generación de imagen.
+- **Sección "Documentos oficiales" (2026-10-28, `#documentos`):** visor con pestañas FPJ-5/6/7/8, hoja en
+  perspectiva con otras detrás, 3 puntos numerados por documento (leyenda que los resalta) y ampliación al tocar.
+  Imágenes `img/doc-fpj*.jpg` = documentos REALES que genera la app con un caso inventado. No afirma que la
+  Fiscalía los acepte (la FAQ dice que depende de la autoridad). Cómo regenerarlas: `guia-pdf/generador/e2e-guia/documentos.spec.js`
+  (ver `LECCIONES_APRENDIDAS.md`, entrada 2026-10-28). Los datos de las 4 hojas deben coincidir (mismo capturado y policía).
 - Pendiente de B (opcional): más cortes diagonales, ilustraciones por función.
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).

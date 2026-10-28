@@ -886,3 +886,27 @@ del menú tenían el mismo color que el texto, y al entrar a una sección no se 
 - **El saldo de créditos cambiaba entre cotizaciones** (−64 y luego 100): siempre releer la cotización y pedir
   confirmación con el precio exacto; no gastar por inercia. El dueño decidió no regenerar para quitar el bigote.
 - **Sin insignias reales**: se pidió "insignia lisa, sin texto ni emblema" para no contradecir el aviso "no oficial".
+
+## 2026-10-28 — Documentos reales en la landing (confianza)
+
+### Qué se hizo
+Un policía preguntó si los documentos de la app son los que acepta la Fiscalía. Se agregó a la landing la sección
+**"Documentos oficiales"** con los formatos FPJ-5, FPJ-6, FPJ-7 y FPJ-8 tal como los genera la app (caso inventado).
+
+### Por qué
+La mejor respuesta no es prometer "aceptación": es **mostrar el formato real** (código, versión y fecha de aprobación al pie).
+La landing no afirma que la Fiscalía los acepte; la FAQ ya explica que depende de la autoridad.
+
+### Problemas encontrados y cómo se resolvieron
+- **Los documentos de ejemplo tenían datos mal puestos** (profesión en "Lugar de nacimiento", dirección cortada): las
+  posiciones de los campos cambian entre versiones. Se reescribió el llenado **por etiqueta** (`poner()` en `documentos.spec.js`), no por índice.
+- **Los documentos mostraban nombres distintos** (capturado y policía) justo cuando la landing promete "sin inconsistencias
+  entre documentos". Se unificaron antes de publicar. Lección: mirar las imágenes juntas, no una por una.
+- **Convertir .docx a imagen con Word por COM falló y fue peligroso**: `New-Object -ComObject Word.Application` se **conecta
+  al Word que el usuario ya tiene abierto**, y mis `taskkill /F` lo cerraron. Regla: **no usar Word por COM sin avisar y
+  NUNCA matar `WINWORD.EXE`**. Se resolvió pidiéndole al usuario que guarde cada .docx como PDF (PyMuPDF lo rasteriza)
+  y editando los .docx con `python-docx` (sin Word) para unificar nombres.
+- **Pendiente:** en el FPJ-5/FPJ-6 de prueba la fecha de nacimiento y la edad salen en blanco aunque el Resumen las muestra;
+  no se sabe si es el llenado de la prueba o un fallo de la app al generar (ver Vikunja, proyecto Informes PONAL).
+- **Efecto 3D**: con `perspective` en el contenedor, la hoja inclinada cortaba a las de atrás (se veían a través).
+  Solución: `transform: perspective(...)` dentro del propio elemento, sin `perspective` ni `preserve-3d` en el padre.
