@@ -496,6 +496,46 @@
       .docs-escena{padding:22px 14px 32px}.docs-papel{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg)}.pin{width:24px;height:24px;margin:-12px 0 0 -12px;font-size:.78rem}.docs-atras{left:6%;right:6%;top:18px}}
     @media (prefers-reduced-motion:reduce){.docs-papel,.docs-hoja:hover .docs-papel{transform:none;transition:none}.pin.nuevo{animation:none}.docs-papel img{transition:none}}
     html.quieto .docs-papel{transform:none}
+
+    /* ── Enlaces de texto con zona táctil de 44 px (sin mover el texto) ── */
+    .fa a,.docs .docs-nota a{display:inline-block;padding:13px 3px;margin:-13px 0}
+    /* ── Celular: la misma información, menos alto ── */
+    @media (max-width:700px){
+      .how{padding-top:60px;padding-bottom:calc(52px + 3vw)}
+      .how-hdr,.phdr,.thdr,.chdr{margin-bottom:34px}
+      .features{padding-top:calc(52px + 3vw);padding-bottom:calc(52px + 3vw)}
+      .compare,.downloads,.testimonios{padding-top:calc(50px + 3vw);padding-bottom:calc(50px + 3vw)}
+      .pricing,.faq{padding-top:60px;padding-bottom:60px}
+      #referidos{padding:60px 0!important}
+      .docs,.dispositivos{padding:60px 0 66px}
+      .cta{padding-top:calc(64px + 3vw);padding-bottom:64px}
+      .trust{padding-top:calc(44px + 3vw);padding-bottom:calc(32px + 3vw)}
+      .stag{margin-bottom:8px}
+      /* Pasos: ícono a la izquierda en vez de arriba */
+      .step{display:grid;grid-template-columns:50px minmax(0,1fr);column-gap:14px;padding:22px 20px;align-items:start}
+      .step .step-i{grid-row:1 / span 2;width:46px;height:46px;font-size:1.35rem;margin:0}
+      .step h3{margin:0 0 4px}
+      .step p{grid-column:2;margin:0}
+      .step-n{font-size:2.8rem;top:6px;right:12px}
+      /* Referidos: ícono a la izquierda */
+      .refcard{display:grid;grid-template-columns:48px minmax(0,1fr);column-gap:14px;align-items:center;text-align:left;padding:18px 18px 18px 16px}
+      .refcard .refico{grid-row:1 / span 2;margin:0;width:46px;height:46px}
+      .refcard .refnum{display:none}
+      .refcard>*:not(.refico):not(.refnum){grid-column:2}
+      /* Documentos: pestañas en 2 columnas */
+      .docs-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:30px}
+      .docs-tab{justify-content:center;text-align:center;padding:8px 10px;font-size:.88rem;line-height:1.15}
+      .docs-tab .ic{display:none}
+      .docs-lista{gap:2px;margin-bottom:18px}
+      .docs-lista li{padding:6px 8px}
+      /* Testimonios, comparación y descargas más compactos */
+      .tcard,.tcard:nth-child(even){padding:20px 20px;gap:12px}
+      .ccard{padding:22px 20px}
+      .dlcard{padding:26px 20px 24px}
+      .dlcard .dlicon{width:88px;height:88px;margin-bottom:14px}
+      .dlcard .dlicon svg{width:46px;height:46px}
+      .dlname{margin-bottom:16px}
+    }
 </style>
 
   <!-- Cloudflare Web Analytics -->
@@ -565,8 +605,7 @@
           <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-pen"/></svg></div><div><h4>5 documentos simultáneos</h4><p>El Informe de Captura, el Acta de Derechos del Capturado, el Rótulo, la Cadena de Custodia y el Acta de Incautación, generados de una sola vez con los mismos datos.</p></div></div>
           <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-users"/></svg></div><div><h4>Múltiples capturados</h4><p>Soporta varios capturados en el mismo procedimiento con documentación individual.</p></div></div>
           <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-pen-line"/></svg></div><div><h4>Mejora de redacción con IA</h4><p>Escribe tu narración y la IA te propone una versión más clara y coherente <strong>sin cambiar los hechos</strong>. La IA <strong>nunca aplica el cambio por sí sola</strong>: solo te muestra la sugerencia y tú decides si la usas, la editas o la descartas. <strong>Exclusivo de las licencias Mensual y Negocio/Estación.</strong></p></div></div>
-          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-smartphone"/></svg></div><div><h4>En el computador y en la calle</h4><p>En <strong>Windows</strong>, <strong>Android</strong> e <strong>iPhone</strong> tienes la app completa, que genera todos los documentos en el mismo equipo y sin depender de internet. La diligencias en el lugar de los hechos y generas ahí mismo, o la terminas después en el computador — como prefieras.</p></div></div>
-          <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-compass"/></svg></div><div><h4>Valida que todo esté bien diligenciado</h4><p>El resumen final marca en rojo cualquier dato obligatorio que falte, y deja las fechas de captura y fiscal siempre resaltadas como recordatorio de revisarlas dos veces — para que no llegues a imprimir con un campo vacío o una fecha mal escrita.</p></div></div>
+                    <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-compass"/></svg></div><div><h4>Valida que todo esté bien diligenciado</h4><p>El resumen final marca en rojo cualquier dato obligatorio que falte, y deja las fechas de captura y fiscal siempre resaltadas como recordatorio de revisarlas dos veces — para que no llegues a imprimir con un campo vacío o una fecha mal escrita.</p></div></div>
           <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-save"/></svg></div><div><h4>Guardar y continuar</h4><p>Guarda el caso en cualquier momento y retómalo después sin perder nada.</p></div></div>
           <div class="fi"><div class="fi-icon"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-lock"/></svg></div><div><h4>100% seguros los datos de tu procedimiento</h4><p>Se procesan en tu propio equipo: nosotros nunca vemos los datos del caso. Lo único que sale es lo que <strong>tú decidas enviar</strong> — por ejemplo cuando mandas el caso del celular a tu computador.</p></div></div>
         </div>
