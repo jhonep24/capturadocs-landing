@@ -477,6 +477,19 @@
     @keyframes pin-pulso{0%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 0 rgba(240,165,0,.7)}100%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 16px rgba(240,165,0,0)}}
     .pin.fuerte{transform:scale(1.35);box-shadow:0 6px 18px rgba(0,0,0,.6),0 0 0 7px rgba(240,165,0,.4)}
     .docs-escena.leyendo .pin:not(.fuerte){opacity:.45}
+    .docs-escena.sinpin .pin{display:none}
+    .docs-nav{position:absolute;top:50%;z-index:4;width:46px;height:46px;margin-top:-23px;border-radius:50%;display:none;place-items:center;border:1.5px solid rgba(240,165,0,.7);background:rgba(10,22,40,.88);color:#ffc533;cursor:pointer;font:700 1.5rem/1 'Rajdhani',sans-serif;box-shadow:0 8px 22px rgba(0,0,0,.5);transition:background .2s,transform .2s}
+    .docs-nav:hover{background:var(--gold);color:var(--navy);transform:scale(1.07)}
+    .docs-nav:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .docs-nav.prev{left:-20px}.docs-nav.next{right:-20px}
+    .docs-multi .docs-nav{display:grid}
+    .docs-pags{display:none;align-items:center;justify-content:center;gap:10px;margin-top:18px}
+    .docs-multi .docs-pags{display:flex}
+    .docs-pags span{font:600 .95rem 'Rajdhani',sans-serif;color:var(--white);letter-spacing:.03em;margin-right:4px}
+    .docs-dot{width:44px;height:44px;border:0;background:none;cursor:pointer;display:grid;place-items:center;margin:-17px -17px}
+    .docs-dot::before{content:"";width:11px;height:11px;border-radius:50%;background:rgba(240,165,0,.3);border:1.5px solid rgba(240,165,0,.7);transition:background .2s,transform .2s}
+    .docs-dot.on::before{background:var(--gold);transform:scale(1.25)}
+    .docs-dot:focus-visible{outline:3px solid var(--accent);outline-offset:-6px;border-radius:50%}
     .docs-hoja figcaption{margin-top:20px;text-align:center;font-size:.8rem;color:var(--muted)}
     .docs-info h3{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.05;margin-bottom:14px}
     .docs-info>p{color:#c3cfe8;font-size:1.05rem;line-height:1.6;margin-bottom:20px}
@@ -492,7 +505,7 @@
     .docs-lb{position:fixed;inset:0;z-index:400;display:none;align-items:flex-start;justify-content:center;padding:24px;background:rgba(4,9,20,.92);cursor:zoom-out;overflow:auto}
     .docs-lb.on{display:flex}
     .docs-lb img{max-width:min(1300px,100%);height:auto;border-radius:6px;background:#fff;box-shadow:0 24px 80px rgba(0,0,0,.7)}
-    @media (max-width:900px){.docs{padding:80px 0 90px}.docs-vista{grid-template-columns:minmax(0,1fr);gap:30px}.docs-tab{padding:10px 14px;font-size:.92rem}
+    @media (max-width:900px){.docs-nav.prev{left:-8px}.docs-nav.next{right:-8px}.docs{padding:80px 0 90px}.docs-vista{grid-template-columns:minmax(0,1fr);gap:30px}.docs-tab{padding:10px 14px;font-size:.92rem}
       .docs-escena{padding:22px 14px 32px}.docs-papel{transform:perspective(1400px) rotateY(-5deg) rotateX(2deg)}.pin{width:24px;height:24px;margin:-12px 0 0 -12px;font-size:.78rem}.docs-atras{left:6%;right:6%;top:18px}}
     @media (prefers-reduced-motion:reduce){.docs-papel,.docs-hoja:hover .docs-papel{transform:none;transition:none}.pin.nuevo{animation:none}.docs-papel img{transition:none}}
     html.quieto .docs-papel{transform:none}
@@ -658,15 +671,18 @@
       <button type="button" role="tab" class="docs-tab" data-d="fpj8" aria-selected="false"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-file-text"/></svg><span><b>FPJ-8</b> Cadena de Custodia</span></button>
     </div>
     <div class="docs-vista">
-      <div class="docs-escena" id="docs-escena" style="--ar:1000/858">
+      <div class="docs-escena" id="docs-escena" style="--ar:1000/1295">
         <div class="docs-luz" aria-hidden="true"></div>
         <div class="docs-atras a1" id="docs-a1" aria-hidden="true"></div>
         <div class="docs-atras a2" id="docs-a2" aria-hidden="true"></div>
         <figure class="docs-hoja" id="docs-hoja">
           <div class="docs-papel">
-            <img id="docs-img" src="img/doc-fpj5.jpg" width="1000" height="858" alt="Informe de Captura en Flagrancia FPJ-5 diligenciado con datos de ejemplo">
+            <img id="docs-img" src="img/doc-fpj5.jpg" width="1000" height="1295" alt="Informe de Captura en Flagrancia FPJ-5 diligenciado con datos de ejemplo">
             <span class="pin" data-i="0">1</span><span class="pin" data-i="1">2</span><span class="pin" data-i="2">3</span>
           </div>
+          <button type="button" class="docs-nav prev" id="docs-prev" aria-label="Hoja anterior">&#8249;</button>
+          <button type="button" class="docs-nav next" id="docs-next" aria-label="Hoja siguiente">&#8250;</button>
+          <div class="docs-pags" id="docs-pags"><span id="docs-cuenta"></span></div>
           <figcaption>Toca la hoja para verla en grande · datos inventados</figcaption>
         </figure>
       </div>
@@ -1706,11 +1722,23 @@
 // Visor de documentos: pestañas, hoja en perspectiva con puntos numerados, leyenda interactiva y ampliación al tocar.
 (function(){
   var D = {
-    fpj5: {img:'img/doc-fpj5.jpg', w:1000, h:858, alt:'Informe de Captura en Flagrancia FPJ-5 diligenciado con datos de ejemplo',
+    fpj5: {img:'img/doc-fpj5.jpg', w:1000, h:1295, alt:'Informe de Captura en Flagrancia FPJ-5 diligenciado con datos de ejemplo',
+      mas:[{img:'img/doc-fpj5-2.jpg', w:1000, h:1295, alt:'FPJ-5, hoja 2 de 3: víctimas, testigos, elementos recolectados y vehículos',
+             d:'Víctimas, testigos y elementos recolectados: las casillas ya vienen listas, y se llenan solo si el caso lo requiere.',
+             l:['Víctimas: datos personales y relación con el indiciado','Testigos de los hechos, con las mismas casillas','Descripción del elemento recolectado, pasada desde el rótulo'],
+             p:[[97.5,7],[97.5,44],[97.5,77]]},
+           {img:'img/doc-fpj5-3.jpg', w:1000, h:1295, alt:'FPJ-5, hoja 3 de 3: narración de los hechos, anexos y servidor que efectúa la captura',
+             d:'La narración de los hechos, los anexos y los datos del servidor que hizo la captura.',
+             l:['Fecha y hora de la captura, casilla por casilla','Narración de los hechos, en forma cronológica','Anexos y servidor que efectúa la captura, con su cargo y contacto'],
+             p:[[97.5,12.5],[97.5,23],[97.5,36.5]]}],
       t:'Informe de Captura en Flagrancia · FPJ-5', d:'Los datos del procedimiento, del lugar de los hechos y del capturado, cada uno en su casilla.',
       l:['Número Único de Noticia Criminal (NUNC), casilla por casilla','Destino del informe y presunta conducta punible','Datos del capturado, con sus padres y su contacto'],
-      p:[[97.5,10],[97.5,39],[97.5,89]]},
+      p:[[97.5,9.3],[97.5,29],[97.5,69]]},
     fpj6: {img:'img/doc-fpj6.jpg', w:1000, h:1310, alt:'Acta de Derechos del Capturado FPJ-6 diligenciada con datos de ejemplo',
+      mas:[{img:'img/doc-fpj6-2.jpg', w:1000, h:1295, alt:'FPJ-6, hoja 2 de 2: persona a quien se comunica la captura y constancia de buen trato',
+             d:'La persona a quien se comunica la captura, el espacio para las firmas y la constancia de buen trato.',
+             l:['Persona a quien se le comunica la captura','Espacios para la firma, la huella y las observaciones','Constancia de buen trato, con el nombre, la cédula y el delito del capturado'],
+             p:[[97.5,12],[97.5,33],[97.5,50]]}],
       t:'Acta de Derechos del Capturado · FPJ-6', d:'El texto de los derechos y los datos personales del capturado, ya escritos.',
       l:['Derechos que se le leen al capturado (art. 303 del C.P.P.)','Nombres, identificación, estado civil y contacto','Un acta por cada capturado'],
       p:[[97.5,33],[97.5,59],[97.5,17]]},
@@ -1727,19 +1755,45 @@
   var tabs = document.querySelectorAll('.docs-tab'), img = document.getElementById('docs-img'); if (!tabs.length || !img) return;
   var tit = document.getElementById('docs-titulo'), des = document.getElementById('docs-desc'), lis = document.getElementById('docs-lista');
   var esc = document.getElementById('docs-escena'), a1 = document.getElementById('docs-a1'), a2 = document.getElementById('docs-a2');
-  var pins = document.querySelectorAll('.docs-papel .pin'), actual = 'fpj5';
-
-  function pintar(k){
-    var x = D[k], otros = ORDEN.filter(function(o){ return o !== k; });
-    esc.style.setProperty('--ar', x.w + '/' + x.h);
-    a1.style.backgroundImage = "url('" + D[otros[0]].img + "')"; a2.style.backgroundImage = "url('" + D[otros[1]].img + "')";
-    img.src = x.img; img.width = x.w; img.height = x.h; img.alt = x.alt; img.classList.remove('cambia');
-    tit.textContent = x.t; des.textContent = x.d; lis.innerHTML = '';
-    x.l.forEach(function(s, i){
+  var pins = document.querySelectorAll('.docs-papel .pin'), actual = 'fpj5', pag = 0;
+  var hoja = document.getElementById('docs-hoja'), pags = document.getElementById('docs-pags'), cuenta = document.getElementById('docs-cuenta');
+  function hojas(k){ var x = D[k]; return [x].concat(x.mas || []); }
+  function ponerHoja(){
+    var hs = hojas(actual), h = hs[pag];
+    esc.style.setProperty('--ar', h.w + '/' + h.h);
+    img.src = h.img; img.width = h.w; img.height = h.h; img.alt = h.alt; img.classList.remove('cambia');
+    des.textContent = h.d || D[actual].d; lis.innerHTML = '';
+    (h.l || D[actual].l).forEach(function(s, i){
       var li = document.createElement('li'); li.dataset.i = i;
       li.innerHTML = '<b>' + (i + 1) + '</b><span></span>'; li.lastChild.textContent = s; lis.appendChild(li);
     });
-    pins.forEach(function(p, i){ p.style.left = x.p[i][0] + '%'; p.style.top = x.p[i][1] + '%'; p.classList.remove('nuevo'); void p.offsetWidth; p.classList.add('nuevo'); });
+    pins.forEach(function(p, i){ var q = (h.p || D[actual].p)[i]; p.style.left = q[0] + '%'; p.style.top = q[1] + '%'; p.classList.remove('nuevo'); void p.offsetWidth; p.classList.add('nuevo'); });
+    hoja.classList.toggle('docs-multi', hs.length > 1);
+    cuenta.textContent = 'Hoja ' + (pag + 1) + ' de ' + hs.length;
+    pags.querySelectorAll('.docs-dot').forEach(function(d, i){ d.classList.toggle('on', i === pag); d.setAttribute('aria-current', i === pag ? 'true' : 'false'); });
+  }
+  function puntos(){
+    pags.querySelectorAll('.docs-dot').forEach(function(d){ d.remove(); });
+    hojas(actual).forEach(function(_, i){
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'docs-dot'; b.setAttribute('aria-label', 'Ver la hoja ' + (i + 1));
+      b.addEventListener('click', function(){ irHoja(i); }); pags.appendChild(b);
+    });
+  }
+  function irHoja(i){
+    var n = hojas(actual).length; i = (i + n) % n; if (i === pag) return; pag = i;
+    img.classList.add('cambia'); setTimeout(ponerHoja, 160);
+  }
+  document.getElementById('docs-prev').addEventListener('click', function(){ irHoja(pag - 1); });
+  document.getElementById('docs-next').addEventListener('click', function(){ irHoja(pag + 1); });
+  var tx = null;
+  hoja.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  hoja.addEventListener('touchend', function(e){ if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 50) irHoja(pag + (dx < 0 ? 1 : -1)); }, {passive:true});
+
+  function pintar(k){
+    var x = D[k], otros = ORDEN.filter(function(o){ return o !== k; });
+    a1.style.backgroundImage = "url('" + D[otros[0]].img + "')"; a2.style.backgroundImage = "url('" + D[otros[1]].img + "')";
+    pag = 0; puntos(); ponerHoja();
+    tit.textContent = x.t;
   }
   function ir(k){
     if (!D[k] || k === actual) return; actual = k;
@@ -1766,7 +1820,7 @@
   addEventListener('keydown', function(e){ if (e.key === 'Escape') lb.classList.remove('on'); });
   img.addEventListener('click', function(){ big.src = img.src; big.alt = img.alt; lb.scrollTop = 0; lb.classList.add('on'); });
   if ('IntersectionObserver' in window) new IntersectionObserver(function(es, o){
-    if (es[0].isIntersecting){ ORDEN.forEach(function(k){ var p = new Image(); p.src = D[k].img; }); o.disconnect(); }
+    if (es[0].isIntersecting){ ORDEN.forEach(function(k){ hojas(k).forEach(function(h){ var p = new Image(); p.src = h.img; }); }); o.disconnect(); }
   }, {rootMargin:'600px'}).observe(document.getElementById('documentos'));
 })();
 </script>
