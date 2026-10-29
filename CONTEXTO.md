@@ -316,6 +316,26 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
 
+## 1.13.7 publicada (2026-10-29)
+
+Lote de ajustes a documentos y captura (todo en `informes-ponal`):
+
+- **NUNC en Times New Roman negrilla 12** en los 5 documentos: FPJ-4, FPJ-5,
+  FPJ-6 (derechos), rótulo (FPJ-7) y acta de incautación.
+- **Cédulas con puntos de miles** en los documentos; además la **cédula del
+  policía** (bloque de firma del FPJ-5 y rótulo) y la **cédula del rótulo**
+  quedaron parejas (misma fuente que el nombre).
+- **Captura:** la IA ahora *corrige* el delito escrito en las 3 casillas (no
+  propone otro); listas de incautación con nombre y apellidos completos; alerta
+  si se escribe un vehículo en Elementos Incautados; en primer respondiente,
+  casilla **Tipo** en vehículos y **sin tope de 2** personas que entregan.
+
+- **`v1.13.7-windows-exe`** (*Latest*), SHA `0f089759…`.
+- **`v1.13.7-android`** (`--latest=false`), SHA `1d546045…`, versionCode 16.
+- Links de `index.html` y hashes de `seguridad.html` actualizados a 1.13.7.
+- PWA redesplegada sola desde `main` (el Worker no cambió en este lote). El APK
+  exige **JDK 21** (`JAVA_HOME` al JBR de Android Studio), igual que la vez pasada.
+
 ## 1.13.6 publicada (2026-10-28)
 
 Lote de mejoras de UI pedidas por el dueño (todas en `informes-ponal`):
