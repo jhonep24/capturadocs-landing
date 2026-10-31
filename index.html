@@ -249,6 +249,7 @@
     .chat-btn{width:100%;margin-top:14px;padding:11px;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:8px;color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;transition:opacity .2s}
     .chat-btn:hover{opacity:.85}
     .chat-btn:disabled{opacity:.5;cursor:default}
+    .chat-offline-btn{display:block;margin-top:10px;padding:11px;text-align:center;text-decoration:none;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:8px;color:var(--navy);font-family:'Rajdhani',sans-serif;font-weight:700}
     .chat-result{margin-top:14px;font-size:.88rem;color:var(--muted);line-height:1.6}
     .chat-result.err{color:#ff6b6b}
     .chat-result.ok{color:var(--white)}
@@ -1370,7 +1371,21 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body || {}),
     });
+    // Un 5xx es el túnel o n8n caídos (Cloudflare devuelve HTML): se trata igual
+    // que no tener conexión. Los 4xx traen JSON con el motivo y pasan.
+    if (r.status >= 500) throw new Error('bot ' + r.status);
     return r.json();
+  }
+
+  // Bot sin respuesta: aviso fijo con el WhatsApp de soporte y botón directo.
+  function chatOfflineHtml(){
+    const n = String(WA_NUMBER).replace(/^57/, '');
+    return '<b>No estoy en línea.</b> Por favor comunícate directamente a este WhatsApp: <b>' + n.slice(0,3) + ' ' + n.slice(3,6) + ' ' + n.slice(6) + '</b>'
+      + '<a class="chat-offline-btn" href="https://wa.me/' + WA_NUMBER + '" target="_blank" rel="noopener">Escribir por WhatsApp</a>';
+  }
+  function chatMostrarOffline(el, conClase){
+    if (conClase !== false) el.className = 'chat-result err';
+    el.innerHTML = chatOfflineHtml();
   }
 
   const CHAT_PLAN_NOMBRES = { S: 'Semanal (7 días)', M: 'Mensual (30 días)', N: 'Negocio/Estación (30 días)' };
@@ -1385,7 +1400,7 @@
         `<div class="chat-plan-row"><span>${escapeHtml(CHAT_PLAN_NOMBRES[plan] || plan)}</span><b>$${Number(precio).toLocaleString('es-CO')}</b></div>`
       ).join('');
     } catch (e) {
-      el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
+      chatMostrarOffline(el, false);
     }
   }
 
@@ -1430,8 +1445,7 @@
       el.appendChild(document.createElement('br'));
       el.appendChild(pagarBtn);
     } catch (e) {
-      el.className = 'chat-result err';
-      el.textContent = 'No pudimos conectar. Intenta de nuevo.';
+      chatMostrarOffline(el);
     } finally {
       btn.disabled = false;
     }
@@ -1479,8 +1493,7 @@
       chatShowView('estado');
       document.getElementById('chat-estado-email').focus();
     } catch (e) {
-      el.className = 'chat-result err';
-      el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
+      chatMostrarOffline(el);
     } finally {
       btn.disabled = false;
     }
@@ -1525,8 +1538,7 @@
       }
       el.innerHTML = html;
     } catch (e) {
-      el.className = 'chat-result err';
-      el.textContent = 'No pudimos conectar. Intenta de nuevo.';
+      chatMostrarOffline(el);
     } finally {
       btn.disabled = false;
     }
@@ -1578,7 +1590,7 @@
       chatLibreAgregarBurbuja((data && data.respuesta) || 'No pudimos generar una respuesta. Intenta de nuevo o escríbenos por WhatsApp.', 'bot');
     } catch (e) {
       if (chatLibreEsperandoEl) { chatLibreEsperandoEl.remove(); chatLibreEsperandoEl = null; }
-      chatLibreAgregarBurbuja('No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.', 'bot');
+      chatLibreAgregarBurbuja('', 'bot').innerHTML = chatOfflineHtml();
     } finally {
       chatLibreDetenerPolling();
       btn.disabled = false;
@@ -1604,8 +1616,7 @@
       el.textContent = '✓ ' + data.mensaje;
       mensajeEl.value = '';
     } catch (e) {
-      el.className = 'chat-result err';
-      el.textContent = 'No pudimos conectar. Intenta de nuevo o escríbenos por WhatsApp.';
+      chatMostrarOffline(el);
     } finally {
       btn.disabled = false;
     }
