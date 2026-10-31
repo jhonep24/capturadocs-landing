@@ -1,0 +1,26 @@
+# CapturaDocs Express
+
+> Software para diligenciar informes de captura en flagrancia en Colombia. Con un solo formulario genera los formatos FPJ de la Policía Judicial ya llenos: Informe de Captura (FPJ-5), Acta de Derechos del Capturado (FPJ-6), Rótulo de elementos materiales probatorios (FPJ-7), Registro de Cadena de Custodia (FPJ-8) y Acta de Incautación. Es una herramienta privada e independiente, no afiliada ni avalada por la Policía Nacional de Colombia.
+
+## Qué hace
+- Se diligencia el caso una sola vez y el sistema llena los cinco documentos, sin transcribir datos y sin inconsistencias entre ellos.
+- Los documentos se generan en formato Word con el formato oficial de los FPJ.
+- Funciona en Windows (instalador), Android (app) e iPhone (app web instalable), también sin conexión.
+- Los documentos se pueden compartir por WhatsApp, correo o Drive.
+
+## Precios (pesos colombianos)
+- Prueba gratuita: 5 casos completos, sin tarjeta.
+- Licencia semanal: $12.000 COP, 7 días, casos ilimitados, un dispositivo.
+- Licencia mensual: $35.000 COP, 30 días, casos ilimitados, un dispositivo, incluye mejora de redacción con IA.
+- Licencia Negocio/Estación: $100.000 COP, 30 días, casos ilimitados, incluye mejora de redacción con IA y soporte por WhatsApp; solo para la versión web de computador.
+
+## Privacidad
+- Arquitectura descrita en https://capturadocs.com/seguridad.html
+
+## Páginas principales
+- Inicio, funciones, precios y descargas: https://capturadocs.com/
+- Guía de uso paso a paso: https://capturadocs.com/guia.html
+- Arquitectura de privacidad: https://capturadocs.com/seguridad.html
+
+## Contacto
+- WhatsApp: https://wa.me/573503593635
