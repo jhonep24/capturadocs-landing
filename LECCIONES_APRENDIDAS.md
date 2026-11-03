@@ -910,3 +910,14 @@ La landing no afirma que la Fiscalía los acepte; la FAQ ya explica que depende 
   no se sabe si es el llenado de la prueba o un fallo de la app al generar (ver Vikunja, proyecto Informes PONAL).
 - **Efecto 3D**: con `perspective` en el contenedor, la hoja inclinada cortaba a las de atrás (se veían a través).
   Solución: `transform: perspective(...)` dentro del propio elemento, sin `perspective` ni `preserve-3d` en el padre.
+
+## 2026-10-30 — Centro de ayuda para atraer tráfico (SEO)
+
+**Qué:** 10 páginas de ayuda estáticas generadas con un script (`ayuda-src/`), más `llms.txt`, sitemap y FAQPage.
+**Por qué así:** el sitio ya dejaba entrar a los rastreadores y tenía datos estructurados, pero no tenía ninguna página que respondiera lo que el policía busca (cómo se llena el FPJ-5, qué significan H/R/E). Las búsquedas mostraban solo manuales y copias en Google Docs. Generar las páginas desde un script mantiene el estilo uniforme y permite agregar otra en minutos.
+**Lecciones:**
+- Los enlaces a PDF que devuelve un buscador pueden estar muertos (HTTP 404 con HTML de 3,8 MB): comprobar el `content-type` antes de leer.
+- `https://www.secretariasenado.gov.co` rechaza la conexión desde este PC, pero el mismo sitio por `http` sí responde; la ley se leyó de ahí.
+- Dentro de una f-string con barras invertidas, `re.sub(r'..')` pierde el dígito: usar una función auxiliar.
+- Para publicar un sitio de varias páginas en un Artifact privado, la portada es un índice y las páginas reales van en `files` con rutas relativas.
+- No inventar grupos ni canales: los grupos cerrados de Facebook/WhatsApp no se pueden buscar; se anotan cuando el dueño los identifique.

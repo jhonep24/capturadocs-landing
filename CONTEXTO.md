@@ -382,6 +382,15 @@ Lote de ajustes pedidos por el dueño:
   el conteo corregido ya están en vivo. Lo único manual que queda: reimportar el
   workflow de n8n para que el resumen diario de Telegram muestre esas secciones.
 
+## Centro de ayuda y SEO (2026-10-30) — EN REVISIÓN, NO PUBLICADO (salvo llms.txt y sitemap)
+
+Objetivo: que los policías encuentren la herramienta al buscar cómo llenar los formatos, y que los asistentes de IA la lean bien.
+- **Publicado (commit `14d5533`)**: `llms.txt` (antes 404) y fechas del `sitemap.xml` al día.
+- **Hecho y en vista previa privada, sin push**: carpeta `ayuda/` con 10 páginas (portada, flagrancia, FPJ-5, 6, 7, 8, errores comunes, lista de chequeo imprimible, narración de los hechos, informe desde el celular), generadas por `ayuda-src/` (ver su README). Cambios en `index.html` (enlace «Centro de ayuda» en el pie y en la nota de Documentos, FAQPage JSON-LD con las 10 preguntas visibles), `guia.html` y `seguridad.html` (enlace en el pie), `sitemap.xml` y `llms.txt` ampliados.
+- Vista previa: Artifact `https://claude.ai/artifact/LEiVWtvf19itGkoXKJcJkZ` (ayuda) y `LxHR7tXpQyzUa52aSkpjpR` v20 (landing). Falta el «aprobado» del dueño para el push.
+- Plan comercial: `marketing/PLAN_CAMPANA_POLICIAS.md` (segmentos, canales, calendario de 12 publicaciones, medición, cuidados).
+- Datos: nada de lo jurídico se escribió de memoria; salió del texto de la Ley 906 y de los formatos mismos. El formato oficial/instructivo de la Policía NO se pudo descargar (los PDF hallados daban 404), así que las casillas se describen a partir de las muestras impresas.
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni

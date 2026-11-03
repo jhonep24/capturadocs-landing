@@ -22,5 +22,17 @@
 - Guía de uso paso a paso: https://capturadocs.com/guia.html
 - Arquitectura de privacidad: https://capturadocs.com/seguridad.html
 
+## Centro de ayuda (guías gratuitas)
+- Índice: https://capturadocs.com/ayuda/
+- Captura en flagrancia en Colombia (arts. 301 a 303 del C.P.P.): https://capturadocs.com/ayuda/captura-en-flagrancia-colombia.html
+- Cómo diligenciar el Informe de Captura FPJ-5: https://capturadocs.com/ayuda/informe-captura-flagrancia-fpj5.html
+- Acta de Derechos del Capturado FPJ-6: https://capturadocs.com/ayuda/acta-derechos-capturado-fpj6.html
+- Rótulo de elementos FPJ-7: https://capturadocs.com/ayuda/rotulo-elementos-fpj7.html
+- Registro de Cadena de Custodia FPJ-8: https://capturadocs.com/ayuda/cadena-de-custodia-fpj8.html
+- Errores comunes en el informe de captura: https://capturadocs.com/ayuda/errores-comunes-informes-captura.html
+- Lista de chequeo imprimible: https://capturadocs.com/ayuda/lista-de-chequeo-captura-flagrancia.html
+- Cómo redactar la narración de los hechos: https://capturadocs.com/ayuda/como-redactar-la-narracion-de-los-hechos.html
+- Informe de captura desde el celular: https://capturadocs.com/ayuda/informe-de-captura-desde-el-celular.html
+
 ## Contacto
 - WhatsApp: https://wa.me/573503593635

@@ -50,6 +50,94 @@
     ]
   }
   </script>
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "¿Es una app oficial de la Policía Nacional?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. CapturaDocs Express es una herramienta privada e independiente, no afiliada ni avalada por la Policía Nacional de Colombia. Solo facilita el diligenciamiento de los formatos FPJ; el criterio profesional del servidor de policía sigue siendo el que manda."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Los documentos generados son aceptados por la Fiscalía u otras autoridades?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "CapturaDocs Express te ayuda a diligenciar los formatos oficiales PONAL de forma correcta y sin inconsistencias entre documentos, pero la aceptación final siempre depende del criterio de la autoridad correspondiente, no de la herramienta."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Qué pasa con los datos de mis capturados?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Los datos de los procedimientos nunca salen de tu dispositivo. La conexión a Internet se usa únicamente para verificar tu licencia y consultar actualizaciones — nombres, cédulas y demás datos del caso ni siquiera nosotros los vemos. La única excepción es si usas voluntariamente la mejora de redacción con IA: en ese caso tu propio dispositivo despoja el texto de tu narración de nombres, cédulas y demás identificadores antes de enviarlo, y solo ese texto ya anonimizado llega a un proveedor externo de IA — nunca los datos completos del caso. Ver el diagrama completo en Arquitectura de privacidad."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo empiezo, y cómo pago cuando quiera activar la licencia?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No necesitas contraseña ni tarjeta para probarla: solo un correo, y ya generas tus primeros 5 casos gratis. Cuando quieras activar, escríbenos por WhatsApp con el ID de tu dispositivo (la app te lo muestra), paga por Nequi o Llave, y te enviamos la clave el mismo día hábil. Ver el paso a paso completo en la Guía de uso."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Qué pasa si no renuevo a tiempo?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Al vencer tu licencia tienes 3 días de gracia con funcionalidad completa para que renueves sin afanes. Pasado ese plazo, la app deja de generar documentos hasta que actives de nuevo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Necesito internet para usarla, o pierdo mi trabajo si se corta la luz?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Puedes diligenciar el formulario y generar documentos sin conexión — solo hace falta internet en algún momento para verificar tu licencia. Además, tu caso se va guardando automáticamente mientras lo diligencias, así que no pierdes nada si se corta la conexión, cierras la app o se apaga el equipo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Funciona en celular o solo en computador?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "En las dos. La app completa funciona en computador con Windows, en Android (su app) y en iPhone (abriendo el enlace), y en las tres genera todos los documentos directamente en el equipo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Puedo cambiar de computador o usar la misma licencia en dos equipos?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "La licencia queda ligada a un único equipo, así que no puede estar activa en dos a la vez. Si cambias de computador, escríbenos por WhatsApp y te ayudamos a reasignarla al nuevo — no necesitas comprar una licencia nueva."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿La mejora de redacción con IA tiene costo aparte?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No es un costo aparte, pero sí es exclusiva de las licencias Mensual y Negocio/Estación. La prueba gratuita y la licencia semanal generan los documentos igual, sin esa asistencia."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Qué es la licencia Negocio/Estación?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Es para negocios, estaciones u otras instituciones que quieran tener CapturaDocs Express disponible en un computador para varios funcionarios — no para el uso individual de un solo policía. Cuesta más que la mensual normal y está pensada para uso en computador."
+   }
+  }
+ ]
+}
+</script>
 
   <style>
     :root{--navy:#070f1f;--navy2:#0d1a2e;--navy3:#162035;--gold:#f0a500;--gold2:#cc8800;--accent:#2e7fff;--green:#25d366;--white:#f0f4ff;--muted:#7a8aaa;--border:#1e3050}
@@ -696,7 +784,7 @@
           <li data-i="2"><b>3</b><span>Datos del capturado, con sus padres y su contacto</span></li>
         </ul>
         <div class="docs-sello"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-landmark"/></svg><span>Cada hoja conserva el <strong>código, la versión y la fecha de aprobación</strong> del formato oficial, al pie de página.</span></div>
-        <p class="docs-nota">La aceptación final de un documento siempre depende de la autoridad que lo recibe. <a href="#preguntas">Ver la pregunta frecuente</a>.</p>
+        <p class="docs-nota">La aceptación final de un documento siempre depende de la autoridad que lo recibe. <a href="#preguntas">Ver la pregunta frecuente</a>. ¿Quieres aprender a llenar cada formato? <a href="ayuda/">Centro de ayuda</a>.</p>
       </div>
     </div>
   </div>
@@ -966,6 +1054,7 @@
     <a href="mailto:contacto@capturadocs.com">contacto@capturadocs.com</a>
     <a class="wa-link" href="#" target="_blank" rel="noopener">WhatsApp</a>
     <a href="guia.html">Guía de uso</a>
+    <a href="ayuda/">Centro de ayuda</a>
     <a href="seguridad.html">Cómo protegemos tus datos</a>
     <a href="#" onclick="abrirTerminos();return false">Términos y condiciones</a>
   </div>
