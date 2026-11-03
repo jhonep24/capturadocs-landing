@@ -384,7 +384,7 @@ Lote de ajustes pedidos por el dueño:
 
 ## Centro de ayuda y SEO (2026-10-30) — PUBLICADO el 2026-11-03 (commit `b99bb3d`)
 
-Actualización 2026-11-03: aprobado y subido; cada página lleva un bloque «Con CapturaDocs Express» (`ayuda-src/ventajas.py`). `marketing/` está en `.gitignore` (estrategia interna, no se sirve en el sitio). Falta: Search Console / Bing Webmaster (acción del dueño) y el recheck a 30 días (Vikunja #176). El texto de abajo es del 30-oct, cuando estaba en revisión.
+Actualización 2026-11-03: aprobado y subido; cada página lleva un bloque «Con CapturaDocs Express» (`ayuda-src/ventajas.py`). `marketing/` está en `.gitignore` (estrategia interna, no se sirve en el sitio). Search Console: propiedad `https://capturadocs.com/` verificada el 2026-11-03 con el archivo `googlee3d80887d5e0db78.html` (NO borrarlo) y sitemap enviado. Falta: Bing Webmaster, pedir indexación de `/ayuda/` y dos guías, y el recheck a 30 días (Vikunja #176). El texto de abajo es del 30-oct, cuando estaba en revisión.
 
 Objetivo: que los policías encuentren la herramienta al buscar cómo llenar los formatos, y que los asistentes de IA la lean bien.
 - **Publicado (commit `14d5533`)**: `llms.txt` (antes 404) y fechas del `sitemap.xml` al día.
