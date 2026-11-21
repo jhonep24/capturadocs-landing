@@ -106,7 +106,7 @@ def json_ld(p):
     grafo = [{'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': miga}]
     if p['slug'] != 'index':
         grafo.append({'@context': 'https://schema.org', '@type': 'Article', 'headline': p['h1_plano'], 'description': p['desc'],
-                      'inLanguage': 'es-CO', 'datePublished': FECHA, 'dateModified': FECHA, 'mainEntityOfPage': url,
+                      'inLanguage': 'es-CO', 'datePublished': FECHA, 'dateModified': p.get('modificado', FECHA), 'mainEntityOfPage': url,
                       'author': {'@type': 'Organization', 'name': 'CapturaDocs Express', 'url': SITIO + '/'},
                       'publisher': {'@type': 'Organization', 'name': 'CapturaDocs Express', 'url': SITIO + '/',
                                     'logo': {'@type': 'ImageObject', 'url': SITIO + '/logo.png'}}})
@@ -176,7 +176,7 @@ def pagina(p):
 <body>
 {NAV}
 <header class="hero"><div class="container">{crumbs}<div class="kicker">{icono(p['icono'])} {e(p['kicker'])}</div><h1>{h1fmt(p['h1'])}</h1><p class="lead">{p['lead']}</p>
-<p class="meta">Actualizado el 30 de octubre de 2026 · Lectura de {p.get('min', 6)} minutos</p></div></header>
+<p class="meta">Actualizado el {p.get('actualizado','30 de octubre de 2026')} · Lectura de {p.get('min', 6)} minutos</p></div></header>
 {toc}
 {dl}
 <main><article class="container">{cuerpo}</article>
