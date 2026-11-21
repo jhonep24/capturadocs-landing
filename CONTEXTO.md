@@ -393,6 +393,13 @@ Objetivo: que los policías encuentren la herramienta al buscar cómo llenar los
 - Plan comercial: `marketing/PLAN_CAMPANA_POLICIAS.md` (segmentos, canales, calendario de 12 publicaciones, medición, cuidados).
 - Datos: nada de lo jurídico se escribió de memoria; salió del texto de la Ley 906 y de los formatos mismos. El formato oficial/instructivo de la Policía NO se pudo descargar (los PDF hallados daban 404), así que las casillas se describen a partir de las muestras impresas.
 
+### Descargas, paso a paso y SEO (2026-11-21, commit `020fd16`)
+- Página `ayuda/descargas-formatos-fpj.html` (fuente `ayuda-src/c_descargas.py`): **solo** los 4 formatos en PDF en blanco (`ayuda/pdf/formato-fpjN-en-blanco.pdf`), sin Word ni ejemplos (decisión del dueño). Cada guía FPJ-5/6/7/8 trae un botón a su PDF.
+- Los PDF salen de `informes-ponal/public/plantillas/*.docx` renderizadas con docxtemplater con datos vacíos y convertidas con Word por COM (Word cerrado antes). Si cambia una plantilla o versión del formato, hay que regenerarlos.
+- Acta de Incautación NO se ofrece: su plantilla trae fijo «Metropolitana de Policía Bogotá».
+- Paso a paso interactivo («Hecho» + barra) en 5 guías: textos en `ayuda-src/pasos.py` («a mano» vs «con la app»; sin cifras de tiempo).
+- Títulos/descripciones con variantes «FPJ 5 / FPJ5». Tráfico 2–10 nov: ver Search Console (consultas no de marca, las guías son la entrada).
+
 ## Cómo desplegar cambios
 
 Es GitHub Pages sirviendo directo desde la rama del repo — no hay build ni
