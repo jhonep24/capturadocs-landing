@@ -396,6 +396,7 @@ Objetivo: que los policías encuentren la herramienta al buscar cómo llenar los
 ### Descargas, paso a paso y SEO (2026-11-21, commit `020fd16`)
 - Página `ayuda/descargas-formatos-fpj.html` (fuente `ayuda-src/c_descargas.py`): **solo** los 4 formatos en PDF en blanco (`ayuda/pdf/formato-fpjN-en-blanco.pdf`), sin Word ni ejemplos (decisión del dueño). Cada guía FPJ-5/6/7/8 trae un botón a su PDF.
 - Los PDF salen de `informes-ponal/public/plantillas/*.docx` renderizadas con docxtemplater con datos vacíos y convertidas con Word por COM (Word cerrado antes). Si cambia una plantilla o versión del formato, hay que regenerarlos.
+- Ajuste de espacio (2026-11-21, `9b6d13d`): FPJ-5 con 19 líneas de narración + 3 de anexos (raya de tabulación de la plantilla, no guiones bajos) y FPJ-6 con rayas en la constancia de buen trato y filas altas; se generan con `docxtemplater` + python-docx (alto de filas) + Word. Los scripts de generación viven solo en el scratchpad de la sesión: si hay que regenerar, rehacerlos con estas mismas reglas.
 - Acta de Incautación NO se ofrece: su plantilla trae fijo «Metropolitana de Policía Bogotá».
 - Paso a paso interactivo («Hecho» + barra) en 5 guías: textos en `ayuda-src/pasos.py` («a mano» vs «con la app»; sin cifras de tiempo).
 - Títulos/descripciones con variantes «FPJ 5 / FPJ5». Tráfico 2–10 nov: ver Search Console (consultas no de marca, las guías son la entrada).
