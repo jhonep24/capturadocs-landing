@@ -12,10 +12,12 @@ from c_flagrancia import PAGINAS as P1
 from c_formatos import PAGINAS as P2
 from c_practica import PAGINAS as P3
 from ventajas import GENERAL, POR_PAGINA
+from pasos import PASOS, PDFS
+from c_descargas import PAGINAS as P4
 
 SITIO = 'https://capturadocs.com'
 FECHA = '2026-10-30'
-PAGINAS = P1 + P2 + P3
+PAGINAS = P1 + P2 + P3 + P4
 POR_SLUG = {p['slug']: p for p in PAGINAS}
 CSS = open(os.path.join(AQUI, 'estilos.css'), encoding='utf-8').read()
 FUENTES = ('<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>'
@@ -58,6 +60,38 @@ def producto(p):
             f'<figure class="prod-img"><img src="../img/app-validacion.jpg" alt="Pantalla de CapturaDocs Express que avisa los campos que faltan antes de generar los documentos" width="1000" height="698" loading="lazy"/>'
             f'<figcaption>La aplicación revisa el caso antes de generar los documentos.</figcaption></figure></div></div></section>')
 
+def descarga(p):
+    """Atajo a la descarga del formato en blanco (solo PDF) y a la sección de descargas."""
+    if p['slug'] in PDFS:
+        fpj = PDFS[p['slug']][1]
+        return (f'<div class="descarga"><h3>Descarga el {fpj} en blanco</h3><p>PDF para imprimir y diligenciar. Copia para diligenciar: verifica que sea la versión vigente en tu institución.</p>'
+                f'<div class="cta-botones"><a class="btn-p" href="pdf/formato-fpj{fpj[-1]}-en-blanco.pdf" download>{icono("file-text")} Descargar {fpj} en blanco (PDF)</a>'
+                f'<a class="btn-o" href="descargas-formatos-fpj.html">Ver todos los formatos</a></div>'
+                '<p class="descarga-nota"><strong>¿Prefieres no llenarlo a mano?</strong> Con CapturaDocs Express llenas el caso una sola vez y este formato sale listo, más rápido y sin errores de transcripción. <a href="../index.html#descargas">Probar gratis con 5 casos</a>.</p></div>')
+    return ''
+
+def stepper(p):
+    """Paso a paso interactivo: marca cada paso, ve el avance y compara hacerlo a mano con hacerlo con la app."""
+    if p['slug'] not in PASOS: return ''
+    tit, pasos = PASOS[p['slug']]
+    n = len(pasos)
+    lis = ''.join(
+        f'<li class="sp"><div class="sp-cab"><b>{i}</b><h3>{e(t)}</h3><button type="button" class="sp-ok" aria-pressed="false">Hecho</button></div>'
+        f'<div class="sp-cols"><div class="sp-mano"><span>A mano</span><p>{e(m)}</p></div>'
+        f'<div class="sp-app"><span>Con CapturaDocs Express</span><p>{e(a)}</p></div></div></li>'
+        for i, (t, m, a) in enumerate(pasos, 1))
+    return (f'<div class="stepper" data-total="{n}"><div class="sp-prog"><div class="sp-bar"><i></i></div><span class="sp-txt" aria-live="polite">0 de {n} pasos</span></div>'
+            f'<ol>{lis}</ol>'
+            f'<div class="sp-fin" hidden><strong>Listo. A mano son {n} pasos repitiendo los mismos datos.</strong> '
+            f'Con CapturaDocs Express los llenas <b>una sola vez</b>, la aplicación revisa antes de generar y sale todo con el formato oficial: más rápido y sin errores de transcripción. '
+            f'<a class="btn-p" href="../index.html#descargas">{icono("zap")} Probar gratis con 5 casos</a></div></div>')
+
+STEPPER_JS = ("<script>(function(){document.querySelectorAll('.stepper').forEach(function(st){var t=+st.dataset.total,bar=st.querySelector('.sp-bar i'),"
+              "tx=st.querySelector('.sp-txt'),fin=st.querySelector('.sp-fin');function up(){var d=st.querySelectorAll('.sp.hecho').length;"
+              "bar.style.width=(d*100/t)+'%';tx.textContent=d+' de '+t+' pasos';fin.hidden=d<t;}"
+              "st.querySelectorAll('.sp-ok').forEach(function(b){b.addEventListener('click',function(){var li=b.closest('.sp'),on=li.classList.toggle('hecho');"
+              "b.setAttribute('aria-pressed',on);b.textContent=on?'Hecho \\u2713':'Hecho';up();});});});})();</script>")
+
 def cta(p):
     return f'''<div class="cta"><div class="container"><h2>{e(p.get('cta_t','Llena este formato una sola vez y deja que se generen todos'))}</h2>
 <p>{e(p.get('cta_p','CapturaDocs Express diligencia el Informe de Captura, el Acta de Derechos, el Rótulo y la Cadena de Custodia con un solo formulario. Pruébalo gratis con 5 casos completos, sin tarjeta.'))}</p>
@@ -94,7 +128,13 @@ def ampliable(t):
 
 def pagina(p):
     slug = p['slug']; url = f'{SITIO}/ayuda/' if slug == 'index' else f'{SITIO}/ayuda/{slug}.html'
-    secs = p.get('secciones', [])
+    secs = list(p.get('secciones', []))
+    st = stepper(p)
+    if st and len(secs) > 1:
+        secs.insert(1, ('paso-a-paso', 'Paso a paso: a mano y con la aplicación',
+                        '<p>Marca cada paso a medida que avanzas. En cada uno ves cómo es hacerlo a mano y cómo se simplifica con CapturaDocs Express.</p>' + st))
+    dl = descarga(p)
+    dl = '<div class="container">' + dl + '</div>' if dl else ''
     toc = ''
     if len(secs) > 1:
         toc = '<div class="container toc"><div class="toc-box"><h2>En esta página</h2><ol>' + ''.join(
@@ -138,11 +178,13 @@ def pagina(p):
 <header class="hero"><div class="container">{crumbs}<div class="kicker">{icono(p['icono'])} {e(p['kicker'])}</div><h1>{h1fmt(p['h1'])}</h1><p class="lead">{p['lead']}</p>
 <p class="meta">Actualizado el 30 de octubre de 2026 · Lectura de {p.get('min', 6)} minutos</p></div></header>
 {toc}
+{dl}
 <main><article class="container">{cuerpo}</article>
 {producto(p)}
 {cta(p)}
 <div class="container">{faq}{rel}<p class="aviso">{e(AVISO)}</p>{fuente}</div></main>
 {FOOT}
+{STEPPER_JS if st else ''}
 <script>document.querySelectorAll('a.wa-link').forEach(function(el){{el.href='https://wa.me/'+window.CAPTURADOCS.WA_NUMBER;}});</script>
 </body>
 </html>
@@ -153,6 +195,9 @@ def indice():
     p['secciones'] = [('guias', 'Los formatos, uno por uno', '<div class="cards">' + ''.join(
         f'<a class="card" href="{x["slug"]}.html">{icono(x["icono"])}<h3>{e(x["corto"])}</h3><p>{e(x["desc_card"])}</p></a>'
         for x in PAGINAS if x['grupo'] == 'formatos') + '</div>'),
+        ('descargas', 'Descargas: formatos en blanco', '<div class="cards">' + ''.join(
+        f'<a class="card" href="{x["slug"]}.html">{icono(x["icono"])}<h3>{e(x["corto"])}</h3><p>{e(x["desc_card"])}</p></a>'
+        for x in PAGINAS if x['grupo'] == 'descargas') + '</div>'),
         ('procedimiento', 'El procedimiento y la práctica', '<div class="cards">' + ''.join(
         f'<a class="card" href="{x["slug"]}.html">{icono(x["icono"])}<h3>{e(x["corto"])}</h3><p>{e(x["desc_card"])}</p></a>'
         for x in PAGINAS if x['grupo'] == 'practica') + '</div>')]

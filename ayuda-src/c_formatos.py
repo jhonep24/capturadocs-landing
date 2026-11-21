@@ -4,8 +4,8 @@ from c_flagrancia import LEY, LEY6
 
 FPJ5 = dict(
     slug='informe-captura-flagrancia-fpj5', grupo='formatos', corto='Informe de Captura (FPJ-5)', icono='clipboard-list',
-    titulo='Cómo diligenciar el Informe de Captura en Flagrancia FPJ-5',
-    desc='Guía casilla por casilla del FPJ-5: NUNC, destino, conducta punible, datos del capturado, víctimas, testigos, elementos, narración de los hechos y firma.',
+    titulo='FPJ-5 (FPJ5): cómo diligenciar el Informe de Captura en Flagrancia + PDF de ejemplo',
+    desc='Cómo llenar el FPJ 5 (FPJ5) casilla por casilla, con PDF de ejemplo para descargar: NUNC, destino, conducta punible, datos del capturado, víctimas, testigos, elementos, narración de los hechos y firma.',
     desc_card='Las 11 secciones del informe, casilla por casilla.',
     kicker='Formato FPJ-5', min=9,
     h1='Informe de Captura en Flagrancia FPJ-5: <em>cómo diligenciarlo bien</em>',
@@ -71,8 +71,8 @@ FPJ5 = dict(
 
 FPJ6 = dict(
     slug='acta-derechos-capturado-fpj6', grupo='formatos', corto='Acta de Derechos (FPJ-6)', icono='file-pen',
-    titulo='Acta de Derechos del Capturado FPJ-6: cómo diligenciarla',
-    desc='Qué es el FPJ-6, qué derechos se informan según el art. 303 del C.P.P., cómo llenar los datos personales, la constancia de buen trato y las firmas.',
+    titulo='FPJ-6 (FPJ6): los 4 derechos del capturado y cómo diligenciar el acta + PDF',
+    desc='Formato FPJ 6 (FPJ6): qué es, qué derechos se informan según el art. 303 del C.P.P., cómo llenar los datos personales, la constancia de buen trato y las firmas.',
     desc_card='Los derechos del art. 303 y los datos personales del capturado.',
     kicker='Formato FPJ-6', min=7,
     h1='Acta de Derechos del Capturado FPJ-6: <em>cómo diligenciarla</em>',
@@ -128,8 +128,8 @@ FPJ6 = dict(
 
 FPJ7 = dict(
     slug='rotulo-elementos-fpj7', grupo='formatos', corto='Rótulo de elementos (FPJ-7)', icono='target',
-    titulo='Rótulo de elementos materiales probatorios FPJ-7: cómo llenarlo',
-    desc='Cómo diligenciar el rótulo FPJ-7: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció.',
+    titulo='FPJ-7 (FPJ7): cómo llenar el rótulo de elementos materiales probatorios + PDF',
+    desc='Cómo llenar el FPJ 7 (FPJ7), con PDF de ejemplo: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció.',
     desc_card='Un rótulo por cada elemento incautado, casilla por casilla.',
     kicker='Formato FPJ-7', min=6,
     h1='Rótulo FPJ-7 de elementos materiales probatorios: <em>cómo llenarlo</em>',
@@ -178,8 +178,8 @@ FPJ7 = dict(
 
 FPJ8 = dict(
     slug='cadena-de-custodia-fpj8', grupo='formatos', corto='Cadena de Custodia (FPJ-8)', icono='lock-keyhole',
-    titulo='Registro de Cadena de Custodia FPJ-8: cómo diligenciarlo',
-    desc='Qué es el FPJ-8, qué significan las marcas H, R y E, quién firma, cómo se describe el elemento y qué dicen los arts. 254 a 259 de la Ley 906.',
+    titulo='FPJ-8 (FPJ8): cadena de custodia, marcas H, R y E y cómo diligenciarlo + PDF',
+    desc='Formato FPJ 8 (FPJ8): qué es, qué significan las marcas H, R y E, quién firma, cómo se describe el elemento y qué dicen los arts. 254 a 259 de la Ley 906.',
     desc_card='Las marcas H, R y E, las firmas y los artículos 254 a 259.',
     kicker='Formato FPJ-8', min=7,
     h1='Registro de Cadena de Custodia FPJ-8: <em>cómo diligenciarlo</em>',

@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rótulo de elementos materiales probatorios FPJ-7: cómo llenarlo</title>
-<meta name="description" content="Cómo diligenciar el rótulo FPJ-7: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció."/>
+<title>FPJ-7 (FPJ7): cómo llenar el rótulo de elementos materiales probatorios + PDF</title>
+<meta name="description" content="Cómo llenar el FPJ 7 (FPJ7), con PDF de ejemplo: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció."/>
 <link rel="icon" type="image/png" href="../logo.png"/><link rel="apple-touch-icon" href="../logo.png"/>
 <link rel="canonical" href="https://capturadocs.com/ayuda/rotulo-elementos-fpj7.html"/><meta name="theme-color" content="#070f1f"/><meta name="robots" content="index,follow"/>
-<meta property="og:type" content="article"/><meta property="og:title" content="Rótulo de elementos materiales probatorios FPJ-7: cómo llenarlo"/><meta property="og:description" content="Cómo diligenciar el rótulo FPJ-7: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció."/>
+<meta property="og:type" content="article"/><meta property="og:title" content="FPJ-7 (FPJ7): cómo llenar el rótulo de elementos materiales probatorios + PDF"/><meta property="og:description" content="Cómo llenar el FPJ 7 (FPJ7), con PDF de ejemplo: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció."/>
 <meta property="og:url" content="https://capturadocs.com/ayuda/rotulo-elementos-fpj7.html"/><meta property="og:image" content="https://capturadocs.com/logo-og.jpg"/><meta property="og:locale" content="es_CO"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Barlow+Condensed:wght@700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
@@ -133,11 +133,64 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
   footer{flex-direction:column;text-align:center;padding:28px 20px}footer a{display:inline-block;padding:14px 8px}
   .hero{padding:104px 0 60px}.paso{padding:14px}td:first-child{white-space:normal}.cta{padding-top:calc(34px + 2vw);padding-bottom:calc(34px + 2vw)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.descarga{margin:26px 0 6px;padding:20px 22px;border-radius:16px;background:linear-gradient(145deg,rgba(46,127,255,.12),rgba(46,127,255,.03));border:1px solid rgba(46,127,255,.45)}
+.descarga h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;margin-bottom:4px}
+.descarga p{color:#d5def2;font-size:.98rem;margin:4px 0 12px}
+.descarga-nota{margin:14px 0 0!important}
+.pdf-lista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pdf-item{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 14px;border-radius:12px;background:var(--navy2);border:1px solid var(--border);text-decoration:none;color:var(--white);transition:border-color .2s}
+.pdf-item:hover{border-color:var(--gold)}
+.pdf-item .ic{width:26px;height:26px;flex:none;color:var(--gold)}
+.pdf-item span{flex:1;min-width:0;display:flex;flex-direction:column}
+.pdf-item small{color:var(--muted);font-size:.85rem}
+.pdf-item em{font-style:normal;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--navy);background:var(--gold);padding:6px 12px;border-radius:8px;font-size:.9rem}
+.stepper{margin:16px 0}
+.sp-prog{display:flex;align-items:center;gap:12px;margin-bottom:14px;position:sticky;top:68px;z-index:5;padding:8px 0;background:var(--navy)}
+.sp-bar{flex:1;height:10px;border-radius:6px;background:var(--navy3);overflow:hidden}
+.sp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#ffc533);transition:width .3s}
+.sp-txt{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--gold);white-space:nowrap}
+.stepper ol{list-style:none;display:grid;gap:12px}
+.sp{padding:16px 18px;border-radius:14px;background:var(--navy2);border:1px solid var(--border);transition:border-color .2s,opacity .2s}
+.sp.hecho{border-color:rgba(37,211,102,.6);opacity:.8}
+.sp-cab{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sp-cab b{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 1rem 'Rajdhani',sans-serif;color:#ffc533;border:1px solid rgba(240,165,0,.5);background:rgba(240,165,0,.12)}
+.sp-cab h3{flex:1;min-width:0;font-family:'Rajdhani',sans-serif;font-size:1.1rem}
+.sp-ok{min-height:44px;padding:0 16px;border-radius:22px;border:1.5px solid var(--border);background:var(--navy);color:var(--white);font:700 .9rem 'Rajdhani',sans-serif;cursor:pointer}
+.sp-ok[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--navy)}
+.sp-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sp-cols>div{padding:12px 14px;border-radius:10px}
+.sp-cols span{display:block;font:700 .78rem 'Rajdhani',sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.sp-cols p{margin:0;font-size:.95rem}
+.sp-mano{background:var(--navy);border:1px solid var(--border)}
+.sp-mano span{color:var(--muted)}
+.sp-app{background:linear-gradient(145deg,rgba(240,165,0,.16),rgba(240,165,0,.05));border:1px solid rgba(240,165,0,.5)}
+.sp-app span{color:#ffd36b}
+.sp-fin{margin-top:16px;padding:18px 20px;border-radius:14px;background:linear-gradient(145deg,rgba(37,211,102,.14),rgba(37,211,102,.04));border:1px solid rgba(37,211,102,.5)}
+.sp-fin .btn-p{margin-top:12px}
+@media(max-width:700px){.pdf-lista,.sp-cols{grid-template-columns:minmax(0,1fr)}.sp-prog{top:60px}.sp-cab{flex-wrap:wrap}.sp-cab h3{flex-basis:calc(100% - 50px)}}
+@media print{.stepper,.descarga{display:none}}
+.pdf-lista{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.pdf-fila{padding:12px 14px;border-radius:12px;background:var(--navy2);border:1px solid var(--border);margin:6px 0}
+.pdf-tit{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}.pdf-tit small{color:var(--muted)}
+.pdf-bt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pdf-bt .pdf-item{min-height:48px;padding:8px 12px;font-size:.92rem}
+.pdf-bt .pdf-item.pri{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
+.pdf-bt .pdf-item.pri .ic{color:var(--navy)}
+.descarga-aviso{font-size:.85rem!important;color:var(--muted)!important;margin:10px 0 0!important}
+@media(max-width:700px){.pdf-bt{grid-template-columns:minmax(0,1fr)}}
+.dl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.dl-card{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:16px;background:var(--navy2);border:1px solid var(--border)}
+.dl-fpj{font:800 2rem 'Barlow Condensed',sans-serif;color:var(--gold);white-space:nowrap}
+.dl-card h3{font-family:'Rajdhani',sans-serif;font-size:1.1rem}
+.dl-det{color:var(--muted);font-size:.9rem;margin-bottom:8px}
+.dl-card .btn-p{justify-content:center;text-align:center}
+.dl-guia{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+@media(max-width:700px){.dl-grid{grid-template-columns:minmax(0,1fr)}}
 
 
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://capturadocs.com/"}, {"@type": "ListItem", "position": 2, "name": "Centro de ayuda", "item": "https://capturadocs.com/ayuda/"}, {"@type": "ListItem", "position": 3, "name": "Rótulo de elementos (FPJ-7)", "item": "https://capturadocs.com/ayuda/rotulo-elementos-fpj7.html"}]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Rótulo FPJ-7 de elementos materiales probatorios: cómo llenarlo", "description": "Cómo diligenciar el rótulo FPJ-7: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció.", "inLanguage": "es-CO", "datePublished": "2026-10-30", "dateModified": "2026-10-30", "mainEntityOfPage": "https://capturadocs.com/ayuda/rotulo-elementos-fpj7.html", "author": {"@type": "Organization", "name": "CapturaDocs Express", "url": "https://capturadocs.com/"}, "publisher": {"@type": "Organization", "name": "CapturaDocs Express", "url": "https://capturadocs.com/", "logo": {"@type": "ImageObject", "url": "https://capturadocs.com/logo.png"}}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Rótulo FPJ-7 de elementos materiales probatorios: cómo llenarlo", "description": "Cómo llenar el FPJ 7 (FPJ7), con PDF de ejemplo: NUNC, fecha y hora de recolección, hallazgo, sitio, persona a quien se halló, descripción del elemento y quién lo diligenció.", "inLanguage": "es-CO", "datePublished": "2026-10-30", "dateModified": "2026-10-30", "mainEntityOfPage": "https://capturadocs.com/ayuda/rotulo-elementos-fpj7.html", "author": {"@type": "Organization", "name": "CapturaDocs Express", "url": "https://capturadocs.com/"}, "publisher": {"@type": "Organization", "name": "CapturaDocs Express", "url": "https://capturadocs.com/", "logo": {"@type": "ImageObject", "url": "https://capturadocs.com/logo.png"}}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Se llena un rótulo por cada elemento?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Cada elemento material probatorio o evidencia física lleva su propio rótulo, con su número de orden y su descripción."}}, {"@type": "Question", "name": "¿Cómo se escribe la hora en el rótulo?", "acceptedAnswer": {"@type": "Answer", "text": "La hora se escribe en formato de 24 horas en casillas separadas, por ejemplo 14:30 como 1430. La fecha va en año, mes y día."}}, {"@type": "Question", "name": "¿Qué diferencia hay entre el FPJ-7 y el FPJ-8?", "acceptedAnswer": {"@type": "Answer", "text": "El FPJ-7 es el rótulo que identifica al elemento en el momento en que se recoge; el FPJ-8 es el registro de cadena de custodia que deja constancia de quién lo halló, lo recolectó y lo embaló, y de quienes lo reciben después."}}, {"@type": "Question", "name": "¿Quién diligencia el rótulo?", "acceptedAnswer": {"@type": "Answer", "text": "Quien recolecta el elemento. La casilla 7 pide sus nombres, cédula, entidad, cargo y firma."}}, {"@type": "Question", "name": "¿Puedo generar el rótulo automáticamente?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. CapturaDocs Express genera el FPJ-7 con la descripción y los datos que ya escribiste en el caso, uno por cada elemento. También tiene una guía para imprimirlo en tamaño reducido y pegarlo al embalaje."}}]}</script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b1c89c7467ba41fbb947cce3577347db"}'></script>
 <script src="../config.js"></script>
@@ -149,11 +202,12 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
 </nav>
 <header class="hero"><div class="container"><div class="crumbs"><a href="../index.html">Inicio</a> / <a href="./">Centro de ayuda</a> / <span>Rótulo de elementos (FPJ-7)</span></div><div class="kicker"><svg class="ic" aria-hidden="true"><use href="../icons.svg#i-target"/></svg> Formato FPJ-7</div><h1>Rótulo <span style="white-space:nowrap">FPJ-7</span> de elementos materiales probatorios: <em>cómo llenarlo</em></h1><p class="lead">El rótulo identifica cada elemento que se recoge en la captura. Se llena uno por elemento y se pega al embalaje. Estas son sus siete casillas y lo que conviene escribir en cada una.</p>
 <p class="meta">Actualizado el 30 de octubre de 2026 · Lectura de 6 minutos</p></div></header>
-<div class="container toc"><div class="toc-box"><h2>En esta página</h2><ol><li><a href="#que-es">¿Qué es el rótulo FPJ-7?</a></li><li><a href="#casillas">Las siete casillas</a></li><li><a href="#descripcion">Cómo describir bien un elemento</a></li><li><a href="#legal">Por qué importa el rótulo</a></li></ol></div></div>
+<div class="container toc"><div class="toc-box"><h2>En esta página</h2><ol><li><a href="#que-es">¿Qué es el rótulo FPJ-7?</a></li><li><a href="#paso-a-paso">Paso a paso: a mano y con la aplicación</a></li><li><a href="#casillas">Las siete casillas</a></li><li><a href="#descripcion">Cómo describir bien un elemento</a></li><li><a href="#legal">Por qué importa el rótulo</a></li></ol></div></div>
+<div class="container"><div class="descarga"><h3>Descarga el FPJ-7 en blanco</h3><p>PDF para imprimir y diligenciar. Copia para diligenciar: verifica que sea la versión vigente en tu institución.</p><div class="cta-botones"><a class="btn-p" href="pdf/formato-fpj7-en-blanco.pdf" download><svg class="ic" aria-hidden="true"><use href="../icons.svg#i-file-text"/></svg> Descargar FPJ-7 en blanco (PDF)</a><a class="btn-o" href="descargas-formatos-fpj.html">Ver todos los formatos</a></div><p class="descarga-nota"><strong>¿Prefieres no llenarlo a mano?</strong> Con CapturaDocs Express llenas el caso una sola vez y este formato sale listo, más rápido y sin errores de transcripción. <a href="../index.html#descargas">Probar gratis con 5 casos</a>.</p></div></div>
 <main><article class="container"><section id="que-es"><h2>¿Qué es el rótulo FPJ-7?</h2>
 <p>El <strong>Rótulo de Elementos Materiales Probatorios y Evidencia Física (FPJ-7)</strong> es la «etiqueta» que se asigna a cada elemento recolectado en el lugar de los hechos o en la captura. Junto con el <a href="cadena-de-custodia-fpj8.html">Registro de Cadena de Custodia (FPJ-8)</a> permite saber de qué elemento se trata, dónde se halló, quién lo halló y quién lo ha tenido.</p>
 <p>La versión que mostramos es la <strong>Versión 04</strong> (aprobada el 18 de abril de 2018), en <strong>una sola hoja horizontal</strong>. El formato de cadena de custodia advierte que los formatos FPJ-7 y FPJ-8 son <strong>exclusivos para la función de Policía Judicial</strong>.</p>
-<p>Se llena <strong>un rótulo por cada elemento</strong>. Si incautaste un celular y una billetera, son dos rótulos.</p></section><section id="casillas"><h2>Las siete casillas</h2>
+<p>Se llena <strong>un rótulo por cada elemento</strong>. Si incautaste un celular y una billetera, son dos rótulos.</p></section><section id="paso-a-paso"><h2>Paso a paso: a mano y con la aplicación</h2><p>Marca cada paso a medida que avanzas. En cada uno ves cómo es hacerlo a mano y cómo se simplifica con CapturaDocs Express.</p><div class="stepper" data-total="5"><div class="sp-prog"><div class="sp-bar"><i></i></div><span class="sp-txt" aria-live="polite">0 de 5 pasos</span></div><ol><li class="sp"><div class="sp-cab"><b>1</b><h3>Un rótulo por elemento</h3><button type="button" class="sp-ok" aria-pressed="false">Hecho</button></div><div class="sp-cols"><div class="sp-mano"><span>A mano</span><p>Preparas un rótulo por cada elemento incautado.</p></div><div class="sp-app"><span>Con CapturaDocs Express</span><p>Agregas cada elemento en el caso y se genera un rótulo por cada uno.</p></div></div></li><li class="sp"><div class="sp-cab"><b>2</b><h3>NUNC, fecha y hora de recolección</h3><button type="button" class="sp-ok" aria-pressed="false">Hecho</button></div><div class="sp-cols"><div class="sp-mano"><span>A mano</span><p>Los escribes de nuevo en cada rótulo.</p></div><div class="sp-app"><span>Con CapturaDocs Express</span><p>Se toman del caso.</p></div></div></li><li class="sp"><div class="sp-cab"><b>3</b><h3>Sitio y persona a quien se halló</h3><button type="button" class="sp-ok" aria-pressed="false">Hecho</button></div><div class="sp-cols"><div class="sp-mano"><span>A mano</span><p>Repites dirección y nombre de la persona.</p></div><div class="sp-app"><span>Con CapturaDocs Express</span><p>Los datos del capturado y del lugar se reutilizan.</p></div></div></li><li class="sp"><div class="sp-cab"><b>4</b><h3>Descripción del elemento</h3><button type="button" class="sp-ok" aria-pressed="false">Hecho</button></div><div class="sp-cols"><div class="sp-mano"><span>A mano</span><p>La redactas aquí y otra vez en el informe y la cadena de custodia.</p></div><div class="sp-app"><span>Con CapturaDocs Express</span><p>La escribes una vez y sale idéntica en los tres documentos.</p></div></div></li><li class="sp"><div class="sp-cab"><b>5</b><h3>Imprimir y pegar</h3><button type="button" class="sp-ok" aria-pressed="false">Hecho</button></div><div class="sp-cols"><div class="sp-mano"><span>A mano</span><p>Imprimes y recortas cada rótulo.</p></div><div class="sp-app"><span>Con CapturaDocs Express</span><p>La guía de uso explica cómo imprimirlo en tamaño reducido para el embalaje.</p></div></div></li></ol><div class="sp-fin" hidden><strong>Listo. A mano son 5 pasos repitiendo los mismos datos.</strong> Con CapturaDocs Express los llenas <b>una sola vez</b>, la aplicación revisa antes de generar y sale todo con el formato oficial: más rápido y sin errores de transcripción. <a class="btn-p" href="../index.html#descargas"><svg class="ic" aria-hidden="true"><use href="../icons.svg#i-zap"/></svg> Probar gratis con 5 casos</a></div></div></section><section id="casillas"><h2>Las siete casillas</h2>
 <figure class="doc"><a href="../img/doc-fpj7.jpg" target="_blank" rel="noopener" aria-label="Abrir la imagen en grande"><img src="../img/doc-fpj7.jpg" alt="Rótulo FPJ-7 diligenciado con datos de ejemplo inventados" width="1400" height="866" loading="lazy"/></a><figcaption>Rótulo FPJ-7 con datos de ejemplo inventados. · Toca la imagen para verla en grande.</figcaption></figure>
 <div class="tabla"><table><thead><tr><th>Casilla</th><th>Qué va ahí</th></tr></thead><tbody>
 <tr><td>1. NUNC</td><td>El Número Único de Noticia Criminal, igual que en los demás formatos.</td></tr>
@@ -192,6 +246,7 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
     <a href="../seguridad.html">Cómo protegemos tus datos</a>
   </div>
 </footer>
+<script>(function(){document.querySelectorAll('.stepper').forEach(function(st){var t=+st.dataset.total,bar=st.querySelector('.sp-bar i'),tx=st.querySelector('.sp-txt'),fin=st.querySelector('.sp-fin');function up(){var d=st.querySelectorAll('.sp.hecho').length;bar.style.width=(d*100/t)+'%';tx.textContent=d+' de '+t+' pasos';fin.hidden=d<t;}st.querySelectorAll('.sp-ok').forEach(function(b){b.addEventListener('click',function(){var li=b.closest('.sp'),on=li.classList.toggle('hecho');b.setAttribute('aria-pressed',on);b.textContent=on?'Hecho \u2713':'Hecho';up();});});});})();</script>
 <script>document.querySelectorAll('a.wa-link').forEach(function(el){el.href='https://wa.me/'+window.CAPTURADOCS.WA_NUMBER;});</script>
 </body>
 </html>

@@ -133,6 +133,59 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
   footer{flex-direction:column;text-align:center;padding:28px 20px}footer a{display:inline-block;padding:14px 8px}
   .hero{padding:104px 0 60px}.paso{padding:14px}td:first-child{white-space:normal}.cta{padding-top:calc(34px + 2vw);padding-bottom:calc(34px + 2vw)}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+.descarga{margin:26px 0 6px;padding:20px 22px;border-radius:16px;background:linear-gradient(145deg,rgba(46,127,255,.12),rgba(46,127,255,.03));border:1px solid rgba(46,127,255,.45)}
+.descarga h3{font-family:'Rajdhani',sans-serif;font-size:1.2rem;margin-bottom:4px}
+.descarga p{color:#d5def2;font-size:.98rem;margin:4px 0 12px}
+.descarga-nota{margin:14px 0 0!important}
+.pdf-lista{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pdf-item{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 14px;border-radius:12px;background:var(--navy2);border:1px solid var(--border);text-decoration:none;color:var(--white);transition:border-color .2s}
+.pdf-item:hover{border-color:var(--gold)}
+.pdf-item .ic{width:26px;height:26px;flex:none;color:var(--gold)}
+.pdf-item span{flex:1;min-width:0;display:flex;flex-direction:column}
+.pdf-item small{color:var(--muted);font-size:.85rem}
+.pdf-item em{font-style:normal;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--navy);background:var(--gold);padding:6px 12px;border-radius:8px;font-size:.9rem}
+.stepper{margin:16px 0}
+.sp-prog{display:flex;align-items:center;gap:12px;margin-bottom:14px;position:sticky;top:68px;z-index:5;padding:8px 0;background:var(--navy)}
+.sp-bar{flex:1;height:10px;border-radius:6px;background:var(--navy3);overflow:hidden}
+.sp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#ffc533);transition:width .3s}
+.sp-txt{font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--gold);white-space:nowrap}
+.stepper ol{list-style:none;display:grid;gap:12px}
+.sp{padding:16px 18px;border-radius:14px;background:var(--navy2);border:1px solid var(--border);transition:border-color .2s,opacity .2s}
+.sp.hecho{border-color:rgba(37,211,102,.6);opacity:.8}
+.sp-cab{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.sp-cab b{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 1rem 'Rajdhani',sans-serif;color:#ffc533;border:1px solid rgba(240,165,0,.5);background:rgba(240,165,0,.12)}
+.sp-cab h3{flex:1;min-width:0;font-family:'Rajdhani',sans-serif;font-size:1.1rem}
+.sp-ok{min-height:44px;padding:0 16px;border-radius:22px;border:1.5px solid var(--border);background:var(--navy);color:var(--white);font:700 .9rem 'Rajdhani',sans-serif;cursor:pointer}
+.sp-ok[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--navy)}
+.sp-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sp-cols>div{padding:12px 14px;border-radius:10px}
+.sp-cols span{display:block;font:700 .78rem 'Rajdhani',sans-serif;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:4px}
+.sp-cols p{margin:0;font-size:.95rem}
+.sp-mano{background:var(--navy);border:1px solid var(--border)}
+.sp-mano span{color:var(--muted)}
+.sp-app{background:linear-gradient(145deg,rgba(240,165,0,.16),rgba(240,165,0,.05));border:1px solid rgba(240,165,0,.5)}
+.sp-app span{color:#ffd36b}
+.sp-fin{margin-top:16px;padding:18px 20px;border-radius:14px;background:linear-gradient(145deg,rgba(37,211,102,.14),rgba(37,211,102,.04));border:1px solid rgba(37,211,102,.5)}
+.sp-fin .btn-p{margin-top:12px}
+@media(max-width:700px){.pdf-lista,.sp-cols{grid-template-columns:minmax(0,1fr)}.sp-prog{top:60px}.sp-cab{flex-wrap:wrap}.sp-cab h3{flex-basis:calc(100% - 50px)}}
+@media print{.stepper,.descarga{display:none}}
+.pdf-lista{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.pdf-fila{padding:12px 14px;border-radius:12px;background:var(--navy2);border:1px solid var(--border);margin:6px 0}
+.pdf-tit{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}.pdf-tit small{color:var(--muted)}
+.pdf-bt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pdf-bt .pdf-item{min-height:48px;padding:8px 12px;font-size:.92rem}
+.pdf-bt .pdf-item.pri{background:var(--gold);color:var(--navy);border-color:var(--gold);font-weight:700}
+.pdf-bt .pdf-item.pri .ic{color:var(--navy)}
+.descarga-aviso{font-size:.85rem!important;color:var(--muted)!important;margin:10px 0 0!important}
+@media(max-width:700px){.pdf-bt{grid-template-columns:minmax(0,1fr)}}
+.dl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}
+.dl-card{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:16px;background:var(--navy2);border:1px solid var(--border)}
+.dl-fpj{font:800 2rem 'Barlow Condensed',sans-serif;color:var(--gold);white-space:nowrap}
+.dl-card h3{font-family:'Rajdhani',sans-serif;font-size:1.1rem}
+.dl-det{color:var(--muted);font-size:.9rem;margin-bottom:8px}
+.dl-card .btn-p{justify-content:center;text-align:center}
+.dl-guia{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+@media(max-width:700px){.dl-grid{grid-template-columns:minmax(0,1fr)}}
 
 
 </style>
@@ -150,6 +203,7 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
 <header class="hero"><div class="container"><div class="crumbs"><a href="../index.html">Inicio</a> / <a href="./">Centro de ayuda</a> / <span>Desde el celular</span></div><div class="kicker"><svg class="ic" aria-hidden="true"><use href="../icons.svg#i-smartphone"/></svg> Herramienta</div><h1>Informe de captura desde el celular: <em>un formulario, todos los documentos</em></h1><p class="lead">Escribir a mano cuatro formatos que repiten los mismos datos es lento y propenso a errores. Así funciona hacerlo desde el celular o el computador con CapturaDocs Express.</p>
 <p class="meta">Actualizado el 30 de octubre de 2026 · Lectura de 5 minutos</p></div></header>
 <div class="container toc"><div class="toc-box"><h2>En esta página</h2><ol><li><a href="#problema">El problema de llenar los formatos a mano</a></li><li><a href="#como">Cómo funciona</a></li><li><a href="#donde">Dónde funciona</a></li><li><a href="#precio">Cuánto cuesta</a></li></ol></div></div>
+
 <main><article class="container"><section id="problema"><h2>El problema de llenar los formatos a mano</h2>
 <p>Los formatos FPJ-5, FPJ-6, FPJ-7 y FPJ-8 piden varias veces los mismos datos: NUNC, nombres, documento, fecha y hora, lugar y descripción de los elementos. Escribirlos a mano o en Word cuatro veces cuesta tiempo y deja espacio para el error: <a href="errores-comunes-informes-captura.html">el nombre que cambia, la hora que no coincide, la descripción distinta</a>.</p></section><section id="como"><h2>Cómo funciona</h2>
 <div class="pasos">
@@ -187,6 +241,7 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
     <a href="../seguridad.html">Cómo protegemos tus datos</a>
   </div>
 </footer>
+
 <script>document.querySelectorAll('a.wa-link').forEach(function(el){el.href='https://wa.me/'+window.CAPTURADOCS.WA_NUMBER;});</script>
 </body>
 </html>
