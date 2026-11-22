@@ -2,19 +2,19 @@
 from c_flagrancia import LEY, LEY6
 
 ERRORES = dict(
-    slug='errores-comunes-informes-captura', grupo='practica', corto='Errores comunes', icono='triangle-alert',
-    titulo='Errores comunes en el informe de captura en flagrancia y cómo evitarlos',
-    desc='Los errores que más se repiten al diligenciar FPJ-5, 6, 7 y 8: datos que no coinciden, casillas vacías, descripciones distintas y firmas sin fecha.',
+    slug='errores-comunes-informes-captura', grupo='practica', corto='Errores a evitar', icono='triangle-alert',
+    titulo='Errores en el informe de captura en flagrancia y cómo evitarlos',
+    desc='Errores que conviene evitar al diligenciar FPJ-5, 6, 7 y 8: datos que no coinciden, casillas vacías, descripciones distintas y traspasos sin registrar.',
     desc_card='Datos que no coinciden, casillas vacías y descripciones distintas.',
     kicker='Práctica', min=7,
-    h1='Errores comunes en el informe de captura en flagrancia <em>y cómo evitarlos</em>',
-    h1_plano='Errores comunes en el informe de captura en flagrancia y cómo evitarlos',
+    h1='Errores en el informe de captura en flagrancia <em>y cómo evitarlos</em>',
+    h1_plano='Errores en el informe de captura en flagrancia y cómo evitarlos',
     lead='Casi todos los problemas de un informe de captura vienen de lo mismo: la misma información escrita de varias maneras. Estos son los diez errores más fáciles de cometer y cómo prevenirlos.',
     secciones=[
         ('por-que', 'Por qué un detalle pequeño se vuelve un problema', '''
 <p>Una captura en flagrancia genera varios documentos que se leen juntos: el informe, el acta de derechos, el rótulo y la cadena de custodia. Cuando los datos no coinciden entre ellos, quien los revisa tiene que preguntarse cuál es el correcto, y eso obliga a corregir, repetir o aclarar. Lo grave no es el error en sí, sino que <strong>resta credibilidad al procedimiento</strong>.</p>
 <p>La mayoría de las inconsistencias se producen por una razón sencilla: <strong>el mismo dato se escribe a mano varias veces</strong>. Cada vez que lo retipeas hay una oportunidad de cometer un error.</p>'''),
-        ('diez', 'Los diez errores más comunes', '''
+        ('diez', 'Diez errores que conviene evitar', '''
 <div class="pasos">
 <div class="paso"><b>1</b><div><h3>Nombre del capturado escrito distinto</h3><p>«Carlos Andrés Ramírez Díaz» en un formato y «Carlos A. Ramírez» en otro. Se evita copiándolo del documento una vez y reutilizándolo.</p></div></div>
 <div class="paso"><b>2</b><div><h3>NUNC con un dígito cambiado</h3><p>El Número Único de Noticia Criminal debe ser idéntico en los cuatro formatos. Cópialo de una sola fuente.</p></div></div>
@@ -23,7 +23,7 @@ ERRORES = dict(
 <div class="paso"><b>5</b><div><h3>Descripción del elemento distinta entre formatos</h3><p>Lo que en el FPJ-5 es «celular negro» en el rótulo es «Samsung A14» y en la cadena de custodia otra cosa. Escríbela una vez y pégala igual.</p></div></div>
 <div class="paso"><b>6</b><div><h3>Rótulo faltante o con varios elementos juntos</h3><p>Es un rótulo por elemento incautado, con su número de orden y su cantidad.</p></div></div>
 <div class="paso"><b>7</b><div><h3>Marcas H, R y E sin correspondencia</h3><p>Una persona que firma en la cadena de custodia debe haber hallado, recolectado o embalado, y cada una de esas marcas tiene que corresponder con lo que pasó.</p></div></div>
-<div class="paso"><b>8</b><div><h3>Firmas sin fecha o espacios de firma vacíos</h3><p>La cadena de custodia registra a cada persona que tuvo contacto con el elemento; sin fecha, el tramo queda sin soporte.</p></div></div>
+<div class="paso"><b>8</b><div><h3>Firmas sin fecha o espacios de firma vacíos</h3><p>La cadena de custodia debe registrar a cada persona que tuvo contacto con el elemento (art. 254): quien firma queda identificado y, en el registro de continuidad, con fecha y hora.</p></div></div>
 <div class="paso"><b>9</b><div><h3>Narración con opiniones en lugar de hechos</h3><p>El formato pide una narración «cronológica y concreta». Describe lo que se vio y se hizo, en orden, sin adjetivos.</p></div></div>
 <div class="paso"><b>10</b><div><h3>Anexos que no se adjuntan</h3><p>El informe lista los anexos (acta de derechos, cadena de custodia, rótulo). Si los nombras, tienen que estar.</p></div></div></div>'''),
         ('prevenir', 'Cómo prevenirlos', '''
@@ -35,7 +35,7 @@ ERRORES = dict(
 <div class="tip"><p><strong>Una forma de evitar los diez a la vez:</strong> llenar un solo formulario y generar los cuatro documentos desde ahí. Así el nombre, el NUNC, la fecha y la descripción son los mismos por construcción. Es lo que hace CapturaDocs Express.</p></div>'''),
     ],
     faq=[
-        ('¿Cuál es el error más frecuente en un informe de captura?', 'La inconsistencia de datos entre los formatos: el nombre, el documento, la fecha y la hora o la descripción del elemento escritos de manera distinta en el informe, el acta, el rótulo y la cadena de custodia.'),
+        ('¿Qué error conviene evitar primero en un informe de captura?', 'La inconsistencia de datos entre los formatos: el nombre, el documento, la fecha y la hora o la descripción del elemento escritos de manera distinta en el informe, el acta, el rótulo y la cadena de custodia.'),
         ('¿La fecha y hora de la captura deben coincidir entre documentos?', 'Sí. El propio FPJ-5 advierte debajo del campo de fecha y hora de la captura que esos datos deben coincidir con los registrados en el acta de derechos del capturado.'),
         ('¿Cuántos rótulos hay que llenar?', 'Uno por cada elemento material probatorio o evidencia física incautada.'),
         ('¿Cómo evito los errores de transcripción?', 'Escribiendo cada dato una sola vez y reutilizándolo, y revisando los documentos juntos antes de firmar. Una herramienta como CapturaDocs Express automatiza la reutilización.'),
@@ -61,21 +61,21 @@ CHEQUEO_ITEMS = [
         'Fecha y hora en que se pone a disposición del fiscal.',
         'Anexos listados y adjuntos; datos del servidor y firma.']),
     ('FPJ-6 · Acta de Derechos', [
-        'Fecha, hora y lugar de la lectura de derechos.',
+        'Fecha y hora de la lectura de derechos.',
         'Un acta por cada capturado.',
         'Persona a quien se comunica la captura (nombre, identificación, teléfono y hora).',
-        'Firma y huella del capturado, o anotación en observaciones si no quiso firmar.',
+        'Firma y huella del capturado (si no quiso firmar, buena práctica: dejarlo anotado en observaciones).',
         'Constancia de buen trato con los mismos datos del informe.']),
     ('FPJ-7 · Rótulo', [
         'Un rótulo por elemento, con número de orden y cantidad.',
-        'Fecha y hora de recolección (hora en 24 horas).',
+        'Fecha y hora de recolección.',
         'Dirección y ubicación específica del hallazgo.',
-        'Nombre y documento de la persona a quien se le encontró el elemento.',
+        'Nombres y apellidos de la persona a quien se le encontró el elemento.',
         'Descripción con marca, modelo, color, serial o IMEI si aplica.',
         'Quién diligencia el rótulo: nombre, cédula, entidad, cargo y firma.']),
     ('FPJ-8 · Cadena de Custodia', [
         'Una fila por cada persona que interviene, con sus marcas H, R y E correctas.',
-        'Cédula, entidad y firma con fecha de cada una.',
+        'Cédula, entidad y firma de cada una; los traspasos posteriores, en el registro de continuidad con fecha, hora y firma.',
         'Descripción igual a la del rótulo y a la del informe.',
         'Historia clínica solo si la entidad de salud recolectó el elemento.']),
 ]
@@ -103,7 +103,7 @@ CHEQUEO = dict(
     lead='Veintitantos puntos para revisar antes de firmar. Está pensada para los cuatro formatos juntos, porque es ahí donde se ven las diferencias.',
     secciones=[('lista', 'Antes de firmar y entregar', _chequeo_html())],
     faq=[
-        ('¿Esta lista reemplaza el instructivo oficial?', 'No. Es una ayuda de revisión basada en lo que piden los formatos y en lo que se repite como error. Para cualquier duda manda el instructivo vigente y la orientación de tu fiscal o tu superior.'),
+        ('¿Esta lista reemplaza el instructivo oficial?', 'No. Es una ayuda de revisión basada en lo que piden los formatos y en buenas prácticas de revisión. Para cualquier duda manda el instructivo vigente y la orientación de tu fiscal o tu superior.'),
         ('¿Puedo imprimirla?', 'Sí. Usa el botón «Imprimir la lista» o la opción de imprimir de tu navegador; está preparada para que salga en una o dos hojas.'),
     ],
     rel=['errores-comunes-informes-captura', 'informe-captura-flagrancia-fpj5', 'cadena-de-custodia-fpj8'],
@@ -152,7 +152,7 @@ NARRACION = dict(
 <tr><td>«Aproximadamente por la tarde»</td><td>«A las 14:30 horas.»</td></tr>
 <tr><td>«Se le informaron sus derechos» (sin hora)</td><td>«A las 14:40 horas se le informaron sus derechos y se diligenció el acta.»</td></tr>
 <tr><td>Dos descripciones distintas del mismo elemento</td><td>La misma descripción del rótulo y de la cadena de custodia.</td></tr></tbody></table></div>
-<div class="tip"><p><strong>Consejo:</strong> antes de escribir, anota las horas y los datos en el orden de arriba. Escribir el relato desde esas notas toma la mitad del tiempo y evita contradicciones.</p></div>'''),
+<div class="tip"><p><strong>Consejo:</strong> antes de escribir, anota las horas y los datos en el orden de arriba. Escribir el relato desde esas notas ayuda a evitar contradicciones.</p></div>'''),
     ],
     faq=[
         ('¿Qué extensión debe tener la narración?', 'La que haga falta para que sea concreta y completa. El formato permite ampliar el espacio cuantas veces sea necesario, pero no se trata de escribir más sino de dejar claros los hechos en orden.'),
@@ -196,8 +196,8 @@ CELULAR = dict(
 <div class="tabla"><table><thead><tr><th>Plan</th><th>Precio</th><th>Incluye</th></tr></thead><tbody>
 <tr><td>Prueba gratuita</td><td>$0</td><td>5 casos completos, sin tarjeta.</td></tr>
 <tr><td>Semanal</td><td>$12.000 COP</td><td>7 días, casos ilimitados, un dispositivo.</td></tr>
-<tr><td>Mensual</td><td>$35.000 COP</td><td>30 días, casos ilimitados, mejora de redacción con IA.</td></tr>
-<tr><td>Negocio/Estación</td><td>$100.000 COP</td><td>30 días, casos ilimitados, mejora de redacción con IA y soporte por WhatsApp (versión web de computador).</td></tr></tbody></table></div>
+<tr><td>Mensual</td><td>$35.000 COP</td><td>30 días, casos ilimitados, mejora de redacción con IA y soporte por WhatsApp.</td></tr>
+<tr><td>Negocio/Estación</td><td>$100.000 COP</td><td>30 días, casos ilimitados, mejora de redacción con IA; solo computador (versión web).</td></tr></tbody></table></div>
 <p>Los precios vigentes están siempre en la <a href="../index.html#precios">página principal</a>.</p>'''),
     ],
     faq=[

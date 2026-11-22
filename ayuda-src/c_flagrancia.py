@@ -26,7 +26,7 @@ FLAGRANCIA = dict(
     titulo='Captura en flagrancia en Colombia: qué es y qué hacer paso a paso',
     desc='Qué es la flagrancia según el art. 301 del C.P.P., quién puede capturar, qué derechos se leen, el plazo de 36 horas y qué documentos se diligencian.',
     desc_card='Qué es la flagrancia, las 36 horas y los documentos del procedimiento.',
-    kicker='Procedimiento', min=8, actualizado='21 de noviembre de 2026', modificado='2026-11-21',
+    kicker='Procedimiento', min=8, actualizado='22 de noviembre de 2026', modificado='2026-11-22',
     h1='Captura en flagrancia en Colombia: <em>qué es y qué hacer paso a paso</em>',
     h1_plano='Captura en flagrancia en Colombia: qué es y qué hacer paso a paso',
     lead='Cuándo hay flagrancia, quién puede capturar, qué se le informa al capturado y qué documentos se diligencian, explicado con lo que dice la Ley 906 de 2004.',
@@ -52,7 +52,7 @@ FLAGRANCIA = dict(
 <ul>
 <li><strong>Si captura una autoridad:</strong> debe conducir al aprehendido inmediatamente, o a más tardar en el término de la distancia, ante la Fiscalía General de la Nación.</li>
 <li><strong>Si captura un particular:</strong> debe llevarlo, en el término de la distancia, ante cualquier autoridad de policía. Esta identifica al aprehendido, recibe un informe detallado de las circunstancias de la captura y lo pone a disposición de la Fiscalía dentro del mismo plazo.</li></ul>
-<p>Cuando la persona que captura es el uniformado, ese «informe detallado» es el <a href="informe-captura-flagrancia-fpj5.html">Informe de Captura en Flagrancia (FPJ-5)</a>.</p>'''),
+<p>Cuando captura un uniformado, el informe de la captura se deja en el <a href="informe-captura-flagrancia-fpj5.html">Informe de Captura en Flagrancia (FPJ-5)</a>: es el formato que se diligencia, según su propio encabezado, «por Policía Nacional o Judicial en casos de captura».</p>'''),
         ('derechos', 'Los derechos del capturado: se informan de manera inmediata', '''
 <p>El artículo 303 obliga a informar al capturado <strong>de manera inmediata</strong>:</p>
 <div class="norma"><h3>Artículo 303 — derechos del capturado</h3><ol>
@@ -63,7 +63,7 @@ FLAGRANCIA = dict(
 <p>Esa información queda por escrito en el <a href="acta-derechos-capturado-fpj6.html">Acta de Derechos del Capturado (FPJ-6)</a>.</p>'''),
         ('identificar', 'Identificación y registro del aprehendido', '''
 <p>El parágrafo del artículo 302 (agregado por la Ley 1142 de 2007) ordena que, <strong>en todos los casos de captura</strong>, la policía judicial proceda de inmediato a la <strong>plena identificación y registro</strong> del aprehendido, según el artículo 128 del Código, con el fin de constatar capturas anteriores, procesos en curso y antecedentes.</p>
-<p>Por eso los datos personales del capturado (nombres, documento, lugar de nacimiento, padres, estado civil, dirección) tienen que quedar <strong>idénticos</strong> en todos los documentos. Un nombre escrito de dos maneras es el error más fácil de evitar y el que más molesta después. Lo explicamos en <a href="errores-comunes-informes-captura.html">los errores más comunes</a>.</p>'''),
+<p>Por eso los datos personales del capturado (nombres, documento, lugar de nacimiento, padres, estado civil, dirección) tienen que quedar <strong>idénticos</strong> en todos los documentos. Un nombre escrito de dos maneras es el error más fácil de evitar y el que más molesta después. Lo explicamos en <a href="errores-comunes-informes-captura.html">los errores que conviene evitar</a>.</p>'''),
         ('treinta-y-seis', 'El plazo de las 36 horas', '''
 <p>Según el artículo 302, la Fiscalía, con base en el informe de la autoridad (o del particular) y en los elementos materiales probatorios aportados, presenta al aprehendido <strong>inmediatamente o a más tardar dentro de las treinta y seis (36) horas siguientes</strong> ante el juez de control de garantías. Allí se revisa la legalidad de la aprehensión y se atienden las solicitudes de la Fiscalía, la defensa y el Ministerio Público.</p>
 <div class="tip"><p><strong>Por qué importa para tu informe:</strong> los documentos son lo que la Fiscalía tiene en la mano para presentar el caso. Un informe completo y coherente al llegar ahorra idas y vueltas dentro de ese plazo. En el FPJ-5 hay un campo para la «fecha y hora en que es puesto a disposición del Fiscal»; la forma impresa advierte que los datos de fecha y hora de la captura deben coincidir con los del acta de derechos.</p></div>
@@ -96,10 +96,10 @@ FLAGRANCIA = dict(
         ('¿Qué pasa si la captura en flagrancia no se sostiene?', 'Según el artículo 302, si de la información aparece que el supuesto delito no comporta detención preventiva o que la captura fue ilegal, la Fiscalía libera al aprehendido y, cuando sea necesario, le impone un compromiso de comparecencia bajo palabra.'),
         ('¿Quién puede capturar a una persona en flagrancia?', 'Según el artículo 302 del Código de Procedimiento Penal, cualquier persona puede capturar a quien sea sorprendido en flagrancia. Si es una autoridad, debe conducirlo inmediatamente ante la Fiscalía; si es un particular, ante cualquier autoridad de policía.'),
         ('¿Cuánto tiempo hay para presentar al capturado ante el juez?', 'El artículo 302 dice que la Fiscalía lo presenta ante el juez de control de garantías inmediatamente o, a más tardar, dentro de las 36 horas siguientes. Hay una regla especial para zonas de difícil acceso por vía fluvial o geográfica.'),
-        ('¿Cuáles son los derechos que se le leen al capturado?', 'El artículo 303 enumera cuatro: conocer el hecho que se le atribuye, indicar a quién se comunica su captura, guardar silencio sin que se use en su contra lo que no declare y designar un abogado de confianza o contar con defensor público.'),
+        ('¿Cuáles son los derechos que se le leen al capturado?', 'El artículo 303 enumera cuatro: conocer el hecho que se le atribuye, indicar a quién se comunica su captura, guardar silencio (y saber que lo que diga podrá usarse en su contra) y designar un abogado de confianza o contar con defensor público.'),
         ('¿Qué documentos se diligencian en una captura en flagrancia?', 'Los formatos FPJ-5 (informe de captura), FPJ-6 (acta de derechos), FPJ-7 (rótulo) y FPJ-8 (cadena de custodia), todos con el mismo Número Único de Noticia Criminal.'),
     ],
     rel=['informe-captura-flagrancia-fpj5', 'rotulo-elementos-fpj7', 'descargas-formatos-fpj'],
-    fuentes=['Ley 906 de 2004, artículos 301, 302 y 303 (texto vigente a octubre de 2026): ' + LEY + '.'],
+    fuentes=['Ley 906 de 2004, artículos 301, 302 y 303 (texto consultado en noviembre de 2026): ' + LEY + '.', 'Corte Constitucional, <a href="https://www.corteconstitucional.gov.co/relatoria/2019/C-303-19.htm" rel="noopener">Sentencia C-303 de 2019</a>: la flagrancia se caracteriza por la inmediatez entre el hecho y la aprehensión.'],
 )
 PAGINAS = [INDEX, FLAGRANCIA]

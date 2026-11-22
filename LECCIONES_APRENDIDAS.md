@@ -28,6 +28,26 @@ estructura de secciones de la landing.
 - 2026-10-22 — Primer intento de rediseño: íconos y animaciones (revertido)
 - 2026-10-24 a 2026-10-27 — Rediseño dirección "B", por pasos y con aprobación
 - 2026-10-27 — Mascota del chat y diseño del chat
+- 2026-11-21 — PDF en blanco, descargas y flagrancia (Centro de ayuda)
+- 2026-11-22 — Auditoría de fuentes del Centro de ayuda y guía del FPJ-4
+
+---
+
+## 2026-11-21 — PDF en blanco, descargas y flagrancia (Centro de ayuda)
+
+- **Pedido del dueño:** solo PDF **en blanco** para imprimir (sin Word, sin ejemplos diligenciados). Quedan en `ayuda/pdf/formato-fpjN-en-blanco.pdf`, con una página `descargas-formatos-fpj`.
+- **Cómo se hicieron:** plantilla `.docx` de informes-ponal con docxtemplater y valores vacíos; python-docx para alturas de fila; Word COM para exportar. Word debe estar cerrado y nunca taskkill. Los scripts no se guardaron (solo scratchpad): reglas en CONTEXTO.md.
+- **Trampas:** etiquetas compartidas filtran guiones bajos a otras tablas (renderizar solo `lugar_captura` con guiones y reescribir el párrafo de la constancia); líneas de 88 guiones se parten (usar 84); en anexos usar el tabulador con relleno de la plantilla, no guiones escritos; más de 19 líneas de narración tocan el pie. Meta: 3 hojas FPJ-5, 2 hojas FPJ-6.
+- **SEO:** Search Console dio 10 indexadas / 4 no. «Rastreada sin indexar» = contenido flojo: se amplió la página de flagrancia y se enlazó desde la portada. Recheck ~2026-12-05 (Vikunja #176).
+
+---
+
+## 2026-11-22 — Auditoría de fuentes del Centro de ayuda y guía del FPJ-4
+
+- **Regla nueva:** nada jurídico o de formato se publica sin fuente; lo que es consejo se rotula «sugerencia» o «buena práctica». Detalle y fuentes en `ayuda-src/FUENTES.md` (un solo dueño).
+- **Qué se encontró al contrastar con la Ley 906 y las plantillas oficiales:** una guía (FPJ-8) omitía 3 de sus 8 casillas; una frase del art. 303 estaba mal citada; el «informe detallado» del art. 302 se atribuía al FPJ-5; había cifras y causas inventadas («la mitad del tiempo», «hacen devolver un informe»); una tabla de planes mezclaba qué incluye cada plan.
+- **Lección:** las guías se escribieron desde las muestras y de memoria; para cada casilla, abrir la plantilla (`informes-ponal/public/plantillas/*.docx`, pie de página incluido) y para cada artículo, el texto del Senado. Los PDF de la Fiscalía (manuales, instructivos) dan 404: no depender de ellos.
+- **Guía FPJ-4** (`informe-primer-respondiente-fpj4`): página «suave», sin bloque comercial grande; la app aparece solo en una nota y una pregunta frecuente (el foco comercial es la flagrancia). Flag `suave=True` en `build.py`.
 
 ---
 

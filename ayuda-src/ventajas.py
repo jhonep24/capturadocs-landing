@@ -3,7 +3,7 @@
 # mismos datos en todos los documentos, formato oficial, funciona sin conexión. Sin cifras de tiempo ni promesas absolutas.
 GENERAL = ('Un solo formulario, todos los documentos',
     ['<strong>Llenas el caso una vez.</strong> El nombre, el documento, la fecha, la hora y la descripción se escriben una sola vez y se reutilizan en cada formato.',
-     '<strong>Menos errores de transcripción.</strong> Al no retipear los datos, desaparece la causa más común de documentos que no coinciden entre sí.',
+     '<strong>Menos errores de transcripción.</strong> Al no retipear los datos, desaparece una causa posible de documentos que no coinciden entre sí.',
      '<strong>Te avisa lo que falta.</strong> Antes de generar, la aplicación revisa los campos y te muestra lo que está vacío o no cuadra.',
      '<strong>Sale con el formato oficial.</strong> Genera el Informe de Captura (FPJ-5), el Acta de Derechos (FPJ-6), el Rótulo (FPJ-7), la Cadena de Custodia (FPJ-8) y el Acta de Incautación.'])
 
@@ -15,7 +15,7 @@ POR_PAGINA = {
  'informe-captura-flagrancia-fpj5': ('El FPJ-5 se llena solo con los datos de tu caso',
     ['<strong>Las 11 secciones</strong> se arman a partir del formulario: destino, conducta, lugar, capturado, víctimas, testigos, elementos, vehículos, narración y servidor.',
      '<strong>Más rápido:</strong> escribes los datos una vez y el informe, el acta, el rótulo y la cadena de custodia salen con lo mismo.',
-     '<strong>Menos devoluciones por inconsistencias:</strong> nombre, documento y descripción de elementos coinciden en todos los documentos.',
+     '<strong>Menos inconsistencias:</strong> nombre, documento y descripción de elementos coinciden en todos los documentos.',
      '<strong>Ayuda para la narración:</strong> el plan mensual incluye una mejora de redacción con IA que anonimiza el texto en tu dispositivo antes de enviarlo.']),
  'acta-derechos-capturado-fpj6': ('El acta de derechos, con los mismos datos del informe',
     ['<strong>El texto de los derechos ya viene en el formato</strong> y los datos personales se copian del caso, sin retipearlos.',

@@ -14,10 +14,11 @@ from c_practica import PAGINAS as P3
 from ventajas import GENERAL, POR_PAGINA
 from pasos import PASOS, PDFS
 from c_descargas import PAGINAS as P4
+from c_primer_respondiente import PAGINAS as P5
 
 SITIO = 'https://capturadocs.com'
 FECHA = '2026-10-30'
-PAGINAS = P1 + P2 + P3 + P4
+PAGINAS = P1 + P2 + P3 + P4 + P5
 POR_SLUG = {p['slug']: p for p in PAGINAS}
 CSS = open(os.path.join(AQUI, 'estilos.css'), encoding='utf-8').read()
 FUENTES = ('<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>'
@@ -106,7 +107,7 @@ def json_ld(p):
     grafo = [{'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': miga}]
     if p['slug'] != 'index':
         grafo.append({'@context': 'https://schema.org', '@type': 'Article', 'headline': p['h1_plano'], 'description': p['desc'],
-                      'inLanguage': 'es-CO', 'datePublished': FECHA, 'dateModified': p.get('modificado', FECHA), 'mainEntityOfPage': url,
+                      'inLanguage': 'es-CO', 'datePublished': p.get('publicado', FECHA), 'dateModified': p.get('modificado', '2026-11-22'), 'mainEntityOfPage': url,
                       'author': {'@type': 'Organization', 'name': 'CapturaDocs Express', 'url': SITIO + '/'},
                       'publisher': {'@type': 'Organization', 'name': 'CapturaDocs Express', 'url': SITIO + '/',
                                     'logo': {'@type': 'ImageObject', 'url': SITIO + '/logo.png'}}})
@@ -176,12 +177,12 @@ def pagina(p):
 <body>
 {NAV}
 <header class="hero"><div class="container">{crumbs}<div class="kicker">{icono(p['icono'])} {e(p['kicker'])}</div><h1>{h1fmt(p['h1'])}</h1><p class="lead">{p['lead']}</p>
-<p class="meta">Actualizado el {p.get('actualizado','30 de octubre de 2026')} · Lectura de {p.get('min', 6)} minutos</p></div></header>
+<p class="meta">Actualizado el {p.get('actualizado','22 de noviembre de 2026')} · Lectura de {p.get('min', 6)} minutos</p></div></header>
 {toc}
 {dl}
 <main><article class="container">{cuerpo}</article>
-{producto(p)}
-{cta(p)}
+{'' if p.get('suave') else producto(p)}
+{'' if p.get('suave') else cta(p)}
 <div class="container">{faq}{rel}<p class="aviso">{e(AVISO)}</p>{fuente}</div></main>
 {FOOT}
 {STEPPER_JS if st else ''}

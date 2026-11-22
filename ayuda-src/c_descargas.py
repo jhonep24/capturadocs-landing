@@ -26,14 +26,14 @@ DESCARGAS = dict(
         ('formatos', 'Los formatos en blanco (PDF)', _tarjetas() + '''
 <div class="tip"><p><strong>Antes de imprimir:</strong> son copias para diligenciar. Verifica que sea la versión vigente en tu institución. CapturaDocs Express es una herramienta independiente y no oficial.</p></div>'''),
         ('app', '¿Prefieres no llenarlos a mano?', '''
-<p>Llenar cuatro formatos a mano significa escribir varias veces el mismo nombre, el mismo NUNC y la misma hora, y ahí aparecen los errores que hacen devolver un informe.</p>
+<p>Llenar cuatro formatos a mano significa escribir varias veces el mismo nombre, el mismo NUNC y la misma hora, y ahí aparecen los errores de transcripción.</p>
 <p>Con <strong>CapturaDocs Express</strong> llenas el caso <strong>una sola vez</strong> y salen el FPJ-5, el FPJ-6, el FPJ-7 y el FPJ-8 con los mismos datos: más rápido y sin errores de transcripción. La aplicación te avisa lo que falta antes de generar y funciona sin conexión.</p>
 <p><a href="../index.html#descargas">Probar gratis con 5 casos</a> · <a href="informe-captura-flagrancia-fpj5.html">Ver la guía del FPJ-5</a></p>'''),
     ],
     faq=[
         ('¿Dónde descargo el formato FPJ 5 en blanco?', 'En esta página: el botón «Descargar PDF en blanco» del FPJ-5, el Informe de Captura en Flagrancia, de tres hojas.'),
         ('¿Dónde descargo el formato FPJ 6 en blanco?', 'En esta página, en la tarjeta del FPJ-6, el Acta de Derechos del Capturado, de dos hojas.'),
-        ('¿Puedo imprimir los formatos FPJ?', 'Sí. Los PDF están pensados para imprimirse en tamaño carta y diligenciarse a mano o con la aplicación.'),
+        ('¿Puedo imprimir los formatos FPJ?', 'Sí. Los PDF están pensados para imprimirse y diligenciarse a mano. El FPJ-5 y el FPJ-6 son verticales; el FPJ-7 y el FPJ-8 son horizontales.'),
         ('¿Son los formatos oficiales?', 'Son copias de los formatos para diligenciar. Verifica siempre que sea la versión vigente en tu institución. CapturaDocs Express es independiente y no está afiliada a la Policía Nacional ni a la Fiscalía.'),
     ],
     rel=['informe-captura-flagrancia-fpj5', 'acta-derechos-capturado-fpj6', 'errores-comunes-informes-captura'],

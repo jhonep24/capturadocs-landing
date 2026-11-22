@@ -13,7 +13,7 @@ FPJ5 = dict(
     lead='El FPJ-5 es el informe que acompaña la captura: cuenta quién fue capturado, dónde, por qué y con qué elementos. Aquí está lo que va en cada una de sus 11 secciones y cómo evitar que lo devuelvan.',
     secciones=[
         ('que-es', '¿Qué es el FPJ-5 y quién lo diligencia?', '''
-<p>El <strong>Informe de Captura en Flagrancia (FPJ-5)</strong> es el documento en el que el servidor de policía que hizo la captura deja constancia de las circunstancias. El mismo formato lo dice en su encabezado: «Este formato será diligenciado por Policía Nacional o Judicial en casos de captura». Es el «informe detallado» que menciona el artículo 302 del Código de Procedimiento Penal, y es lo que la Fiscalía usa para decidir cómo presentar al aprehendido ante el juez.</p>
+<p>El <strong>Informe de Captura en Flagrancia (FPJ-5)</strong> es el documento en el que el servidor de policía que hizo la captura deja constancia de las circunstancias. El mismo formato lo dice en su encabezado: «Este formato será diligenciado por Policía Nacional o Judicial en casos de captura». El artículo 302 del Código de Procedimiento Penal dice que la Fiscalía presenta al aprehendido ante el juez con fundamento en el informe recibido de la autoridad que hizo la aprehensión; el FPJ-5 es el formato en el que se deja ese informe.</p>
 <p>La versión que mostramos en estas guías es la <strong>Versión 04</strong> (aprobada el 28 de agosto de 2019 y publicada el 3 de septiembre de 2019), que tiene <strong>tres hojas</strong>. Revisa siempre que el formato que uses sea el vigente en tu institución.</p>'''),
         ('encabezado', 'El encabezado: NUNC, ciudad y fecha', '''
 <figure class="doc"><img src="../img/ayuda-fpj5-encabezado.jpg" alt="Primera hoja del FPJ-5 con el Número Único de Noticia Criminal, el destino del informe, la conducta punible, el lugar de los hechos y los datos del capturado" width="940" height="760" loading="lazy"/><figcaption>Primera hoja del FPJ-5 con datos de ejemplo inventados.</figcaption></figure>
@@ -24,8 +24,8 @@ FPJ5 = dict(
 <div class="tip"><p><strong>Consejo:</strong> copia el NUNC de una sola fuente y no lo retipees en cada formato. Un dígito cambiado es suficiente para que los documentos no «hablen» del mismo caso.</p></div>'''),
         ('secciones', 'Las 11 secciones, una por una', '''
 <div class="tabla"><table><thead><tr><th>Sección</th><th>Qué va ahí</th></tr></thead><tbody>
-<tr><td>1. Destino del informe</td><td>A quién se dirige: el fiscal o la unidad receptora (por ejemplo, la URI de tu ciudad).</td></tr>
-<tr><td>2. Presunta conducta punible</td><td>El delito que se atribuye, con el artículo del Código Penal. Hay espacio para varios.</td></tr>
+<tr><td>1. Destino del informe</td><td>A quién se dirige el informe.</td></tr>
+<tr><td>2. Presunta conducta punible</td><td>El delito que se atribuye. El formato tiene tres casillas; conviene anotarlo con su artículo del Código Penal.</td></tr>
 <tr><td>3. Lugar de los hechos</td><td>Dirección, barrio, localidad, departamento y municipio; si aplica, zona, vereda y características del sitio.</td></tr>
 <tr><td>4. Información del capturado</td><td>Nombres y apellidos completos, alias, documento (tipo, número y lugar de expedición), edad, género, fecha y lugar de nacimiento, estado civil, escolaridad, ocupación, correo y redes, señales particulares y nombres de los padres.</td></tr>
 <tr><td>5. Víctimas</td><td>Los mismos datos personales de cada víctima y su relación con el indiciado. Si no hay víctima identificada, se deja en blanco.</td></tr>
@@ -33,7 +33,7 @@ FPJ5 = dict(
 <tr><td>7. Descripción de EMP y EF recolectados</td><td>Cada elemento material probatorio o evidencia física, con el sitio de remisión bajo cadena de custodia.</td></tr>
 <tr><td>8. Vehículos implicados</td><td>Marca, clase, color, propietario y placas.</td></tr>
 <tr><td>9. Narración de los hechos</td><td>El relato en forma cronológica y concreta, más la fecha y hora de la captura y la fecha y hora en que se pone a disposición del fiscal.</td></tr>
-<tr><td>10. Anexos</td><td>Los documentos que acompañan: acta de derechos, cadena de custodia, rótulos y lo demás que anexes.</td></tr>
+<tr><td>10. Anexos</td><td>Los documentos que acompañan el informe (por ejemplo, el acta de derechos, la cadena de custodia y los rótulos, si los adjuntas).</td></tr>
 <tr><td>11. Servidor que efectúa la captura</td><td>Nombres y apellidos, identificación, entidad, cargo, teléfono, correo y firma.</td></tr></tbody></table></div>
 <p>El formato aclara que <strong>si hay más capturados, víctimas o testigos, las casillas se pueden reproducir cuantas veces sea necesario</strong>, y que si se necesita más espacio para describir los elementos o narrar, se pueden ampliar las filas.</p>
 <figure class="doc"><img src="../img/ayuda-fpj5-hoja2.jpg" alt="Segunda hoja del FPJ-5 con víctimas, testigos, descripción de elementos recolectados y vehículos implicados" width="940" height="1140" loading="lazy"/><figcaption>Segunda hoja: víctimas, testigos, elementos recolectados y vehículos.</figcaption></figure>'''),
@@ -56,7 +56,7 @@ FPJ5 = dict(
 <li>La <strong>descripción de los elementos</strong> es igual en el FPJ-5, en el rótulo y en la cadena de custodia.</li>
 <li>Pusiste el <strong>delito con su artículo</strong> y el <strong>destino</strong> del informe.</li>
 <li>Marcaste los <strong>anexos</strong> que realmente adjuntas y revisaste la firma.</li></ul>
-<p>Más detalles en <a href="errores-comunes-informes-captura.html">los errores más comunes</a> y en la <a href="lista-de-chequeo-captura-flagrancia.html">lista de chequeo imprimible</a>.</p>'''),
+<p>Más detalles en <a href="errores-comunes-informes-captura.html">los errores que conviene evitar</a> y en la <a href="lista-de-chequeo-captura-flagrancia.html">lista de chequeo imprimible</a>.</p>'''),
     ],
     faq=[
         ('¿Cuántas hojas tiene el FPJ-5?', 'La versión 04 del formato tiene tres hojas: datos del encabezado, lugar y capturado en la primera; víctimas, testigos, elementos y vehículos en la segunda; narración, anexos y servidor que captura en la tercera.'),
@@ -116,7 +116,7 @@ FPJ6 = dict(
 <p>Si quieres ver cómo se conecta con el resto de los documentos, mira <a href="captura-en-flagrancia-colombia.html">la guía de captura en flagrancia</a>.</p>'''),
     ],
     faq=[
-        ('¿Cuántos derechos se le informan al capturado?', 'El artículo 303 del Código de Procedimiento Penal enumera cuatro: conocer el hecho que se le atribuye, indicar a quién se comunica su captura, guardar silencio sin que se use en su contra y designar abogado de confianza o contar con defensor público.'),
+        ('¿Cuántos derechos se le informan al capturado?', 'El artículo 303 del Código de Procedimiento Penal enumera cuatro: conocer el hecho que se le atribuye, indicar a quién se comunica su captura, guardar silencio (sabiendo que lo que diga podrá usarse en su contra) y designar abogado de confianza o contar con defensor público.'),
         ('¿Se hace un acta por cada capturado?', 'Sí. El FPJ-6 es individual: cada persona capturada tiene su propia acta con sus datos y sus firmas.'),
         ('¿Qué es la constancia de buen trato?', 'Es la declaración al final del acta en la que el capturado manifiesta que recibió buen trato físico, psicológico y moral y que se le comunicaron y respetaron sus derechos. Va firmada por el capturado y por el fiscal.'),
         ('¿El nombre identitario es obligatorio?', 'Es una casilla pensada para personas trans: es el nombre con el que se auto identifican, independiente de su nombre legal. Se llena solo cuando corresponde.'),
@@ -144,10 +144,10 @@ FPJ7 = dict(
 <figure class="doc"><img src="../img/doc-fpj7.jpg" alt="Rótulo FPJ-7 diligenciado con datos de ejemplo inventados" width="1400" height="866" loading="lazy"/><figcaption>Rótulo FPJ-7 con datos de ejemplo inventados.</figcaption></figure>
 <div class="tabla"><table><thead><tr><th>Casilla</th><th>Qué va ahí</th></tr></thead><tbody>
 <tr><td>1. NUNC</td><td>El Número Único de Noticia Criminal, igual que en los demás formatos.</td></tr>
-<tr><td>2. No. ID</td><td>Casilla de identificación del rótulo; el instructivo oficial vigente indica cómo asignarla.</td></tr>
-<tr><td>3. Fecha y hora de recolección</td><td>Año, mes y día en casillas separadas (por ejemplo 2026 10 28) y la hora en formato de 24 horas (14:30 se escribe 1430).</td></tr>
+<tr><td>2. No. ID</td><td>Casilla de identificación del rótulo. Consulta en el instructivo de tu institución cómo se asigna.</td></tr>
+<tr><td>3. Fecha y hora de recolección</td><td>Año, mes y día en casillas separadas (por ejemplo 2026 10 28) y la hora en cuatro casillas, dos para la hora y dos para los minutos (por ejemplo, 14:30 se escribe 1430).</td></tr>
 <tr><td>4. Hallazgo</td><td>El número del elemento (01, 02…) y la cantidad. Es el número de orden dentro del caso.</td></tr>
-<tr><td>5. Sitio o lugar de hallazgo</td><td>La dirección donde se encontró y la <strong>ubicación específica</strong> (por ejemplo, «bolsillo derecho del pantalón») y, a la derecha, nombre y documento de la persona a quien se le encontró el elemento.</td></tr>
+<tr><td>5. Sitio o lugar de hallazgo</td><td>La dirección donde se encontró y la <strong>ubicación específica</strong> (por ejemplo, «bolsillo derecho del pantalón») y, a la derecha, nombres y apellidos de la persona a quien se le encontró el elemento.</td></tr>
 <tr><td>6. Descripción del elemento</td><td>Qué es, con los datos que lo distinguen de otro igual.</td></tr>
 <tr><td>7. Rótulo diligenciado por</td><td>Nombres y apellidos, cédula, entidad, cargo y firma de quien lo llena.</td></tr></tbody></table></div>'''),
         ('descripcion', 'Cómo describir bien un elemento', '''
@@ -167,7 +167,7 @@ FPJ7 = dict(
     ],
     faq=[
         ('¿Se llena un rótulo por cada elemento?', 'Sí. Cada elemento material probatorio o evidencia física lleva su propio rótulo, con su número de orden y su descripción.'),
-        ('¿Cómo se escribe la hora en el rótulo?', 'La hora se escribe en formato de 24 horas en casillas separadas, por ejemplo 14:30 como 1430. La fecha va en año, mes y día.'),
+        ('¿Cómo se escribe la hora en el rótulo?', 'El formato trae cuatro casillas para la hora: dos para la hora y dos para los minutos (por ejemplo, 14:30 como 1430). La fecha va en año, mes y día.'),
         ('¿Qué diferencia hay entre el FPJ-7 y el FPJ-8?', 'El FPJ-7 es el rótulo que identifica al elemento en el momento en que se recoge; el FPJ-8 es el registro de cadena de custodia que deja constancia de quién lo halló, lo recolectó y lo embaló, y de quienes lo reciben después.'),
         ('¿Quién diligencia el rótulo?', 'Quien recolecta el elemento. La casilla 7 pide sus nombres, cédula, entidad, cargo y firma.'),
         ('¿Puedo generar el rótulo automáticamente?', 'Sí. CapturaDocs Express genera el FPJ-7 con la descripción y los datos que ya escribiste en el caso, uno por cada elemento. También tiene una guía para imprimirlo en tamaño reducido y pegarlo al embalaje.'),
@@ -198,10 +198,14 @@ FPJ8 = dict(
 <figure class="doc"><img src="../img/doc-fpj8.jpg" alt="Registro de cadena de custodia FPJ-8 diligenciado con datos de ejemplo inventados" width="1400" height="933" loading="lazy"/><figcaption>FPJ-8 con datos de ejemplo inventados.</figcaption></figure>
 <div class="tabla"><table><thead><tr><th>Casilla</th><th>Qué va ahí</th></tr></thead><tbody>
 <tr><td>1. NUNC</td><td>El Número Único de Noticia Criminal, idéntico al de los demás formatos.</td></tr>
-<tr><td>2. No. ID</td><td>Casilla de identificación del registro; el instructivo oficial vigente indica cómo asignarla.</td></tr>
+<tr><td>2. No. ID</td><td>Casilla de identificación del registro. Consulta en el instructivo de tu institución cómo se asigna.</td></tr>
 <tr><td>3. No. de historia clínica (*)</td><td>Solo lo diligencia la entidad prestadora de salud cuando es ella quien recolecta el elemento.</td></tr>
-<tr><td>4. Documentación de los elementos</td><td>Una fila por cada persona que interviene: las marcas H, R y E, nombres y apellidos, cédula, entidad y firma con la fecha.</td></tr>
-<tr><td>5. Descripción</td><td>La descripción del elemento, igual a la del rótulo y a la del informe.</td></tr></tbody></table></div>'''),
+<tr><td>4. Documentación de los elementos</td><td>Una fila por cada persona que interviene: las marcas H, R y E, nombres y apellidos, cédula, entidad y firma.</td></tr>
+<tr><td>5. Descripción</td><td>La descripción del elemento, igual a la del rótulo y a la del informe.</td></tr>
+<tr><td>6. Registro de continuidad</td><td>Cada vez que el elemento pasa a otra persona: fecha, hora, nombres y apellidos de quien recibe, cédula, entidad, calidad en que actúa (C custodio o P perito), propósito del traslado (almacenamiento, análisis, presentación en audiencia, consulta o disposición final), estado en que se recibe el embalaje o contenedor y firma.</td></tr>
+<tr><td>7. Prueba de identificación preliminar homologada (PIPH)</td><td>Solo la diligencia el técnico que haga esa prueba.</td></tr>
+<tr><td>8. Observaciones (*)</td><td>Si se registran observaciones, se escribe el nombre de quien las hace y la fecha.</td></tr></tbody></table></div>
+<p>El formato advierte que, si la hoja no alcanza, se usa el <strong>formato adicional de Registro de Cadena de Custodia</strong>, y que los formatos FPJ-7 y FPJ-8 son <strong>exclusivos para la función de Policía Judicial</strong>.</p>'''),
         ('hre', 'Las marcas H, R y E', '''
 <p>Las convenciones del formato lo dicen: <strong>H, R, E</strong> significan que se marca con una X si la persona <strong>Halló, Recolectó o Embaló</strong> el elemento, respectivamente. Y se puede marcar <strong>una o varias opciones para un mismo nombre</strong>, según sea el caso.</p>
 <div class="tabla"><table><thead><tr><th>Marca</th><th>Significa</th><th>Ejemplo</th></tr></thead><tbody>
@@ -214,11 +218,11 @@ FPJ8 = dict(
 <li><strong>Art. 257 — Inicio:</strong> el servidor público que, en la actuación de indagación o investigación policial, hubiere embalado y rotulado el elemento, lo custodiará.</li>
 <li><strong>Art. 258 — Traslado:</strong> el funcionario de policía judicial o servidor que recogió, embaló y rotuló lo traslada al laboratorio correspondiente y lo entrega en la oficina de correspondencia, <strong>bajo el recibo que figura en el formato de cadena de custodia</strong>.</li>
 <li><strong>Art. 259 — Traspaso:</strong> quien recibe en correspondencia, sin pérdida de tiempo y bajo el recibo del mismo formato, entrega el contenedor al perito que corresponda según su especialidad.</li></ol>
-<p>Por eso cada persona que recibe o entrega el elemento firma y fecha en el FPJ-8: es la forma de que nunca quede un tramo sin responsable.</p>'''),
-        ('errores', 'Los errores que más se repiten', '''
+<p>Por eso el FPJ-8 tiene el <strong>registro de continuidad</strong> (casilla 6): cada vez que el elemento pasa a otra persona queda su fecha, hora, nombre, cédula, entidad, propósito y firma. Así no queda un tramo sin responsable.</p>'''),
+        ('errores', 'Errores que conviene evitar', '''
 <ul>
 <li>Marcar H, R o E sin que la persona haya hecho esa tarea, o dejar una persona que sí intervino sin su fila.</li>
-<li>Firmas sin fecha, o con una fecha anterior a la de recolección del rótulo.</li>
+<li>Traspasos del elemento sin registrar en el registro de continuidad, o con una fecha anterior a la de recolección del rótulo.</li>
 <li>Descripción distinta a la del rótulo o a la del informe.</li>
 <li>Nombre o cédula escritos distinto al resto de documentos del caso.</li>
 <li>Llenar «historia clínica» cuando no corresponde: es solo para la entidad de salud.</li></ul>
@@ -227,7 +231,7 @@ FPJ8 = dict(
     faq=[
         ('¿Qué significan H, R y E en el FPJ-8?', 'Se marca con una X si la persona Halló, Recolectó o Embaló el elemento. Se pueden marcar una o varias opciones para un mismo nombre.'),
         ('¿Qué es el número de historia clínica del formato?', 'Es una casilla marcada con asterisco que solo diligencia la entidad prestadora de salud cuando es ella quien recolecta el elemento material probatorio o la evidencia física.'),
-        ('¿Quién firma el registro de cadena de custodia?', 'Cada persona que interviene con el elemento tiene su fila con nombre, cédula, entidad y firma con fecha. Así queda registro de todas las personas que estuvieron en contacto con él (art. 254).'),
+        ('¿Quién firma el registro de cadena de custodia?', 'Cada persona que interviene con el elemento tiene su fila con nombre, cédula, entidad y firma (casilla 4), y cada traspaso posterior se registra con fecha, hora y firma en el registro de continuidad (casilla 6). Así queda el nombre y la identificación de todas las personas que estuvieron en contacto con el elemento (art. 254).'),
         ('¿Cuándo empieza y cuándo termina la cadena de custodia?', 'Empieza en el lugar donde se descubren, recaudan o encuentran los elementos y finaliza por orden de autoridad competente, según el artículo 254 del Código de Procedimiento Penal.'),
         ('¿Puedo generar el FPJ-8 automáticamente?', 'Sí. CapturaDocs Express genera el FPJ-8 con las marcas H, R y E y los datos de quienes intervinieron, a partir del mismo formulario del caso.'),
     ],

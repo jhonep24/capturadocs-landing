@@ -9,3 +9,5 @@ Regenerar: `python ayuda-src/build.py` desde `capturadocs-landing`. **No se edit
 - Imágenes de apoyo: `img/ayuda-*.jpg` (recortes de las muestras) y `img/doc-fpj7.jpg`, `doc-fpj8.jpg`.
 - Texto legal: sale de la Ley 906 de 2004 publicada por la Secretaría del Senado (`http://www.secretariasenado.gov.co/senado/basedoc/ley_0906_2004_pr006.html` y `pr007`; el `https` rechaza la conexión desde este PC). Si cambia una norma, revisar arts. 254-259 y 301-304.
 - Al agregar una página: sumarla a `PAGINAS`, regenerar, agregarla a `sitemap.xml` y a `llms.txt`.
+
+Fuentes y verificación de cada afirmación: `FUENTES.md`.
