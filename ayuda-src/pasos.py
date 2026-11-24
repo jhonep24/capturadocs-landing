@@ -38,4 +38,5 @@ PDFS = {
  'acta-derechos-capturado-fpj6': ('ejemplo-fpj6-diligenciado.pdf', 'FPJ-6', 'Acta de Derechos', 2),
  'rotulo-elementos-fpj7': ('ejemplo-fpj7-diligenciado.pdf', 'FPJ-7', 'Rótulo', 1),
  'cadena-de-custodia-fpj8': ('ejemplo-fpj8-diligenciado.pdf', 'FPJ-8', 'Cadena de Custodia', 2),
+ 'informe-primer-respondiente-fpj4': ('formato-fpj4-en-blanco.pdf', 'FPJ-4', 'Actuación del Primer Responsable', 4),
 }

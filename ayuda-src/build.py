@@ -68,7 +68,7 @@ def descarga(p):
         return (f'<div class="descarga"><h3>Descarga el {fpj} en blanco</h3><p>PDF para imprimir y diligenciar. Copia para diligenciar: verifica que sea la versión vigente en tu institución.</p>'
                 f'<div class="cta-botones"><a class="btn-p" href="pdf/formato-fpj{fpj[-1]}-en-blanco.pdf" download>{icono("file-text")} Descargar {fpj} en blanco (PDF)</a>'
                 f'<a class="btn-o" href="descargas-formatos-fpj.html">Ver todos los formatos</a></div>'
-                '<p class="descarga-nota"><strong>¿Prefieres no llenarlo a mano?</strong> Con CapturaDocs Express llenas el caso una sola vez y este formato sale listo, más rápido y sin errores de transcripción. <a href="../index.html#descargas">Probar gratis con 5 casos</a>.</p></div>')
+                + ('' if p.get('suave') else '<p class="descarga-nota"><strong>¿Prefieres no llenarlo a mano?</strong> Con CapturaDocs Express llenas el caso una sola vez y este formato sale listo, más rápido y sin errores de transcripción. <a href="../index.html#descargas">Probar gratis con 5 casos</a>.</p>') + '</div>')
     return ''
 
 def stepper(p):
