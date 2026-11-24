@@ -179,3 +179,26 @@ footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--whit
 .linea li:last-child{border-bottom:0}
 .linea .cuando{font:700 .95rem 'Rajdhani',sans-serif;letter-spacing:.5px;color:var(--navy);background:linear-gradient(135deg,var(--gold),var(--gold2));padding:6px 12px;border-radius:8px;text-align:center}
 @media(max-width:700px){.linea li{grid-template-columns:minmax(0,1fr);gap:8px}.linea .cuando{justify-self:start}}
+
+/* Comentarios (moderación previa) */
+.coment{margin:40px 0 10px}
+.coment h2{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.9rem;margin-bottom:14px}
+.coment-lista{margin:18px 0}
+.coment-item{background:var(--navy2);border:1px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+.coment-meta{color:var(--muted);font-size:.85rem;margin-bottom:4px}
+.coment-item p{margin:0;white-space:pre-wrap;word-break:break-word}
+.coment-resp{margin-top:10px;padding:10px 14px;border-left:3px solid var(--gold);background:rgba(240,165,0,.07);border-radius:0 8px 8px 0;font-size:.97rem;white-space:pre-wrap;word-break:break-word}
+.coment-resp b{color:#ffd36b}
+.coment-vacio{color:var(--muted)}
+.coment-form{background:var(--navy2);border:1px solid var(--border);border-radius:14px;padding:18px 20px}
+.coment-form label{display:block;font-family:'Rajdhani',sans-serif;font-weight:700;margin:12px 0 4px}
+.coment-form label:first-child{margin-top:0}
+.coment-form input,.coment-form textarea{width:100%;background:var(--navy);color:var(--white);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font:inherit}
+.coment-form input:focus,.coment-form textarea:focus{outline:3px solid var(--accent);outline-offset:1px}
+.coment-form .c-web{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.c-ts{margin-top:12px}
+.coment-pie{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:14px}
+.coment-pie button{border:0;cursor:pointer}
+.coment-pie button:disabled{opacity:.6;cursor:wait}
+.coment-msg{font-size:.97rem}.coment-msg.ok{color:#7be0a0}.coment-msg.mal{color:#ff9a8a}
+@media print{.coment{display:none}}

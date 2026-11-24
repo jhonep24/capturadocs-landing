@@ -5,6 +5,9 @@
 window.CAPTURADOCS = {
   WA_NUMBER: '573503593635',
   EMAIL: 'contacto@capturadocs.com',
+  // Comentarios del Centro de ayuda. Vacío = la sección no aparece. Ver capturadocs-comentarios/ (Worker).
+  COMENTARIOS_URL: 'https://capturadocs-comentarios.capturadocs.workers.dev',
+  TURNSTILE_SITEKEY: '0x4AAAAAAGQ6d9TEtiYQbZMR',
   // Videos tutoriales de guia.html. Se pega aca el ID de 11 caracteres del
   // video de YouTube (lo que va despues de "v=" o de "youtu.be/"). Mientras un
   // ID este vacio, ese video NO aparece en la pagina: no hay huecos ni

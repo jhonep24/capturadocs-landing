@@ -415,3 +415,10 @@ Al empezar una sesión nueva para tocar la landing, basta con decir "lee
 todo el sistema de diseño, la estructura y los pendientes sin releer las
 ~570 líneas del `index.html`. Actualiza este archivo cuando cambie algo
 estructural (nueva sección, nuevo pendiente resuelto, cambio de paleta).
+
+## Comentarios del Centro de ayuda (2026-11-24)
+
+Sección «Preguntas y comentarios» al final de cada guía (salvo el índice), con **moderación previa**. Backend: Worker + D1 propios,
+fuera de este repo, en `../capturadocs-comentarios/` (README = dueño del detalle: endpoints, antispam, secretos, despliegue).
+Aquí solo vive la parte visible: `comentarios()` y `COMENTARIOS_JS` en `ayuda-src/build.py`, estilos `.coment*` en `estilos.css` y
+`COMENTARIOS_URL` / `TURNSTILE_SITEKEY` en `config.js` (vacíos = la sección no aparece). Panel de moderación: `<worker>/admin`.

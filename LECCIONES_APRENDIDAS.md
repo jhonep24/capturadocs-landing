@@ -30,6 +30,7 @@ estructura de secciones de la landing.
 - 2026-10-27 — Mascota del chat y diseño del chat
 - 2026-11-21 — PDF en blanco, descargas y flagrancia (Centro de ayuda)
 - 2026-11-22 — Auditoría de fuentes del Centro de ayuda y guía del FPJ-4
+- 2026-11-24 — Comentarios con moderación previa (Worker + D1 + Turnstile)
 
 ---
 
@@ -48,6 +49,15 @@ estructura de secciones de la landing.
 - **Qué se encontró al contrastar con la Ley 906 y las plantillas oficiales:** una guía (FPJ-8) omitía 3 de sus 8 casillas; una frase del art. 303 estaba mal citada; el «informe detallado» del art. 302 se atribuía al FPJ-5; había cifras y causas inventadas («la mitad del tiempo», «hacen devolver un informe»); una tabla de planes mezclaba qué incluye cada plan.
 - **Lección:** las guías se escribieron desde las muestras y de memoria; para cada casilla, abrir la plantilla (`informes-ponal/public/plantillas/*.docx`, pie de página incluido) y para cada artículo, el texto del Senado. Los PDF de la Fiscalía (manuales, instructivos) dan 404: no depender de ellos.
 - **Guía FPJ-4** (`informe-primer-respondiente-fpj4`): página «suave», sin bloque comercial grande; la app aparece solo en una nota y una pregunta frecuente (el foco comercial es la flagrancia). Flag `suave=True` en `build.py`.
+
+---
+
+## 2026-11-24 — Comentarios con moderación previa (Worker + D1 + Turnstile)
+
+- **Por qué propio:** Giscus exige cuenta de GitHub (los policías no la tienen), Disqus carga publicidad y rastreadores (choca con la promesa de privacidad) y los de pago dejan los datos en un tercero.
+- **Riesgo propio del público:** un comentario puede traer nombres, cédulas o NUNC de un caso real. Por eso: moderación previa, aviso visible y rechazo automático de números largos (≥7 dígitos), correos y enlaces.
+- **Detalles que dieron guerra:** `wrangler` 4.110 no acepta una fecha de compatibilidad más nueva que la de su binario (bajar `compatibility_date`); la lectura pública se cachea 60 s en el navegador, así que un comentario recién aprobado tarda hasta un minuto en verse.
+- **Despliegue:** Worker separado del de licencias; secretos (`ADMIN_TOKEN`, `SALT`, `TURNSTILE_SECRET`) solo en Cloudflare; el widget de Turnstile se creó por API con la sesión de `wrangler`.
 
 ---
 

@@ -93,6 +93,46 @@ STEPPER_JS = ("<script>(function(){document.querySelectorAll('.stepper').forEach
               "st.querySelectorAll('.sp-ok').forEach(function(b){b.addEventListener('click',function(){var li=b.closest('.sp'),on=li.classList.toggle('hecho');"
               "b.setAttribute('aria-pressed',on);b.textContent=on?'Hecho \\u2713':'Hecho';up();});});});})();</script>")
 
+def comentarios(p):
+    """Preguntas y comentarios con moderación previa. Se muestra solo si config.js trae COMENTARIOS_URL
+    (o, en localhost, ?comentarios=http://localhost:8787 para pruebas). La página se ve completa sin esto."""
+    if p['slug'] == 'index': return ''
+    return (f'<section class="coment" id="comentarios" data-slug="{e(p["slug"])}" hidden>'
+            '<h2>Preguntas y comentarios</h2>'
+            '<div class="tip"><p><strong>Antes de escribir:</strong> lo que publiques es público. '
+            'No escribas nombres, cédulas, teléfonos ni números de casos reales. Los comentarios se revisan antes de aparecer.</p></div>'
+            '<div class="coment-lista" aria-live="polite"></div>'
+            '<form class="coment-form" novalidate>'
+            '<label for="c-nombre">Tu nombre o alias (opcional)</label>'
+            '<input id="c-nombre" name="nombre" maxlength="40" autocomplete="off"/>'
+            '<label for="c-texto">Tu pregunta o comentario</label>'
+            '<textarea id="c-texto" name="texto" rows="4" maxlength="800" required></textarea>'
+            '<input class="c-web" name="web" tabindex="-1" autocomplete="off" aria-hidden="true"/>'
+            '<div class="c-ts"></div>'
+            '<div class="coment-pie"><button type="submit" class="btn-p">Enviar para revisión</button><span class="coment-msg" role="status"></span></div>'
+            '</form></section>')
+
+COMENTARIOS_JS = ("<script>(function(){var s=document.getElementById('comentarios');if(!s)return;var C=window.CAPTURADOCS||{},u=C.COMENTARIOS_URL||'';"
+ "if(/^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname)){var q=new URLSearchParams(location.search).get('comentarios');if(q)u=q;}"
+ "if(!u)return;u=u.replace(/\\/+$/,'');var slug=s.dataset.slug,lista=s.querySelector('.coment-lista'),f=s.querySelector('form'),msg=s.querySelector('.coment-msg'),"
+ "btn=f.querySelector('button'),t0=0,tok='',wid=null,key=C.TURNSTILE_SITEKEY||'';"
+ "function fecha(x){return new Date(x*1000).toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'});}"
+ "function pintar(cs){lista.textContent='';if(!cs.length){var p=document.createElement('p');p.className='coment-vacio';p.textContent='Aún no hay comentarios. Sé la primera persona en preguntar.';lista.appendChild(p);return;}"
+ "cs.forEach(function(c){var d=document.createElement('div');d.className='coment-item';var m=document.createElement('div');m.className='coment-meta';"
+ "m.textContent=(c.nombre||'Anónimo')+' · '+fecha(c.creado);var t=document.createElement('p');t.textContent=c.texto;d.appendChild(m);d.appendChild(t);"
+ "if(c.respuesta){var r=document.createElement('div');r.className='coment-resp';var b=document.createElement('b');b.textContent='Respuesta de CapturaDocs: ';"
+ "r.appendChild(b);r.appendChild(document.createTextNode(c.respuesta));d.appendChild(r);}lista.appendChild(d);});}"
+ "fetch(u+'/api/comentarios?slug='+encodeURIComponent(slug)).then(function(r){return r.json();}).then(function(j){if(!j.ok)return;s.hidden=false;pintar(j.comentarios||[]);}).catch(function(){});"
+ "function cargarTs(){if(!key||wid!==null||t0)return;t0=Date.now();var sc=document.createElement('script');sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';"
+ "sc.async=true;sc.onload=function(){wid=window.turnstile.render(s.querySelector('.c-ts'),{sitekey:key,callback:function(t){tok=t;}});};document.head.appendChild(sc);}"
+ "f.querySelector('textarea').addEventListener('focus',function(){if(!t0)t0=Date.now();cargarTs();});"
+ "f.addEventListener('submit',function(ev){ev.preventDefault();msg.className='coment-msg';msg.textContent='';btn.disabled=true;"
+ "var body={slug:slug,nombre:f.nombre.value,texto:f.texto.value,web:f.web.value,t:t0?Date.now()-t0:0,token:tok};"
+ "fetch(u+'/api/comentarios',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json();}).then(function(j){"
+ "btn.disabled=false;if(j.ok){f.texto.value='';msg.className='coment-msg ok';msg.textContent=j.mensaje||'Enviado.';if(wid!==null&&window.turnstile){window.turnstile.reset(wid);tok='';}}"
+ "else{msg.className='coment-msg mal';msg.textContent=j.error||'No se pudo enviar.';}}).catch(function(){btn.disabled=false;msg.className='coment-msg mal';msg.textContent='No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.';});});"
+ "})();</script>")
+
 def cta(p):
     return f'''<div class="cta"><div class="container"><h2>{e(p.get('cta_t','Llena este formato una sola vez y deja que se generen todos'))}</h2>
 <p>{e(p.get('cta_p','CapturaDocs Express diligencia el Informe de Captura, el Acta de Derechos, el Rótulo y la Cadena de Custodia con un solo formulario. Pruébalo gratis con 5 casos completos, sin tarjeta.'))}</p>
@@ -140,6 +180,7 @@ def pagina(p):
     if len(secs) > 1:
         toc = '<div class="container toc"><div class="toc-box"><h2>En esta página</h2><ol>' + ''.join(
             f'<li><a href="#{i}">{e(t)}</a></li>' for i, t, _ in secs) + '</ol></div></div>'
+    com = comentarios(p)
     cuerpo = ampliable(''.join(f'<section id="{i}"><h2>{t_html}</h2>{c}</section>' for i, t_html, c in
                      [(i, e(t), c) for i, t, c in secs]))
     faq = ''
@@ -183,9 +224,10 @@ def pagina(p):
 <main><article class="container">{cuerpo}</article>
 {'' if p.get('suave') else producto(p)}
 {'' if p.get('suave') else cta(p)}
-<div class="container">{faq}{rel}<p class="aviso">{e(AVISO)}</p>{fuente}</div></main>
+<div class="container">{faq}{rel}{com}<p class="aviso">{e(AVISO)}</p>{fuente}</div></main>
 {FOOT}
 {STEPPER_JS if st else ''}
+{COMENTARIOS_JS if com else ''}
 <script>document.querySelectorAll('a.wa-link').forEach(function(el){{el.href='https://wa.me/'+window.CAPTURADOCS.WA_NUMBER;}});</script>
 </body>
 </html>
