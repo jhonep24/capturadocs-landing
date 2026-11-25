@@ -422,3 +422,8 @@ Sección «Preguntas y comentarios» al final de cada guía (salvo el índice), 
 fuera de este repo, en `../capturadocs-comentarios/` (README = dueño del detalle: endpoints, antispam, secretos, despliegue).
 Aquí solo vive la parte visible: `comentarios()` y `COMENTARIOS_JS` en `ayuda-src/build.py`, estilos `.coment*` en `estilos.css` y
 `COMENTARIOS_URL` / `TURNSTILE_SITEKEY` en `config.js` (vacíos = la sección no aparece). Panel de moderación: `<worker>/admin`.
+
+**Contador privado de descargas (2026-11-25):** el mismo Worker cuenta los clics en los 5 PDF en blanco y en los botones de la app
+(APK, .exe, app web). La parte visible es solo el aviso de clic al final de `config.js` (`POST /api/descarga`, sin cookies ni IP);
+las cifras NO se publican en la página. Se ven en la pestaña «💬 Comunidad» del admin de licencias (archivo local) y en `<worker>/admin`.
+Detalle de cuenta, antirrepetición y endpoints: `../capturadocs-comentarios/README.md`.

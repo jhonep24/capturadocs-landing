@@ -31,6 +31,7 @@ estructura de secciones de la landing.
 - 2026-11-21 — PDF en blanco, descargas y flagrancia (Centro de ayuda)
 - 2026-11-22 — Auditoría de fuentes del Centro de ayuda y guía del FPJ-4
 - 2026-11-24 — Comentarios con moderación previa (Worker + D1 + Turnstile)
+- 2026-11-25 — Contador privado de descargas y pestaña Comunidad en el admin de licencias
 
 ---
 
@@ -58,6 +59,15 @@ estructura de secciones de la landing.
 - **Riesgo propio del público:** un comentario puede traer nombres, cédulas o NUNC de un caso real. Por eso: moderación previa, aviso visible y rechazo automático de números largos (≥7 dígitos), correos y enlaces.
 - **Detalles que dieron guerra:** `wrangler` 4.110 no acepta una fecha de compatibilidad más nueva que la de su binario (bajar `compatibility_date`); la lectura pública se cachea 60 s en el navegador, así que un comentario recién aprobado tarda hasta un minuto en verse.
 - **Despliegue:** Worker separado del de licencias; secretos (`ADMIN_TOKEN`, `SALT`, `TURNSTILE_SECRET`) solo en Cloudflare; el widget de Turnstile se creó por API con la sesión de `wrangler`.
+
+---
+
+## 2026-11-25 — Contador privado de descargas y pestaña Comunidad en el admin de licencias
+
+- **Qué mide:** clics en los botones de descarga, no descargas terminadas. 1 por equipo, archivo y hora (huella con sal, sin IP ni cookies guardadas); solo archivos de una lista fija, para que nadie infle el número con nombres inventados. Mis propios clics también cuentan.
+- **Dónde se ve:** pestaña «Comunidad» del admin de licencias (local) y `<worker>/admin`. Las cifras no se publican por ahora (decisión del dueño).
+- **Una sola caja de mando sin mezclar riesgo:** el panel de licencias solo *llama* al Worker de comentarios con su propia clave; no se metió código de comentarios públicos en el Worker de licencias (el que cobra). Si una clave se filtra, la otra no cae.
+- **Detalle que dio guerra:** Cloudflare corta el trabajo en segundo plano (`waitUntil`) si no se leyó el cuerpo de la petición antes de responder; el contador no sumaba hasta leer `req.text()` antes del `return`.
 
 ---
 
