@@ -19,3 +19,24 @@ window.CAPTURADOCS = {
     rotulo: '',       // Archivos y rotulo al 60%       (seccion 6)
   },
 };
+
+// Contador privado de descargas (ver capturadocs-comentarios/). Solo cuenta clics en los enlaces de una lista fija
+// (PDF en blanco, APK, .exe y app web); un fallo nunca interrumpe la descarga. Sin cookies ni IP.
+(function () {
+  document.addEventListener('click', function (ev) {
+    try {
+      var C = window.CAPTURADOCS, u = C.COMENTARIOS_URL;
+      if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) { var q = new URLSearchParams(location.search).get('comentarios'); if (q) u = q; }
+      if (!u) return;
+      var a = ev.target.closest && ev.target.closest('a[href]');
+      if (!a) return;
+      var h = a.getAttribute('href') || '', m, f = '';
+      if ((m = h.match(/formato-fpj(\d)-en-blanco\.pdf(\?|$)/))) f = 'pdf-fpj' + m[1];
+      else if (/CapturaDocs\.Express\.Android\.apk(\?|$)/.test(h)) f = 'app-apk';
+      else if (/CapturaDocs\.Express\.Setup\.[\d.]+\.exe(\?|$)/.test(h)) f = 'app-exe';
+      else if (/^https:\/\/capturadocs-app\.capturadocs\.workers\.dev/.test(h)) f = 'app-web';
+      if (!f) return;
+      fetch(u.replace(/\/+$/, '') + '/api/descarga', { method: 'POST', body: JSON.stringify({ f: f }), headers: { 'Content-Type': 'text/plain' }, keepalive: true }).catch(function () {});
+    } catch (e) { /* sin contar */ }
+  }, true);
+})();
