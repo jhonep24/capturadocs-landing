@@ -316,6 +316,19 @@ Artifact de claude.ai y aprobación antes de cada `git push`. Ya publicado:
 - La vista previa se arma inlineando CSS/imágenes/icons en un solo HTML y publicándolo como
   Artifact; el chat/precios en vivo no funcionan ahí (solo en el sitio real).
 
+## 1.13.9 publicada (2026-11-26)
+
+Lote de ajustes a documentos y elementos incautados (todo en `informes-ponal`,
+novedades en su `README.md`): elementos a nombre de cualquier persona del caso,
+tipo de documento correcto en acta, rótulo y FPJ-6, chasis y motor en el acta,
+FPJ-4 con filas que crecen, anexos del FPJ-5 con bicicletas y renglón para el
+motivo en el acta de primer respondiente.
+
+- **`v1.13.9-windows-exe`** (*Latest*), SHA `432abac6…`.
+- **`v1.13.9-android`** (`--latest=false`), SHA `31ec36c2…`, versionCode 18.
+- Links de `index.html` y hashes de `seguridad.html` actualizados a 1.13.9.
+- PWA y Worker desplegados juntos con el push a `main` de `informes-ponal`.
+
 ## 1.13.7 publicada (2026-10-29)
 
 Lote de ajustes a documentos y captura (todo en `informes-ponal`):
