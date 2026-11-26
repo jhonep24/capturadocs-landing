@@ -13,6 +13,7 @@ from c_formatos import PAGINAS as P2
 from c_practica import PAGINAS as P3
 from ventajas import GENERAL, POR_PAGINA
 from pasos import PASOS, PDFS
+from carrusel import carrusel, CARRUSEL_JS
 from c_descargas import PAGINAS as P4
 from c_primer_respondiente import PAGINAS as P5
 
@@ -174,6 +175,9 @@ def pagina(p):
     if st and len(secs) > 1:
         secs.insert(1, ('paso-a-paso', 'Paso a paso: a mano y con la aplicación',
                         '<p>Marca cada paso a medida que avanzas. En cada uno ves cómo es hacerlo a mano y cómo se simplifica con CapturaDocs Express.</p>' + st))
+    cr = carrusel(slug)
+    if cr and len(secs) > 1:
+        secs.insert(1, ('casilla-por-casilla', 'Paso a paso, casilla por casilla', cr))
     dl = descarga(p)
     dl = '<div class="container">' + dl + '</div>' if dl else ''
     toc = ''
@@ -227,6 +231,7 @@ def pagina(p):
 <div class="container">{faq}{rel}{com}<p class="aviso">{e(AVISO)}</p>{fuente}</div></main>
 {FOOT}
 {STEPPER_JS if st else ''}
+{CARRUSEL_JS if cr else ''}
 {COMENTARIOS_JS if com else ''}
 <script>document.querySelectorAll('a.wa-link').forEach(function(el){{el.href='https://wa.me/'+window.CAPTURADOCS.WA_NUMBER;}});</script>
 </body>

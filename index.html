@@ -481,6 +481,22 @@
       footer a{display:inline-block;padding:15px 8px}
     }
   
+    /* Acceso visible a la ayuda: enlace en el menú y franja bajo los botones de la portada */
+    .nav-right{display:flex;align-items:center;gap:18px}
+    .nav-ayuda{display:inline-flex;align-items:center;gap:7px;color:var(--white);text-decoration:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;padding:8px 4px;border-bottom:2px solid rgba(240,165,0,.55);transition:color .2s,border-color .2s}
+    .nav-ayuda .ic{color:var(--gold)}
+    .nav-ayuda:hover{color:var(--gold);border-color:var(--gold)}
+    .nav-ayuda:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .hero-ayuda{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;max-width:640px;margin:22px auto 0;padding:14px 20px;border-radius:14px;text-decoration:none;color:var(--white);background:linear-gradient(145deg,rgba(240,165,0,.16),rgba(240,165,0,.05));border:1px solid rgba(240,165,0,.55);text-align:left;transition:box-shadow .25s,transform .2s}
+    .hero-ayuda:hover{box-shadow:0 8px 26px rgba(240,165,0,.28);transform:translateY(-1px)}
+    .hero-ayuda:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    .hero-ayuda .ic{width:28px;height:28px;color:var(--gold)}
+    .hero-ayuda span{flex:1;min-width:200px;font-size:.98rem;line-height:1.45}
+    .hero-ayuda strong{color:#ffd36b}
+    .hero-ayuda em{font-style:normal;font-family:'Rajdhani',sans-serif;font-weight:700;color:var(--gold);white-space:nowrap}
+    @media (max-width:700px){.nav-right{gap:10px}.nav-ayuda{font-size:.92rem}.hero-ayuda{margin-top:18px}}
+    @media (max-width:480px){nav{padding:12px 14px}.nav-logo{gap:8px}.nav-text{font-size:.88rem;letter-spacing:0}.nav-right{gap:8px}.nav-ayuda{padding:8px 2px;font-size:.88rem}.nav-ayuda .ic{display:none}.nav-cta{padding:7px 11px;font-size:.84rem}}
+
     /* Botón de la barra superior: dorado de la marca (antes verde) */
     .nav-cta{background:rgba(240,165,0,.1);color:var(--gold);border:1.5px solid rgba(240,165,0,.7);border-radius:10px;padding:8px 20px;box-shadow:0 0 18px rgba(240,165,0,.14);transition:background .2s,color .2s,box-shadow .25s,transform .2s}
     .nav-cta:hover{opacity:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);box-shadow:0 8px 26px rgba(240,165,0,.4);transform:translateY(-1px)}
@@ -652,7 +668,10 @@
     <img class="nav-icon" src="logo.png" alt="CapturaDocs Express" width="36" height="36"/>
     <div class="nav-text">Captura<span>Docs</span> Express</div>
   </a>
-  <a href="#descargas" class="nav-cta">Obtener acceso</a>
+  <div class="nav-right">
+    <a href="ayuda/" class="nav-ayuda"><svg class="ic" aria-hidden="true"><use href="icons.svg#i-book-open"/></svg> Ayuda</a>
+    <a href="#descargas" class="nav-cta">Obtener acceso</a>
+  </div>
 </nav>
 
 <section class="hero">
@@ -668,6 +687,11 @@
       <a href="#descargas" class="btn-p">Probar gratis ahora</a>
       <a href="#como-funciona" class="btn-s">Ver cómo funciona →</a>
     </div>
+    <a class="hero-ayuda" href="ayuda/">
+      <svg class="ic" aria-hidden="true"><use href="icons.svg#i-book-open"/></svg>
+      <span><strong>¿Primera vez con los formatos?</strong> Aprende a llenar cada casilla, paso a paso, con imágenes.</span>
+      <em>Ir al Centro de ayuda →</em>
+    </a>
     <div class="stats">
       <div class="stat"><div class="stat-n">5</div><div class="stat-l">casos gratis</div></div>
       <div class="stat"><div class="stat-n">~30min</div><div class="stat-l">por informe completo</div></div>
