@@ -2,16 +2,34 @@
 El HTML que se genera aquí es una lista numerada (se lee sin JavaScript); CARRUSEL_JS la convierte en carrusel."""
 import html
 
-from carrusel_fpj6 import PASOS as PASOS_FPJ6, PAGINA
+import importlib
 
-CARRUSEL = {
-    'acta-derechos-capturado-fpj6': dict(
-        pasos=PASOS_FPJ6,
-        imgs={1: '../img/carrusel-fpj6-h1.jpg', 2: '../img/carrusel-fpj6-h2.jpg'},
-        alts={1: 'Primera hoja del formato oficial FPJ-6 en blanco', 2: 'Segunda hoja del formato oficial FPJ-6 en blanco'},
-        pagina=PAGINA,
-    ),
+# slug de la guía -> (módulo con PASOS y PAGINA, clave de las imágenes, nombre del formato, nº de hojas)
+FORMATOS = {
+    'acta-derechos-capturado-fpj6': ('carrusel_fpj6', 'fpj6', 'FPJ-6', 2),
+    'informe-captura-flagrancia-fpj5': ('carrusel_fpj5', 'fpj5', 'FPJ-5', 3),
+    'informe-primer-respondiente-fpj4': ('carrusel_fpj4', 'fpj4', 'FPJ-4', 4),
+    'rotulo-elementos-fpj7': ('carrusel_fpj7', 'fpj7', 'FPJ-7', 1),
+    'cadena-de-custodia-fpj8': ('carrusel_fpj8', 'fpj8', 'FPJ-8', 2),
 }
+ORD = {1: 'Primera', 2: 'Segunda', 3: 'Tercera', 4: 'Cuarta'}
+
+
+def _config(slug):
+    f = FORMATOS.get(slug)
+    if not f:
+        return None
+    mod, clave, nombre, n = f
+    try:
+        m = importlib.import_module(mod)
+    except ModuleNotFoundError:
+        return None  # el formato aún no tiene carrusel
+    return dict(
+        pasos=m.PASOS, pagina=m.PAGINA,
+        imgs={h: f'../img/carrusel-{clave}-h{h}.jpg' for h in range(1, n + 1)},
+        alts={h: (f'{ORD[h]} hoja del formato oficial {nombre} en blanco' if n > 1 else f'Formato oficial {nombre} en blanco') for h in range(1, n + 1)},
+    )
+
 
 INTRO = ('<p>El <strong>recuadro dorado</strong> marca la parte de la hoja oficial que se explica en cada paso. '
          'Avanza con los botones, deslizando o con las teclas ← →.</p>')
@@ -22,7 +40,7 @@ def e(s):
 
 
 def carrusel(slug):
-    c = CARRUSEL.get(slug)
+    c = _config(slug)
     if not c:
         return ''
     pw, ph = c['pagina']
@@ -49,7 +67,7 @@ function el(t,c,h){var x=document.createElement(t);if(c)x.className=c;if(h!=null
 function add(p){for(var i=1;i<arguments.length;i++)p.appendChild(arguments[i]);return p;}
 var ui=el('div','carr-ui'),esc=el('div','carr-escena'),pila=el('div','carr-pila'),papel=el('div','carr-papel');
 var vis=el('div','carr-vis'),hoja=el('div','carr-hoja'),caja=el('div','carr-caja'),pin=el('span','carr-pin'),imgs={};
-[1,2].forEach(function(h){var s=root.getAttribute('data-img'+h);if(!s)return;var im=new Image();im.src=s;im.alt=root.getAttribute('data-alt'+h)||'';im.decoding='async';im.draggable=false;imgs[h]=im;hoja.appendChild(im);});
+[1,2,3,4].forEach(function(h){var s=root.getAttribute('data-img'+h);if(!s)return;var im=new Image();im.src=s;im.alt=root.getAttribute('data-alt'+h)||'';im.decoding='async';im.draggable=false;imgs[h]=im;hoja.appendChild(im);});
 add(hoja,caja,pin);add(vis,hoja);add(papel,vis);
 add(pila,el('div','carr-atras a1'),el('div','carr-atras a2'),papel);
 add(esc,el('div','carr-luz'),pila);
@@ -73,9 +91,9 @@ function enfocar(){
   var pxw=bw*W,pxh=bh*W*ph/pw;
   s=clamp(Math.min(0.94*W/pxw,0.78*H/pxh),sMin,3.2);
   var Wp=W*s,Hp=Wp*ph/pw;
-  tx=(bw*Wp>W*0.9)?(-bx*Wp+0.03*W):(W/2-(bx+bw/2)*Wp);
-  ty=H/2-(by+bh/2)*Hp;
-  tx=clamp(tx,W-Wp,0);ty=clamp(ty,H-Hp,0);
+  tx=(bw*Wp>W*0.9)?(-bx*Wp+0.05*W):(W/2-(bx+bw/2)*Wp);
+  ty=(bh*Hp>H*0.92)?(-by*Hp+0.08*H):(H/2-(by+bh/2)*Hp);
+  tx=clamp(tx,W-Wp,0);ty=clamp(ty,H-Hp,16);
   caja.style.cssText='display:block;left:'+b[0]+'%;top:'+b[1]+'%;width:'+b[2]+'%;height:'+b[3]+'%';
   pin.style.cssText='display:grid;left:'+b[0]+'%;top:'+b[1]+'%';
  }else{caja.style.display='none';pin.style.display='none';}
