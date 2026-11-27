@@ -32,6 +32,7 @@ estructura de secciones de la landing.
 - 2026-11-22 — Auditoría de fuentes del Centro de ayuda y guía del FPJ-4
 - 2026-11-24 — Comentarios con moderación previa (Worker + D1 + Turnstile)
 - 2026-11-25 — Contador privado de descargas y pestaña Comunidad en el admin de licencias
+- 2026-11-27 — Carrusel casilla por casilla en las guías de formatos
 
 ---
 
@@ -50,6 +51,17 @@ estructura de secciones de la landing.
 - **Qué se encontró al contrastar con la Ley 906 y las plantillas oficiales:** una guía (FPJ-8) omitía 3 de sus 8 casillas; una frase del art. 303 estaba mal citada; el «informe detallado» del art. 302 se atribuía al FPJ-5; había cifras y causas inventadas («la mitad del tiempo», «hacen devolver un informe»); una tabla de planes mezclaba qué incluye cada plan.
 - **Lección:** las guías se escribieron desde las muestras y de memoria; para cada casilla, abrir la plantilla (`informes-ponal/public/plantillas/*.docx`, pie de página incluido) y para cada artículo, el texto del Senado. Los PDF de la Fiscalía (manuales, instructivos) dan 404: no depender de ellos.
 - **Guía FPJ-4** (`informe-primer-respondiente-fpj4`): página «suave», sin bloque comercial grande; la app aparece solo en una nota y una pregunta frecuente (el foco comercial es la flagrancia). Flag `suave=True` en `build.py`.
+
+---
+
+## 2026-11-27 — Carrusel casilla por casilla en las guías de formatos
+
+- **Tono:** el primer borrador («explicado como a un niño», 37 pasos en el FPJ-6) lo rechazó el dueño: hace sentir tonto al policía. Quedó de colega a colega, con casillas agrupadas (10 a 18 pasos por formato). Tampoco repetir «(datos inventados)»: «Ejemplo:» ya lo dice.
+- **Estilo:** el dueño prefirió el lenguaje visual de «Documentos oficiales» de la landing (hoja flotante, pines dorados, panel a la derecha) a una tarjeta plana. Las flechas redondas sobre la hoja tapaban la casilla: se quitaron y quedaron los botones del panel.
+- **Zoom:** una caja tan ancha como la hoja no se puede acercar más sin cortarla; las casillas chicas sí se acercan. Las cajas altas se alinean arriba (si no, el pin queda fuera de la vista) y en celular hay un zoom mínimo de 2× para que se lea.
+- **Detalle que dio guerra:** al quitar reglas CSS con un filtro por prefijo (`.carr-c`) se borraron también `.carr-caja`, `.carr-card` y `.carr-cnt`; el recuadro desapareció sin error. Revisar con captura después de cada limpieza de estilos.
+- **Verificación que sirvió:** dibujar las cajas sobre la imagen de cada hoja y un script en el navegador que recorre todos los pasos (escritorio y 375 px) y avisa si el recuadro o el pin quedan fuera de la vista.
+- **Vista previa:** el Artifact privado a veces no le abre al dueño («contenido no disponible»); la alternativa que funcionó fue servir el repo en local y dejarle la página abierta en el panel del navegador de la app, ya posicionada en el carrusel.
 
 ---
 

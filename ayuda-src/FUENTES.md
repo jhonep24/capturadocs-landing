@@ -23,7 +23,16 @@ Si algún día se consiguen los instructivos, contrastar: FPJ-4 (secciones 2 y 3
 - «Informe detallado» del art. 302 lo rinde el particular a la autoridad; ya no se dice que sea el FPJ-5.
 - FPJ-8: faltaban las casillas 6 (registro de continuidad), 7 (PIPH) y 8 (observaciones); la fecha no está en la casilla 4.
 - FPJ-7: la casilla 5 pide solo nombres y apellidos de la persona (no documento); sin «24 horas» ni instructivo inventado.
-- Lista de chequeo: el acta FPJ-6 no tiene «lugar»; la cadena de custodia no pide «firma con fecha» en cada fila.
+- Lista de chequeo: la cadena de custodia no pide «firma con fecha» en cada fila. (Aquí decía también que el acta FPJ-6 no tiene «lugar»:
+  es un error de esta nota; la plantilla `fpj6.docx` v03 y el PDF en blanco sí traen «Lugar:» junto a fecha y hora — verificado 2026-11-27.)
 - Retiradas afirmaciones sin sustento: «toma la mitad del tiempo», «errores más comunes/frecuentes», «hacen devolver un informe»,
   «menos devoluciones», «la central de radio asigna el CAD» y los consejos del primer responsable que no salían del formato.
 - Tabla de planes (página «desde el celular»): el soporte por WhatsApp es del plan mensual, no del Negocio/Estación.
+
+## Carrusel «casilla por casilla» (2026-11-26/27)
+- Los pasos (`carrusel_fpjN.py`) salen del **texto impreso** de cada formato (PDF en blanco de `ayuda/pdf/`, leído con PyMuPDF)
+  y de lo que ya estaba contrastado en las guías. Las cajas se dibujaron sobre la hoja y se revisaron una por una.
+- Ejemplos: datos inventados, rotulados «Ejemplo:». Consejos propios: rotulados «Sugerencia».
+- Sin resolver (se dice en el paso y se remite al instructivo o al fiscal): en la constancia de buen trato del FPJ-6, cuál de los
+  espacios «indiciado(a)» / «imputado(a)» se completa; cómo se asigna el «No. ID» del FPJ-7 y del FPJ-8.
+- El orden de la fecha del FPJ-5 (encabezado, tres casillas sin rótulo) no se afirma; en FPJ-4 y FPJ-8 sí viene impreso (AAAA MM DD).

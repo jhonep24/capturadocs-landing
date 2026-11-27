@@ -440,3 +440,11 @@ Aquí solo vive la parte visible: `comentarios()` y `COMENTARIOS_JS` en `ayuda-s
 (APK, .exe, app web). La parte visible es solo el aviso de clic al final de `config.js` (`POST /api/descarga`, sin cookies ni IP);
 las cifras NO se publican en la página. Se ven en la pestaña «💬 Comunidad» del admin de licencias (archivo local) y en `<worker>/admin`.
 Detalle de cuenta, antirrepetición y endpoints: `../capturadocs-comentarios/README.md`.
+
+## Carrusel «casilla por casilla» y acceso a la ayuda (2026-11-26/27) — PUBLICADO
+- **Portada:** enlace «📖 Ayuda» en el menú (junto a «Obtener acceso») y franja dorada bajo el hero → `ayuda/` (commit `2515997`).
+- **Guías de formato (FPJ-4, 5, 6, 7 y 8):** sección «Paso a paso, casilla por casilla» tras «¿Qué es?»: la hoja oficial en blanco con
+  recuadro dorado, pin numerado y zoom a la casilla; panel con texto, «Ejemplo:» y «Sugerencia» (FPJ-6 en `2515997`, el resto en `1a1b175`).
+  Se quitaron de esas guías las tablas de casillas, las imágenes estáticas y las secciones que el carrusel repetía.
+- Decisiones del dueño: tono de colega (no «como a un niño»), sin «(datos inventados)» repetido, estilo de la sección «Documentos
+  oficiales» de la landing, quitar lo repetido. Detalle técnico: `ayuda-src/README.md`; fuentes: `ayuda-src/FUENTES.md`.
